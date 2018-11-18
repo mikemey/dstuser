@@ -1,0 +1,11 @@
+logs
+*.log
+/*.txt
+
+/node_modules
+/frontend-dist/main.js
+package-lock.json
+
+.idea
+*.iml
+*.config.json

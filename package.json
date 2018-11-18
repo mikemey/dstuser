@@ -1,0 +1,61 @@
+{
+  "name": "dstuser",
+  "version": "1.0.0",
+  "description": "dstuser",
+  "engines": {
+    "node": "10"
+  },
+  "scripts": {
+    "postinstall": "webpack",
+    "prestart": "npm install",
+    "start": "node backend/index.js",
+    "lint": "standard && eslint --ignore-path .gitignore .",
+    "be-test": "mocha 'backend-test/**/**.spec.js' -r chai/register-should",
+    "be-watch": "nodemon -x 'npm run be-test -s' --ignore '**.log'",
+    "test": "npm run lint -s && npm run be-test -s"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikemey/dstuser.git"
+  },
+  "author": "mikemey",
+  "license": "MIT",
+  "bugs": {},
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.4",
+    "jquery": "^3.3.1",
+    "morgan": "^1.9.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
+    "winston": "^3.1.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-string": "^1.5.0",
+    "eslint": "^5.9.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-mocha": "^5.2.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "karma": "^3.1.1",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-mocha": "^1.3.0",
+    "karma-ng-html2js-preprocessor": "^1.0.0",
+    "mocha": "^5.2.0",
+    "nock": "^10.0.2",
+    "nodemon": "^1.18.6",
+    "sinon": "^7.1.1",
+    "standard": "^12.0.1",
+    "supertest": "^3.3.0",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2"
+  },
+  "standard": {
+    "env": [
+      "mocha"
+    ]
+  }
+}
