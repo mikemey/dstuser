@@ -1,8 +1,8 @@
+const fs = require('fs')
 const createServer = require('./app')
-const config = require('./utils/dstuConfig')
-
 const WinstonLogger = require('./utils/winstonLogger')
 
+const config = JSON.parse(fs.readFileSync('dstu.config.json', 'utf8'))
 const logger = WinstonLogger(config.logfile)
 
 const serverLog = msg => logger.info(`========== ${msg.padEnd(5)} ==========`)
