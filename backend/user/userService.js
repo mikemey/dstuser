@@ -23,9 +23,7 @@ const UserService = config => {
       .then(firstPage => {
         const userName = extractUserName(firstPage)
         const postings = extractPostings(firstPage)
-        return {
-          userName, postings
-        }
+        return { userName, postings }
       })
   }
 
@@ -34,6 +32,8 @@ const UserService = config => {
 
   const extractPosting = (_, postingDiv) => {
     const textDiv = $('.text', postingDiv)
+    textDiv.find('br').replaceWith('\n')
+
     const title = cleanText($('strong', textDiv))
     const content = cleanText($('span', textDiv))
     const url = cleanHref($('a', textDiv))
