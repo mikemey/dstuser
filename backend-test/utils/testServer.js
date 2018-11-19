@@ -2,7 +2,11 @@ const supertest = require('supertest')
 const createServer = require('../../backend/app')
 
 const testConfig = {
-  serverPort: 12121
+  serverPort: 12121,
+  dstuHost: 'https://dstu.com',
+  userIdPlaceholder: '$UID$',
+  pagePlaceholder: '$PAGE$',
+  userProfileTemplate: '/userprofil/postings/$UID$?page=$PAGE$'
 }
 
 const createQuietLogger = () => {
@@ -32,7 +36,8 @@ const TestServer = () => {
   return {
     start,
     stop,
-    request
+    request,
+    config: testConfig
   }
 }
 

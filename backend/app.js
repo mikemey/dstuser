@@ -25,7 +25,7 @@ const createServer = (config, logger) => new Promise((resolve, reject) => {
   app.use(requestLogger())
 
   app.use('/dstu', express.static('frontend-dist/'))
-  app.use('/dstuapi', createUserRouter(logger))
+  app.use('/dstuapi', createUserRouter(config))
 
   const server = app.listen(config.serverPort, () => {
     logger.info(`Started on port ${server.address().port}`)

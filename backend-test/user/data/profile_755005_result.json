@@ -1,0 +1,32 @@
+{
+  "userName": "a standard user",
+  "postings": [
+    {
+      "title": "Startlöchern !",
+      "content": "Für heillos überforderten sogar koordiniert.",
+      "url": "https://dstu.com/permalink/p/1036279475",
+      "article": {
+        "title": "Gesetzesentwurf für Fellners bundesweites Radio",
+        "url": "https://dstu.com/2000090941121/Gesetzesentwurf-fuer-Fellners-bundesweites-Radio"
+      }
+    },
+    {
+      "title": "Wem Interessiert das noch ?",
+      "content": "",
+      "url": "https://dstu.com/permalink/p/1034368216",
+      "article": {
+        "title": "Mitdiskutieren bei \"Im Zentrum\": Arbeitskampf und Streik - Sozialpartner auf Kollisionskurs",
+        "url": "https://dstu.com/jetzt/livebericht/2000052041011/mitdiskutieren-bei-im-zentrum-arbeitskampf-und-streik-sozialpartner-auf-kollisionskurs"
+      }
+    },
+    {
+      "title": "",
+      "content": "Wenn das Freudsche-Land aufwacht und seinen Wähler-Masochismus wieder ablegt.",
+      "url": "https://dstu.com/permalink/p/1034153378",
+      "article": {
+        "title": "Mitdiskutieren bei \"Im Zentrum\": Arbeitskampf und Streik - Sozialpartner auf Kollisionskurs",
+        "url": "https://dstu.com/jetzt/livebericht/2000052041011/mitdiskutieren-bei-im-zentrum-arbeitskampf-und-streik-sozialpartner-auf-kollisionskurs"
+      }
+    }
+  ]
+}
