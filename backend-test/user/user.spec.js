@@ -16,17 +16,29 @@ describe('get userprofile endpoint', () => {
 
   const getUserProfile = userId => server.request()
     .get(`/dstuapi/userprofile/${userId}`)
-  const nockUserProfileRequest = userId => nock(server.config.dstuHost)
-    .get(`/userprofil/postings/${userId}?page=1`)
+  const nockUserProfileRequest = (userId, page) => nock(server.config.dstuHost)
+    .get(`/userprofil/postings/${userId}?page=${page}`)
 
   it('should respond with userprofile (#755005 - one page)', () => {
     const testUserId = 755005
-    nockUserProfileRequest(testUserId)
-      .reply(200, testData('profile_755005_1.html'))
+    nockUserProfileRequest(testUserId, 1).reply(200, testData('profile_755005_1.html'))
     return getUserProfile(testUserId)
       .expect(200)
       .then(({ body }) => {
         body.should.deep.equal(expectedData('profile_755005_result.json'))
+      })
+  })
+
+  it('should respond with userprofile (#425185 - multiple pages)', () => {
+    const testUserId = 425185
+    nockUserProfileRequest(testUserId, 1).reply(200, testData('profile_425185_1.html'))
+    nockUserProfileRequest(testUserId, 2).reply(200, testData('profile_425185_2.html'))
+    nockUserProfileRequest(testUserId, 3).reply(200, testData('profile_425185_3.html'))
+
+    return getUserProfile(testUserId)
+      .expect(200)
+      .then(({ body }) => {
+        body.should.deep.equal(expectedData('profile_425185_result.json'))
       })
   })
 })
