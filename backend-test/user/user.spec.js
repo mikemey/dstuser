@@ -21,7 +21,7 @@ describe('get userprofile endpoint', () => {
 
   it('should respond with userprofile (#755005 - one page)', () => {
     const testUserId = 755005
-    nockUserProfileRequest(testUserId, 1).reply(200, testData('profile_755005_1.html'))
+    nockUserProfileRequest(testUserId, 1).reply(200, testData('profile_755005_1.txt'))
     return getUserProfile(testUserId)
       .expect(200)
       .then(({ body }) => {
@@ -31,9 +31,9 @@ describe('get userprofile endpoint', () => {
 
   it('should respond with userprofile (#425185 - multiple pages)', () => {
     const testUserId = 425185
-    nockUserProfileRequest(testUserId, 1).reply(200, testData('profile_425185_1.html'))
-    nockUserProfileRequest(testUserId, 2).reply(200, testData('profile_425185_2.html'))
-    nockUserProfileRequest(testUserId, 3).reply(200, testData('profile_425185_3.html'))
+    nockUserProfileRequest(testUserId, 1).reply(200, testData('profile_425185_1.txt'))
+    nockUserProfileRequest(testUserId, 2).reply(200, testData('profile_425185_2.txt'))
+    nockUserProfileRequest(testUserId, 3).reply(200, testData('profile_425185_3.txt'))
 
     return getUserProfile(testUserId)
       .expect(200)
