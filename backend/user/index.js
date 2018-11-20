@@ -2,9 +2,9 @@ const express = require('express')
 
 const UserService = require('./userService')
 
-const createUserRouter = config => {
+const createUserRouter = (config, logger) => {
   const router = express.Router()
-  const userService = UserService(config)
+  const userService = UserService(config, logger)
 
   router.get('/userprofile/:userId', (req, res) => userService
     .loadPostings(req.params.userId)

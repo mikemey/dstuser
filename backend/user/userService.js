@@ -1,7 +1,7 @@
 const $ = require('cheerio')
 const requests = require('../utils/requests')
 
-const UserService = config => {
+const UserService = (config, logger) => {
   const profileTemplate = config.dstuHost + config.userProfileTemplate
   const userIdPlaceholder = config.userIdPlaceholder
   const pagePlaceholder = config.pagePlaceholder
@@ -19,13 +19,33 @@ const UserService = config => {
       .replace(userIdPlaceholder, userId)
       .replace(pagePlaceholder, 1)
 
-    return requests.getHtml(profileUrl)
+    logger.info(`user profile ${userId}`)
+    return requestPage(profileUrl)
       .then(firstPage => {
         const userName = extractUserName(firstPage)
-        const postings = extractPostings(firstPage)
-        return { userName, postings }
+        const firstPagePostings = extractPostings(firstPage)
+        return Promise.all(findRemainingLinks(firstPage)
+          .map(link => requestPage(link).then(extractPostings))
+        ).then(remainingPostings => {
+          const postings = [].concat.apply(firstPagePostings, remainingPostings)
+          logger.info(`user profile ${userId} DONE`)
+          return { userName, postings }
+        })
       })
   }
+
+  const requestPage = url => {
+    logger.info(`postings: ${url}`)
+    return requests.getHtml(url)
+      .then(result => {
+        logger.info(`postings: ${url} DONE`)
+        return result
+      })
+  }
+  const findRemainingLinks = page => page('div.paging_scroller_container').first()
+    .children().not('.current')
+    .map((_, pageAnchor) => cleanHref($(pageAnchor)))
+    .get()
 
   const extractUserName = page => cleanText(page('div#up_user h2'))
   const extractPostings = page => page('.posting').map(extractPosting).get()
