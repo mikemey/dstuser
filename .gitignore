@@ -3,7 +3,7 @@ logs
 /*.txt
 
 /node_modules
-/frontend-dist/main.js
+/dist
 package-lock.json
 
 .idea

@@ -6,13 +6,14 @@
     "node": "10"
   },
   "scripts": {
-    "prestart": "npm install",
-    "build": "rimraf dist && webpack --bail --progress --profile",
+    "prestart": "webpack && npm install",
     "start": "node backend/index.js",
+    "production": "NODE_ENV=PROD npm start",
+    "test": "npm run lint -s && npm run be-test -s",
     "lint": "standard && eslint --ignore-path .gitignore .",
     "be-test": "mocha 'backend-test/**/**.spec.js' -r chai/register-should",
     "be-watch": "nodemon -x 'npm run be-test -s' --ignore '**.log'",
-    "test": "npm run lint -s && npm run be-test -s"
+    "build-watch": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -32,18 +33,25 @@
     "winston": "^3.1.0"
   },
   "devDependencies": {
+    "angular": "^1.7.5",
     "chai": "^4.2.0",
     "chai-string": "^1.5.0",
+    "clean-webpack-plugin": "^1.0.0",
+    "copy-webpack-plugin": "^4.6.0",
+    "css-loader": "^1.0.1",
     "eslint": "^5.9.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-mocha": "^5.2.0",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.4",
     "mocha": "^5.2.0",
     "nock": "^10.0.2",
     "nodemon": "^1.18.6",
-    "rimraf": "^2.6.2",
+    "raw-loader": "^0.5.1",
     "standard": "^12.0.1",
+    "style-loader": "^0.23.1",
     "supertest": "^3.3.0",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2"
