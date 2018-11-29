@@ -2,7 +2,6 @@ const supertest = require('supertest')
 const createServer = require('../../backend/app')
 
 const testConfig = {
-  serverPort: 12121,
   dstuHost: 'https://dstu.com',
   userIdPlaceholder: '$UID$',
   pagePlaceholder: '$PAGE$',
