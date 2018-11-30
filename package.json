@@ -14,7 +14,7 @@
     "be-test": "mocha 'backend-test/**/**.spec.js' -r chai/register-should",
     "be-watch": "nodemon -x 'npm run be-test -s' --ignore '**.log'",
     "build-watch": "webpack --watch",
-    "e2etest": "./webdriver-helper start && protractor protractor.conf.js; ./webdriver-helper stop"
+    "e2etest": "./webdriver-helper.sh start && protractor protractor.conf.js; ./webdriver-helper.sh stop"
   },
   "repository": {
     "type": "git",
