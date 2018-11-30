@@ -3,11 +3,13 @@
         "browser": true,
         "es6": true,
         "node": true,
-        "mocha": true
+        "mocha": true,
+        "jasmine": true
     },
     "extends": "standard",
     "plugins": [
         "standard",
-        "promise"
+        "promise",
+        "jasmine"
     ]
 }
