@@ -15,7 +15,7 @@
     "be-watch": "nodemon -x 'npm run be-test -s' --ignore '**.log'",
     "build-watch": "webpack --watch",
     "protractor": "protractor protractor.conf.js",
-    "e2e": "./webdriver-helper.sh start && npm run protractor; ./webdriver-helper.sh stop"
+    "e2e": "./e2ehelper start && npm run protractor; ./e2ehelper stop"
   },
   "repository": {
     "type": "git",
