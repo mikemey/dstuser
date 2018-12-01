@@ -1,29 +1,23 @@
-const { by, browser, element } = require('protractor')
+const SearchPage = require('./searchPage')
 
 describe('User main page', () => {
   describe('static elements', () => {
-    beforeEach(() => {
-      browser.get('./')
-    })
+    beforeEach(SearchPage.open)
 
     it('should show status message "ready"', () => {
-      const status = element(by.id('status'))
-      expect(status.getText()).toEqual('ready')
+      expect(SearchPage.statusText()).toEqual('ready')
     })
 
     it('should show userId label', () => {
-      const userInputLabel = element(by.xpath('//form/label'))
-      expect(userInputLabel.getText()).toEqual('User ID:')
+      expect(SearchPage.searchLabel()).toEqual('User ID:')
     })
 
     it('should show userId input', () => {
-      const userInput = element(by.name('userId'))
-      expect(userInput.isDisplayed()).toBeTruthy()
+      expect(SearchPage.searchInput().isDisplayed()).toBeTruthy()
     })
 
     it('should show search postings button', () => {
-      const searchButton = element(by.xpath('//form/button'))
-      expect(searchButton.isDisplayed()).toBeTruthy()
+      expect(SearchPage.searchButton().isDisplayed()).toBeTruthy()
     })
   })
 })
