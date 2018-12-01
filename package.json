@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "angular": "^1.7.5",
+    "angular-route": "^1.7.5",
     "chai": "^4.2.0",
     "chai-string": "^1.5.0",
     "clean-webpack-plugin": "^1.0.0",
