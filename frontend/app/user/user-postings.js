@@ -2,7 +2,7 @@ import angular from 'angular'
 
 import './user-postings.css'
 
-function userPostingsCtrl ($scope) {
+const userPostingsCtrl = ($scope) => {
   $scope.status = 'ready'
 }
 
