@@ -1,4 +1,5 @@
 const SearchPage = require('./searchPage')
+const DerStandardMock = require('../derStandardMock')
 
 describe('User main page', () => {
   describe('static elements', () => {
@@ -22,9 +23,18 @@ describe('User main page', () => {
   })
 
   describe('user search', () => {
+    const derStandard = DerStandardMock()
+
+    beforeEach(derStandard.start)
+    afterEach(derStandard.stop)
+
     it('should display comments', () => {
+      const userId = 755005
+      const pageNum = 1
+      derStandard.serveUserPage(userId, pageNum)
+
       SearchPage.open()
-      SearchPage.searchUserInput().sendKeys('755005')
+      SearchPage.searchUserInput().sendKeys(userId)
       SearchPage.searchUserButton().click()
 
       expect(SearchPage.searchUserButton().isDisplayed()).toBeTruthy()

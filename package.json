@@ -27,6 +27,7 @@
     "body-parser": "^1.18.3",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.4",
+    "mock-http-server": "^1.1.0",
     "moment": "^2.22.2",
     "morgan": "^1.9.1",
     "request": "^2.88.0",

@@ -1,10 +1,11 @@
 <form>
   <label>
     User ID:
-    <input name="userId" />
+    <input ng-model="model.userId"  name="userId" />
   </label>
-  <button>search...</button>
+  <button ng-click="search()">search...</button>
 </form>
+<p>{{ model.content }}</p>
 <footer>
   <p id="status">{{ status }}</p>
 </footer>
