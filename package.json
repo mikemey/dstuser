@@ -15,7 +15,7 @@
     "be-watch": "nodemon -x 'npm run be-test -s'",
     "build-watch": "webpack --watch",
     "protractor": "protractor e2e-test/protractor.conf.js",
-    "e2e": "export NODE_ENV=E2E; ./e2e-test/e2ehelper start && npm run protractor; ./e2e-test/e2ehelper stop"
+    "e2e": "./e2e-test/e2ehelper start && npm run protractor; ./e2e-test/e2ehelper stop"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,6 @@
   },
   "author": "mikemey",
   "license": "MIT",
-  "bugs": {},
   "dependencies": {
     "body-parser": "^1.18.3",
     "cheerio": "^1.0.0-rc.2",

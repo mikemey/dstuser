@@ -1,4 +1,5 @@
 const configLoader = require('../backend/configLoader')
+process.env.NODE_ENV = 'E2E'
 const serverPort = configLoader.get(console).port
 
 exports.config = {

@@ -1,26 +1,32 @@
 #!/usr/bin/env bash
 
+export NODE_ENV="E2E"
 project_dir="${BASH_SOURCE%/*}/.."
 
 action="$1"
 server_bin="npm start -s"
-e2e_server_port=5555
 server_startup_retries=10
 
 wdm_bin="$project_dir/node_modules/webdriver-manager/bin/webdriver-manager"
 wdm_bin_hr="$(basename ${wdm_bin})"
 selenium_dir="$project_dir/node_modules/webdriver-manager/selenium"
+server_config="$project_dir/backend/configLoader.js"
 
 e2e_output="$project_dir/e2e.output"
 
+sed_number_group="\([0-9]*\)"
 server_pid_msg="nodeServer.pid: "
-server_pid_re="^${server_pid_msg}\([0-9]*\)$"
-wdm_pid_re="^.*Detached pid: \([0-9]*\)$"
-selenium_pid_re="^.*seleniumProcess.pid: \([0-9]*\)$"
+server_pid_re="^${server_pid_msg}${sed_number_group}$"
+wdm_pid_re="^.*Detached pid: ${sed_number_group}$"
+selenium_pid_re="^.*seleniumProcess.pid: ${sed_number_group}$"
+server_port_re=".*e2eEnv.*port:${sed_number_group},.*"
 
 function main () {
   [[ ! -f "$wdm_bin" ]] && error_message "$wdm_bin not found. \nPlease run 'npm install' first."
-  [[ ! -d "$selenium_dir" ]] && echo "== Selenium directory not found, running '${wdm_bin_hr} update' ..." && ${wdm_bin} update
+  [[ ! -d "$selenium_dir" ]] && \
+    echo "== Selenium directory not found, running '${wdm_bin_hr} update' ..." && \
+    ${wdm_bin} update
+  [[ ! -f "$server_config" ]] && error_message "$server_config not found, check location."
 
   case "$action" in
     "start" )
@@ -52,9 +58,10 @@ function start_server () {
 }
 
 function wait_for_server () {
-  printf "waiting for server start (port ${e2e_server_port}): "
+  server_port=`extract_server_port`
+  printf "waiting for server start (port ${server_port}): "
   sleep 2
-  while [[ ${server_startup_retries} > 0 && ! `lsof -i :${e2e_server_port}` ]]; do
+  while [[ ${server_startup_retries} > 0 && ! `lsof -i :${server_port}` ]]; do
     sleep 1
     printf "$server_startup_retries "
     server_startup_retries=`expr ${server_startup_retries} - 1`
@@ -74,8 +81,18 @@ function start_webdriver () {
 
 function extract_pid () {
   pid=`sed -n -e 's/'"$1"'/\1/p' "$e2e_output"`
-  ! [[ "$pid" =~ ^[0-9]+$ ]] && error_message "no match of '$1' in '$e2e_output' \nresult: '$pid'"
+  check_is_number "$pid" "no match of '$1' in '$e2e_output' \nresult: '$pid'"
   echo "$pid"
+}
+
+function extract_server_port () {
+  port=`cat "$server_config" | tr -d '\n ' | sed -n -e 's/'"$server_port_re"'/\1/p'`
+  check_is_number "$port" "E2E Server port not found in ${server_config} \nresult: '$port'"
+  echo "$port"
+}
+
+function check_is_number () {
+  ! [[ "$1" =~ ^[0-9]+$ ]] && error_message "$2"
 }
 
 function error_message () {
