@@ -39,4 +39,4 @@ const createServer = (config, logger) => new Promise((resolve, reject) => {
   })
 })
 
-module.exports = createServer
+module.exports = { createServer }

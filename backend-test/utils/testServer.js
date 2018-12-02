@@ -1,7 +1,7 @@
 const supertest = require('supertest')
 
 const TestDataLoader = require('../../test-data/testDataLoader')
-const createServer = require('../../backend/app')
+const app = require('../../backend/app')
 
 const testConfig = {
   dstuHost: 'https://dstu.com',
@@ -19,12 +19,12 @@ const createQuietLogger = () => {
 }
 
 const TestServer = () => {
-  let app, server
+  let _app, server
   process.env.TESTING = 'true'
 
-  const start = () => createServer(testConfig, createQuietLogger())
+  const start = () => app.createServer(testConfig, createQuietLogger())
     .then(dstuServer => {
-      app = dstuServer.app
+      _app = dstuServer.app
       server = dstuServer.server
     })
 
@@ -32,7 +32,7 @@ const TestServer = () => {
     ? new Promise(resolve => server.close(resolve))
     : Promise.resolve()
 
-  const request = () => supertest(app)
+  const request = () => supertest(_app)
 
   return {
     start,

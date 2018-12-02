@@ -12,10 +12,10 @@
     "test": "npm run lint -s && npm run be-test -s && npm run e2e -s",
     "lint": "standard && eslint --ignore-path .gitignore .",
     "be-test": "mocha 'backend-test/**/**.spec.js' -r chai/register-should",
-    "be-watch": "nodemon -x 'npm run be-test -s' --ignore '**.log'",
+    "be-watch": "nodemon -x 'npm run be-test -s'",
     "build-watch": "webpack --watch",
     "protractor": "protractor e2e-test/protractor.conf.js",
-    "e2e": "./e2e-test/e2ehelper start && npm run protractor; ./e2e-test/e2ehelper stop"
+    "e2e": "export NODE_ENV=E2E; ./e2e-test/e2ehelper start && npm run protractor; ./e2e-test/e2ehelper stop"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
     "body-parser": "^1.18.3",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.4",
+    "moment": "^2.22.2",
     "morgan": "^1.9.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
@@ -57,6 +58,7 @@
     "nodemon": "^1.18.7",
     "protractor": "^5.4.1",
     "raw-loader": "^0.5.1",
+    "sinon": "^7.1.1",
     "standard": "^12.0.1",
     "style-loader": "^0.23.1",
     "supertest": "^3.3.0",

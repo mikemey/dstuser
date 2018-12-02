@@ -4,7 +4,7 @@ project_dir="${BASH_SOURCE%/*}/.."
 
 action="$1"
 server_bin="npm start -s"
-server_config="$project_dir/dstu.config.json"
+e2e_server_port=5555
 server_startup_retries=10
 
 wdm_bin="$project_dir/node_modules/webdriver-manager/bin/webdriver-manager"
@@ -52,10 +52,9 @@ function start_server () {
 }
 
 function wait_for_server () {
-  server_port=`sed -n -e 's/.*\"port\": \([0-9]*\).*/\1/p' "$server_config"`
-  printf "waiting for server start (port ${server_port}): "
+  printf "waiting for server start (port ${e2e_server_port}): "
   sleep 2
-  while [[ ${server_startup_retries} > 0 && ! `lsof -i :${server_port}` ]]; do
+  while [[ ${server_startup_retries} > 0 && ! `lsof -i :${e2e_server_port}` ]]; do
     sleep 1
     printf "$server_startup_retries "
     server_startup_retries=`expr ${server_startup_retries} - 1`

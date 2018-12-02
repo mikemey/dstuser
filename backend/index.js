@@ -1,9 +1,9 @@
-const fs = require('fs')
-const createServer = require('./app')
-const WinstonLogger = require('./utils/winstonLogger')
+const app = require('./app')
+const winstonLogger = require('./utils/winstonLogger')
+const configLoader = require('./configLoader')
 
-const config = JSON.parse(fs.readFileSync('dstu.config.json', 'utf8'))
-const logger = WinstonLogger(config.logfile)
+const logger = winstonLogger.create()
+const config = configLoader.get(logger)
 
 const serverLog = msg => logger.info(`========== ${msg.padEnd(5)} ==========`)
 
@@ -16,7 +16,7 @@ process.on('SIGTERM', shutdown)
 process.on('SIGINT', shutdown)
 
 serverLog('START')
-createServer(config, logger)
+app.createServer(config, logger)
   .then(() => serverLog('UP'))
   .catch(err => {
     serverLog('ERROR')
