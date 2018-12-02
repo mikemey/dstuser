@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
 
+project_dir="${BASH_SOURCE%/*}/.."
+
 action="$1"
 server_bin="npm start -s"
-server_config="dstu.config.json"
+server_config="$project_dir/dstu.config.json"
 server_startup_retries=10
 
-wdm_bin="./node_modules/webdriver-manager/bin/webdriver-manager"
+wdm_bin="$project_dir/node_modules/webdriver-manager/bin/webdriver-manager"
 wdm_bin_hr="$(basename ${wdm_bin})"
-selenium_dir="./node_modules/webdriver-manager/selenium"
+selenium_dir="$project_dir/node_modules/webdriver-manager/selenium"
 
-e2e_output="e2e.output"
+e2e_output="$project_dir/e2e.output"
 
 server_pid_msg="nodeServer.pid: "
 server_pid_re="^${server_pid_msg}\([0-9]*\)$"
@@ -18,7 +20,7 @@ selenium_pid_re="^.*seleniumProcess.pid: \([0-9]*\)$"
 
 function main () {
   [[ ! -f "$wdm_bin" ]] && error_message "$wdm_bin not found. \nPlease run 'npm install' first."
-  [[ ! -d "$selenium_dir" ]] && ${wdm_bin} update
+  [[ ! -d "$selenium_dir" ]] && echo "== Selenium directory not found, running '${wdm_bin_hr} update' ..." && ${wdm_bin} update
 
   case "$action" in
     "start" )
@@ -42,7 +44,9 @@ function main () {
 }
 
 function start_server () {
+  pushd . > /dev/null
   ${server_bin} >> "$e2e_output" 2>&1 &
+  popd > /dev/null
   server_pid="$!"
   echo "${server_pid_msg}${server_pid}" >> "$e2e_output"
 }
