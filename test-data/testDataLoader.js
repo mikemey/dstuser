@@ -3,9 +3,14 @@ const path = require('path')
 
 const testDataDir = './comments'
 
-const TestDataLoader = {
-  testData: filename => fs.readFileSync(path.join(__dirname, testDataDir, filename), 'utf8'),
-  testDataAsJson: filename => require(`${testDataDir}/${filename}`)
+const getComment = (userId, pageId) => {
+  const fileName = `profile_${userId}_${pageId}.txt`
+  return fs.readFileSync(path.join(__dirname, testDataDir, fileName), 'utf8')
 }
 
-module.exports = TestDataLoader
+const getCommentResult = userId => {
+  const fileName = `profile_${userId}_result.json`
+  return require(`${testDataDir}/${fileName}`)
+}
+
+module.exports = { getComment, getCommentResult }
