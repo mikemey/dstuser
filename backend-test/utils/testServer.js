@@ -1,4 +1,6 @@
 const supertest = require('supertest')
+
+const TestDataLoader = require('../../test-data/testDataLoader')
 const createServer = require('../../backend/app')
 
 const testConfig = {
@@ -36,6 +38,8 @@ const TestServer = () => {
     start,
     stop,
     request,
+    testData: TestDataLoader.testData,
+    testDataAsJson: TestDataLoader.testDataAsJson,
     config: testConfig
   }
 }

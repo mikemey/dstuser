@@ -1,6 +1,4 @@
 const nock = require('nock')
-const fs = require('fs')
-const path = require('path')
 const TestServer = require('../utils/testServer')
 
 nock.disableNetConnect()
@@ -8,8 +6,8 @@ nock.enableNetConnect('127.0.0.1')
 
 describe('get userprofile endpoint', () => {
   const server = TestServer()
-  const testData = filename => fs.readFileSync(path.join(__dirname, 'data', filename), 'utf8')
-  const expectedData = filename => require(`./data/${filename}`)
+  const testData = filename => server.testData(filename)
+  const expectedData = filename => server.testDataAsJson(filename)
 
   before(server.start)
   after(server.stop)

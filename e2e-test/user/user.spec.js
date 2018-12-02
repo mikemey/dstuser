@@ -20,4 +20,14 @@ describe('User main page', () => {
       expect(SearchPage.searchUserButton().isDisplayed()).toBeTruthy()
     })
   })
+
+  describe('user search', () => {
+    it('should display comments', () => {
+      SearchPage.open()
+      SearchPage.searchUserInput().sendKeys('755005')
+      SearchPage.searchUserButton().click()
+
+      expect(SearchPage.searchUserButton().isDisplayed()).toBeTruthy()
+    })
+  })
 })
