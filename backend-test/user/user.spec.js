@@ -19,24 +19,36 @@ describe('get userprofile endpoint', () => {
     return server.stop()
   })
 
-  const runUserProfileTest = (userId, pageCount) => {
-    for (var pageNum = 1; pageNum <= pageCount; pageNum++) {
-      nock(server.config.dstuHost)
-        .get(`/userprofil/postings/${userId}?page=${pageNum}`)
-        .reply(200, testData(userId, pageNum))
+  describe('valid requests', () => {
+    const runUserProfileTest = (userId, pageCount) => {
+      for (var pageNum = 1; pageNum <= pageCount; pageNum++) {
+        nock(server.config.dstuHost)
+          .get(`/userprofil/postings/${userId}?page=${pageNum}`)
+          .reply(200, testData(userId, pageNum))
+      }
+      return server.request()
+        .get(`/dstuapi/userprofile/${userId}`)
+        .expect(200, expectedData(userId))
     }
-    return server.request()
-      .get(`/dstuapi/userprofile/${userId}`)
-      .expect(200)
-      .then(({ body }) => {
-        body.should.deep.equal(expectedData(userId))
-      })
-  }
-  it('should respond with userprofile (#755005 - one page)', () =>
-    runUserProfileTest(755005, 1)
-  )
 
-  it('should respond with userprofile (#425185 - multiple pages)', () =>
-    runUserProfileTest(425185, 3)
-  )
+    it('respond with userprofile (#755005 - one page)', () =>
+      runUserProfileTest(755005, 1)
+    )
+
+    it('respond with userprofile (#425185 - multiple pages)', () =>
+      runUserProfileTest(425185, 3)
+    )
+  })
+
+  describe('invalid requests', () => {
+    it('return 400 when no userId in request', () => server.request()
+      .get(`/dstuapi/userprofile/`)
+      .expect(400, { error: 'User-ID missing' })
+    )
+
+    it('return 400 when userId is NaN', () => server.request()
+      .get(`/dstuapi/userprofile/123n34`)
+      .expect(400, { error: 'User-ID not a number' })
+    )
+  })
 })
