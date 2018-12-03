@@ -1,3 +1,7 @@
+form {
+  display: inline;
+}
+
 .loader {
   border: 8px solid #dadada;
   border-top: 8px solid #de137a;
@@ -5,14 +9,14 @@
   border-radius: 50%;
   width: 20px;
   height: 20px;
-  animation: spin 0.55s linear infinite;
+  animation: rotating 0.55s linear infinite;
 }
 
-@keyframes spin {
-  0% {
+@keyframes rotating {
+  from {
     transform: rotate(0deg);
   }
-  100% {
+  to {
     transform: rotate(360deg);
   }
 }

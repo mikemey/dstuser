@@ -1,12 +1,25 @@
 const { by, browser, element } = require('protractor')
 
-const SearchPage = {
-  open: () => browser.get('./'),
-  statusText: () => element(by.id('status')).getText(),
-  searchUserLabel: () => element(by.xpath('//form/label')).getText(),
+const open = () => browser.get('./')
+const statusText = () => element(by.id('status')).getText()
+const searchUserLabel = () => element(by.xpath('//form/label')).getText()
 
-  searchUserButton: () => element(by.xpath('//form/button')),
-  searchUserInput: () => element(by.name('userId'))
+const searchUserButton = () => element(by.xpath('//form/button'))
+const searchUserInput = () => element(by.name('userId'))
+
+const searchUser = userId => {
+  searchUserInput().sendKeys(userId)
+  searchUserButton().click()
 }
 
-module.exports = SearchPage
+const getUserName = () => element(by.className('userName')).getText()
+
+module.exports = {
+  open,
+  statusText,
+  searchUserLabel,
+  searchUserButton,
+  searchUserInput,
+  searchUser,
+  getUserName
+}

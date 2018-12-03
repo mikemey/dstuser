@@ -8,11 +8,12 @@ const htmlContentHeader = { 'content-type': 'text/html; charset=utf-8' }
 
 const serverCfg = configLoader.get(console)
 
-const start = () => {
+const start = async () => {
   const { port } = url.parse(serverCfg.dstuHost)
-  return mockServer.start(Number(port))
+  await mockServer.start(Number(port))
 }
-const stop = () => mockServer.stop()
+
+const stop = async () => { await mockServer.stop() }
 
 const pagePath = (userId, pageNum) => {
   const path = serverCfg.userProfileTemplate
@@ -20,6 +21,7 @@ const pagePath = (userId, pageNum) => {
     .replace(serverCfg.pagePlaceholder, pageNum)
   return url.parse(path, true)
 }
+
 const serveUserPage = async (userId, pageNum) => {
   const { pathname, query } = pagePath(userId, pageNum)
   const body = dataLoader.getComment(userId, pageNum)
