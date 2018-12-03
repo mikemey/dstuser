@@ -1,45 +1,33 @@
 const url = require('url')
-const querystring = require('querystring')
-const MockHttpServer = require('mock-http-server')
+const mockServer = require('mockttp').getLocal()
 
 const configLoader = require('../backend/configLoader')
 const dataLoader = require('../test-data/testDataLoader')
 
 const htmlContentHeader = { 'content-type': 'text/html; charset=utf-8' }
 
-const DerStandardMock = () => {
-  const serverConfig = configLoader.get(console)
-  const { hostname, port } = url.parse(serverConfig.dstuHost)
-  const server = new MockHttpServer({ host: hostname, port })
+const serverCfg = configLoader.get(console)
 
-  const pagePath = (userId, pageNum) => {
-    const pathString = serverConfig.userProfileTemplate
-      .replace(serverConfig.userIdPlaceholder, userId)
-      .replace(serverConfig.pagePlaceholder, pageNum)
-    return url.parse(pathString, true)
+const start = () => {
+  const { port } = url.parse(serverCfg.dstuHost)
+  return mockServer.start(Number(port))
+}
+const stop = () => mockServer.stop()
+
+const pagePath = (userId, pageNum) => {
+  const path = serverCfg.userProfileTemplate
+    .replace(serverCfg.userIdPlaceholder, userId)
+    .replace(serverCfg.pagePlaceholder, pageNum)
+  return url.parse(path, true)
+}
+const serveUserPage = async (userId, pageNum) => {
+  const { pathname, query } = pagePath(userId, pageNum)
+  const body = dataLoader.getComment(userId, pageNum)
+  const mockRule = mockServer.get(pathname)
+  for (let param in query) {
+    mockRule.withQuery({ [param]: query[param] })
   }
-
-  const serveUserPage = (userId, pageNum) => {
-    const { pathname, query } = pagePath(userId, pageNum)
-    const body = dataLoader.getComment(userId, pageNum)
-
-    server.on({
-      path: pathname,
-      filter: req => req.pathname === pathname &&
-        querystring.stringify(req.query) === querystring.stringify(query),
-      reply: {
-        status: 200,
-        headers: htmlContentHeader,
-        body
-      }
-    })
-  }
-
-  return {
-    start: server.start,
-    stop: server.stop,
-    serveUserPage
-  }
+  await mockRule.thenReply(200, body, htmlContentHeader)
 }
 
-module.exports = DerStandardMock
+module.exports = { start, stop, serveUserPage }

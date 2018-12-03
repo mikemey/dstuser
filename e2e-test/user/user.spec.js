@@ -1,5 +1,5 @@
 const SearchPage = require('./searchPage')
-const DerStandardMock = require('../derStandardMock')
+const derStandard = require('../derStandardMock')
 
 describe('User main page', () => {
   describe('static elements', () => {
@@ -23,8 +23,6 @@ describe('User main page', () => {
   })
 
   describe('user search', () => {
-    const derStandard = DerStandardMock()
-
     beforeEach(derStandard.start)
     afterEach(derStandard.stop)
 
