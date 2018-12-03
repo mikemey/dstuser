@@ -24,29 +24,40 @@ server_port_re=".*e2eEnv.*port:${sed_number_group},.*"
 function main () {
   [[ ! -f "$wdm_bin" ]] && error_message "$wdm_bin not found. \nPlease run 'npm install' first."
   [[ ! -d "$selenium_dir" ]] && \
-    echo "== Selenium directory not found, running '${wdm_bin_hr} update' ..." && \
-    ${wdm_bin} update
+      echo "== Selenium directory not found, running '${wdm_bin_hr} update' ..." && \
+      ${wdm_bin} update
   [[ ! -f "$server_config" ]] && error_message "$server_config not found, check location."
 
   case "$action" in
     "start" )
-      echo "new session" > "$e2e_output"
-      start_server
-      wait_for_server
-      start_webdriver
+      start_e2e_infrastructure
     ;;
     "stop" )
-      [[ ! -f "$e2e_output" ]] && error_message "$e2e_output not found!"
-      kill "$(extract_pid "$server_pid_re")"
-      kill "$(extract_pid "$selenium_pid_re")"
-      kill "$(extract_pid "$wdm_pid_re")"
-      rm "$e2e_output"
-      echo "e2e infrastructure stopped."
+      stop_e2e_infrastructure
     ;;
     * )
       error_message "not recognized: $action \nmust be either '$(basename $0) start' or '$(basename $0) stop'"
     ;;
   esac
+}
+
+function start_e2e_infrastructure () {
+  [[ -f "$e2e_output" ]] && \
+      echo "$(basename "$e2e_output") exists, shutting down existing e2e infrastructure..." && \
+      stop_e2e_infrastructure
+  echo "new session" > "$e2e_output"
+  start_server
+  wait_for_server
+  start_webdriver
+}
+
+function stop_e2e_infrastructure () {
+  [[ ! -f "$e2e_output" ]] && error_message "$e2e_output not found!"
+  kill "$(extract_pid "$server_pid_re")"
+  kill "$(extract_pid "$selenium_pid_re")"
+  kill "$(extract_pid "$wdm_pid_re")"
+  rm "$e2e_output"
+  echo "e2e infrastructure stopped."
 }
 
 function start_server () {
