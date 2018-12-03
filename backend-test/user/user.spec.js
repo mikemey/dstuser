@@ -2,16 +2,22 @@ const nock = require('nock')
 const TestServer = require('../utils/testServer')
 const dataLoader = require('../../test-data/testDataLoader')
 
-nock.disableNetConnect()
-nock.enableNetConnect('127.0.0.1')
-
 describe('get userprofile endpoint', () => {
   const server = TestServer()
   const testData = (userId, pageId) => dataLoader.getComment(userId, pageId)
   const expectedData = userId => dataLoader.getCommentResult(userId)
 
-  before(server.start)
-  after(server.stop)
+  before(() => {
+    nock.disableNetConnect()
+    nock.enableNetConnect('127.0.0.1')
+    return server.start()
+  })
+
+  after(() => {
+    nock.cleanAll()
+    nock.enableNetConnect()
+    return server.stop()
+  })
 
   const runUserProfileTest = (userId, pageCount) => {
     for (var pageNum = 1; pageNum <= pageCount; pageNum++) {
