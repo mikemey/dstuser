@@ -36,6 +36,10 @@ describe('User main page', () => {
 
     afterEach(derStandard.stop)
 
+    it('should forward to user page', () => {
+      expect(searchPage.getBrowserUrl()).toMatch(new RegExp(`/search/${userId}$`))
+    })
+
     it('should show user name', () => {
       expect(searchPage.getUserName()).toEqual('a standard user')
     })

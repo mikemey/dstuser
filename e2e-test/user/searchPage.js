@@ -12,6 +12,8 @@ const searchUser = userId => {
   searchUserButton().click()
 }
 
+const getBrowserUrl = () => browser.driver.getCurrentUrl()
+
 const getUserName = () => element(by.className('userName')).getText()
 
 module.exports = {
@@ -21,5 +23,6 @@ module.exports = {
   searchUserButton,
   searchUserInput,
   searchUser,
-  getUserName
+  getUserName,
+  getBrowserUrl
 }

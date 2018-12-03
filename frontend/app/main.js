@@ -9,10 +9,13 @@ import './main.css'
 const MODULE_NAME = 'dstu'
 
 const mainRouter = $routeProvider => $routeProvider
-  .when('/', {
+  .when('/search', {
     template: main
   })
-  .otherwise('/')
+  .when('/search/:userId', {
+    template: main
+  })
+  .otherwise({ redirectTo: '/search' })
 
 angular
   .module(MODULE_NAME, [
