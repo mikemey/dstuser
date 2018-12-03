@@ -1,15 +1,18 @@
 const { by, browser, element } = require('protractor')
 
-const open = () => browser.get('./')
+const open = (path = '#!/search') => browser.get(path)
 const statusText = () => element(by.id('status')).getText()
-const searchUserLabel = () => element(by.xpath('//form/label')).getText()
+const formLabel = () => element(by.xpath('//form/label')).getText()
 
-const searchUserButton = () => element(by.xpath('//form/button'))
-const searchUserInput = () => element(by.name('userId'))
+const searchButton = () => element(by.xpath('//form/button'))
+const userIdInput = () => element(by.name('userId'))
 
-const searchUser = userId => {
-  searchUserInput().sendKeys(userId)
-  searchUserButton().click()
+const setUserId = userId => userIdInput().sendKeys(userId)
+const getUserId = () => userIdInput().getAttribute('value')
+
+const requestUserComments = userId => {
+  setUserId(userId)
+  searchButton().click()
 }
 
 const getBrowserUrl = () => browser.driver.getCurrentUrl()
@@ -17,12 +20,14 @@ const getBrowserUrl = () => browser.driver.getCurrentUrl()
 const getUserName = () => element(by.className('userName')).getText()
 
 module.exports = {
+  getBrowserUrl,
   open,
   statusText,
-  searchUserLabel,
-  searchUserButton,
-  searchUserInput,
-  searchUser,
+  formLabel,
+  searchButton,
+  userIdInput,
+  requestUserComments,
   getUserName,
-  getBrowserUrl
+  setUserId,
+  getUserId
 }

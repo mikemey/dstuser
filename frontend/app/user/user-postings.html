@@ -1,9 +1,10 @@
-<form>
+<form name="userForm">
   <label>
     User ID:
-    <input ng-model="model.userId" name="userId" />
+    <input ng-model="model.userId" name="userId" type="text" ng-pattern="/^\d{1,8}$/"
+      maxlength="8" required="required" />
   </label>
-  <button ng-click="search()">search...</button>
+  <button ng-click="search()" ng-disabled="userForm.$invalid">search...</button>
 </form>
 <span class="userName">{{ model.content.userName }}</span>
 

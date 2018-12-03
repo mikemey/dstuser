@@ -1,3 +1,5 @@
+const { Key } = require('protractor')
+
 const searchPage = require('./searchPage')
 const derStandard = require('../derStandardMock')
 
@@ -10,37 +12,68 @@ describe('User main page', () => {
     })
 
     it('should show userId label', () => {
-      expect(searchPage.searchUserLabel()).toEqual('User ID:')
+      expect(searchPage.formLabel()).toEqual('User ID:')
     })
 
     it('should show userId input', () => {
-      expect(searchPage.searchUserInput().isDisplayed()).toBeTruthy()
+      expect(searchPage.userIdInput().isDisplayed()).toBeTruthy()
     })
 
     it('should show search postings button', () => {
-      expect(searchPage.searchUserButton().isDisplayed()).toBeTruthy()
+      expect(searchPage.searchButton().isDisplayed()).toBeTruthy()
+    })
+  })
+
+  describe('userId input validation', () => {
+    beforeEach(searchPage.open)
+
+    it('button disabled when no userId', () => {
+      expect(searchPage.searchButton().isEnabled()).toBeFalsy()
+    })
+
+    it('button disabled when non-digit characters in userId', () => {
+      searchPage.setUserId('123x')
+      expect(searchPage.searchButton().isEnabled()).toBeFalsy()
+    })
+
+    it('allow only 8 characters', () => {
+      searchPage.setUserId('123456789')
+      expect(searchPage.getUserId()).toEqual('12345678')
+      expect(searchPage.searchButton().isEnabled()).toBeTruthy()
     })
   })
 
   describe('user search (single comment page)', () => {
-    const userId = 755005
+    const userId = '755005'
     const pageNum = 1
 
     beforeEach(() => {
       derStandard.start()
       derStandard.serveUserPage(userId, pageNum)
-
       searchPage.open()
-      searchPage.searchUser(userId)
     })
 
     afterEach(derStandard.stop)
 
     it('should forward to user page', () => {
+      searchPage.requestUserComments(userId)
       expect(searchPage.getBrowserUrl()).toMatch(new RegExp(`/search/${userId}$`))
     })
 
     it('should show user name', () => {
+      expect(searchPage.getUserName()).toEqual('')
+      searchPage.requestUserComments(userId)
+      expect(searchPage.getUserName()).toEqual('a standard user')
+    })
+
+    it('should start request when Key.ENTER pressed', () => {
+      searchPage.userIdInput().sendKeys(userId, Key.ENTER)
+      expect(searchPage.getUserName()).toEqual('a standard user')
+    })
+
+    it('should request comments when URL contains userId', () => {
+      searchPage.open(`#!/search/${userId}`)
+      expect(searchPage.getUserId()).toEqual(userId)
       expect(searchPage.getUserName()).toEqual('a standard user')
     })
   })
