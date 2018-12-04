@@ -39,4 +39,6 @@ const server404WhenUserPageFor = async userId => {
     .thenReply(404, dataLoader.get404Page())
 }
 
-module.exports = { start, stop, serveUserPageFor, server404WhenUserPageFor }
+const getCommentResult = userId => dataLoader.getCommentResult(userId)
+
+module.exports = { start, stop, serveUserPageFor, server404WhenUserPageFor, getCommentResult }

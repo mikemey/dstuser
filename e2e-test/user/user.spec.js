@@ -1,7 +1,7 @@
 const { Key } = require('protractor')
 
-const searchPage = require('./searchPage')
 const derStandard = require('../derStandardMock')
+const searchPage = require('./searchPage')
 
 describe('User main page', () => {
   describe('static elements', () => {
@@ -79,6 +79,20 @@ describe('User main page', () => {
       searchPage.open(`#!/search/${userId}`)
       expect(searchPage.getUserId()).toEqual(userId)
       expect(searchPage.getUserName()).toEqual('a standard user')
+    })
+
+    it('should show user comments', async () => {
+      const expectedPostings = derStandard.getCommentResult(userId).postings
+      searchPage.requestUserComments(userId)
+      const comments = await searchPage.getComments()
+
+      expectedPostings.forEach((expected, ix) => {
+        expect(comments[ix].title).toBe(expected.title, `title ix: ${ix}`)
+        expect(comments[ix].content).toBe(expected.content, `content ix: ${ix}`)
+        expect(comments[ix].url).toBe(expected.url, `url ix: ${ix}`)
+        expect(comments[ix].articleTitle).toBe(expected.article.title, `article.title ix: ${ix}`)
+        expect(comments[ix].articleUrl).toBe(expected.article.url, `article.url ix: ${ix}`)
+      })
     })
   })
 

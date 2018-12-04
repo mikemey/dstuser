@@ -14,6 +14,14 @@
 
 <div ng-if="model.loading" class="loader"></div>
 
+<div class="comment" ng-repeat="posting in model.content.postings">
+  <a class="title" href="{{ posting.url }}" target="_blank">{{ posting.title }}</a>
+  <p class="content">{{ posting.content }}</p>
+  <a class="article" href="{{ posting.article.url }}" target="_blank">
+    {{ posting.article.title }}
+  </a>
+</div>
+
 <footer>
   <p id="status">{{ status }}</p>
 </footer>

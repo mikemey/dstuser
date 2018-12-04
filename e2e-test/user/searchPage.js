@@ -21,6 +21,22 @@ const getUserName = () => element(by.className('userName')).getText()
 const errorBox = () => element(by.className('errorMessage'))
 const getErrorMessage = () => errorBox().getText()
 
+const getComments = () => element.all(by.className('comment'))
+  .map(createComment)
+
+const createComment = el => {
+  const titleEl = el.element(by.className('title'))
+  const contentEl = el.element(by.className('content'))
+  const articleEl = el.element(by.className('article'))
+  return {
+    title: titleEl.getText(),
+    url: titleEl.getAttribute('href'),
+    content: contentEl.getText(),
+    articleTitle: articleEl.getText(),
+    articleUrl: articleEl.getAttribute('href')
+  }
+}
+
 module.exports = {
   getBrowserUrl,
   open,
@@ -33,5 +49,6 @@ module.exports = {
   setUserId,
   getUserId,
   errorBox,
-  getErrorMessage
+  getErrorMessage,
+  getComments
 }
