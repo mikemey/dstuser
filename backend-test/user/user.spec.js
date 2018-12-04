@@ -19,18 +19,13 @@ describe('get userprofile endpoint', () => {
     return server.stop()
   })
 
-  describe('valid requests', () => {
-    const runUserProfileTest = (userId, pageCount) => {
-      for (var pageNum = 1; pageNum <= pageCount; pageNum++) {
-        nock(server.config.dstuHost)
-          .get(`/userprofil/postings/${userId}?page=${pageNum}`)
-          .reply(200, testData(userId, pageNum))
-      }
-      return server.request()
-        .get(`/dstuapi/userprofile/${userId}`)
-        .expect(200, expectedData(userId))
-    }
+  const nockDstUserprofile = (userId, pageNum) => nock(server.config.dstuHost)
+    .get(`/userprofil/postings/${userId}?page=${pageNum}`)
 
+  const requestUserprofile = userId => server.request()
+    .get(`/dstuapi/userprofile/${userId}`)
+
+  describe('valid requests', () => {
     it('respond with userprofile (#755005 - one page)', () =>
       runUserProfileTest(755005, 1)
     )
@@ -38,17 +33,22 @@ describe('get userprofile endpoint', () => {
     it('respond with userprofile (#425185 - multiple pages)', () =>
       runUserProfileTest(425185, 3)
     )
+
+    const runUserProfileTest = (userId, pageCount) => {
+      for (var pageNum = 1; pageNum <= pageCount; pageNum++) {
+        nockDstUserprofile(userId, pageNum).reply(200, testData(userId, pageNum))
+      }
+      return requestUserprofile(userId).expect(200, expectedData(userId))
+    }
   })
 
   describe('invalid requests', () => {
-    it('return 400 when no userId in request', () => server.request()
-      .get(`/dstuapi/userprofile/`)
-      .expect(400, { error: 'User-ID missing' })
+    it('return 400 when no userId in request', () =>
+      requestUserprofile('').expect(400, { error: 'User ID missing' })
     )
 
-    it('return 400 when userId is NaN', () => server.request()
-      .get(`/dstuapi/userprofile/123n34`)
-      .expect(400, { error: 'User-ID not a number' })
+    it('return 400 when userId is NaN', () =>
+      requestUserprofile('123n34').expect(400, { error: 'User ID not a number: 123n34' })
     )
   })
 })

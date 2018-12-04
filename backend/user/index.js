@@ -6,11 +6,11 @@ const result = (userId, error) => ({ userId, error })
 
 const extractUserId = req => {
   const reqUserId = req.params.userId
-  if (!reqUserId) return result(reqUserId, 'User-ID missing')
+  if (!reqUserId) return result(reqUserId, 'User ID missing')
 
   const parsed = Number(reqUserId)
   return isNaN(parsed)
-    ? result(reqUserId, 'User-ID not a number')
+    ? result(reqUserId, `User ID not a number: ${reqUserId}`)
     : result(parsed, null)
 }
 
