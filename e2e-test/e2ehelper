@@ -11,6 +11,7 @@ wdm_bin="$project_dir/node_modules/webdriver-manager/bin/webdriver-manager"
 wdm_bin_hr="$(basename ${wdm_bin})"
 selenium_dir="$project_dir/node_modules/webdriver-manager/selenium"
 server_config="$project_dir/backend/configLoader.js"
+config_env="e2eEnv"
 
 e2e_output="$project_dir/e2e.output"
 
@@ -19,7 +20,7 @@ server_pid_msg="nodeServer.pid: "
 server_pid_re="^${server_pid_msg}${sed_number_group}$"
 wdm_pid_re="^.*Detached pid: ${sed_number_group}$"
 selenium_pid_re="^.*seleniumProcess.pid: ${sed_number_group}$"
-server_port_re=".*e2eEnv.*port:${sed_number_group},.*"
+server_port_re=".*port: ${sed_number_group},"
 
 function main () {
   [[ ! -f "$wdm_bin" ]] && error_message "$wdm_bin not found. \nPlease run 'npm install' first."
@@ -61,9 +62,7 @@ function stop_e2e_infrastructure () {
 }
 
 function start_server () {
-  pushd . > /dev/null
   ${server_bin} >> "$e2e_output" 2>&1 &
-  popd > /dev/null
   server_pid="$!"
   echo "${server_pid_msg}${server_pid}" >> "$e2e_output"
 }
@@ -97,8 +96,8 @@ function extract_pid () {
 }
 
 function extract_server_port () {
-  port=`cat "$server_config" | tr -d '\n ' | sed -n -e 's/'"$server_port_re"'/\1/p'`
-  check_is_number "$port" "E2E Server port not found in ${server_config} \nresult: '$port'"
+  port=`cat "$server_config" | grep -A 1 "const $config_env" | sed -n -e 's/'"$server_port_re"'/\1/p'`
+  check_is_number "$port" "E2E Server port not found in $server_config \nresult: '$port'"
   echo "$port"
 }
 
