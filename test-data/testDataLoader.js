@@ -18,5 +18,6 @@ const getCommentResult = userId => {
 }
 
 const get404Page = () => readFile(errorsDir, '404response.html')
+const get302Page = () => readFile(errorsDir, '302response.html')
 
-module.exports = { getComment, getCommentResult, get404Page }
+module.exports = { getComment, getCommentResult, get404Page, get302Page }

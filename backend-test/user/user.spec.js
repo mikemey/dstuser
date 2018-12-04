@@ -67,5 +67,15 @@ describe('get userprofile endpoint', () => {
       nockDstUserprofile(userId, 3).reply(404, dataLoader.get404Page())
       return requestUserprofile(userId).expect(404, errorResponse)
     })
+
+    it('respond with error message when 302', () => {
+      const fakeErrorUrl = '/error/notfoundpage'
+      nockDstUserprofile(userId, 1).reply(302, dataLoader.get302Page(), {
+        'Location': fakeErrorUrl
+      })
+      const scope = nock(server.config.dstuHost).get(fakeErrorUrl).reply(200, 'this shouldnt happen')
+      return requestUserprofile(userId).expect(404, errorResponse)
+        .then(() => { scope.isDone().should.equal(false) })
+    })
   })
 })
