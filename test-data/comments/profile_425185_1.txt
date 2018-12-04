@@ -311,8 +311,8 @@
 
 
   <a class="current" href="/userprofil/postings/425185?sortMode=1&amp;groupMode=2&amp;pageNumber=1">1</a>
-  <a class="" href="/userprofil/postings/425185?page=2">2</a>
-  <a class="" href="/userprofil/postings/425185?page=3">3</a>
+  <a class="" href="/userprofil/postings/425185?pageNumber=2">2</a>
+  <a class="" href="/userprofil/postings/425185?pageNumber=3">3</a>
 
 
 

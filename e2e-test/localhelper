@@ -1,0 +1,107 @@
+#!/usr/bin/env bash
+
+export NODE_ENV="LOCAL"
+project_dir="${BASH_SOURCE%/*}/.."
+
+action="$1"
+server_bin="npm start -s"
+dst_server_bin="node $project_dir/e2e-test/derStandardLocal.js"
+server_startup_retries=10
+
+server_config="$project_dir/backend/configLoader.js"
+config_env="localEnv"
+
+local_output="$project_dir/local.output"
+
+sed_number_group="\([0-9]*\)"
+server_pid_msg="nodeServer.pid: "
+server_pid_re="^${server_pid_msg}${sed_number_group}$"
+dst_server_pid_msg="local.dst.server.pid: "
+dst_server_pid_re="^${dst_server_pid_msg}${sed_number_group}$"
+
+server_port_re=".*port: ${sed_number_group},"
+dst_server_port_re=".*localhost:${sed_number_group}.*"
+
+function main () {
+  [[ ! -f "$server_config" ]] && error_message "$server_config not found, check location."
+
+  case "$action" in
+    "start" )
+      start_local
+    ;;
+    "stop" )
+      stop_local
+    ;;
+    * )
+      error_message "not recognized: $action \nmust be either '$(basename $0) start' or '$(basename $0) stop'"
+    ;;
+  esac
+}
+
+function start_local () {
+  [[ -f "$local_output" ]] && \
+      echo "$(basename "$local_output") exists, shutting down existing local infrastructure..." && \
+      stop_local
+  echo "new session" > "$local_output"
+
+  dst_server_port=`extract_server_port "$dst_server_port_re"`
+  server_port=`extract_server_port "$server_port_re"`
+
+  start_server "$dst_server_bin" "$dst_server_pid_msg"
+  start_server "$server_bin" "$server_pid_msg"
+  wait_for_server "$dst_server_port"
+  wait_for_server "$server_port"
+}
+
+function stop_local () {
+  [[ ! -f "$local_output" ]] && error_message "$local_output not found!"
+  kill "$(extract_pid "$server_pid_re")" && echo "server stopped."
+  kill "$(extract_pid "$dst_server_pid_re")" && echo "local dst server stopped."
+  rm "$local_output"
+  echo "local infrastructure stopped."
+}
+
+function start_server () {
+  ${1} >> "$local_output" 2>&1 &
+  pid="$!"
+  echo "${2}${pid}" >> "$local_output"
+}
+
+function wait_for_server () {
+  printf "waiting for server start (port $1): "
+  ix=${server_startup_retries}
+  while [[ ${ix} > 0 && ! `lsof -i :${1}` ]]; do
+    sleep 1
+    printf "$ix "
+    ix=`expr ${ix} - 1`
+  done
+
+  if [[ ${ix} > 0 ]]; then
+    echo "server started"
+  else
+    error_message "server NOT running!"
+  fi
+}
+
+function extract_pid () {
+  pid=`sed -n -e 's/'"$1"'/\1/p' "$local_output"`
+  check_is_number "$pid" "no match of '$1' in '$local_output' \nresult: '$pid'"
+  echo "$pid"
+}
+
+function extract_server_port () {
+  port=`cat "$server_config" | grep -A 2 "const $config_env" | sed -n -e 's/'"$1"'/\1/p'`
+  check_is_number "$port" "Server port not found in ${server_config} \nresult: '$port'"
+  echo "$port"
+}
+
+function check_is_number () {
+  ! [[ "$1" =~ ^[0-9]+$ ]] && error_message "$2"
+}
+
+function error_message () {
+  printf "$*\n"
+  exit 1
+}
+
+main; exit

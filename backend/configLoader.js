@@ -1,6 +1,7 @@
 const DEFAULT = 'default'
 const E2E = 'E2E'
 const PROD = 'PROD'
+const LOCAL = 'LOCAL'
 
 const defaultEnv = {
   port: 7000,
@@ -14,6 +15,11 @@ const defaultEnv = {
 const e2eEnv = {
   port: 5555,
   dstuHost: 'http://localhost:5556'
+}
+
+const localEnv = {
+  port: 7001,
+  dstuHost: 'http://localhost:5557'
 }
 
 const prodEnv = {
@@ -30,6 +36,9 @@ const get = logger => {
     case E2E:
       logger.info(message(E2E))
       return Object.assign({}, defaultEnv, e2eEnv)
+    case LOCAL:
+      logger.info(message(LOCAL))
+      return Object.assign({}, defaultEnv, localEnv)
     default:
       logger.info(message(DEFAULT))
       return defaultEnv

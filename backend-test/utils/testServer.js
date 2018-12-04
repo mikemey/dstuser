@@ -6,7 +6,7 @@ const testConfig = {
   dstuHost: 'https://dstu.com',
   userIdPlaceholder: '$UID$',
   pagePlaceholder: '$PAGE$',
-  userProfileTemplate: '/userprofil/postings/$UID$?page=$PAGE$'
+  userProfileTemplate: '/userprofil/postings/$UID$?pageNumber=$PAGE$'
 }
 
 const createQuietLogger = () => {
