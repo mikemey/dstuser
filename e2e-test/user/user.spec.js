@@ -22,6 +22,10 @@ describe('User main page', () => {
     it('should show search postings button', () => {
       expect(searchPage.searchButton().isDisplayed()).toBeTruthy()
     })
+
+    it('should hide error box', () => {
+      expect(searchPage.errorBox().isDisplayed()).toBeFalsy()
+    })
   })
 
   describe('userId input validation', () => {
@@ -49,7 +53,7 @@ describe('User main page', () => {
 
     beforeEach(() => {
       derStandard.start()
-      derStandard.serveUserPage(userId, pageNum)
+      derStandard.serveUserPageFor(userId, pageNum)
       searchPage.open()
     })
 
@@ -75,6 +79,22 @@ describe('User main page', () => {
       searchPage.open(`#!/search/${userId}`)
       expect(searchPage.getUserId()).toEqual(userId)
       expect(searchPage.getUserName()).toEqual('a standard user')
+    })
+  })
+
+  describe('derStandard errors', () => {
+    const userId = '755005'
+    beforeEach(() => {
+      derStandard.start()
+    })
+
+    it('should show error message', () => {
+      derStandard.server404WhenUserPageFor(userId)
+      searchPage.open()
+      searchPage.requestUserComments(userId)
+
+      expect(searchPage.errorBox().isDisplayed()).toBeTruthy()
+      expect(searchPage.getErrorMessage()).toEqual(`User ID not found: ${userId}`)
     })
   })
 })

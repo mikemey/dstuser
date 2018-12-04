@@ -7,7 +7,8 @@ const userPostingsCtrl = ($scope, $http, $location, $routeParams) => {
   $scope.model = {
     userId: null,
     content: null,
-    loading: false
+    loading: false,
+    errorMessage: null
   }
 
   $scope.search = () => {
@@ -19,7 +20,8 @@ const userPostingsCtrl = ($scope, $http, $location, $routeParams) => {
       $scope.model.loading = true
       $scope.model.userId = $routeParams.userId
       return $http.get('/dstuapi/userprofile/' + $scope.model.userId)
-        .then(response => ($scope.model.content = response.data))
+        .then(response => { $scope.model.content = response.data })
+        .catch(response => { $scope.model.errorMessage = response.data.error })
         .finally(() => {
           $scope.model.loading = false
         })

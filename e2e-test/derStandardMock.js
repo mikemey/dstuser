@@ -22,7 +22,7 @@ const pagePath = (userId, pageNum) => {
   return url.parse(path, true)
 }
 
-const serveUserPage = async (userId, pageNum) => {
+const serveUserPageFor = async (userId, pageNum) => {
   const { pathname, query } = pagePath(userId, pageNum)
   const body = dataLoader.getComment(userId, pageNum)
   const mockRule = mockServer.get(pathname)
@@ -32,4 +32,10 @@ const serveUserPage = async (userId, pageNum) => {
   await mockRule.thenReply(200, body, htmlContentHeader)
 }
 
-module.exports = { start, stop, serveUserPage }
+const server404WhenUserPageFor = async userId => {
+  const { pathname } = pagePath(userId, 1)
+  await mockServer.get(pathname)
+    .thenReply(404, dataLoader.get404Page())
+}
+
+module.exports = { start, stop, serveUserPageFor, server404WhenUserPageFor }

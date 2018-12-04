@@ -8,6 +8,8 @@
 </form>
 <span class="userName">{{ model.content.userName }}</span>
 
+<p ng-show="model.errorMessage" class="errorMessage">{{ model.errorMessage }}</p>
+
 <hr>
 
 <div ng-if="model.loading" class="loader"></div>
