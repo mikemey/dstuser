@@ -53,9 +53,9 @@ function start_e2e_infrastructure () {
 
 function stop_e2e_infrastructure () {
   [[ ! -f "$e2e_output" ]] && error_message "$e2e_output not found!"
-  kill "$(extract_pid "$server_pid_re")"
-  kill "$(extract_pid "$selenium_pid_re")"
-  kill "$(extract_pid "$wdm_pid_re")"
+  kill "$(extract_pid "$server_pid_re")" && echo "server stopped."
+  kill "$(extract_pid "$selenium_pid_re")" && echo "selenium stopped."
+  kill "$(extract_pid "$wdm_pid_re")" && echo "$wdm_bin_hr stopped."
   rm "$e2e_output"
   echo "e2e infrastructure stopped."
 }
