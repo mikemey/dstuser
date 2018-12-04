@@ -7,10 +7,6 @@ describe('User main page', () => {
   describe('static elements', () => {
     beforeAll(searchPage.open)
 
-    it('should show status message "ready"', () => {
-      expect(searchPage.statusText()).toEqual('ready')
-    })
-
     it('should show userId label', () => {
       expect(searchPage.formLabel()).toEqual('User ID:')
     })

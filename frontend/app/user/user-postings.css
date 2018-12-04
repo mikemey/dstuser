@@ -2,17 +2,6 @@ form {
   display: inline;
 }
 
-footer {
-  text-align: center;
-  font-size: 0.8em;
-  position: fixed;
-  left: 0px;
-  bottom: 0px;
-  height: 45px;
-  width: 100%;
-  background: #CCC;
-}
-
 .loader {
   border: 8px solid #dadada;
   border-top: 8px solid #de137a;

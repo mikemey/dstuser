@@ -3,7 +3,6 @@ const { by, browser, element } = require('protractor')
 const getBrowserUrl = () => browser.driver.getCurrentUrl()
 const open = (path = '#!/search') => browser.get(path)
 
-const statusText = () => element(by.id('status')).getText()
 const formLabel = () => element(by.xpath('//form/label')).getText()
 const userIdInput = () => element(by.name('userId'))
 const searchButton = () => element(by.xpath('//form/button'))
@@ -40,7 +39,6 @@ const createComment = el => {
 module.exports = {
   getBrowserUrl,
   open,
-  statusText,
   formLabel,
   searchButton,
   userIdInput,

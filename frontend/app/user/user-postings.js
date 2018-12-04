@@ -3,7 +3,6 @@ import angular from 'angular'
 import './user-postings.css'
 
 const userPostingsCtrl = ($scope, $http, $location, $routeParams) => {
-  $scope.status = 'ready'
   $scope.model = {
     userId: null,
     content: null,
