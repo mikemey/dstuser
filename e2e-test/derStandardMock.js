@@ -2,11 +2,12 @@ const url = require('url')
 const mockServer = require('mockttp').getLocal()
 
 const configLoader = require('../backend/configLoader')
-const dataLoader = require('../test-data/testDataLoader')
+const TestDataLoader = require('../test-data/testDataLoader')
 
 const htmlContentHeader = { 'content-type': 'text/html; charset=utf-8' }
 
 const serverCfg = configLoader.get(console)
+const dataLoader = TestDataLoader(serverCfg.dstuHost)
 
 const start = async () => {
   const { port } = url.parse(serverCfg.dstuHost)

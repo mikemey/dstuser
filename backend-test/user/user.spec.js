@@ -1,9 +1,11 @@
 const nock = require('nock')
 const TestServer = require('../utils/testServer')
-const dataLoader = require('../../test-data/testDataLoader')
+const TestDataLoader = require('../../test-data/testDataLoader')
 
 describe('get userprofile endpoint', () => {
   const server = TestServer()
+  const dataLoader = TestDataLoader(server.config.dstuHost)
+
   const testData = (userId, pageId) => dataLoader.getComment(userId, pageId)
   const expectedData = userId => dataLoader.getCommentResult(userId)
 
