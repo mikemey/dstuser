@@ -1,16 +1,22 @@
 const fs = require('fs')
 const path = require('path')
 
-const testDataDir = './comments'
+const commentsDir = './comments'
+const errorsDir = './errors'
+
+const readFile = (dir, fileName) =>
+  fs.readFileSync(path.join(__dirname, dir, fileName), 'utf8')
 
 const getComment = (userId, pageId) => {
   const fileName = `profile_${userId}_${pageId}.txt`
-  return fs.readFileSync(path.join(__dirname, testDataDir, fileName), 'utf8')
+  return readFile(commentsDir, fileName)
 }
 
 const getCommentResult = userId => {
   const fileName = `profile_${userId}_result.json`
-  return require(`${testDataDir}/${fileName}`)
+  return require(`${commentsDir}/${fileName}`)
 }
 
-module.exports = { getComment, getCommentResult }
+const get404Page = () => readFile(errorsDir, '404response.html')
+
+module.exports = { getComment, getCommentResult, get404Page }

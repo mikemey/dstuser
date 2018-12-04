@@ -12,7 +12,7 @@ const testConfig = {
 const createQuietLogger = () => {
   return {
     info: () => { },
-    error: console.error,
+    error: (msg, err) => { },
     log: () => { }
   }
 }

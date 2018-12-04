@@ -51,4 +51,21 @@ describe('get userprofile endpoint', () => {
       requestUserprofile('123n34').expect(400, { error: 'User ID not a number: 123n34' })
     )
   })
+
+  describe('derStandard server errors', () => {
+    const userId = 425185
+    const errorResponse = { error: `User ID not found: ${userId}` }
+
+    it('respond with error message when 404', () => {
+      nockDstUserprofile(userId, 1).reply(404, dataLoader.get404Page())
+      return requestUserprofile(userId).expect(404, errorResponse)
+    })
+
+    it('respond with error message when 404 with multiple pages', () => {
+      nockDstUserprofile(userId, 1).reply(200, testData(userId, 1))
+      nockDstUserprofile(userId, 2).reply(200, testData(userId, 2))
+      nockDstUserprofile(userId, 3).reply(404, dataLoader.get404Page())
+      return requestUserprofile(userId).expect(404, errorResponse)
+    })
+  })
 })
