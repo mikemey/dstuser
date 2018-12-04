@@ -20,16 +20,17 @@ const getUserName = () => element(by.className('userName')).getText()
 const errorBox = () => element(by.className('errorMessage'))
 const getErrorMessage = () => errorBox().getText()
 
-const getComments = () => element.all(by.className('comment'))
+const getComments = () => element.all(by.className('comment-box'))
   .map(createComment)
 
 const createComment = el => {
-  const titleEl = el.element(by.className('title'))
-  const contentEl = el.element(by.className('content'))
-  const articleEl = el.element(by.className('article'))
+  const titleEl = el.element(by.className('comment-title'))
+  const urlEl = el.element(by.className('comment-url'))
+  const contentEl = el.element(by.className('comment-content'))
+  const articleEl = el.element(by.className('comment-article'))
   return {
     title: titleEl.getText(),
-    url: titleEl.getAttribute('href'),
+    url: urlEl.getAttribute('href'),
     content: contentEl.getText(),
     articleTitle: articleEl.getText(),
     articleUrl: articleEl.getAttribute('href')
