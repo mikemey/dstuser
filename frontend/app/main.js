@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import userModule from './user/user.module'
 
 import main from './main.html'
+import './main.css'
 
 const MODULE_NAME = 'dstu'
 
