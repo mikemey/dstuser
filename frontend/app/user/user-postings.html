@@ -1,25 +1,39 @@
-<form name="userForm">
-  <label>
-    User ID:
-    <input ng-model="model.userId" name="userId" type="text" ng-pattern="/^\d{1,8}$/"
-      maxlength="8" required="required" />
-  </label>
-  <button ng-click="search()" ng-disabled="userForm.$invalid">search...</button>
-</form>
-<span class="userName">{{ model.content.userName }}</span>
+<form name="userForm" class="offset-lg-4">
+  <div class="form-group row">
+    <div class="col-sm-2">
+      <label for="userId" class="sr-only">User ID</label>
+      <input id="userId" type="text" class="form-control form-control-sm"
+        placeholder="user ID" ng-model="model.userId" ng-pattern="/^\d{1,8}$/"
+        maxlength="8" required="required" />
+    </div>
 
-<p ng-show="model.errorMessage" class="errorMessage">{{ model.errorMessage }}</p>
+    <div class="col-sm-2">
+      <button type="submit" class="btn btn-outline-dark btn-sm col-sm-12"
+        ng-click="search()" ng-disabled="userForm.$invalid">search...</button>
+    </div>
+
+    <div class="col-sm-7">
+      <label class="loader" ng-if="model.loading"></label>
+      <label id="errorMessage" class="form-control-plaintext form-control-sm" ng-show="model.errorMessage">
+        {{ model.errorMessage }}
+      </label>
+      <label id="userName" class="form-control-plaintext form-control-sm">
+        {{model.content.userName }}
+      </label>
+    </div>
+  </div>
+</form>
 
 <hr>
 
-<div ng-if="model.loading" class="loader"></div>
-
-<div class="comment-box" ng-repeat="posting in model.content.postings">
-  <a class="comment-url" href="{{ posting.url }}" target="_blank">
-    <strong class="comment-title">{{ posting.title }}</strong>
-    <span class="comment-content">{{ posting.content }}</span>
-  </a>
-  <a class="comment-article" href="{{ posting.article.url }}" target="_blank">
-    {{ posting.article.title }}
-  </a>
+<div class="row">
+  <div class="comment-box" ng-repeat="posting in model.content.postings">
+    <a class="comment-url" href="{{ posting.url }}" target="_blank">
+      <strong class="comment-title">{{ posting.title }}</strong>
+      <span class="comment-content">{{ posting.content }}</span>
+    </a>
+    <a class="comment-article" href="{{ posting.article.url }}" target="_blank">
+      {{ posting.article.title }}
+    </a>
+  </div>
 </div>

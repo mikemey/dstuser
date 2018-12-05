@@ -8,7 +8,7 @@ describe('User main page', () => {
     beforeAll(searchPage.open)
 
     it('should show userId label', () => {
-      expect(searchPage.formLabel()).toEqual('User ID:')
+      expect(searchPage.formLabel()).toEqual('user ID')
     })
 
     it('should show userId input', () => {
