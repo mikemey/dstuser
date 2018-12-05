@@ -13,10 +13,9 @@
     </div>
 
     <div class="col-sm-7">
-      <label class="loader" ng-if="model.loading"></label>
-      <label id="errorMessage" class="form-control-plaintext form-control-sm" ng-show="model.errorMessage">
-        {{ model.errorMessage }}
-      </label>
+      <label class="loader mb-0" ng-if="model.loading"></label>
+      <label id="errorMessage" class="form-control-plaintext form-control-sm"
+        ng-if="model.errorMessage">{{ model.errorMessage }}</label>
       <label id="userName" class="form-control-plaintext form-control-sm">
         {{model.content.userName }}
       </label>

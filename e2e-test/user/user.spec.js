@@ -20,7 +20,7 @@ describe('User main page', () => {
     })
 
     it('should hide error box', () => {
-      expect(searchPage.errorBox().isDisplayed()).toBeFalsy()
+      expect(searchPage.hasErrorMessage()).toBeFalsy()
     })
   })
 
@@ -103,7 +103,7 @@ describe('User main page', () => {
       searchPage.open()
       searchPage.requestUserComments(userId)
 
-      expect(searchPage.errorBox().isDisplayed()).toBeTruthy()
+      expect(searchPage.hasErrorMessage()).toBeTruthy()
       expect(searchPage.getErrorMessage()).toEqual(`User ID not found: ${userId}`)
     })
   })

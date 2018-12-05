@@ -17,8 +17,9 @@ const requestUserComments = userId => {
 
 const getUserName = () => element(by.id('userName')).getText()
 
-const errorBox = () => element(by.id('errorMessage'))
-const getErrorMessage = () => errorBox().getText()
+const byErrorMessage = by.id('errorMessage')
+const hasErrorMessage = () => browser.isElementPresent(byErrorMessage)
+const getErrorMessage = () => element(byErrorMessage).getText()
 
 const getComments = () => element.all(by.className('comment-box'))
   .map(createComment)
@@ -47,7 +48,7 @@ module.exports = {
   getUserName,
   setUserId,
   getUserId,
-  errorBox,
+  hasErrorMessage,
   getErrorMessage,
   getComments
 }
