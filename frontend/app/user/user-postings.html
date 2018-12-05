@@ -26,13 +26,18 @@
 <hr>
 
 <div class="row">
-  <div class="comment-box" ng-repeat="posting in model.content.postings">
-    <a class="comment-url" href="{{ posting.url }}" target="_blank">
-      <strong class="comment-title">{{ posting.title }}</strong>
-      <span class="comment-content">{{ posting.content }}</span>
-    </a>
-    <a class="comment-article" href="{{ posting.article.url }}" target="_blank">
-      {{ posting.article.title }}
-    </a>
+  <div class="col-lg-3 col-md-4 col-sm-6 p-1" ng-repeat="posting in model.content.postings">
+    <div class="card cmnt-box rounded-0">
+      <a class="card-body cmnt-url text-dark p-2" ng-href="{{ posting.url }}"
+        target="_blank">
+        <strong class="card-title cmnt-title mb-1">{{ posting.title }}</strong>
+        <p class="card-text cmnt-content text-justify small">{{ posting.content
+          }}</p>
+      </a>
+      <a class="card-footer cmnt-article" ng-href="{{ posting.article.url }}"
+        target="_blank">
+        {{ posting.article.title }}
+      </a>
+    </div>
   </div>
 </div>
