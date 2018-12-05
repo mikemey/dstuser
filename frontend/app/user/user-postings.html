@@ -1,18 +1,22 @@
 <form name="userForm" class="offset-lg-4 offset-md-3">
   <div class="form-group row">
-    <div class="col-sm-2">
-      <label for="userId" class="sr-only">User ID</label>
-      <input id="userId" type="text" class="form-control form-control-sm"
+    <div class="col-lg-2 col-sm-3">
+      <input id="userId-small" type="text" class="form-control form-control-sm d-none d-md-block"
+        placeholder="user ID" ng-model="model.userId" ng-pattern="/^\d{1,8}$/"
+        maxlength="8" required="required" />
+      <input id="userId-large" type="text" class="form-control form-control-lg d-sm-block d-md-none"
         placeholder="user ID" ng-model="model.userId" ng-pattern="/^\d{1,8}$/"
         maxlength="8" required="required" />
     </div>
 
-    <div class="col-sm-2">
-      <button type="submit" class="btn btn-outline-dark btn-sm btn-block"
+    <div class="col-lg-2 col-sm-3">
+      <button id="searchBtn-small" type="submit" class="btn btn-outline-dark btn-sm btn-block d-none d-md-block"
+        ng-click="search()" ng-disabled="userForm.$invalid">search...</button>
+      <button id="searchBtn-large" type="submit" class="btn btn-outline-dark btn-lg btn-block d-sm-block d-md-none"
         ng-click="search()" ng-disabled="userForm.$invalid">search...</button>
     </div>
 
-    <div class="col-sm-2">
+    <div class="col-lg-8 col-sm-6">
       <label class="loader mb-0" ng-if="model.loading"></label>
       <label id="errorMessage" class="form-control-plaintext form-control-sm"
         ng-if="model.errorMessage">{{ model.errorMessage }}</label>

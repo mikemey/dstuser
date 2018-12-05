@@ -1,26 +1,40 @@
 const { Key } = require('protractor')
 
 const derStandard = require('../derStandardMock')
-const searchPage = require('./searchPage')
+const { SearchPage, ALL_SCREENS, hiddenScreen } = require('./searchPage')
 
-describe('User main page', () => {
-  describe('static elements', () => {
-    beforeAll(searchPage.open)
+ALL_SCREENS.forEach(testScreen => {
+  const searchPage = SearchPage(testScreen)
 
-    it('should show userId label', () => {
-      expect(searchPage.formLabel()).toEqual('user ID')
-    })
+  describe(`[${testScreen.id}] user main page`, () => {
+    const hideScreen = hiddenScreen(testScreen)
 
-    it('should show userId input', () => {
-      expect(searchPage.userIdInput().isDisplayed()).toBeTruthy()
-    })
+    describe('static elements', () => {
+      beforeAll(searchPage.open)
 
-    it('should show search postings button', () => {
-      expect(searchPage.searchButton().isDisplayed()).toBeTruthy()
-    })
+      it('should show userId label', () => {
+        expect(searchPage.formLabel()).toEqual('user ID')
+      })
 
-    it('should hide error box', () => {
-      expect(searchPage.hasErrorMessage()).toBeFalsy()
+      it(`should show userId input`, () => {
+        expect(searchPage.hasUserIdInput()).toBeTruthy()
+      })
+
+      it(`should NOT show [${hideScreen.id}] userId input`, () => {
+        expect(searchPage.hasUserIdInput(hideScreen)).toBeFalsy()
+      })
+
+      it('should show search postings button', () => {
+        expect(searchPage.hasSearchButton()).toBeTruthy()
+      })
+
+      it(`should NOT show [${hideScreen.id}] search postings button`, () => {
+        expect(searchPage.hasSearchButton()).toBeTruthy()
+      })
+
+      it('should hide error box', () => {
+        expect(searchPage.hasErrorMessage()).toBeFalsy()
+      })
     })
   })
 
@@ -28,18 +42,18 @@ describe('User main page', () => {
     beforeEach(searchPage.open)
 
     it('button disabled when no userId', () => {
-      expect(searchPage.searchButton().isEnabled()).toBeFalsy()
+      expect(searchPage.isSearchButtonEnabled()).toBeFalsy()
     })
 
     it('button disabled when non-digit characters in userId', () => {
       searchPage.setUserId('123x')
-      expect(searchPage.searchButton().isEnabled()).toBeFalsy()
+      expect(searchPage.isSearchButtonEnabled()).toBeFalsy()
     })
 
     it('allow only 8 characters', () => {
       searchPage.setUserId('123456789')
       expect(searchPage.getUserId()).toEqual('12345678')
-      expect(searchPage.searchButton().isEnabled()).toBeTruthy()
+      expect(searchPage.isSearchButtonEnabled()).toBeTruthy()
     })
   })
 
@@ -47,13 +61,14 @@ describe('User main page', () => {
     const userId = '755005'
     const pageNum = 1
 
-    beforeEach(() => {
+    beforeAll(() => {
       derStandard.start()
       derStandard.serveUserPageFor(userId, pageNum)
-      searchPage.open()
     })
 
-    afterEach(derStandard.stop)
+    afterAll(derStandard.stop)
+
+    beforeEach(() => searchPage.open())
 
     it('should forward to user page', () => {
       searchPage.requestUserComments(userId)
@@ -67,7 +82,8 @@ describe('User main page', () => {
     })
 
     it('should start request when Key.ENTER pressed', () => {
-      searchPage.userIdInput().sendKeys(userId, Key.ENTER)
+      searchPage.setUserId(userId)
+      searchPage.setUserId(Key.ENTER)
       expect(searchPage.getUserName()).toEqual('a standard user')
     })
 
@@ -94,9 +110,8 @@ describe('User main page', () => {
 
   describe('derStandard errors', () => {
     const userId = '755005'
-    beforeEach(() => {
-      derStandard.start()
-    })
+    beforeEach(derStandard.start)
+    afterEach(derStandard.stop)
 
     it('should show error message', () => {
       derStandard.server404WhenUserPageFor(userId)
