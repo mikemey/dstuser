@@ -19,7 +19,8 @@ const e2eEnv = {
 
 const localEnv = {
   port: 7001,
-  dstuHost: 'http://localhost:5557'
+  dstuHost: 'http://localhost:5557',
+  interface: '0.0.0.0'
 }
 
 const prodEnv = {
