@@ -1,14 +1,13 @@
 const { Key } = require('protractor')
 
 const derStandard = require('../derStandardMock')
-const { SearchPage, ALL_SCREENS, hiddenScreen } = require('./searchPage')
+const { SearchPage, ALL_SCREENS } = require('./searchPage')
 
 ALL_SCREENS.forEach(testScreen => {
   const searchPage = SearchPage(testScreen)
+  const hideElementsScreen = searchPage.getHiddenScreen()
 
   describe(`[${testScreen.id}] user main page`, () => {
-    const hideElsScreen = hiddenScreen(testScreen)
-
     describe('static elements', () => {
       beforeAll(searchPage.open)
 
@@ -20,24 +19,24 @@ ALL_SCREENS.forEach(testScreen => {
         expect(searchPage.hasUserIdInput()).toBeTruthy()
       })
 
-      it(`should NOT show [${hideElsScreen.id}] userId input`, () => {
-        expect(searchPage.hasUserIdInput(hideElsScreen)).toBeFalsy()
+      it(`should NOT show [${hideElementsScreen.id}] userId input`, () => {
+        expect(searchPage.hasUserIdInput(hideElementsScreen)).toBeFalsy()
       })
 
       it('should show search postings button', () => {
         expect(searchPage.hasSearchButton()).toBeTruthy()
       })
 
-      it(`should NOT show [${hideElsScreen.id}] search postings button`, () => {
-        expect(searchPage.hasSearchButton()).toBeTruthy()
+      it(`should NOT show [${hideElementsScreen.id}] search postings button`, () => {
+        expect(searchPage.hasSearchButton(hideElementsScreen)).toBeFalsy()
       })
 
       it(`should show user name field`, () => {
         expect(searchPage.hasUserName()).toBeTruthy()
       })
 
-      it(`should NOT show [${hideElsScreen.id}] user name field`, () => {
-        expect(searchPage.hasUserName(hideElsScreen)).toBeFalsy()
+      it(`should NOT show [${hideElementsScreen.id}] user name field`, () => {
+        expect(searchPage.hasUserName(hideElementsScreen)).toBeFalsy()
       })
     })
   })
