@@ -15,6 +15,7 @@
     "be-watch": "nodemon -x 'npm run be-test -s'",
     "build-watch": "webpack --watch",
     "protractor": "protractor e2e-test/protractor.conf.js",
+    "fprotractor": "npm run protractor -s | grep -A 2 '^[0-9]*)\\|^Ran *\\|e2e-test'",
     "e2e": "./e2e-test/e2ehelper start && npm run protractor; ./e2e-test/e2ehelper stop"
   },
   "repository": {

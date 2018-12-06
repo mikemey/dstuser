@@ -7,7 +7,7 @@ ALL_SCREENS.forEach(testScreen => {
   const searchPage = SearchPage(testScreen)
 
   describe(`[${testScreen.id}] user main page`, () => {
-    const hideScreen = hiddenScreen(testScreen)
+    const hideElsScreen = hiddenScreen(testScreen)
 
     describe('static elements', () => {
       beforeAll(searchPage.open)
@@ -20,20 +20,24 @@ ALL_SCREENS.forEach(testScreen => {
         expect(searchPage.hasUserIdInput()).toBeTruthy()
       })
 
-      it(`should NOT show [${hideScreen.id}] userId input`, () => {
-        expect(searchPage.hasUserIdInput(hideScreen)).toBeFalsy()
+      it(`should NOT show [${hideElsScreen.id}] userId input`, () => {
+        expect(searchPage.hasUserIdInput(hideElsScreen)).toBeFalsy()
       })
 
       it('should show search postings button', () => {
         expect(searchPage.hasSearchButton()).toBeTruthy()
       })
 
-      it(`should NOT show [${hideScreen.id}] search postings button`, () => {
+      it(`should NOT show [${hideElsScreen.id}] search postings button`, () => {
         expect(searchPage.hasSearchButton()).toBeTruthy()
       })
 
-      it('should hide error box', () => {
-        expect(searchPage.hasErrorMessage()).toBeFalsy()
+      it(`should show user name field`, () => {
+        expect(searchPage.hasUserName()).toBeTruthy()
+      })
+
+      it(`should NOT show [${hideElsScreen.id}] user name field`, () => {
+        expect(searchPage.hasUserName(hideElsScreen)).toBeFalsy()
       })
     })
   })
@@ -68,7 +72,7 @@ ALL_SCREENS.forEach(testScreen => {
 
     afterAll(derStandard.stop)
 
-    beforeEach(() => searchPage.open())
+    beforeEach(searchPage.open)
 
     it('should forward to user page', () => {
       searchPage.requestUserComments(userId)

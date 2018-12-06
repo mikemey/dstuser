@@ -23,8 +23,8 @@ const SearchPage = testScreen => {
 
   const getBrowserUrl = () => browser.driver.getCurrentUrl()
   const open = (path = '#!/search') => Promise.all([
-    browser.manage().window().setSize(testScreen.width, testScreen.height),
-    browser.get(path)
+    browser.get(path),
+    browser.manage().window().setSize(testScreen.width, testScreen.height)
   ])
 
   const byUserId = (suffix = testScreen.suffix) => by.id(`userId-${suffix}`)
@@ -45,7 +45,9 @@ const SearchPage = testScreen => {
     searchButton().click()
   }
 
-  const getUserName = () => element(by.id('userName')).getText()
+  const byUserName = (screen = testScreen) => by.id(`userName-${screen.suffix}`)
+  const getUserName = () => element(byUserName()).getText()
+  const hasUserName = (chk = testScreen) => element(byUserName(chk)).isDisplayed()
 
   const byErrorMessage = by.id('errorMessage')
   const hasErrorMessage = () => browser.isElementPresent(byErrorMessage)
@@ -79,6 +81,7 @@ const SearchPage = testScreen => {
     isSearchButtonEnabled,
     requestUserComments,
     getUserName,
+    hasUserName,
     hasErrorMessage,
     getErrorMessage,
     getComments

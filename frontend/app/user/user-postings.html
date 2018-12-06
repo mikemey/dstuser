@@ -4,15 +4,15 @@
       <input id="userId-small" type="text" class="form-control form-control-sm d-none d-md-block"
         placeholder="user ID" ng-model="model.userId" ng-pattern="/^\d{1,8}$/"
         maxlength="8" required="required" />
-      <input id="userId-large" type="text" class="form-control form-control-lg d-sm-block d-md-none"
+      <input id="userId-large" type="text" class="form-control form-control-lg d-md-none"
         placeholder="user ID" ng-model="model.userId" ng-pattern="/^\d{1,8}$/"
         maxlength="8" required="required" />
     </div>
 
     <div class="col-lg-2 col-sm-3">
-      <button id="searchBtn-small" type="submit" class="btn btn-outline-dark btn-sm btn-block d-none d-md-block"
+      <button id="searchBtn-small" type="submit" class="btn btn-outline-dark btn-sm d-none d-md-block"
         ng-click="search()" ng-disabled="userForm.$invalid">search...</button>
-      <button id="searchBtn-large" type="submit" class="btn btn-outline-dark btn-lg btn-block d-sm-block d-md-none"
+      <button id="searchBtn-large" type="submit" class="btn btn-outline-dark btn-lg d-md-none"
         ng-click="search()" ng-disabled="userForm.$invalid">search...</button>
     </div>
 
@@ -20,7 +20,10 @@
       <label class="loader mb-0" ng-if="model.loading"></label>
       <label id="errorMessage" class="form-control-plaintext form-control-sm"
         ng-if="model.errorMessage">{{ model.errorMessage }}</label>
-      <label id="userName" class="form-control-plaintext form-control-sm">
+      <label id="userName-small" class="form-control-plaintext form-control-sm d-none d-md-block">
+        {{model.content.userName }}
+      </label>
+      <label id="userName-large" class="form-control-plaintext form-control-lg d-md-none">
         {{model.content.userName }}
       </label>
     </div>
