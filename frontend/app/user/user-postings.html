@@ -1,29 +1,31 @@
 <form name="userForm" class="offset-lg-4 offset-md-3">
   <div class="form-group row">
     <div class="col-lg-2 col-sm-3">
-      <input id="userId-small" type="text" class="form-control form-control-sm d-none d-md-block"
-        placeholder="user ID" ng-model="model.userId" ng-pattern="/^\d{1,8}$/"
-        maxlength="8" required="required" />
-      <input id="userId-large" type="text" class="form-control form-control-lg d-md-none"
-        placeholder="user ID" ng-model="model.userId" ng-pattern="/^\d{1,8}$/"
-        maxlength="8" required="required" />
+      <input id="userId-small" type="tel" pattern="[0-9]{1,8}" maxlength="8"
+        class="form-control form-control-sm d-none d-md-block text-center"
+        placeholder="user ID" ng-model="model.userId" required="required" />
+      <input id="userId-large" type="tel" pattern="[0-9]{1,8}" maxlength="8"
+        class="form-control form-control-lg d-md-none text-center" placeholder="user ID"
+        ng-model="model.userId" required="required" />
     </div>
 
-    <div class="col-lg-2 col-sm-3">
+    <div class="col-lg-2 col-sm-3 mt-sm-0 mt-3">
       <button id="searchBtn-small" type="submit" class="btn btn-outline-dark btn-sm d-none d-md-block"
         ng-click="search()" ng-disabled="userForm.$invalid">search...</button>
-      <button id="searchBtn-large" type="submit" class="btn btn-outline-dark btn-lg d-md-none"
+      <button id="searchBtn-large" type="submit" class="btn btn-outline-dark btn-lg d-md-none col-12"
         ng-click="search()" ng-disabled="userForm.$invalid">search...</button>
     </div>
 
-    <div class="col-lg-8 col-sm-6">
-      <label class="loader mb-0" ng-if="model.loading"></label>
+    <div class="col-lg-8 col-sm-6 mt-sm-0 mt-3">
+      <label class="loader my-md-0 mt-2 mb-1 float-md-left offset-md-0 offset-5"
+        ng-if="model.loading"></label>
       <label id="errorMessage" class="form-control-plaintext form-control-sm"
         ng-if="model.errorMessage">{{ model.errorMessage }}</label>
       <label id="userName-small" class="form-control-plaintext form-control-sm d-none d-md-block">
         {{model.content.userName }}
       </label>
-      <label id="userName-large" class="form-control-plaintext form-control-lg d-md-none">
+      <label id="userName-large" ng-if="!model.errorMessage && !model.loading"
+        class="form-control-plaintext form-control-lg d-md-none text-center">
         {{model.content.userName }}
       </label>
     </div>
