@@ -1,0 +1,26 @@
+#!/bin/bash
+
+filterRegex="^[0-9]{1,}|^Ran|e2e-test"
+printlines=2
+counter=$printlines
+while IFS= read -r line; do
+  counter=$(( $counter + 1 ))
+  recording=false
+  
+  if [[ $counter -le $printlines ]]; then
+    recording=true
+  fi
+
+  if [[ "$line" =~ $filterRegex ]]; then
+    recording=true
+    counter=0
+  fi
+
+  if [[ "$recording" == "true" ]]; then
+    printf "$line\n"
+  fi
+
+  if [[ $counter == $printlines ]]; then
+    printf "%s\n" "------------------------------------------------------------------------------"
+  fi
+done < "${1:-/dev/stdin}"
