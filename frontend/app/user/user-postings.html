@@ -17,17 +17,23 @@
     </div>
 
     <div class="col-lg-8 col-sm-6 mt-sm-0 mt-3">
-      <label class="loader my-md-0 mt-2 mb-1 float-md-left offset-md-0 offset-5"
-        ng-if="model.loading"></label>
-      <label id="errorMessage" class="form-control-plaintext form-control-sm"
-        ng-if="model.errorMessage">{{ model.errorMessage }}</label>
-      <label id="userName-small" class="form-control-plaintext form-control-sm d-none d-md-block">
-        {{model.content.userName }}
-      </label>
-      <label id="userName-large" ng-if="!model.errorMessage && !model.loading"
-        class="form-control-plaintext form-control-lg d-md-none text-center">
-        {{model.content.userName }}
-      </label>
+      <div ng-if="model.loading">
+        <label class="loader my-md-0 mt-2 mb-1 float-md-left offset-md-0 offset-5"></label>
+      </div>
+
+      <div ng-if="model.errorMessage">
+        <label id="errorMessage-small" class="form-control-plaintext form-control-sm d-none d-md-block"
+          ng-bind="model.errorMessage"></label>
+        <label id="errorMessage-large" class="form-control-plaintext form-control-lg d-md-none text-center"
+          ng-bind="model.errorMessage"></label>
+      </div>
+
+      <div ng-if="model.content.userName">
+        <label id="userName-small" class="form-control-plaintext form-control-sm d-none d-md-block"
+          ng-bind="model.content.userName"></label>
+        <label id="userName-large" class="form-control-plaintext form-control-lg d-md-none text-center"
+          ng-bind="model.content.userName"></label>
+      </div>
     </div>
   </div>
 </form>

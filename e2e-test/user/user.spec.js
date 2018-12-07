@@ -7,7 +7,7 @@ ALL_SCREENS.forEach(testScreen => {
   const searchPage = SearchPage(testScreen)
   const hideElementsScreen = searchPage.getHiddenScreen()
 
-  describe(`[${testScreen.id}] user main page`, () => {
+  describe(`[${testScreen.id}]: user main page`, () => {
     describe('static elements', () => {
       beforeAll(searchPage.open)
 
@@ -31,11 +31,13 @@ ALL_SCREENS.forEach(testScreen => {
         expect(searchPage.hasSearchButton(hideElementsScreen)).toBeFalsy()
       })
 
-      it(`should show user name field`, () => {
-        expect(searchPage.hasUserName()).toBeTruthy()
+      it('should hide error box(es)', () => {
+        expect(searchPage.hasErrorMessage()).toBeFalsy()
+        expect(searchPage.hasErrorMessage(hideElementsScreen)).toBeFalsy()
       })
 
-      it(`should NOT show [${hideElementsScreen.id}] user name field`, () => {
+      it(`should hide user name fields`, () => {
+        expect(searchPage.hasUserName()).toBeFalsy()
         expect(searchPage.hasUserName(hideElementsScreen)).toBeFalsy()
       })
     })
@@ -60,7 +62,7 @@ ALL_SCREENS.forEach(testScreen => {
     })
   })
 
-  describe('user search (single comment page)', () => {
+  describe(`[${testScreen.id}]: user search (single comment page)`, () => {
     const userId = '755005'
     const pageNum = 1
 
@@ -79,9 +81,10 @@ ALL_SCREENS.forEach(testScreen => {
     })
 
     it('should show user name', () => {
-      expect(searchPage.getUserName()).toEqual('')
+      expect(searchPage.hasUserName()).toBeFalsy()
       searchPage.requestUserComments(userId)
       expect(searchPage.getUserName()).toEqual('a standard user')
+      expect(searchPage.hasUserName(hideElementsScreen)).toBeFalsy()
     })
 
     it('should start request when Key.ENTER pressed', () => {
@@ -111,7 +114,7 @@ ALL_SCREENS.forEach(testScreen => {
     })
   })
 
-  describe('derStandard errors', () => {
+  describe(`[${testScreen.id}]: derStandard errors`, () => {
     const userId = '755005'
     beforeEach(derStandard.start)
     afterEach(derStandard.stop)
@@ -122,6 +125,7 @@ ALL_SCREENS.forEach(testScreen => {
       searchPage.requestUserComments(userId)
 
       expect(searchPage.hasErrorMessage()).toBeTruthy()
+      expect(searchPage.hasErrorMessage(hideElementsScreen)).toBeFalsy()
       expect(searchPage.getErrorMessage()).toEqual(`User ID not found: ${userId}`)
     })
   })

@@ -5,19 +5,26 @@ const LARGE_SCREEN = { id: 'LARGE SCREEN', width: 1000, height: 800, suffix: 'sm
 // medium screen -> xxx-large element identifiers
 const MEDIUM_SCREEN = { id: 'MEDIUM SCREEN', width: 720, height: 600, suffix: 'large' }
 // small screen -> xxx-large element identifiers
-const SMALL_SCREEN = { id: 'SMALL SCREEN', width: 540, height: 600, suffix: 'large' }
+const SMALL_SCREEN = { id: 'SMALL SCREEN', width: 540, height: 400, suffix: 'large' }
 
 // const ALL_SCREENS = [LARGE_SCREEN, MEDIUM_SCREEN, SMALL_SCREEN]
 const ALL_SCREENS = [LARGE_SCREEN, MEDIUM_SCREEN, SMALL_SCREEN]
+
+const hasElement = byElement => browser
+  .isElementPresent(byElement)
+  .then(isElementPresent => isElementPresent
+    ? element(byElement).isDisplayed()
+    : Promise.resolve(false)
+  )
 
 const SearchPage = testScreen => {
   if (!ALL_SCREENS.includes(testScreen)) {
     throw Error(`unknown screen size: >${testScreen}<`)
   }
 
-  const getHiddenScreen = () => testScreen.suffix === SMALL_SCREEN.suffix
-    ? LARGE_SCREEN
-    : SMALL_SCREEN
+  const getHiddenScreen = () => testScreen === LARGE_SCREEN
+    ? SMALL_SCREEN
+    : LARGE_SCREEN
 
   const getBrowserUrl = () => browser.driver.getCurrentUrl()
   const open = (path = '#!/search') => Promise.all([
@@ -26,7 +33,7 @@ const SearchPage = testScreen => {
   ])
 
   const byUserId = (screen = testScreen) => by.id(`userId-${screen.suffix}`)
-  const hasUserIdInput = screen => element(byUserId(screen)).isDisplayed()
+  const hasUserIdInput = screen => hasElement(byUserId(screen))
 
   const userIdInput = () => element(byUserId())
   const getUserId = () => userIdInput().getAttribute('value')
@@ -35,7 +42,7 @@ const SearchPage = testScreen => {
 
   const bySearchButton = (screen = testScreen) => by.id(`searchBtn-${screen.suffix}`)
   const searchButton = () => element(bySearchButton())
-  const hasSearchButton = screen => element(bySearchButton(screen)).isDisplayed()
+  const hasSearchButton = screen => hasElement(bySearchButton(screen))
   const isSearchButtonEnabled = () => searchButton().isEnabled()
 
   const requestUserComments = userId => {
@@ -44,12 +51,12 @@ const SearchPage = testScreen => {
   }
 
   const byUserName = (screen = testScreen) => by.id(`userName-${screen.suffix}`)
+  const hasUserName = screen => hasElement(byUserName(screen))
   const getUserName = () => element(byUserName()).getText()
-  const hasUserName = screen => element(byUserName(screen)).isDisplayed()
 
-  const byErrorMessage = by.id('errorMessage')
-  const hasErrorMessage = () => browser.isElementPresent(byErrorMessage)
-  const getErrorMessage = () => element(byErrorMessage).getText()
+  const byErrorMessage = (screen = testScreen) => by.id(`errorMessage-${screen.suffix}`)
+  const hasErrorMessage = screen => hasElement(byErrorMessage(screen))
+  const getErrorMessage = () => element(byErrorMessage()).getText()
 
   const getComments = () => element.all(by.className('cmnt-box'))
     .map(createComment)
@@ -69,6 +76,7 @@ const SearchPage = testScreen => {
   }
 
   return {
+    id: testScreen.id,
     getBrowserUrl,
     open,
     getHiddenScreen,
@@ -87,4 +95,4 @@ const SearchPage = testScreen => {
   }
 }
 
-module.exports = { SearchPage, LARGE_SCREEN, SMALL_SCREEN, ALL_SCREENS }
+module.exports = { SearchPage, LARGE_SCREEN, MEDIUM_SCREEN, SMALL_SCREEN, ALL_SCREENS }
