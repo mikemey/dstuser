@@ -1,18 +1,7 @@
 body {
-  background-color: #fff2e9;
+  background-color: #fefdf7;
 }
 
 user-postings {
   font-family: Arial, Helvetica, sans-serif;
-}
-
-.title {
-  font-family: 'Times New Roman', Times, serif, sans-serif;
-  font-weight: bold;
-  letter-spacing: 2pt;
-  transform: skewX(170deg);
-}
-
-.title-cmnt {
-  font-weight: normal;
 }

@@ -1,51 +1,61 @@
-<form name="userForm" class="offset-lg-4 offset-md-3 pb-0">
-  <div class="form-group row">
-    <div class="col-lg-2 col-sm-3">
-      <input id="userId-small" type="tel" pattern="[0-9]{1,8}" maxlength="8"
-        class="form-control form-control-sm d-none d-md-block text-center"
-        placeholder="user ID" ng-model="model.userId" required="required" />
-      <input id="userId-large" type="tel" pattern="[0-9]{1,8}" maxlength="8"
-        class="form-control d-md-none text-center" placeholder="user ID"
-        ng-model="model.userId" required="required" />
-    </div>
+<main>
+  <h3 class="d-md-none text-center py-1 title">derStandard.at
+    <span class="title-cmnt">comments</span>
+  </h3>
+  <h2 class="d-none d-md-block text-center pb-2 title">derStandard.at
+    <span class="title-cmnt">comments</span>
+  </h2>
 
-    <div class="col-lg-2 col-sm-3 mt-sm-0 mt-2">
-      <button id="searchBtn-small" type="submit" class="btn btn-secondary btn-sm d-none d-md-block"
-        ng-click="search()" ng-disabled="userForm.$invalid">search...</button>
-      <button id="searchBtn-large" type="submit" class="btn btn-secondary d-md-none col-12"
-        ng-click="search()" ng-disabled="userForm.$invalid">search...</button>
-    </div>
-
-    <div class="col-lg-8 col-sm-6 mt-sm-0 mt-2">
-      <div ng-if="model.loading">
-        <label class="loader my-md-0 mt-2 mb-1 float-md-left offset-md-0 offset-5"></label>
+  <form name="userForm" class="offset-lg-2 offset-md-1 pb-0">
+    <div class="form-row">
+      <div class="col-lg-2 col-md-2 col-sm-3">
+        <input id="userId-small" type="tel" pattern="[0-9]{1,8}" maxlength="8"
+          class="form-control form-control-sm d-none d-md-block text-center"
+          placeholder="user ID" ng-model="model.userId" required="required" />
+        <input id="userId-large" type="tel" pattern="[0-9]{1,8}" maxlength="8"
+          class="form-control d-md-none text-center" placeholder="user ID"
+          ng-model="model.userId" required="required" />
       </div>
 
-      <div ng-if="model.errorMessage">
-        <label id="errorMessage-small" class="form-control-plaintext form-control-sm d-none d-md-block"
-          ng-bind="model.errorMessage"></label>
-        <label id="errorMessage-large" class="form-control-plaintext d-md-none text-center"
-          ng-bind="model.errorMessage"></label>
+      <div class="col-lg-2 col-sm-3 mt-sm-0 mt-2">
+        <button id="searchBtn-small" type="submit" class="btn btn-secondary btn-sm d-none d-md-block"
+          ng-click="search()" ng-disabled="userForm.$invalid">search...</button>
+        <button id="searchBtn-large" type="submit" class="btn btn-secondary d-md-none"
+          ng-click="search()" ng-disabled="userForm.$invalid">search...</button>
       </div>
 
-      <div ng-if="model.content.userName">
-        <label id="userName-small" class="form-control-plaintext form-control-sm d-none d-md-block"
-          ng-bind="model.content.userName"></label>
-        <label id="userName-large" class="form-control-plaintext d-md-none text-center"
-          ng-bind="model.content.userName"></label>
+      <div class="col-lg-6 col-sm-3 mt-sm-0 mt-2">
+        <div ng-if="model.loading">
+          <label class="loader my-md-0 mt-2 mb-1 float-md-left offset-md-0 offset-5"></label>
+        </div>
+
+        <div ng-if="model.errorMessage">
+          <label id="errorMessage-small" class="form-control-plaintext form-control-sm d-none d-md-block"
+            ng-bind="model.errorMessage"></label>
+          <label id="errorMessage-large" class="form-control-plaintext d-md-none text-center"
+            ng-bind="model.errorMessage"></label>
+        </div>
+
+        <div ng-if="model.content.userName">
+          <label id="userName-small" class="form-control-plaintext form-control-sm d-none d-md-block"
+            ng-bind="model.content.userName"></label>
+          <label id="userName-large" class="form-control-plaintext d-md-none text-center"
+            ng-bind="model.content.userName"></label>
+        </div>
       </div>
     </div>
-  </div>
-</form>
+  </form>
 
-<hr class="divider" />
+  <hr class="divider" />
+</main>
 
 <div class="row postings my-2">
-  <div class=" col-xl-3 col-lg-4 col-md-4 col-sm-6 p-1" ng-repeat="posting in model.content.postings">
-    <div class="card cmnt-box rounded-0">
+  <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 p-1" ng-repeat="posting in model.content.postings">
+    <div class="card cmnt-box rounded-0 h-100">
       <a class="card-body cmnt-url text-dark p-3" ng-href="{{ posting.url }}"
         target="_blank">
-        <strong class="card-title cmnt-title mb-1">{{ posting.title }}</strong>
+        <strong class="card-title mb-1">{{ posting.title }}</strong>
+        <small ng-if="!posting.title" class="text-muted mb-1">&lt;no title&gt;</small>
         <p class="card-text cmnt-content text-justify small">{{
           posting.content
           }}</p>

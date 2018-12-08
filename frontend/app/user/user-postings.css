@@ -1,3 +1,19 @@
+main {
+  background-color: #fff4e5;
+  box-shadow: 35px 0px 15px #fff4e5, -35px 0px 15px #fff4e5, -35px -8px #fff4e5, 35px -8px #fff4e5;
+}
+
+.title {
+  font-family: 'Times New Roman', Times, serif, sans-serif;
+  font-weight: bold;
+  letter-spacing: 2pt;
+  transform: skewX(170deg);
+}
+
+.title-cmnt {
+  font-weight: normal;
+}
+
 .loader {
   border: 6px solid #dadada;
   border-top: 6px solid #de137a;
@@ -24,9 +40,4 @@
 .cmnt-article {
   color: #161b63;
   font-size: 75%;
-}
-
-.postings {
-  background-color: #fefdf7;
-  box-shadow: -20px -10px 20px #fefdf7, 20px -10px 20px #fefdf7, -20px 10px #fefdf7, 20px 10px #fefdf7;
 }
