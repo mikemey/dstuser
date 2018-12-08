@@ -7,45 +7,57 @@ module.exports = searchPage => {
   const singlePageUserId = 755005
   const userId = 425185
 
-  describe(`[${searchPage.id}]: filter input field`, () => {
+  describe(`[${searchPage.id}]: filter`, () => {
     beforeAll(() => {
       derStandard.start()
-      derStandard.serveUserPageFor(singlePageUserId, 1)
-      derStandard.serveUserPageFor(userId, 1)
-      derStandard.serveUserPageFor(userId, 2)
-      derStandard.serveUserPageFor(userId, 3)
     })
-
     afterAll(derStandard.stop)
+
     beforeEach(searchPage.open)
 
-    it('disabled when no user searched', () => {
-      expect(searchPage.hasFilter()).toBeTruthy()
-      expect(searchPage.hasFilter(hideElementsScreen)).toBeFalsy()
-      expect(searchPage.isFilterEnabled()).toBeFalsy()
+    describe(`input field is disabled`, () => {
+      it('when no user searched', () => {
+        expect(searchPage.hasFilter()).toBeTruthy()
+        expect(searchPage.hasFilter(hideElementsScreen)).toBeFalsy()
+        expect(searchPage.isFilterEnabled()).toBeFalsy()
+      })
+
+      it('when user not found', () => {
+        const unknownUserId = 99
+        searchPage.requestUserComments(unknownUserId)
+        expect(searchPage.getErrorMessage()).toMatch(`${unknownUserId}`)
+        expect(searchPage.isFilterEnabled()).toBeFalsy()
+      })
     })
-    // it('disabled when user not found', () => {
+
+    describe('input field behaviour', () => {
+      beforeAll(() => {
+        derStandard.serveUserPageFor(singlePageUserId, 1)
+        derStandard.serveUserPageFor(userId, 1)
+        derStandard.serveUserPageFor(userId, 2)
+        derStandard.serveUserPageFor(userId, 3)
+      })
+
+      it('is enabled when user comments shown', async () => {
+        searchPage.requestUserComments(singlePageUserId)
+        const comments = await searchPage.getComments()
+        expect(comments.length).toBe(3)
+        expect(searchPage.isFilterEnabled()).toBeTruthy()
+      })
+
+      // it('should not reload page when Key.Enter', async () => {
+      // })
+
+      // it('should not filter comments when no input', async () => {
+      // })
+    })
+
+    // describe('posting filtering', () => {
+    //   beforeAll(() => {
+    //     derStandard.serveUserPageFor(userId, 1)
+    //     derStandard.serveUserPageFor(userId, 2)
+    //     derStandard.serveUserPageFor(userId, 3)
+    //   })
     // })
   })
-
-  // describe(`[${searchPage.id}]: filter postings`, () => {
-  // it('enabled when user comments shown', () => {
-  //   expect(searchPage.hasUserName()).toBeFalsy()
-  //   expect(searchPage.hasUserName(hideElementsScreen)).toBeFalsy()
-  // })
-
-  // it('should not reload page when Key.Enter', async () => {
-  //   const singlePageUserId = 755005
-  //   searchPage.requestUserComments(singlePageUserId)
-  //   expect(searchPage.getComments().length).to.Be(0)
-  //   expect(comments[ix].title).toBe(expected.title)
-  // })
-
-  // it('should not filter comments when no input', async () => {
-  //   const singlePageUserId = 755005
-  //   searchPage.requestUserComments(singlePageUserId)
-  //   const comments = await searchPage.getComments()
-  //   expect(comments[ix].title).toBe(expected.title)
-  // })
-  // })
 }

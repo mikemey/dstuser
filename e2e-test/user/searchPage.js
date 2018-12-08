@@ -5,7 +5,7 @@ const LARGE_SCREEN = { id: 'LARGE SCREEN', width: 1000, height: 800, suffix: 'sm
 // medium screen -> xxx-large element identifiers
 const MEDIUM_SCREEN = { id: 'MEDIUM SCREEN', width: 720, height: 600, suffix: 'large' }
 // small screen -> xxx-large element identifiers
-const SMALL_SCREEN = { id: 'SMALL SCREEN', width: 540, height: 400, suffix: 'large' }
+const SMALL_SCREEN = { id: 'SMALL SCREEN', width: 540, height: 500, suffix: 'large' }
 
 // const ALL_SCREENS = [LARGE_SCREEN, MEDIUM_SCREEN, SMALL_SCREEN]
 const ALL_SCREENS = [LARGE_SCREEN, MEDIUM_SCREEN, SMALL_SCREEN]

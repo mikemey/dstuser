@@ -2,6 +2,8 @@ import angular from 'angular'
 
 import './user-postings.css'
 
+const DISABLED = 'disabled'
+
 const userPostingsCtrl = ($scope, $http, $location, $routeParams, $window) => {
   $scope.model = {
     userId: null,
@@ -22,10 +24,20 @@ const userPostingsCtrl = ($scope, $http, $location, $routeParams, $window) => {
         .then(response => { $scope.model.content = response.data })
         .catch(response => { $scope.model.errorMessage = response.data.error })
         .finally(() => {
+          updateFilterEnabled()
           focusField()
           $scope.model.loading = false
         })
     }
+  }
+
+  const updateFilterEnabled = () => {
+    const uidFields = $window.document.querySelectorAll('input[id^="filter-"]')
+    uidFields.forEach(field => {
+      if ($scope.model.content) {
+        field.removeAttribute(DISABLED)
+      }
+    })
   }
 
   const focusField = () => {
