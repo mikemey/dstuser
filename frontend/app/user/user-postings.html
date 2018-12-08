@@ -1,22 +1,22 @@
-<form name="userForm" class="offset-lg-4 offset-md-3">
+<form name="userForm" class="offset-lg-4 offset-md-3 pb-1">
   <div class="form-group row">
     <div class="col-lg-2 col-sm-3">
       <input id="userId-small" type="tel" pattern="[0-9]{1,8}" maxlength="8"
         class="form-control form-control-sm d-none d-md-block text-center"
         placeholder="user ID" ng-model="model.userId" required="required" />
       <input id="userId-large" type="tel" pattern="[0-9]{1,8}" maxlength="8"
-        class="form-control form-control-lg d-md-none text-center" placeholder="user ID"
+        class="form-control d-md-none text-center" placeholder="user ID"
         ng-model="model.userId" required="required" />
     </div>
 
-    <div class="col-lg-2 col-sm-3 mt-sm-0 mt-3">
-      <button id="searchBtn-small" type="submit" class="btn btn-outline-dark btn-sm d-none d-md-block"
+    <div class="col-lg-2 col-sm-3 mt-sm-0 mt-2">
+      <button id="searchBtn-small" type="submit" class="btn btn-secondary btn-sm d-none d-md-block"
         ng-click="search()" ng-disabled="userForm.$invalid">search...</button>
-      <button id="searchBtn-large" type="submit" class="btn btn-outline-dark btn-lg d-md-none col-12"
+      <button id="searchBtn-large" type="submit" class="btn btn-secondary d-md-none col-12"
         ng-click="search()" ng-disabled="userForm.$invalid">search...</button>
     </div>
 
-    <div class="col-lg-8 col-sm-6 mt-sm-0 mt-3">
+    <div class="col-lg-8 col-sm-6 mt-sm-0 mt-2">
       <div ng-if="model.loading">
         <label class="loader my-md-0 mt-2 mb-1 float-md-left offset-md-0 offset-5"></label>
       </div>
@@ -24,29 +24,28 @@
       <div ng-if="model.errorMessage">
         <label id="errorMessage-small" class="form-control-plaintext form-control-sm d-none d-md-block"
           ng-bind="model.errorMessage"></label>
-        <label id="errorMessage-large" class="form-control-plaintext form-control-lg d-md-none text-center"
+        <label id="errorMessage-large" class="form-control-plaintext d-md-none text-center"
           ng-bind="model.errorMessage"></label>
       </div>
 
       <div ng-if="model.content.userName">
         <label id="userName-small" class="form-control-plaintext form-control-sm d-none d-md-block"
           ng-bind="model.content.userName"></label>
-        <label id="userName-large" class="form-control-plaintext form-control-lg d-md-none text-center"
+        <label id="userName-large" class="form-control-plaintext d-md-none text-center"
           ng-bind="model.content.userName"></label>
       </div>
     </div>
   </div>
 </form>
 
-<hr>
-
-<div class="row">
+<div ng-if="model.content.postings" class="row postings my-2">
   <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 p-1" ng-repeat="posting in model.content.postings">
     <div class="card cmnt-box rounded-0">
       <a class="card-body cmnt-url text-dark p-3" ng-href="{{ posting.url }}"
         target="_blank">
         <strong class="card-title cmnt-title mb-1">{{ posting.title }}</strong>
-        <p class="card-text cmnt-content text-justify small">{{ posting.content
+        <p class="card-text cmnt-content text-justify small">{{
+          posting.content
           }}</p>
       </a>
       <a class="card-footer cmnt-article p-3" ng-href="{{ posting.article.url }}"
