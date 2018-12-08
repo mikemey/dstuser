@@ -8,7 +8,7 @@
 
   <form name="userForm" class="offset-lg-2 offset-md-1 pb-0">
     <div class="form-row">
-      <div class="col-lg-2 col-md-2 col-sm-3">
+      <div class="col-md-2 col-sm-3">
         <input id="userId-small" type="tel" pattern="[0-9]{1,8}" maxlength="8"
           class="form-control form-control-sm d-none d-md-block text-center"
           placeholder="user ID" ng-model="model.userId" required="required" />
@@ -17,16 +17,16 @@
           ng-model="model.userId" required="required" />
       </div>
 
-      <div class="col-lg-2 col-sm-3 mt-sm-0 mt-2">
-        <button id="searchBtn-small" type="submit" class="btn btn-secondary btn-sm d-none d-md-block"
+      <div class="col-md-2 col-sm-2 mt-sm-0 mt-2">
+        <button id="searchBtn-small" type="submit" class="btn btn-secondary btn-sm d-none d-md-block col-12"
           ng-click="search()" ng-disabled="userForm.$invalid">search...</button>
-        <button id="searchBtn-large" type="submit" class="btn btn-secondary d-md-none"
+        <button id="searchBtn-large" type="submit" class="btn btn-secondary d-md-none offset-sm-0 offset-4 col-sm-12 col-4"
           ng-click="search()" ng-disabled="userForm.$invalid">search...</button>
       </div>
 
-      <div class="col-lg-6 col-sm-3 mt-sm-0 mt-2">
+      <div class="col-lg-8 col-sm-7 mt-sm-0 mt-2 text-center">
         <div ng-if="model.loading">
-          <label class="loader my-md-0 mt-2 mb-1 float-md-left offset-md-0 offset-5"></label>
+          <div class="loader offset-5 float-left"></div>
         </div>
 
         <div ng-if="model.errorMessage">
@@ -55,10 +55,10 @@
       <a class="card-body cmnt-url text-dark p-3" ng-href="{{ posting.url }}"
         target="_blank">
         <strong class="card-title mb-1">{{ posting.title }}</strong>
-        <small ng-if="!posting.title" class="text-muted mb-1">&lt;no title&gt;</small>
-        <p class="card-text cmnt-content text-justify small">{{
-          posting.content
-          }}</p>
+        <small ng-if="!posting.title" class="text-muted mb-1">
+          &lang;&nbsp;no title&nbsp;&rang;
+        </small>
+        <p class="card-text cmnt-content text-justify small">{{posting.content}}</p>
       </a>
       <a class="card-footer cmnt-article p-3" ng-href="{{ posting.article.url }}"
         target="_blank">

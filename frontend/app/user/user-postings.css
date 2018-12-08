@@ -1,6 +1,6 @@
 main {
-  background-color: #fff4e5;
-  box-shadow: 35px 0px 15px #fff4e5, -35px 0px 15px #fff4e5, -35px -8px #fff4e5, 35px -8px #fff4e5;
+  background-color: #fdefdb;
+  box-shadow: 35px 0px 10px #fdefdb, -35px 0px 10px #fdefdb, -35px -8px #fdefdb, 35px -8px #fdefdb;
 }
 
 .title {
@@ -15,12 +15,14 @@ main {
 }
 
 .loader {
-  border: 6px solid #dadada;
-  border-top: 6px solid #de137a;
-  border-left: 6px solid #de137a;
+  border: 4px solid #dadada;
+  border-top: 4px solid #de137a;
+  border-left: 4px solid #de137a;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  margin-top: 8px;
+  margin-bottom: 2px;
+  width: 20px;
+  height: 20px;
   animation: rotating 0.55s linear infinite;
 }
 
