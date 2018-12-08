@@ -1,4 +1,4 @@
-<form name="userForm" class="offset-lg-4 offset-md-3 pb-1">
+<form name="userForm" class="offset-lg-4 offset-md-3 pb-0">
   <div class="form-group row">
     <div class="col-lg-2 col-sm-3">
       <input id="userId-small" type="tel" pattern="[0-9]{1,8}" maxlength="8"
@@ -38,8 +38,10 @@
   </div>
 </form>
 
-<div ng-if="model.content.postings" class="row postings my-2">
-  <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 p-1" ng-repeat="posting in model.content.postings">
+<hr class="divider" />
+
+<div class="row postings my-2">
+  <div class=" col-xl-3 col-lg-4 col-md-4 col-sm-6 p-1" ng-repeat="posting in model.content.postings">
     <div class="card cmnt-box rounded-0">
       <a class="card-body cmnt-url text-dark p-3" ng-href="{{ posting.url }}"
         target="_blank">
