@@ -1,4 +1,4 @@
-// const { Key } = require('protractor')
+const { Key } = require('protractor')
 
 const derStandard = require('../derStandardMock')
 
@@ -38,18 +38,22 @@ module.exports = searchPage => {
         derStandard.serveUserPageFor(userId, 3)
       })
 
-      it('is enabled when user comments shown', async () => {
+      beforeEach(async () => {
         searchPage.requestUserComments(singlePageUserId)
         const comments = await searchPage.getComments()
         expect(comments.length).toBe(3)
+      })
+
+      it('is enabled when user comments shown', () => {
         expect(searchPage.isFilterEnabled()).toBeTruthy()
       })
 
-      // it('should not reload page when Key.Enter', async () => {
-      // })
-
-      // it('should not filter comments when no input', async () => {
-      // })
+      it('should not reload page when Key.Enter', () => {
+        searchPage.sendToUserId(23)
+        searchPage.sendToFilter(Key.ENTER)
+        expect(searchPage.getBrowserUrl())
+          .toMatch(new RegExp(`/search/${singlePageUserId}$`))
+      })
     })
 
     // describe('posting filtering', () => {

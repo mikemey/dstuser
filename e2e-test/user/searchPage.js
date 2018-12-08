@@ -79,7 +79,7 @@ const SearchPage = testScreen => {
   const hasFilter = screen => hasElement(byFilter(screen))
   const filterInput = () => element(byFilter())
   const isFilterEnabled = () => filterInput().isEnabled()
-  const setFilter = filter => filterInput().sendKeys(filter)
+  const sendToFilter = filter => filterInput().sendKeys(filter)
 
   /* eslint object-property-newline: "off" */
   return {
@@ -94,7 +94,7 @@ const SearchPage = testScreen => {
     getUserName, hasUserName,
     hasErrorMessage, getErrorMessage,
     getComments,
-    hasFilter, isFilterEnabled, setFilter
+    hasFilter, isFilterEnabled, sendToFilter
   }
 }
 

@@ -41,7 +41,10 @@ const userPostingsCtrl = ($scope, $http, $location, $routeParams, $window) => {
   }
 
   const focusField = () => {
-    const uidFields = $window.document.querySelectorAll('input[id^="userId-"]')
+    const selectField = $scope.model.content && $scope.model.content.postings
+      ? 'input[id^="filter-"]'
+      : 'input[id^="userId-"]'
+    const uidFields = $window.document.querySelectorAll(selectField)
     uidFields.forEach(field => {
       const style = $window.getComputedStyle(field)
       if (style.display !== 'none') {

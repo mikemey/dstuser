@@ -24,7 +24,7 @@
           ng-click="search()" ng-disabled="userForm.$invalid">search...</button>
       </div>
 
-      <div class="col-md-4 col-sm-2 mt-sm-0 mt-2 text-center">
+      <div class="col-md-4 col-sm mt-sm-0 mt-2 text-center">
         <div ng-if="model.loading">
           <div class="loader offset-5 float-left"></div>
         </div>
@@ -44,17 +44,19 @@
         </div>
       </div>
 
-      <div class="col-md-4 col-sm-2 mt-sm-0 mt-2">
+      <div class="col-md-4 d-none d-md-block mt-sm-0 mt-2">
         <input id="filter-small" type="text" formnovalidate="formnovalidate"
-          class="form-control form-control-sm d-none d-md-block" placeholder="filter..."
-          ng-model="model.filter" disabled />
+          class="form-control form-control-sm" placeholder="filter..."
+          ng-model="model.filter" onkeydown="if (event.keyCode === 13) { return false; }"
+          disabled />
       </div>
     </div>
+
     <div class="form-row">
       <div class="col pt-md-0 pt-sm-2 pt-0">
         <input id="filter-large" type="text" formnovalidate="formnovalidate"
           class="form-control d-md-none" placeholder="filter..." ng-model="model.filter"
-          disabled />
+          onkeydown="if (event.keyCode === 13) { return false; }" disabled />
       </div>
     </div>
   </form>
