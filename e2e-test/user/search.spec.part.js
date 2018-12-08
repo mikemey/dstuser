@@ -31,8 +31,8 @@ module.exports = searchPage => {
     })
 
     it('should start request when Key.ENTER pressed', () => {
-      searchPage.setUserId(userId)
-      searchPage.setUserId(Key.ENTER)
+      searchPage.sendToUserId(userId)
+      searchPage.sendToUserId(Key.ENTER)
       expect(searchPage.getUserName()).toEqual('a standard user')
     })
 

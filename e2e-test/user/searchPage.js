@@ -37,7 +37,7 @@ const SearchPage = testScreen => {
 
   const userIdInput = () => element(byUserId())
   const getUserId = () => userIdInput().getAttribute('value')
-  const setUserId = userId => userIdInput().sendKeys(userId)
+  const sendToUserId = userId => userIdInput().sendKeys(userId)
   const formLabel = () => userIdInput().getAttribute('placeholder')
 
   const bySearchButton = (screen = testScreen) => by.id(`searchBtn-${screen.suffix}`)
@@ -46,7 +46,7 @@ const SearchPage = testScreen => {
   const isSearchButtonEnabled = () => searchButton().isEnabled()
 
   const requestUserComments = userId => {
-    setUserId(userId)
+    sendToUserId(userId)
     searchButton().click()
   }
 
@@ -87,7 +87,7 @@ const SearchPage = testScreen => {
     getBrowserUrl,
     open,
     getHiddenScreen,
-    hasUserIdInput, setUserId, getUserId,
+    hasUserIdInput, sendToUserId, getUserId,
     formLabel,
     hasSearchButton, isSearchButtonEnabled,
     requestUserComments,

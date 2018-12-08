@@ -43,12 +43,12 @@ module.exports = searchPage => {
     })
 
     it('button disabled when non-digit characters in userId', () => {
-      searchPage.setUserId('123x')
+      searchPage.sendToUserId('123x')
       expect(searchPage.isSearchButtonEnabled()).toBeFalsy()
     })
 
     it('allow only 8 characters', () => {
-      searchPage.setUserId('123456789')
+      searchPage.sendToUserId('123456789')
       expect(searchPage.getUserId()).toEqual('12345678')
       expect(searchPage.isSearchButtonEnabled()).toBeTruthy()
     })
