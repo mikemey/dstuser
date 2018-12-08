@@ -1,6 +1,6 @@
 main {
   background-color: #fdefdb;
-  box-shadow: 35px 0px 10px #fdefdb, -35px 0px 10px #fdefdb, -35px -8px #fdefdb, 35px -8px #fdefdb;
+  box-shadow: 35px 0px 5px #fdefdb, -35px 0px 5px #fdefdb, -35px -8px #fdefdb, 35px -8px #fdefdb;
 }
 
 .title {
@@ -12,6 +12,10 @@ main {
 
 .title-cmnt {
   font-weight: normal;
+}
+
+form[name=userForm] input::placeholder {
+  color: #d8d8d8;
 }
 
 .loader {

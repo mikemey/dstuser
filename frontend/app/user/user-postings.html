@@ -6,7 +6,7 @@
     <span class="title-cmnt">comments</span>
   </h2>
 
-  <form name="userForm" class="offset-lg-2 offset-md-1 pb-0">
+  <form name="userForm" class="offset-lg-1 offset-0 pb-0">
     <div class="form-row">
       <div class="col-md-2 col-sm-3">
         <input id="userId-small" type="tel" pattern="[0-9]{1,8}" maxlength="8"
@@ -24,7 +24,7 @@
           ng-click="search()" ng-disabled="userForm.$invalid">search...</button>
       </div>
 
-      <div class="col mt-sm-0 mt-2 text-center">
+      <div class="col-md-4 col-sm-2 mt-sm-0 mt-2 text-center">
         <div ng-if="model.loading">
           <div class="loader offset-5 float-left"></div>
         </div>
@@ -43,18 +43,31 @@
             ng-bind="model.content.userName"></label>
         </div>
       </div>
+
+      <div class="col-md-4 col-sm-2 mt-sm-0 mt-2">
+        <input id="filter-small" type="text" formnovalidate="formnovalidate"
+          class="form-control form-control-sm d-none d-md-block" placeholder="filter..."
+          ng-model="model.filter" disabled />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col pt-md-0 pt-sm-2 pt-0">
+        <input id="filter-large" type="text" formnovalidate="formnovalidate"
+          class="form-control d-md-none" placeholder="filter..." ng-model="model.filter"
+          disabled />
+      </div>
     </div>
   </form>
 
-  <hr class="divider" />
+  <hr class="my-2" />
 </main>
 
-<div class="row postings my-2">
+<div class="row postings mb-5 mt-2">
   <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 p-1" ng-repeat="posting in model.content.postings">
     <div class="card cmnt-box rounded-0 h-100">
       <a class="card-body cmnt-url text-dark p-3" ng-href="{{ posting.url }}"
         target="_blank">
-        <strong class="card-title mb-1">{{ posting.title }}</strong>
+        <strong class="card-title cmnt-title mb-1">{{ posting.title }}</strong>
         <small ng-if="!posting.title" class="text-muted mb-1">
           &lang;&nbsp;no title&nbsp;&rang;
         </small>

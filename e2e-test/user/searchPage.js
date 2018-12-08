@@ -75,23 +75,26 @@ const SearchPage = testScreen => {
     }
   }
 
+  const byFilter = (screen = testScreen) => by.id(`filter-${screen.suffix}`)
+  const hasFilter = screen => hasElement(byFilter(screen))
+  const filterInput = () => element(byFilter())
+  const isFilterEnabled = () => filterInput().isEnabled()
+  const setFilter = filter => filterInput().sendKeys(filter)
+
+  /* eslint object-property-newline: "off" */
   return {
     id: testScreen.id,
     getBrowserUrl,
     open,
     getHiddenScreen,
-    hasUserIdInput,
-    setUserId,
-    getUserId,
+    hasUserIdInput, setUserId, getUserId,
     formLabel,
-    hasSearchButton,
-    isSearchButtonEnabled,
+    hasSearchButton, isSearchButtonEnabled,
     requestUserComments,
-    getUserName,
-    hasUserName,
-    hasErrorMessage,
-    getErrorMessage,
-    getComments
+    getUserName, hasUserName,
+    hasErrorMessage, getErrorMessage,
+    getComments,
+    hasFilter, isFilterEnabled, setFilter
   }
 }
 
