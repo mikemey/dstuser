@@ -9,7 +9,8 @@ const userPostingsCtrl = ($scope, $http, $location, $routeParams, $window) => {
     userId: null,
     content: null,
     loading: false,
-    errorMessage: null
+    errorMessage: null,
+    filter: ''
   }
 
   $scope.search = () => {
@@ -21,13 +22,24 @@ const userPostingsCtrl = ($scope, $http, $location, $routeParams, $window) => {
       $scope.model.loading = true
       $scope.model.userId = $routeParams.userId
       return $http.get('/dstuapi/userprofile/' + $scope.model.userId)
-        .then(response => { $scope.model.content = response.data })
+        .then(response => {
+          $scope.model.content = response.data
+          addFilterContent()
+        })
         .catch(response => { $scope.model.errorMessage = response.data.error })
         .finally(() => {
           updateFilterEnabled()
           focusField()
           $scope.model.loading = false
         })
+    }
+  }
+
+  const addFilterContent = () => {
+    if ($scope.model.content.postings) {
+      $scope.model.content.postings.forEach(post => {
+        post.filterContent = `${post.title} ${post.content} ${post.article.title}`.toLowerCase()
+      })
     }
   }
 

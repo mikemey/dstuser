@@ -22,7 +22,7 @@ describe('get userprofile endpoint', () => {
   })
 
   const nockDstUserprofile = (userId, pageNum) => nock(server.config.dstuHost)
-    .get(`/userprofil/postings/${userId}?pageNumber=${pageNum}`)
+    .get(`/userprofil/postings/${userId}?pageNumber=${pageNum}&sortMode=1`)
 
   const requestUserprofile = userId => server.request()
     .get(`/dstuapi/userprofile/${userId}`)

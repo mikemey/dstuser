@@ -59,6 +59,7 @@ const SearchPage = testScreen => {
   const getErrorMessage = () => element(byErrorMessage()).getText()
 
   const getComments = () => element.all(by.className('cmnt-box'))
+    .filter(el => el.isDisplayed())
     .map(createComment)
 
   const createComment = el => {
@@ -67,11 +68,11 @@ const SearchPage = testScreen => {
     const contentEl = el.element(by.className('cmnt-content'))
     const articleEl = el.element(by.className('cmnt-article'))
     return {
-      title: titleEl.getText(),
-      url: urlEl.getAttribute('ng-href'),
-      content: contentEl.getText(),
-      articleTitle: articleEl.getText(),
-      articleUrl: articleEl.getAttribute('ng-href')
+      title: () => titleEl.getText(),
+      url: () => urlEl.getAttribute('ng-href'),
+      content: () => contentEl.getText(),
+      articleTitle: () => articleEl.getText(),
+      articleUrl: () => articleEl.getAttribute('ng-href')
     }
   }
 

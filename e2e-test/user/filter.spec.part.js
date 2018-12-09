@@ -10,7 +10,12 @@ module.exports = searchPage => {
   describe(`[${searchPage.id}]: filter`, () => {
     beforeAll(() => {
       derStandard.start()
+      derStandard.serveUserPageFor(userId, 1)
+      derStandard.serveUserPageFor(userId, 2)
+      derStandard.serveUserPageFor(userId, 3)
+      derStandard.serveUserPageFor(singlePageUserId, 1)
     })
+
     afterAll(derStandard.stop)
 
     beforeEach(searchPage.open)
@@ -31,24 +36,14 @@ module.exports = searchPage => {
     })
 
     describe('input field behaviour', () => {
-      beforeAll(() => {
-        derStandard.serveUserPageFor(singlePageUserId, 1)
-        derStandard.serveUserPageFor(userId, 1)
-        derStandard.serveUserPageFor(userId, 2)
-        derStandard.serveUserPageFor(userId, 3)
-      })
-
       beforeEach(async () => {
         searchPage.requestUserComments(singlePageUserId)
         const comments = await searchPage.getComments()
         expect(comments.length).toBe(3)
       })
 
-      it('is enabled when user comments shown', () => {
+      it('is enabled and not reload page on Key.Enter', () => {
         expect(searchPage.isFilterEnabled()).toBeTruthy()
-      })
-
-      it('should not reload page when Key.Enter', () => {
         searchPage.sendToUserId(23)
         searchPage.sendToFilter(Key.ENTER)
         expect(searchPage.getBrowserUrl())
@@ -56,12 +51,34 @@ module.exports = searchPage => {
       })
     })
 
-    // describe('posting filtering', () => {
-    //   beforeAll(() => {
-    //     derStandard.serveUserPageFor(userId, 1)
-    //     derStandard.serveUserPageFor(userId, 2)
-    //     derStandard.serveUserPageFor(userId, 3)
-    //   })
-    // })
+    describe('posting filtering', () => {
+      beforeEach(() => searchPage.requestUserComments(userId))
+
+      it('shows all when no filter', async () => {
+        const comments = await searchPage.getComments()
+        expect(comments.length).toBe(30)
+      })
+
+      it('when single title match', async () => {
+        searchPage.sendToFilter('versus')
+        const comments = await searchPage.getComments()
+        expect(comments.length).toBe(1)
+        expect(comments[0].title()).toBe('Standard versus Kronenzeitung')
+      })
+
+      it('when single article match', async () => {
+        searchPage.sendToFilter('katzian')
+        const comments = await searchPage.getComments()
+        expect(comments.length).toBe(1)
+        expect(comments[0].title()).toBe('Das Ende der AK??')
+      })
+
+      it('when many comment contents match', async () => {
+        searchPage.sendToFilter('politisch')
+        const comments = await searchPage.getComments()
+        expect(comments.length).toBe(6)
+        expect(comments[0].title()).toBe('Großartiger Erfolg')
+      })
+    })
   })
 }

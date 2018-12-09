@@ -39,6 +39,10 @@ form[name=userForm] input::placeholder {
   }
 }
 
+.filtered-cmnt {
+  display: none;
+}
+
 .cmnt-content {
   white-space: pre-wrap;
 }

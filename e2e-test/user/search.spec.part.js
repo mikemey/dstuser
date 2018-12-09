@@ -48,11 +48,11 @@ module.exports = searchPage => {
       const comments = await searchPage.getComments()
 
       expectedPostings.forEach((expected, ix) => {
-        expect(comments[ix].title).toBe(expected.title, `title ix: ${ix}`)
-        expect(comments[ix].content).toBe(expected.content, `content ix: ${ix}`)
-        expect(comments[ix].url).toBe(expected.url, `url ix: ${ix}`)
-        expect(comments[ix].articleTitle).toBe(expected.article.title, `article.title ix: ${ix}`)
-        expect(comments[ix].articleUrl).toBe(expected.article.url, `article.url ix: ${ix}`)
+        expect(comments[ix].title()).toBe(expected.title, `title ix: ${ix}`)
+        expect(comments[ix].content()).toBe(expected.content, `content ix: ${ix}`)
+        expect(comments[ix].url()).toBe(expected.url, `url ix: ${ix}`)
+        expect(comments[ix].articleTitle()).toBe(expected.article.title, `article.title ix: ${ix}`)
+        expect(comments[ix].articleUrl()).toBe(expected.article.url, `article.url ix: ${ix}`)
       })
     })
   })
