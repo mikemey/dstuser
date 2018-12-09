@@ -7,7 +7,7 @@ module.exports = searchPage => {
   const singlePageUserId = 755005
   const userId = 425185
 
-  describe(`[${searchPage.id}]: filter`, () => {
+  describe(`Filter`, () => {
     beforeAll(() => {
       derStandard.start()
       derStandard.serveUserPageFor(userId, 1)

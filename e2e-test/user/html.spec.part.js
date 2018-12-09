@@ -1,7 +1,7 @@
 module.exports = searchPage => {
   const hideElementsScreen = searchPage.getHiddenScreen()
 
-  describe(`[${searchPage.id}]: HTML elements`, () => {
+  describe('HTML elements', () => {
     beforeAll(searchPage.open)
 
     it('should show userId label', () => {

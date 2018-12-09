@@ -7,7 +7,9 @@ const filterCommentsTests = require('./filter.spec.part')
 ALL_SCREENS.forEach(testScreen => {
   const searchPage = SearchPage(testScreen)
 
-  htmlTests(searchPage)
-  searchUserTests(searchPage)
-  filterCommentsTests(searchPage)
+  describe(`[${searchPage.id}]:`, () => {
+    htmlTests(searchPage)
+    searchUserTests(searchPage)
+    filterCommentsTests(searchPage)
+  })
 })

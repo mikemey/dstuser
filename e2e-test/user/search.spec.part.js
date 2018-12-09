@@ -5,7 +5,7 @@ const derStandard = require('../derStandardMock')
 module.exports = searchPage => {
   const hideElementsScreen = searchPage.getHiddenScreen()
 
-  describe(`[${searchPage.id}]: user search (single comment page)`, () => {
+  describe('user search (single comment page)', () => {
     const userId = '755005'
     const pageNum = 1
 
@@ -57,7 +57,7 @@ module.exports = searchPage => {
     })
   })
 
-  describe(`[${searchPage.id}]: derStandard errors`, () => {
+  describe('derStandard errors', () => {
     const userId = '755005'
     beforeEach(derStandard.start)
     afterEach(derStandard.stop)
