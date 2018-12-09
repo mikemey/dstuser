@@ -65,7 +65,7 @@
 </main>
 
 <div class="row postings mb-5 mt-2">
-  <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 p-1" ng-repeat="posting in model.content.postings"
+  <div class="col-xl-3 col-lg-4 col-sm-6 p-1" ng-repeat="posting in model.content.postings"
        ng-class="posting.filterContent.includes(model.filter.toLowerCase()) ? '' : 'filtered-cmnt'">
     <div class="card cmnt-box rounded-0 h-100">
       <a class="card-body cmnt-url text-dark p-3" ng-href="{{ posting.url }}"
