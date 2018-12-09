@@ -22,6 +22,12 @@ dst_server_pid_re="^${dst_server_pid_msg}${sed_number_group}$"
 server_port_re=".*port: ${sed_number_group},"
 dst_server_port_re=".*localhost:${sed_number_group}.*"
 
+function print_usage () {
+  echo -e "\n usage: $(basename -- $0) [ start | stop ]"
+  echo -e "\nStarts/stops a local instance and a mocked data server (with NODE_ENV=${NODE_ENV})."
+  echo -e "All outputs are redirected to '${local_output}'"
+}
+
 function main () {
   [[ ! -f "$server_config" ]] && error_message "$server_config not found, check location."
 
@@ -33,7 +39,8 @@ function main () {
       stop_local
     ;;
     * )
-      error_message "not recognized: $action \nmust be either '$(basename $0) start' or '$(basename $0) stop'"
+      print_usage
+      error_message "command not recognized: >$action< \nmust be either '$(basename $0) start' or '$(basename $0) stop'"
     ;;
   esac
 }
@@ -51,6 +58,8 @@ function start_local () {
   start_server "$server_bin" "$server_pid_msg"
   wait_for_server "$dst_server_port"
   wait_for_server "$server_port"
+
+  echo "infrastructure started. See logging file: 'tail -f ${local_output}'"
 }
 
 function stop_local () {
@@ -70,7 +79,7 @@ function start_server () {
 function wait_for_server () {
   printf "waiting for server start (port $1): "
   ix=${server_startup_retries}
-  while [[ ${ix} > 0 && ! `lsof -i :${1}` ]]; do
+  while [[ ${ix} > 0 && ! `lsof -i :${1} 2> /dev/null` ]]; do
     sleep 1
     printf "$ix "
     ix=`expr ${ix} - 1`
@@ -100,7 +109,7 @@ function check_is_number () {
 }
 
 function error_message () {
-  printf "$*\n"
+  printf "\n$*\n"
   exit 1
 }
 

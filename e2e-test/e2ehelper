@@ -22,6 +22,15 @@ wdm_pid_re="^.*Detached pid: ${sed_number_group}$"
 selenium_pid_re="^.*seleniumProcess.pid: ${sed_number_group}$"
 server_port_re=".*port: ${sed_number_group},"
 
+function print_usage () {
+  echo -e "\n usage: $(basename -- $0) [ start | stop ]"
+  echo -e "\nStarts/stops a local e2e infrastructure (with NODE_ENV=${NODE_ENV}):"
+  echo -e "\t- Local server instance (${server_bin})"
+  echo -e "\t- Webdriver manager (${wdm_bin})"
+  echo -e "\t- updates selenium directory (${selenium_dir})"
+  echo -e "All outputs are redirected to '${e2e_output}'"
+}
+
 function main () {
   [[ ! -f "$wdm_bin" ]] && error_message "$wdm_bin not found. \nPlease run 'npm install' first."
   [[ ! -f "$server_config" ]] && error_message "$server_config not found, check location."
@@ -34,7 +43,8 @@ function main () {
       stop_e2e_infrastructure
     ;;
     * )
-      error_message "not recognized: $action \nmust be either '$(basename $0) start' or '$(basename $0) stop'"
+      print_usage
+      error_message "command not recognized: >$action< \nmust be either '$(basename $0) start' or '$(basename $0) stop'"
     ;;
   esac
 }
