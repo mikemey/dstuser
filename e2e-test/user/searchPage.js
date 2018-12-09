@@ -82,6 +82,15 @@ const SearchPage = testScreen => {
   const isFilterEnabled = () => filterInput().isEnabled()
   const sendToFilter = filter => filterInput().sendKeys(filter)
 
+  const getHighlightedTexts = () => element.all(by.className('highlightedText'))
+    .map(createTexts)
+
+  const createTexts = el => {
+    return {
+      getText: () => el.getText()
+    }
+  }
+
   /* eslint object-property-newline: "off" */
   return {
     id: testScreen.id,
@@ -95,7 +104,8 @@ const SearchPage = testScreen => {
     getUserName, hasUserName,
     hasErrorMessage, getErrorMessage,
     getComments,
-    hasFilter, isFilterEnabled, sendToFilter
+    hasFilter, isFilterEnabled, sendToFilter,
+    getHighlightedTexts
   }
 }
 

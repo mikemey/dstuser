@@ -70,15 +70,14 @@
     <div class="card cmnt-box rounded-0 h-100">
       <a class="card-body cmnt-url text-dark p-3" ng-href="{{ posting.url }}"
          target="_blank">
-        <strong class="card-title cmnt-title mb-1">{{ posting.title }}</strong>
+        <strong class="card-title cmnt-title mb-1" ng-bind-html="highlight(posting.title, model.filter)"></strong>
         <small ng-if="!posting.title" class="text-muted mb-1">
           &lang;&nbsp;no title&nbsp;&rang;
         </small>
-        <p class="card-text cmnt-content text-justify small">{{posting.content}}</p>
+        <p class="card-text cmnt-content text-justify small" ng-bind-html="highlight(posting.content, model.filter)"></p>
       </a>
       <a class="card-footer cmnt-article p-3" ng-href="{{ posting.article.url }}"
-         target="_blank">
-        {{ posting.article.title }}
+         target="_blank" ng-bind-html="highlight(posting.article.title, model.filter)">
       </a>
     </div>
   </div>

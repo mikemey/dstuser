@@ -59,11 +59,16 @@ module.exports = searchPage => {
         expect(comments.length).toBe(30)
       })
 
-      it('when single title match', async () => {
-        searchPage.sendToFilter('versus')
+      it('when single title match and highlight text', async () => {
+        const filter = 'versus'
+        searchPage.sendToFilter(filter)
         const comments = await searchPage.getComments()
         expect(comments.length).toBe(1)
         expect(comments[0].title()).toBe('Standard versus Kronenzeitung')
+
+        const highlightedText = await searchPage.getHighlightedTexts()
+        expect(highlightedText.length).toBe(1)
+        expect(highlightedText[0].getText()).toBe(filter)
       })
 
       it('when single article match', async () => {

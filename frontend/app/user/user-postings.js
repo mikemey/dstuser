@@ -1,10 +1,11 @@
 import angular from 'angular'
+import ngSanitize from 'angular-sanitize'
 
 import './user-postings.css'
 
 const DISABLED = 'disabled'
 
-const userPostingsCtrl = ($scope, $http, $location, $routeParams, $window) => {
+const userPostingsCtrl = ($scope, $http, $location, $routeParams, $window, $sce, $sanitize) => {
   $scope.model = {
     userId: null,
     content: null,
@@ -65,12 +66,25 @@ const userPostingsCtrl = ($scope, $http, $location, $routeParams, $window) => {
     })
   }
 
+  $scope.highlight = (text, search) => {
+    text = $sanitize(text)
+    if (!search) {
+      return $sce.trustAsHtml(text)
+    }
+    search = $sanitize(search)
+    return $sce.trustAsHtml(text.replace(
+      new RegExp(search, 'gi'), '<span class="highlightedText">$&</span>')
+    )
+  }
+
   return loadUserData()
 }
 
 export default angular
-  .module('user.postings', [])
+  .module('user.postings', [ngSanitize])
   .component('userPostings', {
     template: require('./user-postings.html'),
-    controller: ['$scope', '$http', '$location', '$routeParams', '$window', userPostingsCtrl]
+    controller: [
+      '$scope', '$http', '$location', '$routeParams', '$window', '$sce', '$sanitize', userPostingsCtrl
+    ]
   })

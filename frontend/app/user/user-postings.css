@@ -51,3 +51,7 @@ form[name=userForm] input::placeholder {
   color: #161b63;
   font-size: 75%;
 }
+
+.highlightedText {
+  background: yellow;
+}
