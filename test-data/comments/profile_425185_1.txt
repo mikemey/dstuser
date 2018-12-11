@@ -360,7 +360,7 @@
         </div>
     </div>
     <div class="article">
-        <h5>Wirtschaft</h5>
+        <h5>International</h5>
         <h4><a href="/2000091697338/Mit-der-Metallereinigung-sollte-der-heisse-Herbst-nun-beendet-sein">Mit der Metallereinigung sollte der hei&#223;e Herbst nun beendet sein</a></h4>
     </div>
 </div>
@@ -430,7 +430,7 @@
         </div>
     </div>
     <div class="article">
-        <h5>Inland</h5>
+        <h5>Wirtschaft</h5>
         <h4><a href="/2000090268071/Belvedere-Mitnahme-des-Gemaeldes-in-SPOe-Zentrale-nicht-abgestimmt">Belvedere: Mitnahme des Gem&#228;ldes in SP&#214;-Zentrale war nicht abgestimmt</a></h4>
     </div>
 </div>
@@ -465,7 +465,7 @@
         </div>
     </div>
     <div class="article">
-        <h5>Inland</h5>
+        <h5>Web</h5>
         <h4><a href="/2000090059222/Ex-Kanzler-Christian-Kern-verabschiedet-sich-aus-dem-Parlament">Ex-Kanzler Kern verabschiedet sich mahnend vom Parlament</a></h4>
     </div>
 </div>
@@ -500,7 +500,7 @@
         </div>
     </div>
     <div class="article">
-        <h5>Inland</h5>
+        <h5>Sport</h5>
         <h4><a href="/2000090059222/Ex-Kanzler-Christian-Kern-verabschiedet-sich-aus-dem-Parlament">Ex-Kanzler Kern verabschiedet sich mahnend vom Parlament</a></h4>
     </div>
 </div>
@@ -535,7 +535,7 @@
         </div>
     </div>
     <div class="article">
-        <h5>Inland</h5>
+        <h5>Panorama</h5>
         <h4><a href="/2000088780845/Rendi-Wagner-in-der-Steiermark-Kurzvisite-bei-der-roten-Basis">Rendi-Wagner in der Steiermark: Kurzvisite bei der roten Basis</a></h4>
     </div>
 </div>
@@ -570,7 +570,7 @@
         </div>
     </div>
     <div class="article">
-        <h5>Meinung</h5>
+        <h5>Etat</h5>
         <h4><a href="/2000088687141/Endlich-wieder-Sitzenbleiben">Endlich wieder Sitzenbleiben!</a></h4>
     </div>
 </div>
@@ -605,7 +605,7 @@
         </div>
     </div>
     <div class="article">
-        <h5>Bildung</h5>
+        <h5>Kultur</h5>
         <h4><a href="/2000088576170/SchulpaketFassmann-will-nicht-retro-sein">Schulpaket: Fa&#223;mann will nicht &quot;retro&quot; sein</a></h4>
     </div>
 </div>
@@ -640,7 +640,7 @@
         </div>
     </div>
     <div class="article">
-        <h5>Wirtschaft</h5>
+        <h5>Wissenschaft</h5>
         <h4><a href="/2000079961816/Vorrang-fuer-Kurz-oder-Sozialpartner-Schwieriger-Spagat-fuer-Mahrer">Vorrang f&#252;r Kurz oder Sozialpartner? Schwieriger Spagat</a></h4>
     </div>
 </div>
@@ -675,7 +675,7 @@
         </div>
     </div>
     <div class="article">
-        <h5>Inland</h5>
+        <h5>Gesundheit</h5>
         <h4><a href="/2000079650586/SPOe-fuer-Voves-Wohlfuehlpartei-der-Funktionaere">SP&#214; f&#252;r Voves &quot;Wohlf&#252;hlpartei der Funktion&#228;re&quot;</a></h4>
     </div>
 </div>

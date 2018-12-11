@@ -74,7 +74,8 @@ const SearchPage = testScreen => {
       content: () => contentEl.getText(),
       articleTitle: () => articleEl.getText(),
       articleUrl: () => articleEl.getAttribute('ng-href'),
-      articleSection: () => sectionEl.getText()
+      articleSection: () => sectionEl.getText(),
+      commentBoxClasses: () => el.getAttribute('class')
     }
   }
 

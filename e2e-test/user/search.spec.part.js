@@ -77,6 +77,14 @@ module.exports = searchPage => {
       const comments = await searchPage.getComments()
       expect(comments.length).toBe(30)
 
+      const expectedBgClasses = [
+        'international', 'inland',
+        'wirtschaft', 'web', 'sport',
+        'panorama', 'etat', 'kultur',
+        'wissenschaft', 'gesundheit',
+        'bildung', 'reisen', 'lifestyle'
+      ]
+
       expectedPostings.forEach((expected, ix) => {
         expect(comments[ix].title()).toBe(expected.title, `title ix: ${ix}`)
         expect(comments[ix].content()).toBe(expected.content, `content ix: ${ix}`)
@@ -84,6 +92,10 @@ module.exports = searchPage => {
         expect(comments[ix].articleTitle()).toBe(expected.article.title, `article.title ix: ${ix}`)
         expect(comments[ix].articleUrl()).toBe(expected.article.url, `article.url ix: ${ix}`)
         expect(comments[ix].articleSection()).toBe(expected.article.section, `article.section ix: ${ix}`)
+        if (ix < expectedBgClasses.length) {
+          expect(comments[ix].commentBoxClasses())
+            .toMatch(new RegExp(`${expectedBgClasses[ix]}`), `class Contains ix: ${ix}`)
+        }
       })
     })
   })

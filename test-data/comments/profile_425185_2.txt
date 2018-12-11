@@ -346,7 +346,7 @@
         </div>
     </div>
     <div class="article">
-        <h5>Wirtschaft</h5>
+        <h5>Bildung</h5>
         <h4><a href="/2000078174007/AMS-Kein-Koepferollen-nach-Regierungstreffen">Migranten im Fokus der geplanten AMS-Reform</a></h4>
     </div>
 </div>
@@ -381,7 +381,7 @@
         </div>
     </div>
     <div class="article">
-        <h5>Inland</h5>
+        <h5>Reisen</h5>
         <h4><a href="/2000077910587/Ruecktrittsgeruechte-um-Justizminister-Moser-bringen-Kurz-in-Bedraengnis">R&#252;cktrittsger&#252;chte um Justizminister Moser bedr&#228;ngen Kurz</a></h4>
     </div>
 </div>
@@ -416,7 +416,7 @@
         </div>
     </div>
     <div class="article">
-        <h5>Inland</h5>
+        <h5>Lifestyle</h5>
         <h4><a href="/2000077972477/Julia-Herr-als-Vorsitzende-der-Sozialistischen-Jugend-bestaetigt">Julia Herr als Vorsitzende der Sozialistischen Jugend best&#228;tigt</a></h4>
     </div>
 </div>

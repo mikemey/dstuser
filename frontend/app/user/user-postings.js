@@ -2,6 +2,7 @@ import angular from 'angular'
 import ngSanitize from 'angular-sanitize'
 
 import './user-postings.css'
+import './section-colors.css'
 
 const DISABLED = 'disabled'
 
