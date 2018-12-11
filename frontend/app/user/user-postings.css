@@ -43,13 +43,18 @@ form[name=userForm] input::placeholder {
   display: none;
 }
 
+.cmnt-url {
+  line-height: normal;
+}
+
 .cmnt-content {
   white-space: pre-wrap;
+  line-height: 1.3em;
 }
 
 .cmnt-article {
   color: #161b63;
-  font-size: 75%;
+  font-size: 80%;
 }
 
 .cmnt-section {
