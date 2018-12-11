@@ -7,7 +7,8 @@
       "url": "{DSTU_HOST}/permalink/p/1036279475",
       "article": {
         "title": "Gesetzesentwurf für Fellners bundesweites Radio",
-        "url": "{DSTU_HOST}/2000090941121/Gesetzesentwurf-fuer-Fellners-bundesweites-Radio"
+        "url": "{DSTU_HOST}/2000090941121/Gesetzesentwurf-fuer-Fellners-bundesweites-Radio",
+        "section": "Etat"
       }
     },
     {
@@ -16,7 +17,8 @@
       "url": "{DSTU_HOST}/permalink/p/1034368216",
       "article": {
         "title": "Mitdiskutieren bei \"Im Zentrum\": Arbeitskampf und Streik - Sozialpartner auf Kollisionskurs",
-        "url": "{DSTU_HOST}/jetzt/livebericht/2000052041011/mitdiskutieren-bei-im-zentrum-arbeitskampf-und-streik-sozialpartner-auf-kollisionskurs"
+        "url": "{DSTU_HOST}/jetzt/livebericht/2000052041011/mitdiskutieren-bei-im-zentrum-arbeitskampf-und-streik-sozialpartner-auf-kollisionskurs",
+        "section": "Etat"
       }
     },
     {
@@ -25,7 +27,8 @@
       "url": "{DSTU_HOST}/permalink/p/1034153378",
       "article": {
         "title": "Mitdiskutieren bei \"Im Zentrum\": Arbeitskampf und Streik - Sozialpartner auf Kollisionskurs",
-        "url": "{DSTU_HOST}/jetzt/livebericht/2000052041011/mitdiskutieren-bei-im-zentrum-arbeitskampf-und-streik-sozialpartner-auf-kollisionskurs"
+        "url": "{DSTU_HOST}/jetzt/livebericht/2000052041011/mitdiskutieren-bei-im-zentrum-arbeitskampf-und-streik-sozialpartner-auf-kollisionskurs",
+        "section": "Etat"
       }
     }
   ]

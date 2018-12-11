@@ -52,6 +52,13 @@ form[name=userForm] input::placeholder {
   font-size: 75%;
 }
 
+.cmnt-section {
+  position: absolute;
+  right: 3px;
+  bottom: 0px;
+  opacity: 0.4;
+}
+
 .highlightedText {
   background: yellow;
 }

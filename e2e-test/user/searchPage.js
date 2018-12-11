@@ -67,12 +67,14 @@ const SearchPage = testScreen => {
     const urlEl = el.element(by.className('cmnt-url'))
     const contentEl = el.element(by.className('cmnt-content'))
     const articleEl = el.element(by.className('cmnt-article'))
+    const sectionEl = el.element(by.className('cmnt-section'))
     return {
       title: () => titleEl.getText(),
       url: () => urlEl.getAttribute('ng-href'),
       content: () => contentEl.getText(),
       articleTitle: () => articleEl.getText(),
-      articleUrl: () => articleEl.getAttribute('ng-href')
+      articleUrl: () => articleEl.getAttribute('ng-href'),
+      articleSection: () => sectionEl.getText()
     }
   }
 
