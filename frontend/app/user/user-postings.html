@@ -69,7 +69,7 @@
        ng-class="posting.filterContent.includes(model.filter.toLowerCase()) ? '' : 'filtered-cmnt'">
     <div class="card cmnt-box rounded-0 h-100" ng-class="posting.article.section.toLowerCase()">
       <a class="card-body cmnt-url text-dark p-3" target="_blank" ng-href="{{ posting.url }}">
-        <strong class="card-title cmnt-title mb-1" ng-bind-html="highlight(posting.title, model.filter)"></strong>
+        <small class="card-title cmnt-title font-weight-bold" ng-bind-html="highlight(posting.title, model.filter)"></small>
         <small ng-if="!posting.title" class="text-muted mb-1">
           &lang;&nbsp;no title&nbsp;&rang;
         </small>
