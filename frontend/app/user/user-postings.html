@@ -81,7 +81,7 @@
         <a class="cmnt-article d-block" ng-href="{{ posting.article.url }}" target="_blank"
            ng-bind-html="highlight(posting.article.title, model.filter)">
         </a>
-        <small class="cmnt-section text-right">Wirtschaft</small>
+        <small class="cmnt-section text-right" ng-bind="posting.article.section"></small>
       </div>
     </div>
   </div>

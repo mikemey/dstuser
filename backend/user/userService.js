@@ -65,8 +65,9 @@ const UserService = (config, logger) => {
   const extractArtice = postingDiv => {
     const articleAnchor = $('.article a', postingDiv)
     const title = cleanText(articleAnchor)
+    const section = cleanText($('.article h5', postingDiv))
     const url = cleanHref(articleAnchor)
-    return { title, url }
+    return { title, url, section }
   }
 
   return {

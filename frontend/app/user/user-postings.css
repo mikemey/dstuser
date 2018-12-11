@@ -57,6 +57,7 @@ form[name=userForm] input::placeholder {
   right: 3px;
   bottom: 0px;
   opacity: 0.4;
+  font-size: 70%;
 }
 
 .highlightedText {

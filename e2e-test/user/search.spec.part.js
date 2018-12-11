@@ -7,11 +7,10 @@ module.exports = searchPage => {
 
   describe('user search (single comment page)', () => {
     const userId = '755005'
-    const pageNum = 1
 
     beforeAll(() => {
       derStandard.start()
-      derStandard.serveUserPageFor(userId, pageNum)
+      derStandard.serveUserPageFor(userId, 1)
     })
 
     afterAll(derStandard.stop)
@@ -53,6 +52,38 @@ module.exports = searchPage => {
         expect(comments[ix].url()).toBe(expected.url, `url ix: ${ix}`)
         expect(comments[ix].articleTitle()).toBe(expected.article.title, `article.title ix: ${ix}`)
         expect(comments[ix].articleUrl()).toBe(expected.article.url, `article.url ix: ${ix}`)
+        expect(comments[ix].articleSection()).toBe(expected.article.section, `article.section ix: ${ix}`)
+      })
+    })
+  })
+
+  describe('user search (multiple comment pages)', () => {
+    const userId = '425185'
+
+    beforeAll(() => Promise.all([
+      derStandard.start(),
+      derStandard.serveUserPageFor(userId, 1),
+      derStandard.serveUserPageFor(userId, 2),
+      derStandard.serveUserPageFor(userId, 3)
+    ]))
+
+    afterAll(derStandard.stop)
+
+    beforeEach(searchPage.open)
+
+    it('should show user comments', async () => {
+      const expectedPostings = derStandard.getCommentResult(userId).postings
+      searchPage.requestUserComments(userId)
+      const comments = await searchPage.getComments()
+      expect(comments.length).toBe(30)
+
+      expectedPostings.forEach((expected, ix) => {
+        expect(comments[ix].title()).toBe(expected.title, `title ix: ${ix}`)
+        expect(comments[ix].content()).toBe(expected.content, `content ix: ${ix}`)
+        expect(comments[ix].url()).toBe(expected.url, `url ix: ${ix}`)
+        expect(comments[ix].articleTitle()).toBe(expected.article.title, `article.title ix: ${ix}`)
+        expect(comments[ix].articleUrl()).toBe(expected.article.url, `article.url ix: ${ix}`)
+        expect(comments[ix].articleSection()).toBe(expected.article.section, `article.section ix: ${ix}`)
       })
     })
   })
