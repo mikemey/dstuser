@@ -68,13 +68,21 @@
   <div class="col-xl-3 col-lg-4 col-sm-6 p-lg-2 p-1" ng-repeat="posting in model.content.postings"
        ng-class="posting.filterContent.includes(model.filter.toLowerCase()) ? '' : 'filtered-cmnt'">
     <div class="card cmnt-box h-100" ng-class="posting.article.section.toLowerCase()">
-      <a class="card-body cmnt-url text-dark p-3" target="_blank" ng-href="{{ posting.url }}">
+      <div class="card-body px-3 py-2">
         <small class="card-title cmnt-title font-weight-bold" ng-bind-html="highlight(posting.title, model.filter)"></small>
         <small ng-if="!posting.title" class="text-muted">
           &lang;&nbsp;no title&nbsp;&rang;
         </small>
-        <p class="card-text cmnt-content text-justify small mt-1" ng-bind-html="highlight(posting.content, model.filter)"></p>
-      </a>
+        <a class="cmnt-url text-dark" target="_blank" ng-href="{{ posting.url }}">
+          <p class="card-text cmnt-content text-justify small mt-1"
+             ng-bind-html="highlight(posting.content, model.filter)"></p>
+        </a>
+        <div class="cmnt-rate float-right pr-1">
+          <small class="cmnt-rate-pos" ng-bind="posting.rating.pos"></small>
+          <small class=""> +/- </small>
+          <small class="cmnt-rate-neg" ng-bind="posting.rating.neg"></small>
+        </div>
+      </div>
       <div class="card-footer p-3">
         <a class="cmnt-article d-block" ng-href="{{ posting.article.url }}"
            target="_blank" ng-bind-html="highlight(posting.article.title, model.filter)">

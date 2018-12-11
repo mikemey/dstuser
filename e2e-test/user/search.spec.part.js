@@ -53,6 +53,8 @@ module.exports = searchPage => {
         expect(comments[ix].articleTitle()).toBe(expected.article.title, `article.title ix: ${ix}`)
         expect(comments[ix].articleUrl()).toBe(expected.article.url, `article.url ix: ${ix}`)
         expect(comments[ix].articleSection()).toBe(expected.article.section, `article.section ix: ${ix}`)
+        expect(comments[ix].ratingPos()).toBe(expected.rating.pos, `rating.pos ix: ${ix}`)
+        expect(comments[ix].ratingNeg()).toBe(expected.rating.neg, `rating.neg ix: ${ix}`)
       })
     })
   })

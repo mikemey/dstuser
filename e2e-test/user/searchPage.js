@@ -68,6 +68,9 @@ const SearchPage = testScreen => {
     const contentEl = el.element(by.className('cmnt-content'))
     const articleEl = el.element(by.className('cmnt-article'))
     const sectionEl = el.element(by.className('cmnt-section'))
+    const ratePosEl = el.element(by.className('cmnt-rating-pos'))
+    const rateNegEl = el.element(by.className('cmnt-rating-neg'))
+
     return {
       title: () => titleEl.getText(),
       url: () => urlEl.getAttribute('ng-href'),
@@ -75,7 +78,9 @@ const SearchPage = testScreen => {
       articleTitle: () => articleEl.getText(),
       articleUrl: () => articleEl.getAttribute('ng-href'),
       articleSection: () => sectionEl.getText(),
-      commentBoxClasses: () => el.getAttribute('class')
+      commentBoxClasses: () => el.getAttribute('class'),
+      ratingPos: () => ratePosEl.getText(),
+      ratingNeg: () => rateNegEl.getText()
     }
   }
 
@@ -89,9 +94,7 @@ const SearchPage = testScreen => {
     .map(createTexts)
 
   const createTexts = el => {
-    return {
-      getText: () => el.getText()
-    }
+    return { getText: () => el.getText() }
   }
 
   /* eslint object-property-newline: "off" */

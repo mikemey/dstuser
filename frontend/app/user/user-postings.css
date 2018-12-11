@@ -68,3 +68,23 @@ form[name=userForm] input::placeholder {
 .highlightedText {
   background: yellow;
 }
+
+.card-body {
+  position: relative;
+}
+
+.cmnt-rate {
+  position: absolute;
+  right: 3px;
+  bottom: 0px;
+  font-size: 70%;
+  font-weight: bold;
+}
+
+.cmnt-rate-pos {
+  color: #18b92e;
+}
+
+.cmnt-rate-neg {
+  color: #e01212;
+}
