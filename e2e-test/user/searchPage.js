@@ -66,6 +66,7 @@ const SearchPage = testScreen => {
     const titleEl = el.element(by.className('cmnt-title'))
     const urlEl = el.element(by.className('cmnt-url'))
     const contentEl = el.element(by.className('cmnt-content'))
+    const dateEl = el.element(by.className('cmnt-date'))
     const articleEl = el.element(by.className('cmnt-article'))
     const sectionEl = el.element(by.className('cmnt-section'))
     const ratePosEl = el.element(by.className('cmnt-rate-pos'))
@@ -75,6 +76,7 @@ const SearchPage = testScreen => {
       title: () => titleEl.getText(),
       url: () => urlEl.getAttribute('ng-href'),
       content: () => contentEl.getText(),
+      date: () => dateEl.getText(),
       articleTitle: () => articleEl.getText(),
       articleUrl: () => articleEl.getAttribute('ng-href'),
       articleSection: () => sectionEl.getText(),

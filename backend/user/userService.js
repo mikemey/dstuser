@@ -58,10 +58,11 @@ const UserService = (config, logger) => {
     const title = cleanText($('strong', contentDiv))
     const content = cleanText($('span', contentDiv))
     const url = cleanHref($('a', contentDiv))
+    const date = cleanText($('.absolute', postingDiv))
 
     const article = extractArtice(postingDiv)
     const rating = extractRating(postingDiv)
-    return { title, content, url, article, rating }
+    return { title, content, date, url, article, rating }
   }
 
   const extractArtice = postingDiv => {

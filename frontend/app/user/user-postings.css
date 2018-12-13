@@ -59,8 +59,8 @@ form[name=userForm] input::placeholder {
 
 .cmnt-section {
   position: absolute;
-  right: 3px;
-  bottom: 0px;
+  right: 0.7em;
+  bottom: 0em;
   opacity: 0.4;
   font-size: 70%;
 }
@@ -75,10 +75,9 @@ form[name=userForm] input::placeholder {
 
 .cmnt-rate {
   position: absolute;
-  right: 3px;
+  right: 1em;
   bottom: 0px;
   font-size: 70%;
-  font-weight: bold;
 }
 
 .cmnt-rate-pos {
@@ -87,4 +86,11 @@ form[name=userForm] input::placeholder {
 
 .cmnt-rate-neg {
   color: #e01212;
+}
+
+.cmnt-date {
+  position: absolute;
+  right: 1em;
+  top: 0.2em;
+  font-size: 70%;
 }
