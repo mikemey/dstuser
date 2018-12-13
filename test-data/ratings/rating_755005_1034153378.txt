@@ -1,0 +1,21 @@
+<div class="js-ratings-log ratings-log basic-depth-8dp" data-totalpositive="1" data-totalnegative="2" data-closable="ratinglog-1-1036100604" data-closable-active="true" data-closable-remove="true">
+    <div class="ratings-log-inner basic-scrollbar-light">
+<form action="/Forum/RatingLog?id=1036100604&amp;idType=Posting" data-ajax="true" data-ajax-begin="ForumLoader.onRatingLogEntriesLoadedBegin" data-ajax-complete="ForumLoader.onRatingLogEntriesLoadedComplete" data-ajax-loading="#js-ratings-log-loading" data-ajax-method="GET" data-ajax-mode="after" data-ajax-success="ForumLoader.onRatingLogEntriesLoadedSuccess" data-ajax-update="#js-ratings-log-entries" data-ajax-url="/Forum/RatingLog?id=1036100604&amp;idType=Posting" id="form0" method="post">            <ul id="js-ratings-log-entries">
+                <li data-rate="negative" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/277282" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>wilderpel</span>
+        </a>
+            <button data-communityidentityid="277282" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/248538" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Wolf19710</span>
+        </a>
+            <button data-communityidentityid="248538" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="negative" data-finished="true">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/223109" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Werner Kargel</span>
+        </a>
+            <button data-communityidentityid="223109" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li>
+            </ul></form>    </div>
+</div>

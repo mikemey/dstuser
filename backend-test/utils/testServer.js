@@ -6,9 +6,11 @@ const testConfig = {
   dstuHost: 'https://dstu.com',
   userIdPlaceholder: '$UID$',
   pagePlaceholder: '$PAGE$',
-  userProfileTemplate: '/userprofil/postings/$UID$?pageNumber=$PAGE$&sortMode=1'
+  postingIdPlaceholder: '$POSTID$',
+  userProfileTemplate: '/userprofil/postings/$UID$?pageNumber=$PAGE$&sortMode=1',
+  postingRatingTemplate: '/ratinglog?id=$POSTID$&idType=1'
 }
-
+// "https://derstandard.at/forum/ratinglog?id=$POSTID$&idType=1"  -H 'X-Requested-With: XMLHttpRequest'
 const createQuietLogger = () => {
   return {
     info: () => { },

@@ -37,7 +37,9 @@ describe('configuration selection', () => {
       config.dstuHost.should.equal('https://derstandard.at')
       config.userIdPlaceholder.should.equal('$UID$')
       config.pagePlaceholder.should.equal('$PAGE$')
+      config.postingIdPlaceholder.should.equal('$POSTID$')
       config.userProfileTemplate.should.equal('/userprofil/postings/$UID$?pageNumber=$PAGE$&sortMode=1')
+      config.postingRatingTemplate.should.equal('/forum/ratinglog?id=$POSTID$&idType=1')
     }
 
     it('when no NODE_ENV', () => {

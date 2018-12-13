@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 
 const commentsDir = './comments'
+const ratingsDir = './ratings'
 const errorsDir = './errors'
 
 const HOST_RE = /\{DSTU_HOST\}/g
@@ -26,6 +27,21 @@ const TestDataLoader = host => {
   const get404Page = () => readFile(errorsDir, '404response.html')
   const get302Page = () => readFile(errorsDir, '302response.html')
 
-  return { getComment, getCommentResult, get404Page, get302Page }
+  const getRating = (userId, postingId) => {
+    const fileName = `rating_${userId}_${postingId}.txt`
+    return readFile(ratingsDir, fileName)
+      .replace(HOST_RE, host)
+  }
+
+  const getRatingResult = (userId, postingId) => {
+    const fileName = `profile_${userId}_${postingId}.json`
+    return JSON.parse(readFile(ratingsDir, fileName)
+      .replace(HOST_RE, host)
+    )
+  }
+
+  return {
+    getComment, getCommentResult, get404Page, get302Page, getRating, getRatingResult
+  }
 }
 module.exports = TestDataLoader
