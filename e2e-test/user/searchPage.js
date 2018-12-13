@@ -68,8 +68,8 @@ const SearchPage = testScreen => {
     const contentEl = el.element(by.className('cmnt-content'))
     const articleEl = el.element(by.className('cmnt-article'))
     const sectionEl = el.element(by.className('cmnt-section'))
-    const ratePosEl = el.element(by.className('cmnt-rating-pos'))
-    const rateNegEl = el.element(by.className('cmnt-rating-neg'))
+    const ratePosEl = el.element(by.className('cmnt-rate-pos'))
+    const rateNegEl = el.element(by.className('cmnt-rate-neg'))
 
     return {
       title: () => titleEl.getText(),
@@ -79,8 +79,8 @@ const SearchPage = testScreen => {
       articleUrl: () => articleEl.getAttribute('ng-href'),
       articleSection: () => sectionEl.getText(),
       commentBoxClasses: () => el.getAttribute('class'),
-      ratingPos: () => ratePosEl.getText(),
-      ratingNeg: () => rateNegEl.getText()
+      ratingPos: () => ratePosEl.getText().then(Number),
+      ratingNeg: () => rateNegEl.getText().then(Number)
     }
   }
 

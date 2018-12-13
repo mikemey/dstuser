@@ -7,6 +7,7 @@ const UserService = (config, logger) => {
   const pagePlaceholder = config.pagePlaceholder
 
   const cleanText = el => el.text().trim()
+  const cleanNumber = el => Number(cleanText(el))
   const cleanHref = el => {
     const href = el.attr('href')
     return href.startsWith(config.dstuHost)
@@ -51,15 +52,16 @@ const UserService = (config, logger) => {
   const extractPostings = page => page('.posting').map(extractPosting).get()
 
   const extractPosting = (_, postingDiv) => {
-    const textDiv = $('.text', postingDiv)
-    textDiv.find('br').replaceWith('\n')
+    const contentDiv = $('.text', postingDiv)
+    contentDiv.find('br').replaceWith('\n')
 
-    const title = cleanText($('strong', textDiv))
-    const content = cleanText($('span', textDiv))
-    const url = cleanHref($('a', textDiv))
+    const title = cleanText($('strong', contentDiv))
+    const content = cleanText($('span', contentDiv))
+    const url = cleanHref($('a', contentDiv))
 
     const article = extractArtice(postingDiv)
-    return { title, content, url, article }
+    const rating = extractRating(postingDiv)
+    return { title, content, url, article, rating }
   }
 
   const extractArtice = postingDiv => {
@@ -68,6 +70,11 @@ const UserService = (config, logger) => {
     const section = cleanText($('.article h5', postingDiv))
     const url = cleanHref(articleAnchor)
     return { title, url, section }
+  }
+  const extractRating = postingDiv => {
+    const pos = cleanNumber($('.ratings-positive-count', postingDiv))
+    const neg = cleanNumber($('.ratings-negative-count', postingDiv))
+    return { pos, neg }
   }
 
   return {
