@@ -52,6 +52,7 @@ const UserService = (config, logger) => {
   const extractPostings = page => page('.posting').map(extractPosting).get()
 
   const extractPosting = (_, postingDiv) => {
+    const postingId = $(postingDiv).attr('data-postingid')
     const contentDiv = $('.text', postingDiv)
     contentDiv.find('br').replaceWith('\n')
 
@@ -62,7 +63,7 @@ const UserService = (config, logger) => {
 
     const article = extractArtice(postingDiv)
     const rating = extractRating(postingDiv)
-    return { title, content, date, url, article, rating }
+    return { postingId, title, content, date, url, article, rating }
   }
 
   const extractArtice = postingDiv => {

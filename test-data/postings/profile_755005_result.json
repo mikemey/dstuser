@@ -2,6 +2,7 @@
   "userName": "a standard user",
   "postings": [
     {
+      "postingId": "1036279475",
       "title": "Startlöchern !",
       "content": "Für\nheillos überforderten sogar koordiniert.",
       "date": "Do, 15.11.2018, 18:22",
@@ -17,6 +18,7 @@
       }
     },
     {
+      "postingId": "1034368216",
       "title": "Wem Interessiert das noch ?",
       "content": "",
       "date": "Mo, 10.09.2018, 15:00",
@@ -32,6 +34,7 @@
       }
     },
     {
+      "postingId": "1034153378",
       "title": "",
       "content": "Wenn das Freudsche-Land aufwacht und seinen Wähler-Masochismus wieder ablegt.",
       "date": "Mo, 03.09.2018, 15:00",
