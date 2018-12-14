@@ -20,7 +20,7 @@ const UserService = (config, logger) => {
       .replace(userIdPlaceholder, userId)
       .replace(pagePlaceholder, 1)
 
-    logger.info(`user profile ${userId}`)
+    logger.info(`user profile [${userId}]`)
     return requestPage(profileUrl)
       .then(firstPage => {
         const userName = extractUserName(firstPage)
