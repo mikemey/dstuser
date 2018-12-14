@@ -1,6 +1,10 @@
 const $ = require('cheerio')
 const requests = require('../utils/requests')
 
+const REQUEST_HEADERS = {
+  'X-Requested-With': 'XMLHttpRequest'
+}
+
 const RatingService = (config, logger) => {
   const postingTemplate = config.dstuHost + config.postingRatingTemplate
   const postingIdPlaceholder = config.postingIdPlaceholder
@@ -12,7 +16,7 @@ const RatingService = (config, logger) => {
       .replace(postingIdPlaceholder, postingId)
 
     logger.info(`posting rating [${postingId}]`)
-    return requests.getHtml(postingUrl)
+    return requests.getHtml(postingUrl, REQUEST_HEADERS)
       .then(extractAllRatings)
   }
 

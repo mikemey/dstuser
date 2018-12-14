@@ -15,10 +15,11 @@ describe('ratings websocket', () => {
   })
 
   after(() => {
-    nock.cleanAll()
     nock.enableNetConnect()
     return server.stop()
   })
+
+  afterEach(nock.cleanAll)
 
   const testRating = postingId => dataLoader.getRating(userId, postingId)
   const expectedData = postingId => dataLoader.getRatingResult(userId, postingId)
@@ -26,11 +27,11 @@ describe('ratings websocket', () => {
   const postingRatingUrl = postId => testConfig.postingRatingTemplate
     .replace(testConfig.postingIdPlaceholder, postId)
 
-  const nockPostingRating = postingId => nock(testConfig.dstuHost).get(postingRatingUrl(postingId))
-  // "https://derstandard.at/forum/ratinglog?id=$POSTID$&idType=1"  -H 'X-Requested-With: XMLHttpRequest'
-
-  // const requestPostingRating = postingId => server.request()
-  //   .get(postingRatingUrl(postingId))
+  const nockPostingRating = postingId => nock(testConfig.dstuHost, {
+    reqheaders: {
+      'X-Requested-With': 'XMLHttpRequest'
+    }
+  }).get(postingRatingUrl(postingId))
 
   describe('request posting ratings', () => {
     it('responds with only positive ratings', () => runRatingsTest(1036279475))
