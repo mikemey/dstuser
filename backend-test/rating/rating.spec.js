@@ -33,6 +33,8 @@ describe('ratings websocket', () => {
     }
   }).get(postingRatingUrl(postingId))
 
+  const requestRating = (postingId = '') => server.ws(`/dstuws/rating/${postingId}`)
+
   describe('request posting ratings', () => {
     it('responds with only positive ratings', () => runRatingsTest(1036279475))
 
@@ -42,7 +44,7 @@ describe('ratings websocket', () => {
 
     const runRatingsTest = postingId => {
       nockPostingRating(postingId).reply(200, testRating(postingId))
-      return server.ws('/dstuws/rating').onMessage(postingId)
+      return requestRating(postingId)
         .then(response => {
           response.should.deep.equal(expectedData(postingId))
         })
@@ -50,11 +52,29 @@ describe('ratings websocket', () => {
   })
 
   describe('invalid requests', () => {
-    it('no message received', () => { })
-    it('NaN received', () => { })
-    it('space padded number received', () => { })
+    it('NaN received', () => {
+      const postingId = 'abc'
+      return requestRating(postingId)
+        .then(response => {
+          response.should.deep.equal({ error: `invalid postingId: "${postingId}"` })
+        })
+    })
   })
 
   describe('derStandard server errors', () => {
+    const postingId = 1034153378
+    const emptyResult = { postingId: String(postingId), rating: { neg: [], pos: [] } }
+
+    it('no result', () => {
+      nockPostingRating(postingId).reply(200, testRating('no_result'))
+      return requestRating(postingId)
+        .then(response => { response.should.deep.equal(emptyResult) })
+    })
+
+    it('internal error', () => {
+      nockPostingRating(postingId).reply(500, 'blub')
+      return requestRating(postingId)
+        .then(response => { response.should.deep.equal(emptyResult) })
+    })
   })
 })

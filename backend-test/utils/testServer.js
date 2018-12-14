@@ -45,33 +45,27 @@ const TestServer = () => {
     }
   }
 
-  const ws = path => {
+  const ws = path => new Promise((resolve, reject) => {
     const connectionUrl = wsAddress + path
+    const websocket = new WebSocket(connectionUrl)
+    const result = { data: 'closed' }
 
-    const onMessage = message => new Promise((resolve, reject) => {
-      const websocket = new WebSocket(connectionUrl)
-      const result = { data: {} }
-
-      websocket.on('open', () => {
-        debuglog('open')
-        websocket.send(message)
-      })
-
-      websocket.on('message', data => {
-        debuglog('message', data)
-        result.data = JSON.parse(data)
-      })
-
-      websocket.on('error', reject)
-
-      websocket.on('close', () => {
-        debuglog('close')
-        resolve(result.data)
-      })
+    websocket.on('open', () => {
+      debuglog('open')
     })
 
-    return { onMessage }
-  }
+    websocket.on('message', data => {
+      debuglog('message', data)
+      result.data = JSON.parse(data)
+    })
+
+    websocket.on('error', reject)
+
+    websocket.on('close', ev => {
+      debuglog('close', ev)
+      resolve(result.data)
+    })
+  })
 
   return {
     start,

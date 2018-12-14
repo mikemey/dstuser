@@ -5,6 +5,8 @@ const REQUEST_HEADERS = {
   'X-Requested-With': 'XMLHttpRequest'
 }
 
+const EMPTY_RESULT = { pos: [], neg: [] }
+
 const RatingService = (config, logger) => {
   const postingTemplate = config.dstuHost + config.postingRatingTemplate
   const postingIdPlaceholder = config.postingIdPlaceholder
@@ -18,6 +20,10 @@ const RatingService = (config, logger) => {
     logger.info(`posting rating [${postingId}]`)
     return requests.getHtml(postingUrl, REQUEST_HEADERS)
       .then(extractAllRatings)
+      .catch(error => {
+        logger.error(`ERROR posting rating [${postingId}]: ${error.message}`, error)
+        return EMPTY_RESULT
+      })
   }
 
   const extractAllRatings = page => Promise.all([
