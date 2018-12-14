@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 
-const commentsDir = './comments'
+const postingsDir = './postings'
 const ratingsDir = './ratings'
 const errorsDir = './errors'
 
@@ -13,13 +13,13 @@ const readFile = (dir, fileName) =>
 const TestDataLoader = host => {
   const getComment = (userId, pageId) => {
     const fileName = `profile_${userId}_${pageId}.txt`
-    return readFile(commentsDir, fileName)
+    return readFile(postingsDir, fileName)
       .replace(HOST_RE, host)
   }
 
   const getCommentResult = userId => {
     const fileName = `profile_${userId}_result.json`
-    return JSON.parse(readFile(commentsDir, fileName)
+    return JSON.parse(readFile(postingsDir, fileName)
       .replace(HOST_RE, host)
     )
   }
