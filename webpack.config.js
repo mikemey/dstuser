@@ -19,6 +19,10 @@ module.exports = {
       filename: '[name].bundle.js',
       chunkFilename: '[name].bundle.js'
     },
+  node: {
+    fs: 'empty',
+    tls: 'empty'
+  },
   module: {
     rules: [
       { test: /\.css$/, use: isTest ? 'null-loader' : ['style-loader', CssExtractPlugin.loader, 'css-loader'] },
