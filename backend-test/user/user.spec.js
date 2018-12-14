@@ -16,10 +16,11 @@ describe('get userprofile endpoint', () => {
   })
 
   after(() => {
-    nock.cleanAll()
     nock.enableNetConnect()
     return server.stop()
   })
+
+  afterEach(nock.cleanAll)
 
   const nockDstUserprofile = (userId, pageNum) => nock(server.config.dstuHost)
     .get(`/userprofil/postings/${userId}?pageNumber=${pageNum}&sortMode=1`)
