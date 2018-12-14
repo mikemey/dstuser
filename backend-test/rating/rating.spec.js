@@ -2,7 +2,7 @@ const nock = require('nock')
 const TestServer = require('../utils/testServer')
 const TestDataLoader = require('../../test-data/testDataLoader')
 
-xdescribe('ratings websocket', () => {
+describe('ratings websocket', () => {
   const userId = 755005
   const server = TestServer()
   const testConfig = server.config
@@ -27,11 +27,19 @@ xdescribe('ratings websocket', () => {
     .replace(testConfig.postingIdPlaceholder, postId)
 
   const nockPostingRating = postingId => nock(testConfig.dstuHost).get(postingRatingUrl(postingId))
+  // "https://derstandard.at/forum/ratinglog?id=$POSTID$&idType=1"  -H 'X-Requested-With: XMLHttpRequest'
+
+  // const requestPostingRating = postingId => server.request()
+  //   .get(postingRatingUrl(postingId))
 
   describe('request posting ratings', () => {
     it('responds with only positive ratings', () => {
       const postingId = 1036279475
       nockPostingRating(postingId).reply(200, testRating(postingId))
+      return server.ws('/dstuws/echo').onMessage('hello')
+        .then(response => {
+          response.should.equal('echo: hello')
+        })
     })
   })
 

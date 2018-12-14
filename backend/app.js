@@ -1,8 +1,10 @@
 const express = require('express')
+const expressWs = require('express-ws')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 
 const createUserRouter = require('./user')
+const createWsRouter = require('./rating')
 
 const methodsWithBody = ['POST', 'PUT']
 
@@ -20,12 +22,14 @@ const requestLogger = () => {
 
 const createServer = (config, logger) => new Promise((resolve, reject) => {
   const app = express()
+  expressWs(app)
 
   app.use(bodyParser.json())
   app.use(requestLogger())
 
   app.use('/dstu', express.static('dist/'))
   app.use('/dstuapi', createUserRouter(config, logger))
+  app.use('/dstuws', createWsRouter(config, logger))
 
   const server = app.listen(config.port, config.interface, () => {
     logger.info(`Started on port ${server.address().port}`)

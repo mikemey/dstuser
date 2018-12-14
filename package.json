@@ -27,6 +27,7 @@
     "body-parser": "^1.18.3",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.4",
+    "express-ws": "^4.0.0",
     "moment": "^2.22.2",
     "morgan": "^1.9.1",
     "request": "^2.88.0",
@@ -66,7 +67,8 @@
     "supertest": "^3.3.0",
     "webdriver-manager": "^12.1.0",
     "webpack": "^4.26.1",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.1.2",
+    "ws": "^6.1.2"
   },
   "standard": {
     "env": [

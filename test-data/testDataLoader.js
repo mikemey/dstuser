@@ -34,7 +34,7 @@ const TestDataLoader = host => {
   }
 
   const getRatingResult = (userId, postingId) => {
-    const fileName = `profile_${userId}_${postingId}.json`
+    const fileName = `rating_${userId}_${postingId}.json`
     return JSON.parse(readFile(ratingsDir, fileName)
       .replace(HOST_RE, host)
     )
