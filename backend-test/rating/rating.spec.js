@@ -33,17 +33,25 @@ describe('ratings websocket', () => {
   //   .get(postingRatingUrl(postingId))
 
   describe('request posting ratings', () => {
-    it('responds with only positive ratings', () => {
-      const postingId = 1036279475
+    it('responds with only positive ratings', () => runRatingsTest(1036279475))
+
+    it('responds with only negative ratings', () => runRatingsTest(1034368216))
+
+    it('responds with positive and negative ratings', () => runRatingsTest(1034153378))
+
+    const runRatingsTest = postingId => {
       nockPostingRating(postingId).reply(200, testRating(postingId))
-      return server.ws('/dstuws/echo').onMessage('hello')
+      return server.ws('/dstuws/rating').onMessage(postingId)
         .then(response => {
-          response.should.equal('echo: hello')
+          response.should.deep.equal(expectedData(postingId))
         })
-    })
+    }
   })
 
   describe('invalid requests', () => {
+    it('no message received', () => { })
+    it('NaN received', () => { })
+    it('space padded number received', () => { })
   })
 
   describe('derStandard server errors', () => {

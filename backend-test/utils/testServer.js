@@ -59,7 +59,7 @@ const TestServer = () => {
 
       websocket.on('message', data => {
         debuglog('message', data)
-        result.data = data
+        result.data = JSON.parse(data)
       })
 
       websocket.on('error', reject)
