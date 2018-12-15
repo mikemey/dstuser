@@ -30,8 +30,16 @@ const app = express()
 app.use('/userprofil/postings/:userId', (req, res) => {
   const userId = req.params.userId
   const page = req.query.pageNumber
-  logger.info(`requested ${userId}-${page}`)
+  logger.info(`requested user page ${userId}-${page}`)
   return res.status(200).send(dataLoader.getComment(userId, page))
+})
+
+const ratingUserId = 755005
+
+app.use('/forum/ratinglog', (req, res) => {
+  const postingId = req.query.id
+  logger.info(`requested rating for ${postingId}`)
+  return res.status(200).send(dataLoader.getRating(ratingUserId, postingId))
 })
 
 const server = app.listen(port, () => {
