@@ -79,14 +79,15 @@
              ng-bind-html="highlight(posting.content, model.filter)"></p>
         </a>
         <div class="cmnt-rate float-right">
-          <a href="#" ng-click="posting.showRating = !posting.showRating"
-             onclick="return false;">
+          <a id="ln-{{ posting.postingId }}" href="#" onclick="return false;"
+             ng-click="posting.showRating = !posting.showRating">
             <small class="cmnt-rate-pos font-weight-bold" ng-bind="posting.rating.pos"></small>
             <small class=""> +/- </small>
             <small class="cmnt-rate-neg font-weight-bold" ng-bind="posting.rating.neg"></small>
           </a>
         </div>
       </div>
+      <rating ng-if="posting.showRating" posting-id="{{ posting.postingId }}"></rating>
       <div class="card-footer p-3">
         <a class="cmnt-article d-block" ng-href="{{ posting.article.url }}"
            target="_blank" ng-bind-html="highlight(posting.article.title, model.filter)">

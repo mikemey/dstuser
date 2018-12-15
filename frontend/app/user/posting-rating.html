@@ -1,6 +1,15 @@
 <div class="rating">
-  <h5>RATINGS ARE HERE!!</h5>
-  <p ng-bind="model.result"></p>
-  <small ng-bind="model.count"></small>
-  <p ng-bind="model.message"></p>
+  <div class="rating-body">
+    <div ng-if="model.message" class="w-100 bg-warning px-3 py-2" ng-bind="model.message"></div>
+    <div class="w-50 float-left">
+      <ul class="list-group" ng-repeat="name in model.rating.pos">
+        <li class="list-group-item rating-pos">{{ name }}</li>
+      </ul>
+    </div>
+    <div class="w-50 float-right">
+      <ul class="list-group" ng-repeat="name in model.rating.neg">
+        <li class="list-group-item rating-neg">{{ name }}</li>
+      </ul>
+    </div>
+  </div>
 </div>

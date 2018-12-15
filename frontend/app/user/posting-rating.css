@@ -1,3 +1,18 @@
 div.rating {
-  background-color: red;
+  position: relative;
+  top: 0px;
+  z-index: 3;
+}
+
+.rating-body {
+  width: 100%;
+  position: absolute;
+}
+
+.rating-pos {
+  background-color: greenyellow;
+}
+
+.rating-neg {
+  background-color: orangered;
 }

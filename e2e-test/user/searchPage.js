@@ -95,14 +95,18 @@ const SearchPage = testScreen => {
   const sendToFilter = filter => filterInput().sendKeys(filter)
 
   const getHighlightedTexts = () => element.all(by.className('highlightedText'))
-    .map(createTexts)
+    .map(asText)
 
-  const createTexts = el => {
-    return { getText: () => el.getText() }
-  }
+  const asText = el => el.getText()
 
   const getRatingHrefs = () => element.all(by.css('.cmnt-rate a'))
     .map(el => el.getAttribute('href'))
+
+  const byPostingId = postingId => by.id(`ln-${postingId}`)
+  const clickRating = postingId => element(byPostingId(postingId)).click()
+
+  const getPositiveRaters = () => element.all(by.className('rating-pos')).map(asText)
+  const getNegativeRaters = () => element.all(by.className('rating-neg')).map(asText)
 
   /* eslint object-property-newline: "off" */
   return {
@@ -120,7 +124,8 @@ const SearchPage = testScreen => {
     getComments,
     hasFilter, isFilterEnabled, sendToFilter,
     getHighlightedTexts,
-    getRatingHrefs
+    getRatingHrefs, clickRating,
+    getPositiveRaters, getNegativeRaters
   }
 }
 

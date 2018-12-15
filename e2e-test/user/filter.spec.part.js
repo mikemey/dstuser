@@ -68,7 +68,7 @@ module.exports = searchPage => {
 
         const highlightedText = await searchPage.getHighlightedTexts()
         expect(highlightedText.length).toBe(1)
-        expect(highlightedText[0].getText()).toBe(filter)
+        expect(highlightedText[0]).toBe(filter)
       })
 
       it('when single article match', async () => {

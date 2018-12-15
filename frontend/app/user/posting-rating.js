@@ -3,58 +3,31 @@ import ngWebSocket from 'angular-websocket'
 
 import './posting-rating.css'
 
-const ratingCtrl = ($scope, $websocket) => {
-  $scope.echoServer = {}
+const ratingCtrl = function ($scope, $websocket) {
+  this.$onInit = () => loadRating(this.postingId)
+
   $scope.model = {
-    result: 'started',
     message: '',
-    count: 3
+    rating: null
   }
 
-  const open = () => {
-    const ws = $websocket('ws://localhost:7001/dstuws/echo')
-
-    ws.onError(errorEv => {
-      $scope.model.result = 'Error'
-      console.log(Object.getOwnPropertyNames(errorEv))
-      $scope.model.message = errorEv.data
-    })
-
-    ws.onOpen(() => {
-      $scope.model.result = 'connected'
-      sendHello()
-    })
+  const loadRating = postingId => {
+    const ws = $websocket(`ws://localhost:7001/dstuws/rating/${postingId}`)
 
     ws.onMessage(msgEvent => {
-      $scope.model.result = $scope.model.result + ' - message received'
-      messageReceived(msgEvent.data)
+      const ratingResponse = JSON.parse(msgEvent.data)
+      $scope.model.rating = ratingResponse.rating
     })
-    ws.onClose(() => {
-      $scope.model.result = $scope.model.result + ' - closed'
-    })
-
-    $scope.echoServer = ws
+    ws.onError(errorEv => { $scope.model.message = errorEv.data })
   }
-
-  const sendHello = () => $scope.echoServer.send('hello world')
-
-  const messageReceived = msg => {
-    $scope.model.message = msg
-    if ($scope.model.count > 0) {
-      $scope.model.count = $scope.model.count - 1
-      $scope.echoServer.close()
-      open()
-    } else {
-      $scope.echoServer.close()
-    }
-  }
-
-  return open()
 }
 
 export default angular
   .module('user.rating', [ngWebSocket.name])
   .component('rating', {
     template: require('./posting-rating.html'),
-    controller: ['$scope', '$websocket', ratingCtrl]
+    controller: ['$scope', '$websocket', ratingCtrl],
+    bindings: {
+      postingId: '@'
+    }
   })
