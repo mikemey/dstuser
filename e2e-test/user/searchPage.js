@@ -27,7 +27,9 @@ const SearchPage = testScreen => {
     : LARGE_SCREEN
 
   const getBrowserUrl = () => browser.driver.getCurrentUrl()
-  const open = (path = '#!/search') => Promise.all([
+  const userSearchPath = '#!/search'
+  const openUserPage = userId => open(`${userSearchPath}/${userId}`)
+  const open = (path = userSearchPath) => Promise.all([
     browser.get(path),
     browser.manage().window().setSize(testScreen.width, testScreen.height)
   ])
@@ -99,11 +101,15 @@ const SearchPage = testScreen => {
     return { getText: () => el.getText() }
   }
 
+  const getRatingHrefs = () => element.all(by.css('.cmnt-rate a'))
+    .map(el => el.getAttribute('href'))
+
   /* eslint object-property-newline: "off" */
   return {
     id: testScreen.id,
     getBrowserUrl,
     open,
+    openUserPage,
     getHiddenScreen,
     hasUserIdInput, sendToUserId, getUserId,
     formLabel,
@@ -113,7 +119,8 @@ const SearchPage = testScreen => {
     hasErrorMessage, getErrorMessage,
     getComments,
     hasFilter, isFilterEnabled, sendToFilter,
-    getHighlightedTexts
+    getHighlightedTexts,
+    getRatingHrefs
   }
 }
 

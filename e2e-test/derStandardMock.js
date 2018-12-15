@@ -12,6 +12,8 @@ const dataLoader = TestDataLoader(serverCfg.dstuHost)
 const start = async () => {
   const { port } = url.parse(serverCfg.dstuHost)
   await mockServer.start(Number(port))
+  const serverUrl = `http://localhost:${serverCfg.port}`
+  return serverUrl
 }
 
 const stop = async () => { await mockServer.stop() }
@@ -41,4 +43,8 @@ const server404WhenUserPageFor = async userId => {
 
 const getCommentResult = userId => dataLoader.getCommentResult(userId)
 
-module.exports = { start, stop, serveUserPageFor, server404WhenUserPageFor, getCommentResult }
+/* eslint object-property-newline: "off" */
+module.exports = {
+  start, stop, config: serverCfg,
+  serveUserPageFor, server404WhenUserPageFor, getCommentResult
+}
