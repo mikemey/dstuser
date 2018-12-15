@@ -37,7 +37,9 @@ app.use('/userprofil/postings/:userId', (req, res) => {
 const ratingUserId = 755005
 
 app.use('/forum/ratinglog', (req, res) => {
-  const postingId = req.query.id
+  const idType = req.query.idType
+  const postingId = idType === '1' ? req.query.id : `${req.query.id}_ext`
+
   logger.info(`requested rating for ${postingId}`)
   return res.status(200).send(dataLoader.getRating(ratingUserId, postingId))
 })
