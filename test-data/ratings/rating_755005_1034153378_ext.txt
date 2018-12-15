@@ -1,0 +1,116 @@
+<li data-rate="negative" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/171380" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Polka</span>
+        </a>
+            <button data-communityidentityid="171380" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="negative" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/679355" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>fugu288</span>
+        </a>
+            <button data-communityidentityid="679355" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="negative" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/520599" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>MFunited</span>
+        </a>
+            <button data-communityidentityid="520599" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/633552" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>er bringt Licht</span>
+        </a>
+            <button data-communityidentityid="633552" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/196961" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>reality?</span>
+        </a>
+            <button data-communityidentityid="196961" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="negative" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/176874" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Petra &#214;sterreicher</span>
+        </a>
+            <button data-communityidentityid="176874" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="negative" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/248304" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>zkk</span>
+        </a>
+            <button data-communityidentityid="248304" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/536838" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>bastivon1982</span>
+        </a>
+            <button data-communityidentityid="536838" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/24561" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>brigitte_nauer</span>
+        </a>
+            <button data-communityidentityid="24561" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/682454" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>DerNachdenker1</span>
+        </a>
+            <button data-communityidentityid="682454" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/503335" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>herbststurm1</span>
+        </a>
+            <button data-communityidentityid="503335" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/227766" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Supersauberer Supersaub&#228;r</span>
+        </a>
+            <button data-communityidentityid="227766" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="negative" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/639693" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Mitte-Rechts-Linker Nichtw&#228;hler</span>
+        </a>
+            <button data-communityidentityid="639693" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/531917" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>soitis</span>
+        </a>
+            <button data-communityidentityid="531917" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/677697" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>autorit&#228;rer Anarchist</span>
+        </a>
+            <button data-communityidentityid="677697" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="negative" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/516802" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Observer20</span>
+        </a>
+            <button data-communityidentityid="516802" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/225289" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Tim O&#180;Beil</span>
+        </a>
+            <button data-communityidentityid="225289" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="negative" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/89960" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>haraldmarkus40</span>
+        </a>
+            <button data-communityidentityid="89960" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="negative" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/678268" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>michelmann1</span>
+        </a>
+            <button data-communityidentityid="678268" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="negative" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/503403" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>law</span>
+        </a>
+            <button data-communityidentityid="503403" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="negative" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/499749" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Hortensia die Erste</span>
+        </a>
+            <button data-communityidentityid="499749" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/190254" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>p1000wisch</span>
+        </a>
+            <button data-communityidentityid="190254" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="negative" data-finished="true">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/605165" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Resilein</span>
+        </a>
+            <button data-communityidentityid="605165" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li>

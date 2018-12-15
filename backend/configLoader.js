@@ -11,7 +11,9 @@ const defaultEnv = {
   pagePlaceholder: '$PAGE$',
   postingIdPlaceholder: '$POSTID$',
   userProfileTemplate: '/userprofil/postings/$UID$?pageNumber=$PAGE$&sortMode=1',
-  postingRatingTemplate: '/forum/ratinglog?id=$POSTID$&idType=1'
+  postingRatingTemplate: '/forum/ratinglog?id=$POSTID$&idType=1',
+  latestRaterIdPlaceholder: '$LRID$',
+  postingRatingNextTemplate: '/Forum/RatingLog?id=$POSTID$&idType=Posting&LatestRaterCommunityIdentityId=$LRID$'
 }
 
 const e2eEnv = {

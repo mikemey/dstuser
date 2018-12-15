@@ -24,14 +24,22 @@ describe('ratings websocket', () => {
   const testRating = postingId => dataLoader.getRating(userId, postingId)
   const expectedData = postingId => dataLoader.getRatingResult(userId, postingId)
 
-  const postingRatingUrl = postId => testConfig.postingRatingTemplate
+  const postingRatingPath = postId => testConfig.postingRatingTemplate
     .replace(testConfig.postingIdPlaceholder, postId)
 
-  const nockPostingRating = postingId => nock(testConfig.dstuHost, {
+  const postingRatingNextPath = (postingId, lastRaterId) => testConfig.postingRatingNextTemplate
+    .replace(testConfig.postingIdPlaceholder, postingId)
+    .replace(testConfig.latestRaterIdPlaceholder, lastRaterId)
+
+  const nockPostingRating = postingId => nockAsXHRequest(postingRatingPath(postingId))
+  const nockPostingNextRating = (postingId, lastRaterId) =>
+    nockAsXHRequest(postingRatingNextPath(postingId, lastRaterId))
+
+  const nockAsXHRequest = path => nock(testConfig.dstuHost, {
     reqheaders: {
       'X-Requested-With': 'XMLHttpRequest'
     }
-  }).get(postingRatingUrl(postingId))
+  }).get(path)
 
   const requestRating = (postingId = '') => server.ws(`/dstuws/rating/${postingId}`)
 
@@ -40,7 +48,13 @@ describe('ratings websocket', () => {
 
     it('responds with only negative ratings', () => runRatingsTest(1034368216))
 
-    it('responds with positive and negative ratings', () => runRatingsTest(1034153378))
+    it('responds with positive and negative ratings', () => {
+      const postingId = 1034153378
+      const postingNextData = `${postingId}_ext`
+      const lastRaterId = 608969
+      nockPostingNextRating(postingId, lastRaterId).reply(200, testRating(postingNextData))
+      return runRatingsTest(postingId)
+    })
 
     const runRatingsTest = postingId => {
       nockPostingRating(postingId).reply(200, testRating(postingId))

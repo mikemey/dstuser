@@ -1,21 +1,58 @@
-<div class="js-ratings-log ratings-log basic-depth-8dp" data-totalpositive="1" data-totalnegative="2" data-closable="ratinglog-1-1036100604" data-closable-active="true" data-closable-remove="true">
-    <div class="ratings-log-inner basic-scrollbar-light">
-<form action="/Forum/RatingLog?id=1036100604&amp;idType=Posting" data-ajax="true" data-ajax-begin="ForumLoader.onRatingLogEntriesLoadedBegin" data-ajax-complete="ForumLoader.onRatingLogEntriesLoadedComplete" data-ajax-loading="#js-ratings-log-loading" data-ajax-method="GET" data-ajax-mode="after" data-ajax-success="ForumLoader.onRatingLogEntriesLoadedSuccess" data-ajax-update="#js-ratings-log-entries" data-ajax-url="/Forum/RatingLog?id=1036100604&amp;idType=Posting" id="form0" method="post">            <ul id="js-ratings-log-entries">
-                <li data-rate="negative" data-finished="">
-        <a onclick="event.stopPropagation();" href="/userprofil/postings/277282" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
-            <span>wilderpel</span>
+<div class="js-ratings-log ratings-log basic-depth-8dp" data-totalpositive="16" data-totalnegative="17" data-closable="ratinglog-1-1034153378" data-closable-active="true" data-closable-remove="true">
+  <div class="ratings-log-inner basic-scrollbar-light">
+    <form action="/Forum/RatingLog?id=1034153378&amp;idType=Posting" data-ajax="true" data-ajax-begin="ForumLoader.onRatingLogEntriesLoadedBegin" data-ajax-complete="ForumLoader.onRatingLogEntriesLoadedComplete" data-ajax-loading="#js-ratings-log-loading" data-ajax-method="GET" data-ajax-mode="after" data-ajax-success="ForumLoader.onRatingLogEntriesLoadedSuccess" data-ajax-update="#js-ratings-log-entries" data-ajax-url="/Forum/RatingLog?id=1034153378&amp;idType=Posting" id="form0" method="post">            <ul id="js-ratings-log-entries">
+      <li data-rate="negative" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/29978" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+          <span>Charly Blecher</span>
         </a>
-            <button data-communityidentityid="277282" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
-</li><li data-rate="positive" data-finished="">
-        <a onclick="event.stopPropagation();" href="/userprofil/postings/248538" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
-            <span>Wolf19710</span>
-        </a>
-            <button data-communityidentityid="248538" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
-</li><li data-rate="negative" data-finished="true">
-        <a onclick="event.stopPropagation();" href="/userprofil/postings/223109" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
-            <span>Werner Kargel</span>
-        </a>
-            <button data-communityidentityid="223109" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
-</li>
-            </ul></form>    </div>
+        <button data-communityidentityid="29978" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+      </li><li data-rate="positive" data-finished="">
+      <a onclick="event.stopPropagation();" href="/userprofil/postings/675980" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+        <span>allwetterfrau57</span>
+      </a>
+      <button data-communityidentityid="675980" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+    </li><li data-rate="negative" data-finished="">
+      <a onclick="event.stopPropagation();" href="/userprofil/postings/638264" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+        <span>Nidhog</span>
+      </a>
+      <button data-communityidentityid="638264" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+    </li><li data-rate="positive" data-finished="">
+      <a onclick="event.stopPropagation();" href="/userprofil/postings/654785" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+        <span>We love you</span>
+      </a>
+      <button data-communityidentityid="654785" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+    </li><li data-rate="negative" data-finished="">
+      <a onclick="event.stopPropagation();" href="/userprofil/postings/499873" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+        <span>bearskin</span>
+      </a>
+      <button data-communityidentityid="499873" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+    </li><li data-rate="negative" data-finished="">
+      <a onclick="event.stopPropagation();" href="/userprofil/postings/156790" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+        <span>Martin215</span>
+      </a>
+      <button data-communityidentityid="156790" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+    </li><li data-rate="positive" data-finished="">
+      <a onclick="event.stopPropagation();" href="/userprofil/postings/533273" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+        <span>CRM 114</span>
+      </a>
+      <button data-communityidentityid="533273" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+    </li><li data-rate="negative" data-finished="">
+      <a onclick="event.stopPropagation();" href="/userprofil/postings/684478" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+        <span>Pastafarus</span>
+      </a>
+      <button data-communityidentityid="684478" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+    </li><li data-rate="positive" data-finished="">
+      <a onclick="event.stopPropagation();" href="/userprofil/postings/500388" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+        <span>Hollareituli&#246;&#246;&#246;</span>
+      </a>
+      <button data-communityidentityid="500388" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+    </li><li data-rate="positive" data-finished="">
+      <a onclick="event.stopPropagation();" href="/userprofil/postings/608969" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+        <span>Werner Werner</span>
+      </a>
+      <button data-communityidentityid="608969" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+    </li>
+    </ul>                <div id="js-ratings-log-loading" class="ratings-log-loading">wird geladen…</div>
+      <input class="js-ratings-log-communityidentityid-param" data-val="true" data-val-number="The field LatestRaterCommunityIdentityId must be a number." data-val-required="The LatestRaterCommunityIdentityId field is required." id="LatestRaterCommunityIdentityId" name="LatestRaterCommunityIdentityId" type="hidden" value="608969" />                <button class="js-ratings-log-showmore ratings-log-showmore" onclick="event.stopPropagation();" type="submit">mehr anzeigen</button>
+    </form>    </div>
 </div>

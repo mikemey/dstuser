@@ -40,6 +40,8 @@ describe('configuration selection', () => {
       config.postingIdPlaceholder.should.equal('$POSTID$')
       config.userProfileTemplate.should.equal('/userprofil/postings/$UID$?pageNumber=$PAGE$&sortMode=1')
       config.postingRatingTemplate.should.equal('/forum/ratinglog?id=$POSTID$&idType=1')
+      config.latestRaterIdPlaceholder.should.equal('$LRID$')
+      config.postingRatingNextTemplate.should.equal('/Forum/RatingLog?id=$POSTID$&idType=Posting&LatestRaterCommunityIdentityId=$LRID$')
     }
 
     it('when no NODE_ENV', () => {

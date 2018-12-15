@@ -1,6 +1,5 @@
 logs
 *.log
-/*.txt
 *.output
 
 /node_modules
