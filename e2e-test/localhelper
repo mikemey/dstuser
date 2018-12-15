@@ -59,7 +59,7 @@ function start_local () {
   wait_for_server "$dst_server_port"
   wait_for_server "$server_port"
 
-  echo "infrastructure started. See logging file: 'tail -f ${local_output}'"
+  echo -e "infrastructure started. See logging file: \n\ttail -f ${local_output}"
 }
 
 function stop_local () {

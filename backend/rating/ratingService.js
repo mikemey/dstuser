@@ -21,7 +21,7 @@ const RatingService = (config, logger) => {
     return requests.getHtml(postingUrl, REQUEST_HEADERS)
       .then(extractAllRatings)
       .catch(error => {
-        logger.error(`ERROR posting rating [${postingId}]: ${error.message}`, error)
+        logger.error(`ERROR posting rating [${postingId}: "${postingUrl}"]`, error)
         return EMPTY_RESULT
       })
   }
