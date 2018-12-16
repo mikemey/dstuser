@@ -28,7 +28,11 @@ const userPostingsCtrl = ($scope, $http, $location, $routeParams, $window, $sce,
           $scope.model.content = response.data
           addFilterContent()
         })
-        .catch(response => { $scope.model.errorMessage = response.data.error })
+        .catch(response => {
+          $scope.model.errorMessage = response.data
+            ? response.data.error
+            : response.message
+        })
         .finally(() => {
           updateFilterEnabled()
           focusField()
