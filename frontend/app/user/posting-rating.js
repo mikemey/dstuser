@@ -3,7 +3,7 @@ import ngWebSocket from 'angular-websocket'
 
 import './posting-rating.css'
 
-const ratingCtrl = function ($scope, $websocket) {
+const ratingCtrl = function ($scope, $websocket, $window) {
   this.$onInit = () => loadRating(this.postingId)
 
   $scope.model = {
@@ -12,7 +12,14 @@ const ratingCtrl = function ($scope, $websocket) {
   }
 
   const loadRating = postingId => {
-    const ws = $websocket(`ws://localhost:7001/dstuws/rating/${postingId}`)
+    const loc = $window.location
+    const websocketUrl =
+      (loc.protocol === 'https:' ? 'wss://' : 'ws://') +
+      loc.host +
+      '/dstuws/rating/' +
+      postingId
+
+    const ws = $websocket(websocketUrl)
 
     ws.onMessage(msgEvent => {
       const ratingResponse = JSON.parse(msgEvent.data)
@@ -26,7 +33,7 @@ export default angular
   .module('user.rating', [ngWebSocket.name])
   .component('rating', {
     template: require('./posting-rating.html'),
-    controller: ['$scope', '$websocket', ratingCtrl],
+    controller: ['$scope', '$websocket', '$window', ratingCtrl],
     bindings: {
       postingId: '@'
     }
