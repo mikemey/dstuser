@@ -8,7 +8,7 @@ module.exports = searchPage => {
     beforeAll(() => {
       derStandard.start()
       derStandard.serveUserPageFor(userId, 1)
-      derStandard.serveRating(userId, postingId)
+      derStandard.serveRating(userId, postingId, `${postingId}_small`)
       return searchPage.openUserPage(userId)
     })
 

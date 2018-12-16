@@ -27,6 +27,10 @@ const pagePath = (userId, pageNum) => serverCfg.userProfileTemplate
 const ratingPath = postingId => serverCfg.postingRatingTemplate
   .replace(serverCfg.postingIdPlaceholder, postingId)
 
+const ratingExtendedPath = (postingId, latestRaterId) => serverCfg.postingRatingNextTemplate
+  .replace(serverCfg.postingIdPlaceholder, postingId)
+  .replace(serverCfg.latestRaterIdPlaceholder, latestRaterId)
+
 const serveUserPageFor = async (userId, pageNum) => {
   const body = dataLoader.getComment(userId, pageNum)
   await mockWithQuery(pagePath(userId, pageNum)).thenReply(200, body, htmlContentHeader)
@@ -39,10 +43,17 @@ const server404WhenUserPageFor = async userId => {
 
 const getCommentResult = userId => dataLoader.getCommentResult(userId)
 
-const serveRating = async (userId, postingId) => {
-  const body = dataLoader.getRating(userId, postingId)
+const serveRating = async (userId, postingId, dataPostingId = postingId) => {
+  const body = dataLoader.getRating(userId, dataPostingId)
   await mockWithQuery(ratingPath(postingId)).thenReply(200, body, htmlContentHeader)
 }
+
+const serveRatingExtended = async (userId, postingId, latestRaterId) => {
+  const body = dataLoader.getRating(userId, `${postingId}_ext`)
+  await mockWithQuery(ratingExtendedPath(postingId, latestRaterId)).thenReply(200, body, htmlContentHeader)
+}
+
+const getRatingResult = (userId, postingId) => dataLoader.getRatingResult(userId, postingId)
 
 const mockWithQuery = fullPath => {
   const { pathname, query } = url.parse(fullPath, true)
@@ -57,5 +68,5 @@ const mockWithQuery = fullPath => {
 module.exports = {
   start, stop, getServerUrl,
   serveUserPageFor, server404WhenUserPageFor, getCommentResult,
-  serveRating
+  serveRating, serveRatingExtended, getRatingResult
 }
