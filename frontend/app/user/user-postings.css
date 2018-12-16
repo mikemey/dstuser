@@ -76,12 +76,15 @@ form[name=userForm] input::placeholder {
 .cmnt-rate {
   position: absolute;
   right: 1em;
-  bottom: 0px;
-  font-size: 70%;
+  bottom: -2px;
 }
 
 .cmnt-rate-pos {
   color: #259814;
+}
+
+.plus-minus {
+  color: #313d50;
 }
 
 .cmnt-rate-neg {
