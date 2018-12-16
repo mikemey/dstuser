@@ -27,12 +27,20 @@ const SearchPage = testScreen => {
     : LARGE_SCREEN
 
   const getBrowserUrl = () => browser.driver.getCurrentUrl()
+
   const userSearchPath = '#!/search'
   const openUserPage = userId => open(`${userSearchPath}/${userId}`)
-  const open = (path = userSearchPath) => Promise.all([
-    browser.get(path),
-    browser.manage().window().setSize(testScreen.width, testScreen.height)
-  ])
+  const open = (path = userSearchPath) => browser.get(path)
+    .then(() => browser.manage().window().setSize(testScreen.width, testScreen.height))
+
+  const restart = () => browser.getAllWindowHandles()
+    .then(handles => {
+      if (handles[1]) {
+        browser.driver.switchTo().window(handles[1])
+        browser.driver.close()
+      }
+      browser.driver.switchTo().window(handles[0])
+    })
 
   const byUserId = (screen = testScreen) => by.id(`userId-${screen.suffix}`)
   const hasUserIdInput = screen => hasElement(byUserId(screen))
@@ -116,11 +124,19 @@ const SearchPage = testScreen => {
   const getNegativeRaters = () => element.all(by.className('rating-neg'))
     .filter(onlyDisplayed).map(asText)
 
+  const clickRaterAndFollow = ix => element.all(by.className('rater-link')).get(ix).click()
+    .then(() => browser.getAllWindowHandles())
+    .then(handles => {
+      const newWindowHandle = handles[1]
+      return browser.switchTo().window(newWindowHandle)
+    })
+
   /* eslint object-property-newline: "off" */
   return {
     id: testScreen.id,
     getBrowserUrl,
     open,
+    restart,
     openUserPage,
     getHiddenScreen,
     hasUserIdInput, sendToUserId, getUserId,
@@ -133,7 +149,7 @@ const SearchPage = testScreen => {
     hasFilter, isFilterEnabled, sendToFilter,
     getHighlightedTexts,
     getRatingHrefs, clickRating,
-    getPositiveRaters, getNegativeRaters
+    getPositiveRaters, getNegativeRaters, clickRaterAndFollow
   }
 }
 

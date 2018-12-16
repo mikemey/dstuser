@@ -2,12 +2,14 @@
   <div class="rating-body">
     <div ng-if="model.message" class="w-100 bg-warning px-3 py-2" ng-bind="model.message"></div>
     <ul class="list-group w-50 float-left rating-group-pos">
-      <li class="list-group-item rating-pos"
-          ng-repeat="name in model.rating.pos">{{ name }}</li>
+      <li class="list-group-item rating-pos" ng-repeat="rater in model.rating.pos">
+        <a class="rater-link" target="_blank" ng-bind="rater.name" ng-href="{{ rater.link }}"></a>
+      </li>
     </ul>
     <ul class="list-group w-50 float-right rating-group-neg">
-      <li class="list-group-item rating-neg"
-          ng-repeat="name in model.rating.neg">{{ name }}</li>
+      <li class="list-group-item rating-neg" ng-repeat="rater in model.rating.neg">
+        <a class="rater-link" target="_blank" ng-bind="rater.name" ng-href="{{ rater.link }}"></a>
+      </li>
     </ul>
   </div>
 </div>

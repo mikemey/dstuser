@@ -4,7 +4,10 @@
     "pos": [
     ],
     "neg": [
-      "österix"
+      {
+        "name": "österix",
+        "userId": "174048"
+      }
     ]
   }
 }

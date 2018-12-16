@@ -9,7 +9,6 @@ div.rating {
   width: 99%;
   position: absolute;
   font-size: 75%;
-  color: #313d50;
 }
 
 .rating-body ul li {
@@ -46,4 +45,8 @@ div.rating {
 
 .rating-neg {
   background-color: inherit;
+}
+
+.rater-link {
+  color: #313d50;
 }

@@ -14,6 +14,7 @@ const RatingService = (config, logger) => {
   const latestRaterIdPlaceholder = config.latestRaterIdPlaceholder
 
   const cleanText = el => el.text().trim()
+  const cleanHref = el => /[^/]*$/.exec(el.attr('href'))[0]
 
   const loadRating = postingId => {
     logger.info(`posting rating [${postingId}]`)
@@ -48,8 +49,12 @@ const RatingService = (config, logger) => {
     return { pos, neg, latestRaterId }
   })
 
-  const extractRating = (rate, page) => page(`li[data-rate="${rate}"] > a > span`)
-    .map((_, span) => cleanText($(span)))
+  const extractRating = (rate, page) => page(`li[data-rate="${rate}"] > a`)
+    .map((_, anchor) => {
+      const name = cleanText($(anchor))
+      const userId = cleanHref($(anchor))
+      return { name, userId }
+    })
     .get()
 
   const extractLastRaterId = page => page('#LatestRaterCommunityIdentityId').attr('value')

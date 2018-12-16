@@ -22,10 +22,21 @@ const ratingCtrl = function ($scope, $websocket, $window) {
     const ws = $websocket(websocketUrl)
 
     ws.onMessage(msgEvent => {
-      const ratingResponse = JSON.parse(msgEvent.data)
-      $scope.model.rating = ratingResponse.rating
+      $scope.model.rating = extractRating(msgEvent.data)
     })
     ws.onError(errorEv => { $scope.model.message = errorEv.data })
+  }
+
+  const extractRating = data => {
+    const ratingResponse = JSON.parse(data)
+    const pos = ratingResponse.rating.pos.map(convertRater)
+    const neg = ratingResponse.rating.neg.map(convertRater)
+    return { pos, neg }
+  }
+
+  const convertRater = rater => {
+    rater.link = '#!/search/' + rater.userId
+    return rater
   }
 }
 
