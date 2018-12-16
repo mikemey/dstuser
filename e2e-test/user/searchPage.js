@@ -61,7 +61,7 @@ const SearchPage = testScreen => {
   const getErrorMessage = () => element(byErrorMessage()).getText()
 
   const getComments = () => element.all(by.className('cmnt-box'))
-    .filter(el => el.isDisplayed())
+    .filter(onlyDisplayed)
     .map(createComment)
 
   const createComment = el => {
@@ -71,8 +71,8 @@ const SearchPage = testScreen => {
     const dateEl = el.element(by.className('cmnt-date'))
     const articleEl = el.element(by.className('cmnt-article'))
     const sectionEl = el.element(by.className('cmnt-section'))
-    const ratePosEl = el.element(by.className('cmnt-rate-pos'))
-    const rateNegEl = el.element(by.className('cmnt-rate-neg'))
+    const ratePosEl = el.all(by.className('cmnt-rate-pos')).filter(onlyDisplayed).first()
+    const rateNegEl = el.all(by.className('cmnt-rate-neg')).filter(onlyDisplayed).first()
 
     return {
       title: () => titleEl.getText(),
@@ -83,8 +83,8 @@ const SearchPage = testScreen => {
       articleUrl: () => articleEl.getAttribute('ng-href'),
       articleSection: () => sectionEl.getText(),
       commentBoxClasses: () => el.getAttribute('class'),
-      ratingPos: () => ratePosEl.getText().then(Number),
-      ratingNeg: () => rateNegEl.getText().then(Number)
+      ratingPos: () => ratePosEl.getText().then(toNumber),
+      ratingNeg: () => rateNegEl.getText().then(toNumber)
     }
   }
 
@@ -98,15 +98,23 @@ const SearchPage = testScreen => {
     .map(asText)
 
   const asText = el => el.getText()
+  const onlyDisplayed = el => el.isDisplayed()
+  const toNumber = res => {
+    const num = Number(res)
+    if (isNaN(num)) console.log(`NaN: [${res}]`)
+    return num
+  }
 
   const getRatingHrefs = () => element.all(by.css('.cmnt-rate a'))
-    .map(el => el.getAttribute('href'))
+    .filter(onlyDisplayed).map(el => el.getAttribute('href'))
 
   const byPostingId = postingId => by.id(`ln-${postingId}`)
   const clickRating = postingId => element(byPostingId(postingId)).click()
 
-  const getPositiveRaters = () => element.all(by.className('rating-pos')).map(asText)
-  const getNegativeRaters = () => element.all(by.className('rating-neg')).map(asText)
+  const getPositiveRaters = () => element.all(by.className('rating-pos'))
+    .filter(onlyDisplayed).map(asText)
+  const getNegativeRaters = () => element.all(by.className('rating-neg'))
+    .filter(onlyDisplayed).map(asText)
 
   /* eslint object-property-newline: "off" */
   return {
