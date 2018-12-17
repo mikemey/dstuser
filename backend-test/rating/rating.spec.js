@@ -70,7 +70,7 @@ describe('ratings websocket', () => {
       const postingId = 'abc'
       return requestRating(postingId)
         .then(response => {
-          response.should.deep.equal({ error: `invalid postingId: "${postingId}"` })
+          response.should.deep.equal({ error: `NaN: "${postingId}"` })
         })
     })
   })
