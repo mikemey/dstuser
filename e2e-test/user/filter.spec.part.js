@@ -38,7 +38,7 @@ module.exports = searchPage => {
     describe('input field behaviour', () => {
       beforeEach(async () => {
         searchPage.requestUserComments(singlePageUserId)
-        const comments = await searchPage.getComments()
+        const comments = await searchPage.comments.getComments()
         expect(comments.length).toBe(3)
       })
 
@@ -55,32 +55,32 @@ module.exports = searchPage => {
       beforeEach(() => searchPage.requestUserComments(userId))
 
       it('shows all when no filter', async () => {
-        const comments = await searchPage.getComments()
+        const comments = await searchPage.comments.getComments()
         expect(comments.length).toBe(30)
       })
 
       it('when single title match and highlight text', async () => {
         const filter = 'versus'
         searchPage.sendToFilter(filter)
-        const comments = await searchPage.getComments()
+        const comments = await searchPage.comments.getComments()
         expect(comments.length).toBe(1)
         expect(comments[0].title()).toBe('Standard versus Kronenzeitung')
 
-        const highlightedText = await searchPage.getHighlightedTexts()
+        const highlightedText = await searchPage.comments.getHighlightedTexts()
         expect(highlightedText.length).toBe(1)
         expect(highlightedText[0]).toBe(filter)
       })
 
       it('when single article match', async () => {
         searchPage.sendToFilter('katzian')
-        const comments = await searchPage.getComments()
+        const comments = await searchPage.comments.getComments()
         expect(comments.length).toBe(1)
         expect(comments[0].title()).toBe('Das Ende der AK??')
       })
 
       it('when many comment contents match', async () => {
         searchPage.sendToFilter('politisch')
-        const comments = await searchPage.getComments()
+        const comments = await searchPage.comments.getComments()
         expect(comments.length).toBe(6)
         expect(comments[0].title()).toBe('Großartiger Erfolg')
       })

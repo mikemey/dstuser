@@ -44,7 +44,7 @@ module.exports = searchPage => {
     it('should show user comments', async () => {
       const expectedPostings = derStandard.getCommentResult(userId).postings
       searchPage.requestUserComments(userId)
-      const comments = await searchPage.getComments()
+      const comments = await searchPage.comments.getComments()
 
       expectedPostings.forEach((expected, ix) => {
         expect(comments[ix].title()).toBe(expected.title, `title ix: ${ix}`)
@@ -77,7 +77,7 @@ module.exports = searchPage => {
     it('should show user comments', async () => {
       const expectedPostings = derStandard.getCommentResult(userId).postings
       searchPage.requestUserComments(userId)
-      const comments = await searchPage.getComments()
+      const comments = await searchPage.comments.getComments()
       expect(comments.length).toBe(30)
 
       const expectedBgClasses = [
