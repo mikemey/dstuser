@@ -13,8 +13,8 @@ const createComment = el => {
   const dateEl = el.element(by.className('cmnt-date'))
   const articleEl = el.element(by.className('cmnt-article'))
   const sectionEl = el.element(by.className('cmnt-section'))
-  const ratePosEl = el.all(by.className('cmnt-rate-pos')).filter(onlyDisplayed).first()
-  const rateNegEl = el.all(by.className('cmnt-rate-neg')).filter(onlyDisplayed).first()
+  const ratePosEl = el.all(by.className('karma-pos')).filter(onlyDisplayed).first()
+  const rateNegEl = el.all(by.className('karma-neg')).filter(onlyDisplayed).first()
 
   return {
     title: () => titleEl.getText(),

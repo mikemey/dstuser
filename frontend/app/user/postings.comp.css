@@ -38,18 +38,6 @@
   bottom: -2px;
 }
 
-.cmnt-rate-pos {
-  color: #259814;
-}
-
-.plus-minus {
-  color: #313d50;
-}
-
-.cmnt-rate-neg {
-  color: #e01212;
-}
-
 .cmnt-date {
   position: absolute;
   right: 1em;

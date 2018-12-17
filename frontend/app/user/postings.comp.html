@@ -15,16 +15,7 @@
         <div class="cmnt-rate float-right">
           <a id="ln-{{ posting.postingId }}" href="#" onclick="return false;"
              ng-click="posting.showRating = !posting.showRating">
-            <div class="d-none d-md-inline">
-              <small class="cmnt-rate-pos font-weight-bold" ng-bind="posting.rating.pos"></small>
-              <small class="plus-minus">+/&#8722;</small>
-              <small class="cmnt-rate-neg font-weight-bold" ng-bind="posting.rating.neg"></small>
-            </div>
-            <div class="d-md-none">
-              <strong class="cmnt-rate-pos font-weight-bold" ng-bind="posting.rating.pos"></strong>
-              <small class="plus-minus">+/&#8722;</small>
-              <strong class="cmnt-rate-neg font-weight-bold" ng-bind="posting.rating.neg"></strong>
-            </div>
+            <karma-points postings="[posting]"></karma-points>
           </a>
         </div>
       </div>
