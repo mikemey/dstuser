@@ -64,43 +64,5 @@
   <hr class="my-2" />
 </main>
 
-<div class="row postings mb-5 mt-2">
-  <div class="col-xl-3 col-lg-4 col-sm-6 p-lg-2 p-1" ng-repeat="posting in model.content.postings"
-       ng-class="posting.filterContent.includes(model.filter.toLowerCase()) ? '' : 'filtered-cmnt'">
-    <div class="card cmnt-box h-100" ng-class="posting.article.section.toLowerCase()">
-      <div class="cmnt-date float-right text-muted" ng-bind="posting.date"></div>
-      <div class="card-body p-3">
-        <small class="card-title cmnt-title font-weight-bold" ng-bind-html="highlight(posting.title, model.filter)"></small>
-        <small ng-if="!posting.title" class="text-muted">
-          &lang;&nbsp;no title&nbsp;&rang;
-        </small>
-        <a class="cmnt-url text-dark" target="_blank" ng-href="{{ posting.url }}">
-          <p class="card-text cmnt-content text-justify small mt-1"
-             ng-bind-html="highlight(posting.content, model.filter)"></p>
-        </a>
-        <div class="cmnt-rate float-right">
-          <a id="ln-{{ posting.postingId }}" href="#" onclick="return false;"
-             ng-click="posting.showRating = !posting.showRating">
-            <div class="d-none d-md-inline">
-              <small class="cmnt-rate-pos font-weight-bold" ng-bind="posting.rating.pos"></small>
-              <small class="plus-minus">+/&#8722;</small>
-              <small class="cmnt-rate-neg font-weight-bold" ng-bind="posting.rating.neg"></small>
-            </div>
-            <div class="d-md-none">
-              <strong class="cmnt-rate-pos font-weight-bold" ng-bind="posting.rating.pos"></strong>
-              <small class="plus-minus">+/&#8722;</small>
-              <strong class="cmnt-rate-neg font-weight-bold" ng-bind="posting.rating.neg"></strong>
-            </div>
-          </a>
-        </div>
-      </div>
-      <rating ng-if="posting.showRating" posting-id="{{ posting.postingId }}"></rating>
-      <div class="card-footer p-3">
-        <a class="cmnt-article d-block" ng-href="{{ posting.article.url }}"
-           target="_blank" ng-bind-html="highlight(posting.article.title, model.filter)">
-        </a>
-        <small class="cmnt-section text-right" ng-bind="posting.article.section"></small>
-      </div>
-    </div>
-  </div>
-</div>
+<postings ng-if="model.content.postings" postings="model.content.postings"
+          filter="model.filter"></postings>

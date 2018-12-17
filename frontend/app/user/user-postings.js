@@ -1,12 +1,10 @@
 import angular from 'angular'
-import ngSanitize from 'angular-sanitize'
 
 import './user-postings.css'
-import './section-colors.css'
 
 const DISABLED = 'disabled'
 
-const userPostingsCtrl = ($scope, $http, $location, $routeParams, $window, $sce, $sanitize) => {
+const userPageCtrl = ($scope, $http, $location, $routeParams, $window) => {
   $scope.model = {
     userId: null,
     content: null,
@@ -24,10 +22,7 @@ const userPostingsCtrl = ($scope, $http, $location, $routeParams, $window, $sce,
       $scope.model.loading = true
       $scope.model.userId = $routeParams.userId
       return $http.get('/dstuapi/userprofile/' + $scope.model.userId)
-        .then(response => {
-          $scope.model.content = response.data
-          addFilterContent()
-        })
+        .then(response => { $scope.model.content = response.data })
         .catch(response => {
           $scope.model.errorMessage = response.data
             ? response.data.error
@@ -38,14 +33,6 @@ const userPostingsCtrl = ($scope, $http, $location, $routeParams, $window, $sce,
           focusField()
           $scope.model.loading = false
         })
-    }
-  }
-
-  const addFilterContent = () => {
-    if ($scope.model.content.postings) {
-      $scope.model.content.postings.forEach(post => {
-        post.filterContent = `${post.title} ${post.content} ${post.article.title}`.toLowerCase()
-      })
     }
   }
 
@@ -71,25 +58,12 @@ const userPostingsCtrl = ($scope, $http, $location, $routeParams, $window, $sce,
     })
   }
 
-  $scope.highlight = (text, search) => {
-    text = $sanitize(text)
-    if (!search) {
-      return $sce.trustAsHtml(text)
-    }
-    search = $sanitize(search)
-    return $sce.trustAsHtml(text.replace(
-      new RegExp(search, 'gi'), '<span class="highlightedText">$&</span>')
-    )
-  }
-
   return loadUserData()
 }
 
 export default angular
-  .module('user.postings', [ngSanitize])
-  .component('userPostings', {
+  .module('user.page', [])
+  .component('userPage', {
     template: require('./user-postings.html'),
-    controller: [
-      '$scope', '$http', '$location', '$routeParams', '$window', '$sce', '$sanitize', userPostingsCtrl
-    ]
+    controller: ['$scope', '$http', '$location', '$routeParams', '$window', userPageCtrl]
   })
