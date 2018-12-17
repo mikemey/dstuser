@@ -1,7 +1,7 @@
 import angular from 'angular'
 import ngWebSocket from 'angular-websocket'
 
-import './posting-rating.css'
+import './posting-rating.comp.css'
 
 const ratingCtrl = function ($scope, $websocket, $window) {
   this.$onInit = () => loadRating(this.postingId)
@@ -43,7 +43,7 @@ const ratingCtrl = function ($scope, $websocket, $window) {
 export default angular
   .module('user.rating', [ngWebSocket.name])
   .component('rating', {
-    template: require('./posting-rating.html'),
+    template: require('./posting-rating.comp.html'),
     controller: ['$scope', '$websocket', '$window', ratingCtrl],
     bindings: {
       postingId: '@'
