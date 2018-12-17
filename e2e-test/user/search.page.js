@@ -1,6 +1,7 @@
 const { by, browser, element } = require('protractor')
 
 const comments = require('./comments.page')
+const { hasElement } = require('../utils/utils.page')
 
 // large screen -> xxx-small element identifiers
 const LARGE_SCREEN = { id: 'LARGE SCREEN', width: 1000, height: 800, suffix: 'small' }
@@ -11,13 +12,6 @@ const SMALL_SCREEN = { id: 'SMALL SCREEN', width: 540, height: 500, suffix: 'lar
 
 // const ALL_SCREENS = [LARGE_SCREEN, MEDIUM_SCREEN, SMALL_SCREEN]
 const ALL_SCREENS = [LARGE_SCREEN, MEDIUM_SCREEN, SMALL_SCREEN]
-
-const hasElement = byElement => browser
-  .isElementPresent(byElement)
-  .then(isElementPresent => isElementPresent
-    ? element(byElement).isDisplayed()
-    : Promise.resolve(false)
-  )
 
 const SearchPage = testScreen => {
   if (!ALL_SCREENS.includes(testScreen)) {

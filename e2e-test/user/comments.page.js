@@ -1,12 +1,6 @@
 const { by, browser, element } = require('protractor')
 
-const asText = el => el.getText()
-const onlyDisplayed = el => el.isDisplayed()
-const toNumber = res => {
-  const num = Number(res)
-  if (isNaN(num)) console.log(`NaN: [${res}]`)
-  return num
-}
+const { onlyDisplayed, asHref, asNumber, asText } = require('../utils/utils.page')
 
 const getComments = () => element.all(by.className('cmnt-box'))
   .filter(onlyDisplayed)
@@ -24,15 +18,15 @@ const createComment = el => {
 
   return {
     title: () => titleEl.getText(),
-    url: () => urlEl.getAttribute('ng-href'),
+    url: () => asHref(urlEl, 'ng-href'),
     content: () => contentEl.getText(),
     date: () => dateEl.getText(),
     articleTitle: () => articleEl.getText(),
-    articleUrl: () => articleEl.getAttribute('ng-href'),
+    articleUrl: () => asHref(articleEl, 'ng-href'),
     articleSection: () => sectionEl.getText(),
     commentBoxClasses: () => el.getAttribute('class'),
-    ratingPos: () => ratePosEl.getText().then(toNumber),
-    ratingNeg: () => rateNegEl.getText().then(toNumber)
+    ratingPos: () => ratePosEl.getText().then(asNumber),
+    ratingNeg: () => rateNegEl.getText().then(asNumber)
   }
 }
 
@@ -40,7 +34,7 @@ const getHighlightedTexts = () => element.all(by.className('highlightedText'))
   .map(asText)
 
 const getRatingHrefs = () => element.all(by.css('.cmnt-rate a'))
-  .filter(onlyDisplayed).map(el => el.getAttribute('href'))
+  .filter(onlyDisplayed).map(el => asHref(el))
 
 const byPostingId = postingId => by.id(`ln-${postingId}`)
 const clickRating = postingId => element(byPostingId(postingId)).click()
