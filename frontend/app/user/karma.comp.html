@@ -1,0 +1,15 @@
+<div>
+  <div ng-if="model.message" class="w-100 bg-warning px-3 py-2" ng-bind="model.message"></div>
+  <a href="#" onclick="return false;">
+    <div class="d-none d-md-inline">
+      <small class="karma-pos font-weight-bold" ng-bind="model.karma.pos.length"></small>
+      <small class="plus-minus">+/&#8722;</small>
+      <small class="karma-neg font-weight-bold" ng-bind="model.karma.neg.length"></small>
+    </div>
+    <div class="d-md-none">
+      <strong class="karma-pos font-weight-bold" ng-bind="model.karma.pos.length"></strong>
+      <small class="plus-minus">+/&#8722;</small>
+      <strong class="karma-neg font-weight-bold" ng-bind="model.karma.neg.length"></strong>
+    </div>
+  </a>
+</div>

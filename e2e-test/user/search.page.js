@@ -1,7 +1,7 @@
 const { by, browser, element } = require('protractor')
 
 const comments = require('./comments.page')
-const { hasElement } = require('../utils/utils.page')
+const { hasElement, onlyDisplayed, asNumber } = require('../utils/utils.page')
 
 // large screen -> xxx-small element identifiers
 const LARGE_SCREEN = { id: 'LARGE SCREEN', width: 1000, height: 800, suffix: 'small' }
@@ -70,8 +70,13 @@ const SearchPage = testScreen => {
   const isFilterEnabled = () => filterInput().isEnabled()
   const sendToFilter = filter => filterInput().sendKeys(filter)
 
-  const byKarma = (screen = testScreen) => by.id(`karma-${screen.suffix}`)
-  const hasKarma = screen => hasElement(byKarma(screen))
+  const byKarma = type => by.className(`karma-${type}`)
+  const karmaPoints = type => element.all(byKarma(type))
+    .filter(onlyDisplayed)
+    .first().getText().then(asNumber)
+  const getKarmaPoints = () => Promise.all([karmaPoints('pos'), karmaPoints('neg')])
+  const hasKarma = () => Promise.all([hasElement(byKarma('pos')), hasElement(byKarma('neg'))])
+    .then(karmas => karmas[0] && karmas[1])
 
   /* eslint object-property-newline: "off" */
   return {
@@ -89,7 +94,7 @@ const SearchPage = testScreen => {
     hasErrorMessage, getErrorMessage,
     hasFilter, isFilterEnabled, sendToFilter,
     comments,
-    hasKarma
+    hasKarma, getKarmaPoints
   }
 }
 
