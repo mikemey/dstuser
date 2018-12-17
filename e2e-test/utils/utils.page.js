@@ -1,4 +1,4 @@
-const { browser, element } = require('protractor')
+const { element } = require('protractor')
 
 const onlyDisplayed = el => el.isDisplayed()
 const asText = el => el.getText()
@@ -9,11 +9,7 @@ const asNumber = res => {
   return num
 }
 
-const hasElement = byElement => browser
-  .isElementPresent(byElement)
-  .then(isElementPresent => isElementPresent
-    ? element(byElement).isDisplayed()
-    : Promise.resolve(false)
-  )
+const hasElement = byElement => element.all(byElement)
+  .filter(onlyDisplayed).first().isPresent()
 
 module.exports = { onlyDisplayed, asText, asHref, asNumber, hasElement }
