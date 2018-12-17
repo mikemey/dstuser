@@ -1,5 +1,6 @@
 const rp = require('request-promise')
 const moment = require('moment')
+const { startTimer, stopTimer } = require('./backend/utils/msTimer')
 
 const htmlTransformOpts = (url, method = 'GET') => Object.assign(
   { uri: url },
@@ -11,13 +12,6 @@ const htmlTransformOpts = (url, method = 'GET') => Object.assign(
 const placeHolder = 'XXXX'
 const getFullUrl = userId => `https://derstandard.at/userprofil/postings/${placeHolder}?pageNumber=1&sortMode=1`
   .replace(placeHolder, userId)
-
-const startTimer = () => process.hrtime()
-const stopTimer = start => {
-  const stop = process.hrtime(start)
-  const millis = stop[0] * 1000 + stop[1] / 1000000
-  return millis.toFixed(0)
-}
 
 const times = []
 const request = url => {

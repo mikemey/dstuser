@@ -1,5 +1,6 @@
 const $ = require('cheerio')
 const requests = require('../utils/requests')
+const { startTimer, stopTimer } = require('../utils/msTimer')
 
 const UserService = (config, logger) => {
   const profileTemplate = config.dstuHost + config.userProfileTemplate
@@ -16,11 +17,13 @@ const UserService = (config, logger) => {
   }
 
   const loadPostings = userId => {
+    logger.info(`user profile [${userId}]`)
+    const profileTimer = startTimer()
+
     const profileUrl = profileTemplate
       .replace(userIdPlaceholder, userId)
       .replace(pagePlaceholder, 1)
 
-    logger.info(`user profile [${userId}]`)
     return requestPage(profileUrl)
       .then(firstPage => {
         const userName = extractUserName(firstPage)
@@ -29,7 +32,7 @@ const UserService = (config, logger) => {
           .map(link => requestPage(link).then(extractPostings))
         ).then(remainingPostings => {
           const postings = [].concat.apply(firstPagePostings, remainingPostings)
-          logger.info(`user profile ${userId} DONE`)
+          logger.info(`user profile ${userId} \tDONE (${stopTimer(profileTimer)}ms)`)
           return { userName, postings }
         })
       })
@@ -37,9 +40,10 @@ const UserService = (config, logger) => {
 
   const requestPage = url => {
     logger.info(`postings: ${url}`)
+    const pageTimer = startTimer()
     return requests.getHtml(url)
       .then(result => {
-        logger.info(`postings: ${url} DONE`)
+        logger.info(`postings: ${url} \tDONE (${stopTimer(pageTimer)}ms)`)
         return result
       })
   }
