@@ -397,7 +397,7 @@
         </span>
         	<div class="js-ratings ratings">
 		<div class="js-ratings-counts ratings-counts" data-closable-target="ratinglog-1-1034153378" onclick="ForumLoader.toggleRatinglog(1034153378, 1)">
-			<span class="js-ratings-negative-count ratings-negative-count">0</span>
+			<span class="js-ratings-negative-count ratings-negative-count">17</span>
 			<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 75 10" shape-rendering="geometricPrecision">
 				<rect width="100%" height="100%" fill="#000" opacity=".1"/>
 				<rect fill="#fff" x="1" y="1" width="73" height="8"/>
@@ -409,7 +409,7 @@
 					<rect class="js-ratings-positive-bar ratings-counts-bar" fill="#2da106" width="0%" height="100%"/>
 				</svg>
 			</svg>
-			<span class="js-ratings-positive-count ratings-positive-count">2</span>
+			<span class="js-ratings-positive-count ratings-positive-count">16</span>
 		</div>
 	</div>
 
