@@ -76,6 +76,9 @@ const SearchPage = testScreen => {
   const isFilterEnabled = () => filterInput().isEnabled()
   const sendToFilter = filter => filterInput().sendKeys(filter)
 
+  const byKarma = (screen = testScreen) => by.id(`karma-${screen.suffix}`)
+  const hasKarma = screen => hasElement(byKarma(screen))
+
   /* eslint object-property-newline: "off" */
   return {
     id: testScreen.id,
@@ -91,7 +94,8 @@ const SearchPage = testScreen => {
     getUserName, hasUserName,
     hasErrorMessage, getErrorMessage,
     hasFilter, isFilterEnabled, sendToFilter,
-    comments
+    comments,
+    hasKarma
   }
 }
 
