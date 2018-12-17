@@ -27,10 +27,6 @@ const pagePath = (userId, pageNum) => serverCfg.userProfileTemplate
 const ratingPath = postingId => serverCfg.postingRatingTemplate
   .replace(serverCfg.postingIdPlaceholder, postingId)
 
-const ratingExtendedPath = (postingId, latestRaterId) => serverCfg.postingRatingNextTemplate
-  .replace(serverCfg.postingIdPlaceholder, postingId)
-  .replace(serverCfg.latestRaterIdPlaceholder, latestRaterId)
-
 const serveUserPageFor = async (userId, pageNum) => {
   const body = dataLoader.getComment(userId, pageNum)
   await mockWithQuery(pagePath(userId, pageNum)).thenReply(200, body, htmlContentHeader)
