@@ -1,4 +1,4 @@
-const { SearchPage, ALL_SCREENS } = require('./searchPage')
+const { SearchPage, ALL_SCREENS } = require('./search.page')
 
 const htmlTests = require('./html.spec.part')
 const searchUserTests = require('./search.spec.part')
