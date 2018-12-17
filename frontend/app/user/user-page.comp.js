@@ -1,6 +1,6 @@
 import angular from 'angular'
 
-import './user-postings.css'
+import './user-page.comp.css'
 
 const DISABLED = 'disabled'
 
@@ -64,6 +64,6 @@ const userPageCtrl = ($scope, $http, $location, $routeParams, $window) => {
 export default angular
   .module('user.page', [])
   .component('userPage', {
-    template: require('./user-postings.html'),
+    template: require('./user-page.comp.html'),
     controller: ['$scope', '$http', '$location', '$routeParams', '$window', userPageCtrl]
   })

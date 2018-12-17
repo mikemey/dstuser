@@ -1,11 +1,11 @@
 import angular from 'angular'
 
-import userPostings from './user-postings'
+import userPage from './user-page.comp'
 import postings from './postings.comp'
 import postingRating from './posting-rating.comp'
 
 export default angular.module('user', [
-  userPostings.name,
+  userPage.name,
   postingRating.name,
   postings.name
 ])
