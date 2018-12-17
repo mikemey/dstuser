@@ -14,9 +14,6 @@ module.exports = searchPage => {
     afterAll(derStandard.stop)
 
     describe('rating links', () => {
-      const userId = '755005'
-      const postingId = 1034153378
-
       beforeAll(() => searchPage.openUserPage(userId))
 
       it('point to nowhere', () => {
