@@ -1,65 +1,67 @@
 .cmnt-url {
-  background-color: rgb(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 .international {
-  background-color: rgb(174, 204, 204, 0.4);
+  background-color: rgba(174, 204, 204, 0.4);
 }
 
 .inland {
-  background-color: rgb(208, 218, 224, 0.4);
+  background-color: rgba(208, 218, 224, 0.4);
 }
 
 .wirtschaft {
-  background-color: rgb(207, 214, 178, 0.4);
+  background-color: rgba(207, 214, 178, 0.4);
 }
 
 .web {
-  background-color: rgb(172, 194, 151, 0.4);
+  background-color: rgba(172, 194, 151, 0.4);
 }
 
 .sport {
-  background-color: rgb(199, 217, 97, 0.4);
+  background-color: rgba(199, 217, 97, 0.4);
 }
 
 .panorama {
-  background-color: rgb(153, 204, 153, 0.4);
+  background-color: rgba(153, 204, 153, 0.4);
 }
 
 .etat {
-  background-color: rgb(255, 204, 102, 0.4);
+  background-color: rgba(255, 204, 102, 0.4);
 }
 
 .kultur {
-  background-color: rgb(201, 201, 201, 0.4);
+  background-color: rgba(201, 201, 201, 0.4);
 }
 
 .wissenschaft {
-  background-color: rgb(174, 209, 220, 0.4);
+  background-color: rgba(174, 209, 220, 0.4);
 }
 
-.gesundheit {}
+.gesundheit {
+  background-color: rgba(181, 186, 181, 0.4);
+}
 
 .bildung {
-  background-color: rgb(181, 186, 181, 0.4);
+  background-color: rgba(181, 186, 181, 0.4);
 }
 
 .reisen {
-  background-color: rgb(181, 186, 181, 0.4);
+  background-color: rgba(181, 186, 181, 0.4);
 }
 
 .lifestyle {
-  background-color: rgb(181, 186, 181, 0.4);
+  background-color: rgba(181, 186, 181, 0.4);
 }
 
 .user {
-  background-color: rgb(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 .meinung {
-  background-color: rgb(247, 247, 240, 0.4);
+  background-color: rgba(247, 247, 240, 0.4);
 }
 
 .automobil {
-  background-color: rgb(176, 191, 215, 0.4);
+  background-color: rgba(176, 191, 215, 0.4);
 }
