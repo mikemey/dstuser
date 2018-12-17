@@ -6,26 +6,30 @@ const createRatingRouter = (config, logger) => {
   const router = express.Router()
   const ratingService = RatingService(config, logger)
 
-  const clientIp = req => req.headers['x-forwarded-for'] || req.connection.remoteAddress
+  router.ws('/rating/:pid', (ws, req) => checkPostingId(ws, req)
+    .then(pid => ratingService.loadRating(pid))
+    .then(rating => ws.send(JSON.stringify(rating)))
+    .catch(err => { logger.info(`Error: ${err.message}`) })
+    .finally(() => {
+      logger.info(`closing connection to: [${clientIp(req)}]`)
+      ws.close()
+    })
+  )
 
-  router.ws('/rating/:pid', (ws, req) => {
+  const checkPostingId = (ws, req) => new Promise((resolve, reject) => {
     const postingId = req.params.pid
     logger.info(`received rating request from: [${clientIp(req)}], for: [${postingId}]`)
     const pid = Number(postingId)
-    return isNaN(pid)
-      ? invalidPostingIdResponse(ws, postingId)
-      : ratingService.loadRating(pid)
-        .then(rating => ws.send(JSON.stringify({ postingId, rating })))
-        .finally(() => {
-          logger.info(`closing connection to: [${clientIp(req)}]`)
-          ws.close()
-        })
+    if (isNaN(pid)) {
+      const msg = `invalid postingId: "${postingId}"`
+      ws.send(JSON.stringify(errorMessage(msg)))
+      reject(Error(msg))
+    } else {
+      resolve(pid)
+    }
   })
 
-  const invalidPostingIdResponse = (ws, postingId) => {
-    ws.send(JSON.stringify(errorMessage(`invalid postingId: "${postingId}"`)))
-    ws.close()
-  }
+  const clientIp = req => req.headers['x-forwarded-for'] || req.connection.remoteAddress
 
   const errorMessage = error => { return { error } }
 

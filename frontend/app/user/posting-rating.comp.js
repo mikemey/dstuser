@@ -29,8 +29,8 @@ const ratingCtrl = function ($scope, $websocket, $window) {
 
   const extractRating = data => {
     const ratingResponse = JSON.parse(data)
-    const pos = ratingResponse.rating.pos.map(convertRater)
-    const neg = ratingResponse.rating.neg.map(convertRater)
+    const pos = ratingResponse.pos.map(convertRater)
+    const neg = ratingResponse.neg.map(convertRater)
     return { pos, neg }
   }
 

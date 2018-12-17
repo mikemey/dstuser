@@ -1,13 +1,10 @@
 {
-  "postingId": "1034368216",
-  "rating": {
-    "pos": [
-    ],
-    "neg": [
-      {
-        "name": "österix",
-        "userId": "174048"
-      }
-    ]
-  }
+  "pos": [
+  ],
+  "neg": [
+    {
+      "name": "österix",
+      "userId": "174048"
+    }
+  ]
 }

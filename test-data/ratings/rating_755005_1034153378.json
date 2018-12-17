@@ -1,141 +1,138 @@
 {
-  "postingId": "1034153378",
-  "rating": {
-    "pos": [
-      {
-        "name": "allwetterfrau57",
-        "userId": "675980"
-      },
-      {
-        "name": "We love you",
-        "userId": "654785"
-      },
-      {
-        "name": "CRM 114",
-        "userId": "533273"
-      },
-      {
-        "name": "Hollareituliööö",
-        "userId": "500388"
-      },
-      {
-        "name": "Werner Werner",
-        "userId": "608969"
-      },
-      {
-        "name": "er bringt Licht",
-        "userId": "633552"
-      },
-      {
-        "name": "reality?",
-        "userId": "196961"
-      },
-      {
-        "name": "bastivon1982",
-        "userId": "536838"
-      },
-      {
-        "name": "brigitte_nauer",
-        "userId": "24561"
-      },
-      {
-        "name": "DerNachdenker1",
-        "userId": "682454"
-      },
-      {
-        "name": "herbststurm1",
-        "userId": "503335"
-      },
-      {
-        "name": "Supersauberer Supersaubär",
-        "userId": "227766"
-      },
-      {
-        "name": "soitis",
-        "userId": "531917"
-      },
-      {
-        "name": "autoritärer Anarchist",
-        "userId": "677697"
-      },
-      {
-        "name": "Tim O´Beil",
-        "userId": "225289"
-      },
-      {
-        "name": "p1000wisch",
-        "userId": "190254"
-      }
-    ],
-    "neg": [
-      {
-        "name": "Charly Blecher",
-        "userId": "29978"
-      },
-      {
-        "name": "Nidhog",
-        "userId": "638264"
-      },
-      {
-        "name": "bearskin",
-        "userId": "499873"
-      },
-      {
-        "name": "Martin215",
-        "userId": "156790"
-      },
-      {
-        "name": "Pastafarus",
-        "userId": "684478"
-      },
-      {
-        "name": "Polka",
-        "userId": "171380"
-      },
-      {
-        "name": "fugu288",
-        "userId": "679355"
-      },
-      {
-        "name": "MFunited",
-        "userId": "520599"
-      },
-      {
-        "name": "Petra Österreicher",
-        "userId": "176874"
-      },
-      {
-        "name": "zkk",
-        "userId": "248304"
-      },
-      {
-        "name": "Mitte-Rechts-Linker Nichtwähler",
-        "userId": "639693"
-      },
-      {
-        "name": "Observer20",
-        "userId": "516802"
-      },
-      {
-        "name": "haraldmarkus40",
-        "userId": "89960"
-      },
-      {
-        "name": "michelmann1",
-        "userId": "678268"
-      },
-      {
-        "name": "law",
-        "userId": "503403"
-      },
-      {
-        "name": "Hortensia die Erste",
-        "userId": "499749"
-      },
-      {
-        "name": "Resilein",
-        "userId": "605165"
-      }
-    ]
-  }
+  "pos": [
+    {
+      "name": "allwetterfrau57",
+      "userId": "675980"
+    },
+    {
+      "name": "We love you",
+      "userId": "654785"
+    },
+    {
+      "name": "CRM 114",
+      "userId": "533273"
+    },
+    {
+      "name": "Hollareituliööö",
+      "userId": "500388"
+    },
+    {
+      "name": "Werner Werner",
+      "userId": "608969"
+    },
+    {
+      "name": "er bringt Licht",
+      "userId": "633552"
+    },
+    {
+      "name": "reality?",
+      "userId": "196961"
+    },
+    {
+      "name": "bastivon1982",
+      "userId": "536838"
+    },
+    {
+      "name": "brigitte_nauer",
+      "userId": "24561"
+    },
+    {
+      "name": "DerNachdenker1",
+      "userId": "682454"
+    },
+    {
+      "name": "herbststurm1",
+      "userId": "503335"
+    },
+    {
+      "name": "Supersauberer Supersaubär",
+      "userId": "227766"
+    },
+    {
+      "name": "soitis",
+      "userId": "531917"
+    },
+    {
+      "name": "autoritärer Anarchist",
+      "userId": "677697"
+    },
+    {
+      "name": "Tim O´Beil",
+      "userId": "225289"
+    },
+    {
+      "name": "p1000wisch",
+      "userId": "190254"
+    }
+  ],
+  "neg": [
+    {
+      "name": "Charly Blecher",
+      "userId": "29978"
+    },
+    {
+      "name": "Nidhog",
+      "userId": "638264"
+    },
+    {
+      "name": "bearskin",
+      "userId": "499873"
+    },
+    {
+      "name": "Martin215",
+      "userId": "156790"
+    },
+    {
+      "name": "Pastafarus",
+      "userId": "684478"
+    },
+    {
+      "name": "Polka",
+      "userId": "171380"
+    },
+    {
+      "name": "fugu288",
+      "userId": "679355"
+    },
+    {
+      "name": "MFunited",
+      "userId": "520599"
+    },
+    {
+      "name": "Petra Österreicher",
+      "userId": "176874"
+    },
+    {
+      "name": "zkk",
+      "userId": "248304"
+    },
+    {
+      "name": "Mitte-Rechts-Linker Nichtwähler",
+      "userId": "639693"
+    },
+    {
+      "name": "Observer20",
+      "userId": "516802"
+    },
+    {
+      "name": "haraldmarkus40",
+      "userId": "89960"
+    },
+    {
+      "name": "michelmann1",
+      "userId": "678268"
+    },
+    {
+      "name": "law",
+      "userId": "503403"
+    },
+    {
+      "name": "Hortensia die Erste",
+      "userId": "499749"
+    },
+    {
+      "name": "Resilein",
+      "userId": "605165"
+    }
+  ]
 }

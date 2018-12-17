@@ -1,12 +1,9 @@
 {
-  "postingId": "1036279475",
-  "rating": {
-    "pos": [
-      {
-        "name": "heinzm",
-        "userId": "562160"
-      }
-    ],
-    "neg": []
-  }
+  "pos": [
+    {
+      "name": "heinzm",
+      "userId": "562160"
+    }
+  ],
+  "neg": []
 }

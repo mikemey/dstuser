@@ -77,7 +77,7 @@ describe('ratings websocket', () => {
 
   describe('derStandard server errors', () => {
     const postingId = 1034153378
-    const emptyResult = { postingId: String(postingId), rating: { neg: [], pos: [] } }
+    const emptyResult = { neg: [], pos: [] }
 
     it('no result', () => {
       nockPostingRating(postingId).reply(200, testRating('no_result'))
