@@ -48,13 +48,6 @@ const serveRating = async (userId, postingId, dataPostingId = postingId) => {
   await mockWithQuery(ratingPath(postingId)).thenReply(200, body, htmlContentHeader)
 }
 
-const serveRatingExtended = async (userId, postingId, latestRaterId) => {
-  const body = dataLoader.getRating(userId, `${postingId}_ext`)
-  await mockWithQuery(ratingExtendedPath(postingId, latestRaterId)).thenReply(200, body, htmlContentHeader)
-}
-
-const getRatingResult = (userId, postingId) => dataLoader.getRatingResult(userId, postingId)
-
 const mockWithQuery = fullPath => {
   const { pathname, query } = url.parse(fullPath, true)
   const mockRule = mockServer.get(pathname)
@@ -68,5 +61,5 @@ const mockWithQuery = fullPath => {
 module.exports = {
   start, stop, getServerUrl,
   serveUserPageFor, server404WhenUserPageFor, getCommentResult,
-  serveRating, serveRatingExtended, getRatingResult
+  serveRating
 }
