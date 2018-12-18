@@ -18,11 +18,15 @@ const elementInView = byElement => {
   return el
 }
 
+const setInputField = (element, text) => element.clear()
+  .then(() => element.sendKeys(text))
+
 module.exports = {
   onlyDisplayed,
   asText,
   asHref,
   asNumber,
   hasElement,
-  elementInView
+  elementInView,
+  setInputField
 }

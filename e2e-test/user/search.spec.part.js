@@ -30,8 +30,7 @@ module.exports = searchPage => {
     })
 
     it('should start request when Key.ENTER pressed', () => {
-      searchPage.sendToUserId(userId)
-      searchPage.sendToUserId(Key.ENTER)
+      searchPage.sendToUserId(userId + Key.ENTER)
       expect(searchPage.getUserName()).toEqual('a standard user')
     })
 
@@ -63,20 +62,20 @@ module.exports = searchPage => {
   describe('user search (multiple comment pages)', () => {
     const userId = '425185'
 
-    beforeAll(() => Promise.all([
-      derStandard.start(),
-      derStandard.serveUserPageFor(userId, 1),
-      derStandard.serveUserPageFor(userId, 2),
-      derStandard.serveUserPageFor(userId, 3)
-    ]))
+    beforeAll(() => Promise
+      .all([
+        derStandard.start(),
+        derStandard.serveUserPageFor(userId, 1),
+        derStandard.serveUserPageFor(userId, 2),
+        derStandard.serveUserPageFor(userId, 3)
+      ])
+      .then(() => searchPage.openUserPage(userId))
+    )
 
     afterAll(derStandard.stop)
 
-    beforeEach(searchPage.open)
-
     it('should show user comments', async () => {
       const expectedPostings = derStandard.getCommentResult(userId).postings
-      searchPage.requestUserComments(userId)
       const comments = await searchPage.comments.getComments()
       expect(comments.length).toBe(30)
 
@@ -110,8 +109,7 @@ module.exports = searchPage => {
 
     it('should show error message', () => {
       derStandard.server404WhenUserPageFor(userId)
-      searchPage.open()
-      searchPage.requestUserComments(userId)
+      searchPage.openUserPage(userId)
 
       expect(searchPage.hasErrorMessage()).toBeTruthy()
       expect(searchPage.hasErrorMessage(hideElementsScreen)).toBeFalsy()

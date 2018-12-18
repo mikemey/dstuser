@@ -18,10 +18,9 @@ module.exports = searchPage => {
 
     afterAll(derStandard.stop)
 
-    beforeEach(searchPage.open)
-
     describe(`input field is disabled`, () => {
       it('when no user searched', () => {
+        searchPage.open()
         expect(searchPage.hasFilter()).toBeTruthy()
         expect(searchPage.hasFilter(hideElementsScreen)).toBeFalsy()
         expect(searchPage.isFilterEnabled()).toBeFalsy()
@@ -29,7 +28,7 @@ module.exports = searchPage => {
 
       it('when user not found', () => {
         const unknownUserId = 99
-        searchPage.requestUserComments(unknownUserId)
+        searchPage.openUserPage(unknownUserId)
         expect(searchPage.getErrorMessage()).toMatch(`${unknownUserId}`)
         expect(searchPage.isFilterEnabled()).toBeFalsy()
       })
@@ -37,7 +36,7 @@ module.exports = searchPage => {
 
     describe('input field behaviour', () => {
       beforeEach(async () => {
-        searchPage.requestUserComments(singlePageUserId)
+        searchPage.openUserPage(singlePageUserId)
         const comments = await searchPage.comments.getComments()
         expect(comments.length).toBe(3)
       })
@@ -52,7 +51,7 @@ module.exports = searchPage => {
     })
 
     describe('posting filtering', () => {
-      beforeEach(() => searchPage.requestUserComments(userId))
+      beforeAll(() => searchPage.openUserPage(userId))
 
       it('shows all when no filter', async () => {
         const comments = await searchPage.comments.getComments()

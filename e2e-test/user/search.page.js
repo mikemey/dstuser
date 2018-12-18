@@ -1,7 +1,7 @@
 const { by, browser, element } = require('protractor')
 
 const comments = require('./comments.page')
-const { hasElement, onlyDisplayed, asNumber } = require('../utils/utils.page')
+const { hasElement, onlyDisplayed, asNumber, setInputField } = require('../utils/utils.page')
 
 // large screen -> xxx-small element identifiers
 const LARGE_SCREEN = { id: 'LARGE SCREEN', width: 1000, height: 800, suffix: 'small' }
@@ -43,7 +43,7 @@ const SearchPage = testScreen => {
 
   const userIdInput = () => element(byUserId())
   const getUserId = () => userIdInput().getAttribute('value')
-  const sendToUserId = userId => userIdInput().sendKeys(userId)
+  const sendToUserId = userId => setInputField(userIdInput(), userId)
   const formLabel = () => userIdInput().getAttribute('placeholder')
 
   const bySearchButton = (screen = testScreen) => by.id(`searchBtn-${screen.suffix}`)
@@ -68,7 +68,7 @@ const SearchPage = testScreen => {
   const hasFilter = screen => hasElement(byFilter(screen))
   const filterInput = () => element(byFilter())
   const isFilterEnabled = () => filterInput().isEnabled()
-  const sendToFilter = filter => filterInput().sendKeys(filter)
+  const sendToFilter = filter => setInputField(filterInput(), filter)
 
   const byKarma = type => by.className(`karma-${type}`)
   const karmaPoints = type => element.all(byKarma(type))

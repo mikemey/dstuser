@@ -9,31 +9,25 @@ module.exports = searchPage => {
       derStandard.start()
       derStandard.serveUserPageFor(userId, 1)
       derStandard.serveRating(userId, postingId, `${postingId}_small`)
+      searchPage.openUserPage(userId)
+      searchPage.comments.clickRating(postingId)
     })
 
     afterAll(derStandard.stop)
 
     describe('rating links', () => {
-      beforeAll(() => searchPage.openUserPage(userId))
-
       it('point to nowhere', () => {
         const emptyHref = derStandard.getServerUrl('/dstu/#')
         expect(searchPage.comments.getRatingHrefs()).toEqual([emptyHref, emptyHref, emptyHref])
       })
 
-      it('should show ratings', () => {
-        searchPage.comments.clickRating(postingId)
+      it('should show pos/neg ratings', () => {
         expect(searchPage.comments.getPositiveRaters()).toEqual(['Wolf19710'])
         expect(searchPage.comments.getNegativeRaters()).toEqual(['wilderpel', 'Werner Kargel'])
       })
     })
 
     describe('rater links', () => {
-      beforeEach(() => {
-        searchPage.openUserPage(userId)
-        searchPage.comments.clickRating(postingId)
-      })
-
       afterEach(searchPage.restart)
 
       it('should forward to wolf', () => {
