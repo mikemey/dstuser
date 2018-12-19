@@ -2,7 +2,7 @@ const UserPageObject = require('./userPageObject')
 const requests = require('../utils/requests')
 const { startTimer, stopTimer } = require('../utils/msTimer')
 
-const UserService = (config, logger) => {
+const PostingsService = (config, logger) => {
   const profileTemplate = config.dstuHost + config.userProfileTemplate
   const userIdPlaceholder = config.userIdPlaceholder
   const pagePlaceholder = config.pagePlaceholder
@@ -46,4 +46,4 @@ const UserService = (config, logger) => {
   }
 }
 
-module.exports = UserService
+module.exports = PostingsService

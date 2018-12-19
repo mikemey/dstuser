@@ -1,17 +1,17 @@
 const express = require('express')
 
 const { isNumber, clientIp } = require('../utils/endpointHelper')
-const UserService = require('./userService')
+const PostingsService = require('./postingsService')
 
 const createPostingsRouter = (config, logger) => {
   const router = express.Router()
-  const userService = UserService(config, logger)
+  const postingsService = PostingsService(config, logger)
 
   router.ws('/postings/:userId', (ws, req) => {
     const userId = req.params.userId
     logger.info(`received postings request from: [${clientIp(req)}], for: [${userId}]`)
     return isNumber(ws, userId)
-      .then(userId => userService.loadPostings(userId))
+      .then(userId => postingsService.loadPostings(userId))
       .then(postings => ws.send(JSON.stringify(postings)))
       .catch(wsErrorHandler(ws, userId))
       .finally(() => {

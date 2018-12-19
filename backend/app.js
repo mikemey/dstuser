@@ -3,8 +3,8 @@ const expressWs = require('express-ws')
 const bodyParser = require('body-parser')
 
 const { createRequestLogger } = require('./utils/requestsLogger')
-const createPostingsRouter = require('./user')
-const createRatingsRouter = require('./rating')
+const createPostingsRouter = require('./postings')
+const createRatingsRouter = require('./ratings')
 
 const createServer = (config, logger) => new Promise((resolve, reject) => {
   const app = express()
