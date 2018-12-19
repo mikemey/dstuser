@@ -14,19 +14,27 @@ const testConfig = {
   postingRatingNextTemplate: '/Forum/RatingLog?id=$POSTID$&idType=Posting&LatestRaterCommunityIdentityId=$LRID$'
 }
 
-const createQuietLogger = () => {
-  return {
-    info: () => { },
-    error: () => { },
-    log: () => { }
-  }
+const LOG_IN_TESTS = 0
+const quietLogger = {
+  info: () => { },
+  error: () => { },
+  log: () => { }
 }
+
+const loudLogger = {
+  info: msg => { console.log(msg) },
+  error: msg => { console.log(msg) },
+  log: obj => { console.log(obj) }
+}
+
+const createTestLogger = () => LOG_IN_TESTS ? loudLogger : quietLogger
 
 const TestServer = () => {
   let app, server, wsAddress
   process.env.TESTING = 'true'
+  const testLogger = createTestLogger()
 
-  const start = () => backendApp.createServer(testConfig, createQuietLogger())
+  const start = () => backendApp.createServer(testConfig, testLogger)
     .then(dstuServer => {
       app = dstuServer.app
       server = dstuServer.server
@@ -46,19 +54,24 @@ const TestServer = () => {
 
     websocket.on('open', () => {
       result.status = 'open'
+      testLogger.info('testsocket open')
     })
 
     websocket.on('message', data => {
+      testLogger.info('testsocket message')
       result.status = 'message'
       result.data.push(JSON.parse(data))
     })
 
     websocket.on('error', err => {
+      testLogger.info('testsocket error')
+      testLogger.log(err)
       result.status = 'error'
       reject(err)
     })
 
     websocket.on('close', ev => {
+      testLogger.info('testsocket closed')
       result.status = 'closed'
       resolve(result)
     })

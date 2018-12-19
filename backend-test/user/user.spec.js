@@ -9,6 +9,11 @@ describe('get userprofile endpoint', () => {
   const testData = (userId, pageId) => dataLoader.getComment(userId, pageId)
   const expectedData = userId => dataLoader.getCommentResult(userId)
 
+  const nockDstUserprofile = (userId, pageNum) => nock(server.config.dstuHost)
+    .get(`/userprofil/postings/${userId}?pageNumber=${pageNum}&sortMode=1`)
+
+  const requestPostings = userId => server.ws(`/dstu/api/postings/${userId}`)
+
   before(() => {
     nock.disableNetConnect()
     nock.enableNetConnect('127.0.0.1')
@@ -21,12 +26,6 @@ describe('get userprofile endpoint', () => {
   })
 
   afterEach(nock.cleanAll)
-
-  const nockDstUserprofile = (userId, pageNum) => nock(server.config.dstuHost)
-    .get(`/userprofil/postings/${userId}?pageNumber=${pageNum}&sortMode=1`)
-
-  const requestUserprofile = userId => server.request()
-    .get(`/dstu/api/userprofile/${userId}`)
 
   describe('valid requests', () => {
     it('respond with userprofile (#755005 - one page)', () =>
@@ -41,18 +40,18 @@ describe('get userprofile endpoint', () => {
       for (var pageNum = 1; pageNum <= pageCount; pageNum++) {
         nockDstUserprofile(userId, pageNum).reply(200, testData(userId, pageNum))
       }
-      return requestUserprofile(userId).expect(200, expectedData(userId))
+      return requestPostings(userId).then(response => {
+        response.status.should.equal('closed')
+        response.data[0].should.deep.equal(expectedData(userId))
+      })
     }
   })
 
   describe('invalid requests', () => {
-    it('return 400 when no userId in request', () =>
-      requestUserprofile('').expect(400, { error: 'User ID missing' })
-    )
-
-    it('return 400 when userId is NaN', () =>
-      requestUserprofile('123n34').expect(400, { error: 'User ID not a number: 123n34' })
-    )
+    it('when userId is NaN', () => requestPostings('123n34').then(response => {
+      response.status.should.equal('closed')
+      response.data[0].should.deep.equal({ error: `NaN: "123n34"` })
+    }))
   })
 
   describe('derStandard server errors', () => {
@@ -61,14 +60,20 @@ describe('get userprofile endpoint', () => {
 
     it('respond with error message when 404', () => {
       nockDstUserprofile(userId, 1).reply(404, dataLoader.get404Page())
-      return requestUserprofile(userId).expect(404, errorResponse)
+      return requestPostings(userId).then(response => {
+        response.status.should.equal('closed')
+        response.data[0].should.deep.equal(errorResponse)
+      })
     })
 
     it('respond with error message when 404 with multiple pages', () => {
       nockDstUserprofile(userId, 1).reply(200, testData(userId, 1))
       nockDstUserprofile(userId, 2).reply(200, testData(userId, 2))
       nockDstUserprofile(userId, 3).reply(404, dataLoader.get404Page())
-      return requestUserprofile(userId).expect(404, errorResponse)
+      return requestPostings(userId).then(response => {
+        response.status.should.equal('closed')
+        response.data[0].should.deep.equal(errorResponse)
+      })
     })
 
     it('respond with error message when 302', () => {
@@ -77,8 +82,10 @@ describe('get userprofile endpoint', () => {
         'Location': fakeErrorUrl
       })
       const scope = nock(server.config.dstuHost).get(fakeErrorUrl).reply(200, 'this shouldnt happen')
-      return requestUserprofile(userId).expect(404, errorResponse)
-        .then(() => { scope.isDone().should.equal(false) })
+      return requestPostings(userId).then(response => {
+        response.status.should.equal('closed')
+        response.data[0].should.deep.equal(errorResponse)
+      }).then(() => { scope.isDone().should.equal(false) })
     })
   })
 })
