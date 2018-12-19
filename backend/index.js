@@ -1,8 +1,8 @@
 const app = require('./app')
-const winstonLogger = require('./utils/winstonLogger')
+const serverLogger = require('./utils/serverLogger')
 const configLoader = require('./configLoader')
 
-const logger = winstonLogger.create()
+const logger = serverLogger.create()
 const config = configLoader.get(logger)
 
 const serverLog = msg => logger.info(`========== ${msg.padEnd(5)} ==========`)

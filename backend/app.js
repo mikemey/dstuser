@@ -2,7 +2,7 @@ const express = require('express')
 const expressWs = require('express-ws')
 const bodyParser = require('body-parser')
 
-const { createRequestLogger } = require('./utils/morganLogger')
+const { createRequestLogger } = require('./utils/requestsLogger')
 const createUserRouter = require('./user')
 const createWsRouter = require('./rating')
 
