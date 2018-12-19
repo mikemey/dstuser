@@ -1,31 +1,17 @@
 const express = require('express')
 const expressWs = require('express-ws')
 const bodyParser = require('body-parser')
-const morgan = require('morgan')
 
+const { createRequestLogger } = require('./utils/morganLogger')
 const createUserRouter = require('./user')
 const createWsRouter = require('./rating')
-
-const methodsWithBody = ['POST', 'PUT']
-
-const requestLogger = () => {
-  morgan.token('clientIP', req => req.headers['x-forwarded-for'] || req.connection.remoteAddress)
-  morgan.token('requestBody', req => methodsWithBody.includes(req.method)
-    ? `\n${JSON.stringify(req.body, null, ' ')}`
-    : ''
-  )
-  const format = ':date[iso] [:clientIP] :method :url [:status] [:res[content-length] bytes] - :response-time[0]ms :user-agent :requestBody'
-
-  const skip = () => process.env.TESTING !== undefined
-  return morgan(format, { skip })
-}
 
 const createServer = (config, logger) => new Promise((resolve, reject) => {
   const app = express()
   expressWs(app)
 
   app.use(bodyParser.json())
-  app.use(requestLogger())
+  app.use(createRequestLogger(config))
 
   app.use('/dstu', express.static('dist/'))
   app.use('/dstuapi', createUserRouter(config, logger))

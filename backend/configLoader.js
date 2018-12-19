@@ -1,7 +1,7 @@
-const DEFAULT = 'default'
-const E2E = 'E2E'
-const PROD = 'PROD'
-const LOCAL = 'LOCAL'
+const DEFAULT_ENV = 'default'
+const E2E_ENV = 'E2E'
+const PROD_ENV = 'PROD'
+const LOCAL_ENV = 'LOCAL'
 
 const defaultEnv = {
   port: 7000,
@@ -28,24 +28,25 @@ const localEnv = {
 }
 
 const prodEnv = {
-  port: 8001
+  port: 8001,
+  requestslog: 'dstu.requests.log'
 }
 
 const message = environment => `using ${environment} environment configuration`
 
 const get = logger => {
   switch (process.env.NODE_ENV) {
-    case PROD:
-      logger.info(message(PROD))
+    case PROD_ENV:
+      logger.info(message(PROD_ENV))
       return Object.assign({}, defaultEnv, prodEnv)
-    case E2E:
-      logger.info(message(E2E))
+    case E2E_ENV:
+      logger.info(message(E2E_ENV))
       return Object.assign({}, defaultEnv, e2eEnv)
-    case LOCAL:
-      logger.info(message(LOCAL))
+    case LOCAL_ENV:
+      logger.info(message(LOCAL_ENV))
       return Object.assign({}, defaultEnv, localEnv)
     default:
-      logger.info(message(DEFAULT))
+      logger.info(message(DEFAULT_ENV))
       return defaultEnv
   }
 }

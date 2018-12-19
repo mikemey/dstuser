@@ -1,10 +1,10 @@
-const moment = require('moment')
 const { createLogger, format, transports } = require('winston')
+const dateFormat = require('./logDateFormat')
 
 const create = () => {
   const winston = createLogger({
     format: format.combine(
-      format.timestamp({ format: () => moment().utc().format('YYYY-MM-DD HH:mm:ss z') }),
+      format.timestamp({ format: dateFormat }),
       format.printf(info => `[${info.timestamp}] ${info.message}`)
     ),
     transports: [new transports.Console()]

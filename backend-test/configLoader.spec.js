@@ -1,3 +1,4 @@
+const should = require('chai').should()
 const { stub, assert } = require('sinon')
 
 const configLoader = require('../backend/configLoader')
@@ -42,6 +43,7 @@ describe('configuration selection', () => {
       config.postingRatingTemplate.should.equal('/forum/ratinglog?id=$POSTID$&idType=1')
       config.latestRaterIdPlaceholder.should.equal('$LRID$')
       config.postingRatingNextTemplate.should.equal('/Forum/RatingLog?id=$POSTID$&idType=Posting&LatestRaterCommunityIdentityId=$LRID$')
+      should.not.exist(config.requestslog)
     }
 
     it('when no NODE_ENV', () => {
@@ -61,6 +63,7 @@ describe('configuration selection', () => {
       const config = setupConfig('using PROD environment configuration')
 
       config.port.should.equal(8001)
+      config.requestslog.should.equal('dstu.requests.log')
     })
 
     it('when E2E environment', () => {
@@ -69,6 +72,15 @@ describe('configuration selection', () => {
 
       config.port.should.equal(5555)
       config.dstuHost.should.include('http://localhost:5556')
+    })
+
+    it('when LOCAL environment', () => {
+      process.env.NODE_ENV = 'LOCAL'
+      const config = setupConfig('using LOCAL environment configuration')
+
+      config.port.should.equal(7001)
+      config.dstuHost.should.include('http://localhost:5557')
+      config.interface.should.equal('0.0.0.0')
     })
   })
 })
