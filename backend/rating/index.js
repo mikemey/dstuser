@@ -9,7 +9,7 @@ const createRatingRouter = (config, logger) => {
   router.ws('/rating/:pid', (ws, req) => {
     const postingId = req.params.pid
     logger.info(`received rating request from: [${clientIp(req)}], for: [${postingId}]`)
-    return checkInputParameter(ws, req, postingId)
+    return checkInputParameter(ws, postingId)
       .then(pid => ratingService.loadRating(pid))
       .then(rating => ws.send(JSON.stringify(rating)))
       .catch(err => { logger.info(`Error: ${err.message}`) })
@@ -19,7 +19,7 @@ const createRatingRouter = (config, logger) => {
       })
   })
 
-  const checkInputParameter = (ws, req, param) => new Promise((resolve, reject) => {
+  const checkInputParameter = (ws, param) => new Promise((resolve, reject) => {
     const pid = Number(param)
     if (isNaN(pid)) {
       const msg = `NaN: "${param}"`
