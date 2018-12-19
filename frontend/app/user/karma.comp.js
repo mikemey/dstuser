@@ -4,10 +4,13 @@ import ngWebSocket from 'angular-websocket'
 import './karma.comp.css'
 
 const karmaCtrl = function ($scope) {
-  this.$onInit = () => this.postings.forEach(post => {
-    $scope.model.pos += post.rating.pos
-    $scope.model.neg += post.rating.neg
-  })
+  this.$onChanges = () => {
+    $scope.model = this.postings.reduce((sums, post) => {
+      sums.pos += post.rating.pos
+      sums.neg += post.rating.neg
+      return sums
+    }, { pos: 0, neg: 0 })
+  }
 
   $scope.model = {
     pos: 0,

@@ -5,8 +5,10 @@ import './postings.comp.css'
 import './section-colors.css'
 
 const postingsCtrl = function ($scope, $sce, $sanitize) {
-  this.$onInit = () => loadPostings(this.postings)
-  this.$onChanges = () => setFilter(this.filter)
+  this.$onChanges = () => {
+    loadPostings(this.postings)
+    setFilter(this.filter)
+  }
 
   $scope.model = {
     postings: null,

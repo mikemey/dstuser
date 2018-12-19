@@ -30,7 +30,7 @@ const userPageCtrl = ($scope, $websocket, $location, $routeParams, $window, wsur
         if (response.error) {
           $scope.model.errorMessage = response.error
         } else {
-          $scope.model.content = response
+          updateContent(response)
         }
       })
 
@@ -41,6 +41,16 @@ const userPageCtrl = ($scope, $websocket, $location, $routeParams, $window, wsur
       })
 
       ws.onError(errorEv => { $scope.model.message = errorEv.data })
+    }
+  }
+
+  let first = true
+  const updateContent = partial => {
+    if (first) {
+      first = false
+      $scope.model.content = partial
+    } else {
+      $scope.model.content.postings = $scope.model.content.postings.concat(partial.postings)
     }
   }
 
