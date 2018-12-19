@@ -14,8 +14,8 @@ const createServer = (config, logger) => new Promise((resolve, reject) => {
   app.use(createRequestLogger(config))
 
   app.use('/dstu', express.static('dist/'))
-  app.use('/dstuapi', createUserRouter(config, logger))
-  app.use('/dstuws', createWsRouter(config, logger))
+  app.use('/dstu/api', createUserRouter(config, logger))
+  app.use('/dstu/ws', createWsRouter(config, logger))
 
   const server = app.listen(config.port, config.interface, () => {
     logger.info(`Started on port ${server.address().port}`)

@@ -16,7 +16,7 @@ const ratingCtrl = function ($scope, $websocket, $window) {
     const websocketUrl =
       (loc.protocol === 'https:' ? 'wss://' : 'ws://') +
       loc.host +
-      '/dstuws/rating/' +
+      '/dstu/ws/rating/' +
       postingId
 
     const ws = $websocket(websocketUrl)

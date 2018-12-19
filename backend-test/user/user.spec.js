@@ -26,7 +26,7 @@ describe('get userprofile endpoint', () => {
     .get(`/userprofil/postings/${userId}?pageNumber=${pageNum}&sortMode=1`)
 
   const requestUserprofile = userId => server.request()
-    .get(`/dstuapi/userprofile/${userId}`)
+    .get(`/dstu/api/userprofile/${userId}`)
 
   describe('valid requests', () => {
     it('respond with userprofile (#755005 - one page)', () =>

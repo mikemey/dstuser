@@ -41,7 +41,7 @@ describe('ratings websocket', () => {
     }
   }).get(path)
 
-  const requestRating = (postingId = '') => server.ws(`/dstuws/rating/${postingId}`)
+  const requestRating = (postingId = '') => server.ws(`/dstu/ws/rating/${postingId}`)
 
   describe('request posting ratings', () => {
     it('responds with only positive ratings', () => runRatingsTest(1036279475))

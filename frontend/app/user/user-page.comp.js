@@ -21,7 +21,7 @@ const userPageCtrl = ($scope, $http, $location, $routeParams, $window) => {
     if ($routeParams.userId) {
       $scope.model.loading = true
       $scope.model.userId = $routeParams.userId
-      return $http.get('/dstuapi/userprofile/' + $scope.model.userId)
+      return $http.get('/dstu/api/userprofile/' + $scope.model.userId)
         .then(response => { $scope.model.content = response.data })
         .catch(response => {
           $scope.model.errorMessage = response.data
