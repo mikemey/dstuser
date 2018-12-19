@@ -39,8 +39,7 @@ const PostingsService = (config, logger) => {
     : requestPage(remainingPageLinks.shift())
       .then(page => {
         const postings = UserPageObject.from(page, config).getPostings()
-        onPartialResult(prBuilder.build(postings))
-        return collectPostings(remainingPageLinks, prBuilder, onPartialResult)
+        return onPartialResult(prBuilder.build(postings))
       })
       .catch(error => {
         logger.error(`Error requesting page`, error)
