@@ -60,7 +60,8 @@ describe('ratings websocket', () => {
       nockPostingRating(postingId).reply(200, testRating(postingId))
       return requestRating(postingId)
         .then(response => {
-          response.should.deep.equal(expectedData(postingId))
+          response.data[0].should.deep.equal(expectedData(postingId))
+          response.status.should.equal('closed')
         })
     }
   })
@@ -70,7 +71,8 @@ describe('ratings websocket', () => {
       const postingId = 'abc'
       return requestRating(postingId)
         .then(response => {
-          response.should.deep.equal({ error: `NaN: "${postingId}"` })
+          response.data[0].should.deep.equal({ error: `NaN: "${postingId}"` })
+          response.status.should.equal('closed')
         })
     })
   })
@@ -82,13 +84,19 @@ describe('ratings websocket', () => {
     it('no result', () => {
       nockPostingRating(postingId).reply(200, testRating('no_result'))
       return requestRating(postingId)
-        .then(response => { response.should.deep.equal(emptyResult) })
+        .then(response => {
+          response.data[0].should.deep.equal(emptyResult)
+          response.status.should.equal('closed')
+        })
     })
 
     it('internal error', () => {
       nockPostingRating(postingId).reply(500, 'blub')
       return requestRating(postingId)
-        .then(response => { response.should.deep.equal(emptyResult) })
+        .then(response => {
+          response.data[0].should.deep.equal(emptyResult)
+          response.status.should.equal('closed')
+        })
     })
   })
 })

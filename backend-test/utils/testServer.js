@@ -39,33 +39,28 @@ const TestServer = () => {
 
   const request = () => supertest(app)
 
-  const DEBUG = 0
-  const debuglog = (msg, obj) => {
-    if (DEBUG) {
-      console.log(`-- ${msg} --`)
-      if (obj) console.log(obj)
-    }
-  }
-
   const ws = path => new Promise((resolve, reject) => {
     const connectionUrl = wsAddress + path
     const websocket = new WebSocket(connectionUrl)
-    const result = { data: 'closed' }
+    const result = { data: [], status: 'init' }
 
     websocket.on('open', () => {
-      debuglog('open')
+      result.status = 'open'
     })
 
     websocket.on('message', data => {
-      debuglog('message', data)
-      result.data = JSON.parse(data)
+      result.status = 'message'
+      result.data.push(JSON.parse(data))
     })
 
-    websocket.on('error', reject)
+    websocket.on('error', err => {
+      result.status = 'error'
+      reject(err)
+    })
 
     websocket.on('close', ev => {
-      debuglog('close', ev)
-      resolve(result.data)
+      result.status = 'closed'
+      resolve(result)
     })
   })
 
