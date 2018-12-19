@@ -1,6 +1,7 @@
 const express = require('express')
 
 const RatingService = require('./ratingService')
+const isNumberCheck = require('../utils/isNumberCheck')
 
 const createRatingRouter = (config, logger) => {
   const router = express.Router()
@@ -9,7 +10,7 @@ const createRatingRouter = (config, logger) => {
   router.ws('/rating/:pid', (ws, req) => {
     const postingId = req.params.pid
     logger.info(`received rating request from: [${clientIp(req)}], for: [${postingId}]`)
-    return checkInputParameter(ws, postingId)
+    return isNumberCheck(ws, postingId)
       .then(pid => ratingService.loadRating(pid))
       .then(rating => ws.send(JSON.stringify(rating)))
       .catch(err => { logger.info(`Error: ${err.message}`) })
@@ -19,20 +20,7 @@ const createRatingRouter = (config, logger) => {
       })
   })
 
-  const checkInputParameter = (ws, param) => new Promise((resolve, reject) => {
-    const pid = Number(param)
-    if (isNaN(pid)) {
-      const msg = `NaN: "${param}"`
-      ws.send(JSON.stringify(errorMessage(msg)))
-      reject(Error(msg))
-    } else {
-      resolve(pid)
-    }
-  })
-
   const clientIp = req => req.headers['x-forwarded-for'] || req.connection.remoteAddress
-
-  const errorMessage = error => { return { error } }
 
   return router
 }
