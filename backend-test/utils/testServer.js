@@ -23,7 +23,10 @@ const quietLogger = {
 
 const loudLogger = {
   info: msg => { console.log(msg) },
-  error: msg => { console.log(msg) },
+  error: (msg, error) => {
+    console.log(msg)
+    console.log(error)
+  },
   log: obj => { console.log(obj) }
 }
 

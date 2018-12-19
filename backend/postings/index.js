@@ -10,9 +10,11 @@ const createPostingsRouter = (config, logger) => {
   router.ws('/postings/:userId', (ws, req) => {
     const userId = req.params.userId
     logger.info(`received postings request from: [${clientIp(req)}], for: [${userId}]`)
+
+    const onPartialResult = partial => ws.send(JSON.stringify(partial))
+
     return isNumber(ws, userId)
-      .then(userId => postingsService.loadPostings(userId))
-      .then(postings => ws.send(JSON.stringify(postings)))
+      .then(userId => postingsService.loadPostings(userId, onPartialResult))
       .catch(wsErrorHandler(ws, userId))
       .finally(() => {
         logger.info(`closing connection to: [${clientIp(req)}]`)

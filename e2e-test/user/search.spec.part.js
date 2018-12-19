@@ -5,6 +5,11 @@ const derStandard = require('../derStandardMock')
 module.exports = searchPage => {
   const hideElementsScreen = searchPage.getHiddenScreen()
 
+  const getExpectedPostings = userId => {
+    const commentResult = derStandard.getCommentResult(userId)
+    return commentResult.reduce((postings, current) => postings.concat(current.postings), [])
+  }
+
   describe('user search (single comment page)', () => {
     const userId = '755005'
 
@@ -41,7 +46,7 @@ module.exports = searchPage => {
     })
 
     it('should show user comments', async () => {
-      const expectedPostings = derStandard.getCommentResult(userId).postings
+      const expectedPostings = getExpectedPostings(userId)
       searchPage.requestUserComments(userId)
       const comments = await searchPage.comments.getComments()
 
@@ -75,7 +80,7 @@ module.exports = searchPage => {
     afterAll(derStandard.stop)
 
     it('should show user comments', async () => {
-      const expectedPostings = derStandard.getCommentResult(userId).postings
+      const expectedPostings = getExpectedPostings(userId)
       const comments = await searchPage.comments.getComments()
       expect(comments.length).toBe(30)
 

@@ -42,7 +42,7 @@ describe('postings websocket', () => {
       }
       return requestPostings(userId).then(response => {
         response.status.should.equal('closed')
-        response.data[0].should.deep.equal(expectedData(userId))
+        response.data.should.deep.equal(expectedData(userId))
       })
     }
   })
@@ -70,9 +70,12 @@ describe('postings websocket', () => {
       nockDstUserprofile(userId, 1).reply(200, testData(userId, 1))
       nockDstUserprofile(userId, 2).reply(200, testData(userId, 2))
       nockDstUserprofile(userId, 3).reply(404, dataLoader.get404Page())
+
+      const partialResult = expectedData(userId)
+      partialResult[2].postings = []
       return requestPostings(userId).then(response => {
         response.status.should.equal('closed')
-        response.data[0].should.deep.equal(errorResponse)
+        response.data.should.deep.equal(partialResult)
       })
     })
 
