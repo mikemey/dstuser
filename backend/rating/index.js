@@ -3,7 +3,7 @@ const express = require('express')
 const RatingService = require('./ratingService')
 const { isNumber, clientIp } = require('../utils/endpointHelper')
 
-const createRatingRouter = (config, logger) => {
+const createRatingsRouter = (config, logger) => {
   const router = express.Router()
   const ratingService = RatingService(config, logger)
 
@@ -23,4 +23,4 @@ const createRatingRouter = (config, logger) => {
   return router
 }
 
-module.exports = createRatingRouter
+module.exports = createRatingsRouter

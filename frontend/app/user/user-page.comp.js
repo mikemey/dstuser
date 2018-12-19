@@ -4,7 +4,7 @@ import './user-page.comp.css'
 
 const DISABLED = 'disabled'
 
-const userPageCtrl = ($scope, $http, $location, $routeParams, $window) => {
+const userPageCtrl = ($scope, $websocket, $location, $routeParams, $window, wsurl) => {
   $scope.model = {
     userId: null,
     content: null,
@@ -21,18 +21,26 @@ const userPageCtrl = ($scope, $http, $location, $routeParams, $window) => {
     if ($routeParams.userId) {
       $scope.model.loading = true
       $scope.model.userId = $routeParams.userId
-      return $http.get('/dstu/api/userprofile/' + $scope.model.userId)
-        .then(response => { $scope.model.content = response.data })
-        .catch(response => {
-          $scope.model.errorMessage = response.data
-            ? response.data.error
-            : response.message
-        })
-        .finally(() => {
-          updateFilterEnabled()
-          focusField()
-          $scope.model.loading = false
-        })
+
+      const websocketUrl = wsurl + '/postings/' + $scope.model.userId
+      const ws = $websocket(websocketUrl)
+
+      ws.onMessage(msgEvent => {
+        const response = JSON.parse(msgEvent.data)
+        if (response.error) {
+          $scope.model.errorMessage = response.error
+        } else {
+          $scope.model.content = response
+        }
+      })
+
+      ws.onClose(() => {
+        updateFilterEnabled()
+        focusField()
+        $scope.model.loading = false
+      })
+
+      ws.onError(errorEv => { $scope.model.message = errorEv.data })
     }
   }
 
@@ -65,5 +73,5 @@ export default angular
   .module('user.page', [])
   .component('userPage', {
     template: require('./user-page.comp.html'),
-    controller: ['$scope', '$http', '$location', '$routeParams', '$window', userPageCtrl]
+    controller: ['$scope', '$websocket', '$location', '$routeParams', '$window', 'wsurl', userPageCtrl]
   })

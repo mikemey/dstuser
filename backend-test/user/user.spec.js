@@ -2,7 +2,7 @@ const nock = require('nock')
 const TestServer = require('../utils/testServer')
 const TestDataLoader = require('../../test-data/testDataLoader')
 
-describe('get userprofile endpoint', () => {
+describe('postings websocket', () => {
   const server = TestServer()
   const dataLoader = TestDataLoader(server.config.dstuHost)
 
@@ -12,7 +12,7 @@ describe('get userprofile endpoint', () => {
   const nockDstUserprofile = (userId, pageNum) => nock(server.config.dstuHost)
     .get(`/userprofil/postings/${userId}?pageNumber=${pageNum}&sortMode=1`)
 
-  const requestPostings = userId => server.ws(`/dstu/api/postings/${userId}`)
+  const requestPostings = userId => server.ws(`/dstu/ws/postings/${userId}`)
 
   before(() => {
     nock.disableNetConnect()

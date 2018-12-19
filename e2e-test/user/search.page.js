@@ -1,7 +1,7 @@
 const { by, browser, element } = require('protractor')
 
 const comments = require('./comments.page')
-const { hasElement, onlyDisplayed, asNumber, setInputField } = require('../utils/utils.page')
+const { hasElement, onlyDisplayed, asNumber, setInputField, waitForElementText } = require('../utils/utils.page')
 
 // large screen -> xxx-small element identifiers
 const LARGE_SCREEN = { id: 'LARGE SCREEN', width: 1000, height: 800, suffix: 'small' }
@@ -58,11 +58,11 @@ const SearchPage = testScreen => {
 
   const byUserName = (screen = testScreen) => by.id(`userName-${screen.suffix}`)
   const hasUserName = screen => hasElement(byUserName(screen))
-  const getUserName = () => element(byUserName()).getText()
+  const getUserName = () => waitForElementText(byUserName())
 
   const byErrorMessage = (screen = testScreen) => by.id(`errorMessage-${screen.suffix}`)
   const hasErrorMessage = screen => hasElement(byErrorMessage(screen))
-  const getErrorMessage = () => element(byErrorMessage()).getText()
+  const getErrorMessage = () => waitForElementText(byErrorMessage())
 
   const byFilter = (screen = testScreen) => by.id(`filter-${screen.suffix}`)
   const hasFilter = screen => hasElement(byFilter(screen))

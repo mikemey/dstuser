@@ -3,8 +3,8 @@ const expressWs = require('express-ws')
 const bodyParser = require('body-parser')
 
 const { createRequestLogger } = require('./utils/requestsLogger')
-const createUserRouter = require('./user')
-const createWsRouter = require('./rating')
+const createPostingsRouter = require('./user')
+const createRatingsRouter = require('./rating')
 
 const createServer = (config, logger) => new Promise((resolve, reject) => {
   const app = express()
@@ -14,8 +14,8 @@ const createServer = (config, logger) => new Promise((resolve, reject) => {
   app.use(createRequestLogger(config))
 
   app.use('/dstu', express.static('dist/'))
-  app.use('/dstu/api', createUserRouter(config, logger))
-  app.use('/dstu/ws', createWsRouter(config, logger))
+  app.use('/dstu/ws', createPostingsRouter(config, logger))
+  app.use('/dstu/ws', createRatingsRouter(config, logger))
 
   const server = app.listen(config.port, config.interface, () => {
     logger.info(`Started on port ${server.address().port}`)

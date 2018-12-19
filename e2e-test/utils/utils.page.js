@@ -1,4 +1,4 @@
-const { element, browser } = require('protractor')
+const { element, browser, ExpectedConditions } = require('protractor')
 
 const onlyDisplayed = el => el.isDisplayed()
 const asText = el => el.getText()
@@ -21,6 +21,13 @@ const elementInView = byElement => {
 const setInputField = (element, text) => element.clear()
   .then(() => element.sendKeys(text))
 
+const waitForElement = (byElement, locator = element) => browser
+  .wait(ExpectedConditions.presenceOf(locator(byElement)), 3000)
+
+const waitForAllElements = byElement => waitForElement(byElement, element.all)
+
+const waitForElementText = byElement => waitForElement(byElement).then(() => element(byElement).getText())
+
 module.exports = {
   onlyDisplayed,
   asText,
@@ -28,5 +35,8 @@ module.exports = {
   asNumber,
   hasElement,
   elementInView,
-  setInputField
+  setInputField,
+  waitForElement,
+  waitForAllElements,
+  waitForElementText
 }

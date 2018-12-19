@@ -1,10 +1,13 @@
 const { by, browser, element } = require('protractor')
 
-const { onlyDisplayed, asHref, asNumber, asText, elementInView } = require('../utils/utils.page')
+const { onlyDisplayed, asHref, asNumber, asText, elementInView, waitForAllElements } = require('../utils/utils.page')
 
-const getComments = () => element.all(by.className('cmnt-box'))
-  .filter(onlyDisplayed)
-  .map(createComment)
+const byCommentBox = by.className('cmnt-box')
+const getComments = () => waitForAllElements(byCommentBox)
+  .then(() => element.all(byCommentBox)
+    .filter(onlyDisplayed)
+    .map(createComment)
+  )
 
 const createComment = el => {
   const titleEl = el.element(by.className('cmnt-title'))
