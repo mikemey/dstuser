@@ -23,10 +23,10 @@ angular
     ngRoute,
     userModule.name
   ])
-  .factory('wsurl', $window => {
+  .factory('wsurl', ['$window', $window => {
     const loc = $window.location
     return (loc.protocol === 'https:' ? 'wss://' : 'ws://') + loc.host + '/dstu/ws'
-  })
+  }])
   .config(['$routeProvider', mainRouter])
 
 export default MODULE_NAME

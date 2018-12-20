@@ -6,12 +6,13 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 const isTest = process.env.npm_lifecycle_event.includes('test')
+const isProd = process.env.NODE_ENV === 'PROD'
 const targetFolder = 'dist'
 
 module.exports = {
   stats: 'minimal',
   entry: isTest ? undefined : { app: './frontend/app/main.js' },
-  mode: 'none',
+  mode: (isTest || !isProd) ? 'development' : 'production',
   output: isTest ? {}
     : {
       path: path.resolve(__dirname, targetFolder),
