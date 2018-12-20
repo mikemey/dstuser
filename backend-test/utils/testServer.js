@@ -14,7 +14,6 @@ const testConfig = {
   postingRatingNextTemplate: '/Forum/RatingLog?id=$POSTID$&idType=Posting&LatestRaterCommunityIdentityId=$LRID$'
 }
 
-const LOG_IN_TESTS = 0
 const quietLogger = {
   info: () => { },
   error: () => { },
@@ -30,6 +29,7 @@ const loudLogger = {
   log: obj => { console.log(obj) }
 }
 
+const LOG_IN_TESTS = 0
 const createTestLogger = () => LOG_IN_TESTS ? loudLogger : quietLogger
 
 const TestServer = () => {
@@ -50,7 +50,7 @@ const TestServer = () => {
 
   const request = () => supertest(app)
 
-  const ws = path => new Promise((resolve, reject) => {
+  const ws = (path, onMessage) => new Promise((resolve, reject) => {
     const connectionUrl = wsAddress + path
     const websocket = new WebSocket(connectionUrl)
     const result = { data: [], status: 'init' }
@@ -64,6 +64,7 @@ const TestServer = () => {
       testLogger.info('testsocket message')
       result.status = 'message'
       result.data.push(JSON.parse(data))
+      if (onMessage) return onMessage(websocket)
     })
 
     websocket.on('error', err => {

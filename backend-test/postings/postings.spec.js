@@ -54,6 +54,37 @@ describe('postings websocket', () => {
     }))
   })
 
+  describe('client closes connections', () => {
+    const userId = 799725
+    const postingsPathRe = new RegExp(`\\/userprofil\\/postings\\/${userId}.*`)
+    const delay = time => result => new Promise(resolve => setTimeout(() => resolve(result), time))
+
+    it('should stop requesting user pages', () => {
+      let requestCounter = 0
+      nock(server.config.dstuHost).persist()
+        .get(postingsPathRe)
+        .reply(() => {
+          requestCounter += 1
+          return [200, testData(userId, 1)]
+        })
+
+      const onMessage = websocket => websocket.close()
+
+      return server.ws(`/dstu/ws/postings/${userId}`, onMessage)
+        .then(response => {
+          response.status.should.equal('closed')
+          response.data.should.have.lengthOf(1)
+          response.data[0].part.should.equal(1)
+          response.data[0].totalParts.should.equal(101)
+          response.data[0].userName.should.equal('Helmut Wolff')
+        })
+        .then(delay(50))
+        .then(() => {
+          requestCounter.should.be.below(3)
+        })
+    })
+  })
+
   describe('derStandard server errors', () => {
     const userId = 425185
     const errorResponse = { error: `User ID not found: ${userId}` }

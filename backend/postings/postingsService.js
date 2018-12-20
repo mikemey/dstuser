@@ -24,28 +24,45 @@ const PostingsService = (config, logger) => {
         const remainingPageLinks = userPage.findRemainingLinks()
 
         const prBuilder = PartialResultBuilder(userName, remainingPageLinks.length + 1)
-        const firstPagePostings = userPage.getPostings()
-        onPartialResult(prBuilder.build(firstPagePostings))
+        const collector = Collector(remainingPageLinks, prBuilder.build, onPartialResult)
 
-        return collectPostings(remainingPageLinks, prBuilder, onPartialResult)
+        return sendPageResult(firstPage, collectPostings, collector)
       })
       .then(() => {
         logger.info(`user profile [${userId}] \tDONE (${stopTimer(profileTimer)}ms)`)
       })
   }
 
-  const collectPostings = (remainingPageLinks, prBuilder, onPartialResult) => remainingPageLinks.length === 0
+  const sendPageResult = (page, nextFunc, collector) => {
+    const postings = UserPageObject.from(page, config).getPostings()
+    return sendPartialResult(postings, nextFunc, collector)
+  }
+
+  const sendPartialResult = (postings, nextFunc, collector) => {
+    return collector.onPartialResult(collector.responseBuilder(postings))
+      ? nextFunc(collector)
+      : Promise.resolve()
+  }
+
+  const Collector = (links, responseBuilder, onPartialResult) => {
+    const linksEmpty = () => links.length === 0
+    const nextLink = () => links.shift()
+    return {
+      linksEmpty,
+      nextLink,
+      responseBuilder,
+      onPartialResult
+    }
+  }
+
+  const collectPostings = collector => collector.linksEmpty()
     ? Promise.resolve()
-    : requestPage(remainingPageLinks.shift())
-      .then(page => {
-        const postings = UserPageObject.from(page, config).getPostings()
-        return onPartialResult(prBuilder.build(postings))
-      })
+    : requestPage(collector.nextLink())
+      .then(page => sendPageResult(page, collectPostings, collector))
       .catch(error => {
         logger.error(`Error requesting page`, error)
-        onPartialResult(prBuilder.build([]))
+        return sendPartialResult([], collectPostings, collector)
       })
-      .finally(() => collectPostings(remainingPageLinks, prBuilder, onPartialResult))
 
   const requestPage = url => {
     logger.info(`postings: ${url}`)
