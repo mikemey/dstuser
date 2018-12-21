@@ -55,12 +55,10 @@ const userPageCtrl = ($scope, $websocket, $location, $routeParams, $window, wsur
   }
 
   const updateFilterEnabled = () => {
-    const uidFields = $window.document.querySelectorAll('input[id^="filter-"]')
-    uidFields.forEach(field => {
-      if ($scope.model.content) {
-        field.removeAttribute(DISABLED)
-      }
-    })
+    if ($scope.model.content) {
+      const uidFields = $window.document.querySelectorAll('input[id^="filter-"]')
+      uidFields.forEach(field => field.removeAttribute(DISABLED))
+    }
   }
 
   const focusField = () => {
