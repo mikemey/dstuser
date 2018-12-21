@@ -15,12 +15,15 @@ const postingsCtrl = function ($scope, $sce, $sanitize) {
     filter: ''
   }
 
-  const loadPostings = postings => { $scope.model.postings = postings.map(addFilterContent) }
+  const loadPostings = postings => { $scope.model.postings = addFilterContent(postings) }
   const setFilter = filter => { $scope.model.filter = filter }
 
-  const addFilterContent = post => {
-    post.filterContent = `${post.title} ${post.content} ${post.article.title}`.toLowerCase()
-    return post
+  const addFilterContent = postings => {
+    postings.filter(post => !post.filterContent)
+      .forEach(post => {
+        post.filterContent = `${post.title} ${post.content} ${post.article.title}`.toLowerCase()
+      })
+    return postings
   }
 
   $scope.highlight = (text, search) => {
