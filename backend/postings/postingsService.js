@@ -1,4 +1,4 @@
-const UserPageObject = require('./userPageObject')
+const UserPageParser = require('./userPageParser')
 const PartialResultBuilder = require('./partialResultBuilder')
 
 const requests = require('../utils/requests')
@@ -19,9 +19,9 @@ const PostingsService = (config, logger) => {
 
     return requestPage(profileUrl)
       .then(firstPage => {
-        const userPage = UserPageObject.from(firstPage, config)
-        const userName = userPage.getUserName()
-        const remainingPageLinks = userPage.findRemainingLinks()
+        const pageParser = UserPageParser.from(firstPage, config)
+        const userName = pageParser.getUserName()
+        const remainingPageLinks = pageParser.findRemainingLinks()
 
         const prBuilder = PartialResultBuilder(userName, remainingPageLinks.length + 1)
         const collector = Collector(remainingPageLinks, prBuilder.build, onPartialResult)
@@ -34,7 +34,7 @@ const PostingsService = (config, logger) => {
   }
 
   const sendPageResult = (page, nextFunc, collector) => {
-    const postings = UserPageObject.from(page, config).getPostings()
+    const postings = UserPageParser.from(page, config).getPostings()
     return sendPartialResult(postings, nextFunc, collector)
   }
 
