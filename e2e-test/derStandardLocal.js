@@ -27,14 +27,18 @@ process.on('SIGTERM', shutdown)
 process.on('SIGINT', shutdown)
 
 const app = express()
+
+const manyPagesUserId = 799725
+const ratingUserId = 755005
+
 app.use('/userprofil/postings/:userId', (req, res) => {
   const userId = req.params.userId
-  const page = req.query.pageNumber
+  const page = Number(userId) === manyPagesUserId
+    ? 1
+    : req.query.pageNumber
   logger.info(`requested user page ${userId}-${page}`)
   return res.status(200).send(dataLoader.getComment(userId, page))
 })
-
-const ratingUserId = 755005
 
 app.use('/forum/ratinglog', (req, res) => {
   const idType = req.query.idType
