@@ -3,6 +3,7 @@
     "part": 1,
     "totalParts": 1,
     "userName": "a standard user",
+    "totalPostings": 3,
     "postings": [
       {
         "postingId": "1036279475",

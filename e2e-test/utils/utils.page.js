@@ -27,6 +27,7 @@ const waitForElement = (byElement, locator = element) => browser
 const waitForAllElements = byElement => waitForElement(byElement, element.all)
 
 const waitForElementText = byElement => waitForElement(byElement).then(() => element(byElement).getText())
+const waitForElementNumber = byElement => waitForElementText(byElement).then(asNumber)
 
 module.exports = {
   onlyDisplayed,
@@ -38,5 +39,6 @@ module.exports = {
   setInputField,
   waitForElement,
   waitForAllElements,
-  waitForElementText
+  waitForElementText,
+  waitForElementNumber
 }

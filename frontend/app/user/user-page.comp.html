@@ -44,7 +44,11 @@
         </div>
       </div>
 
-      <div class="col-1 small mt-sm-0 mt-1">
+      <div class="col-1 mt-sm-0 mt-1 mx-0">
+        <user-stats ng-if="model.content" content="model.content"></user-stats>
+      </div>
+
+      <div class="col-1 mt-sm-0 mt-1 mx-0">
         <div class="float-right text-center" ng-if="model.content">
           <small class="col">Karma</small>
           <karma-points class="text-nowrap" postings="model.content.postings"></karma-points>

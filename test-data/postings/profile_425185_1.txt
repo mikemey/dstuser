@@ -293,7 +293,7 @@
 <div id="up_col_content" class="postings">
     <div class="header">
         <h3>Postings
-                            <span>1 - 10 von 40</span>
+                            <span>1 - 10 von 30</span>
         </h3>
     </div>
 

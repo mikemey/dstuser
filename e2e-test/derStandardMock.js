@@ -18,7 +18,7 @@ const start = async () => {
 
 const getServerUrl = path => serverUrl ? `${serverUrl}${path}` : '-- not yet started --'
 
-const stop = async () => { await mockServer.stop() }
+const stop = () => { mockServer.stop() }
 
 const pagePath = (userId, pageNum) => serverCfg.userProfileTemplate
   .replace(serverCfg.userIdPlaceholder, userId)
@@ -27,21 +27,25 @@ const pagePath = (userId, pageNum) => serverCfg.userProfileTemplate
 const ratingPath = postingId => serverCfg.postingRatingTemplate
   .replace(serverCfg.postingIdPlaceholder, postingId)
 
-const serveUserPageFor = async (userId, pageNum) => {
+const serveUserPageFor = (userId, pageNum) => {
   const body = dataLoader.getComment(userId, pageNum)
-  await mockWithQuery(pagePath(userId, pageNum)).thenReply(200, body, htmlContentHeader)
+  return mockWithQuery(pagePath(userId, pageNum)).thenReply(200, body, htmlContentHeader)
 }
 
-const server404WhenUserPageFor = async userId => {
-  await mockWithQuery(pagePath(userId, 1))
-    .thenReply(404, dataLoader.get404Page())
+const serveDefaultUserPageFor = userId => {
+  const body = dataLoader.getComment(userId, 1)
+  const path = pagePath(userId, 1).replace(/\?.*$/g, '')
+  return mockServer.get(path).thenReply(200, body, htmlContentHeader)
 }
+
+const server404WhenUserPageFor = userId => mockWithQuery(pagePath(userId, 1))
+  .thenReply(404, dataLoader.get404Page())
 
 const getCommentResult = userId => dataLoader.getCommentResult(userId)
 
-const serveRating = async (userId, postingId, dataPostingId = postingId) => {
+const serveRating = (userId, postingId, dataPostingId = postingId) => {
   const body = dataLoader.getRating(userId, dataPostingId)
-  await mockWithQuery(ratingPath(postingId)).thenReply(200, body, htmlContentHeader)
+  return mockWithQuery(ratingPath(postingId)).thenReply(200, body, htmlContentHeader)
 }
 
 const mockWithQuery = fullPath => {
@@ -57,5 +61,5 @@ const mockWithQuery = fullPath => {
 module.exports = {
   start, stop, getServerUrl,
   serveUserPageFor, server404WhenUserPageFor, getCommentResult,
-  serveRating
+  serveRating, serveDefaultUserPageFor
 }

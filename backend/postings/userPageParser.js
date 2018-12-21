@@ -1,6 +1,6 @@
 const $ = require('cheerio')
 
-const from = (page, config) => {
+const from = (firstPage, config) => {
   const cleanText = el => el.text().trim()
   const cleanNumber = el => Number(cleanText(el))
   const cleanHref = el => {
@@ -10,9 +10,27 @@ const from = (page, config) => {
       : config.dstuHost + href
   }
 
-  const getUserName = () => cleanText(page('div#up_user h2'))
+  const getCommonProps = () => {
+    const userName = getUserName()
+    const totalParts = getRemainingPageLinks().length + 1
+    const totalPostings = getTotalPostings()
 
-  const getPostings = () => page('.posting').map(extractPosting).get()
+    return { userName, totalParts, totalPostings }
+  }
+
+  const getUserName = () => cleanText(firstPage('div#up_user h2'))
+
+  const getRemainingPageLinks = () => firstPage('div.paging_scroller_container').first()
+    .children().not('.current')
+    .map((_, pageAnchor) => cleanHref($(pageAnchor)))
+    .get()
+
+  const getTotalPostings = () => {
+    const fullTotalText = cleanText(firstPage('div.postings div.header span'))
+    return Number(fullTotalText.replace(/.*von\s/, ''))
+  }
+
+  const getPostings = userPage => userPage('.posting').map(extractPosting).get()
 
   const extractPosting = (_, postingDiv) => {
     const postingId = $(postingDiv).attr('data-postingid')
@@ -42,13 +60,8 @@ const from = (page, config) => {
     return { pos, neg }
   }
 
-  const findRemainingLinks = () => page('div.paging_scroller_container').first()
-    .children().not('.current')
-    .map((_, pageAnchor) => cleanHref($(pageAnchor)))
-    .get()
-
   return {
-    getUserName, getPostings, findRemainingLinks
+    getCommonProps, getRemainingPageLinks, getPostings
   }
 }
 

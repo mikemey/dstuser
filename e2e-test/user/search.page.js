@@ -1,7 +1,10 @@
 const { by, browser, element } = require('protractor')
 
 const comments = require('./comments.page')
-const { hasElement, onlyDisplayed, asNumber, setInputField, waitForElementText } = require('../utils/utils.page')
+const {
+  hasElement, onlyDisplayed, asNumber, setInputField,
+  waitForElementText, waitForElementNumber
+} = require('../utils/utils.page')
 
 // large screen -> xxx-small element identifiers
 const LARGE_SCREEN = { id: 'LARGE SCREEN', width: 1000, height: 800, suffix: 'small' }
@@ -78,6 +81,10 @@ const SearchPage = testScreen => {
   const hasKarma = () => Promise.all([hasElement(byKarma('pos')), hasElement(byKarma('neg'))])
     .then(karmas => karmas[0] && karmas[1])
 
+  const byTotal = by.className(`total-postings`)
+  const hasPostingTotal = () => hasElement(byTotal)
+  const getPostingTotal = () => waitForElementNumber(byTotal)
+
   /* eslint object-property-newline: "off" */
   return {
     id: testScreen.id,
@@ -94,7 +101,8 @@ const SearchPage = testScreen => {
     hasErrorMessage, getErrorMessage,
     hasFilter, isFilterEnabled, sendToFilter,
     comments,
-    hasKarma, getKarmaPoints
+    hasKarma, getKarmaPoints,
+    hasPostingTotal, getPostingTotal
   }
 }
 

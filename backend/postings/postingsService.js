@@ -20,11 +20,10 @@ const PostingsService = (config, logger) => {
     return requestPage(profileUrl)
       .then(firstPage => {
         const pageParser = UserPageParser.from(firstPage, config)
-        const userName = pageParser.getUserName()
-        const remainingPageLinks = pageParser.findRemainingLinks()
+        const commonProps = pageParser.getCommonProps()
 
-        const prBuilder = PartialResultBuilder(userName, remainingPageLinks.length + 1)
-        const collector = Collector(remainingPageLinks, prBuilder.build, onPartialResult)
+        const prBuilder = PartialResultBuilder(commonProps)
+        const collector = Collector(pageParser, prBuilder.build, onPartialResult)
 
         return sendPageResult(firstPage, collectPostings, collector)
       })
@@ -33,8 +32,21 @@ const PostingsService = (config, logger) => {
       })
   }
 
+  const Collector = (pageParser, responseBuilder, onPartialResult) => {
+    const links = pageParser.getRemainingPageLinks()
+    const linksEmpty = () => links.length === 0
+    const nextLink = () => links.shift()
+    return {
+      linksEmpty,
+      nextLink,
+      responseBuilder,
+      onPartialResult,
+      getPostings: pageParser.getPostings
+    }
+  }
+
   const sendPageResult = (page, nextFunc, collector) => {
-    const postings = UserPageParser.from(page, config).getPostings()
+    const postings = collector.getPostings(page)
     return sendPartialResult(postings, nextFunc, collector)
   }
 
@@ -42,17 +54,6 @@ const PostingsService = (config, logger) => {
     return collector.onPartialResult(collector.responseBuilder(postings))
       ? nextFunc(collector)
       : Promise.resolve()
-  }
-
-  const Collector = (links, responseBuilder, onPartialResult) => {
-    const linksEmpty = () => links.length === 0
-    const nextLink = () => links.shift()
-    return {
-      linksEmpty,
-      nextLink,
-      responseBuilder,
-      onPartialResult
-    }
   }
 
   const collectPostings = collector => collector.linksEmpty()
