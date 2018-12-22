@@ -12,6 +12,7 @@ main {
 
 .title-cmnt {
   font-weight: normal;
+  font-size: 70%;
 }
 
 form[name=userForm] input::placeholder {
