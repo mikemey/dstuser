@@ -44,17 +44,6 @@
         </div>
       </div>
 
-      <div class="col-1 mt-sm-0 mt-1 mx-0">
-        <user-stats ng-if="model.content" content="model.content"></user-stats>
-      </div>
-
-      <div class="col-1 mt-sm-0 mt-1 mx-0">
-        <div class="float-right text-center" ng-if="model.content">
-          <small class="col">Karma</small>
-          <karma-points class="text-nowrap" postings="model.content.postings"></karma-points>
-        </div>
-      </div>
-
       <div class="col-md-3 d-none d-md-block mt-sm-0 mt-2">
         <input id="filter-small" type="text" formnovalidate="formnovalidate"
                class="form-control form-control-sm" placeholder="filter..."
@@ -68,6 +57,12 @@
         <input id="filter-large" type="text" formnovalidate="formnovalidate"
                class="form-control d-md-none" placeholder="filter..." ng-model="model.filter"
                onkeydown="if (event.keyCode === 13) { return false; }" disabled />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col mt-sm-0 mt-1 mx-0">
+        <user-stats ng-if="model.content" content="model.content"></user-stats>
       </div>
     </div>
   </form>

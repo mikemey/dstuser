@@ -1,4 +1,12 @@
-<div ng-if="model.content" class="text-center">
-  <small class="col">#&nbsp;Posts</small>
-  <small class="total-postings col font-weight-bold" ng-bind="model.content.totalPostings"></small>
+<div class="row text-center" ng-if="model.content">
+  <div class="col-6 ">
+    <small class="">Postings:</small>
+    <small class="total-postings font-weight-bold" ng-bind="model.content.totalPostings"></small>
+  </div>
+  <div class="col-6 mt-sm-0 mt-1 mx-0">
+    <div class="">
+      <small class="">Karma:</small>
+      <karma-points class="text-nowrap" postings="model.content.postings"></karma-points>
+    </div>
+  </div>
 </div>
