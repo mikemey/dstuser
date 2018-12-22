@@ -1,5 +1,5 @@
-<div class="row postings mb-5 mt-2">
-  <div class="col-xl-3 col-lg-4 col-sm-6 p-lg-2 p-1" ng-repeat="posting in model.postings"
+<div class="row postings my-2">
+  <div class="col-xl-3 col-lg-4 col-sm-6 p-lg-2 p-1" ng-repeat="posting in model.postings | limitTo: model.postingsLimit"
        ng-class="posting.filterContent.includes(model.filter.toLowerCase()) ? '' : 'filtered-cmnt'">
     <div class="card cmnt-box h-100" ng-class="posting.article.section.toLowerCase()">
       <div class="cmnt-date float-right text-muted" ng-bind="posting.date"></div>
@@ -28,4 +28,12 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="row postings mb-5 p-lg-2 p-1">
+  <button id="more-postings" ng-if="model.postings.length > model.postingsLimit"
+          ng-click="showMorePostings()" class="btn btn-secondary btn-dark col-12">
+    load more postings&hellip;&nbsp;
+    <small>({{ model.postingsLimit }} of {{ model.postings.length }})</small>
+  </button>
 </div>

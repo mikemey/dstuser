@@ -4,6 +4,7 @@ import ngSanitize from 'angular-sanitize'
 import './postings.comp.css'
 import './section-colors.css'
 
+const POSTINGS_PER_PAGE = 48
 const postingsCtrl = function ($scope, $sce, $sanitize) {
   this.$onChanges = () => {
     loadPostings(this.postings)
@@ -12,6 +13,7 @@ const postingsCtrl = function ($scope, $sce, $sanitize) {
 
   $scope.model = {
     postings: null,
+    postingsLimit: POSTINGS_PER_PAGE,
     filter: ''
   }
 
@@ -35,6 +37,10 @@ const postingsCtrl = function ($scope, $sce, $sanitize) {
     return $sce.trustAsHtml(text.replace(
       new RegExp(search, 'gi'), '<span class="highlightedText">$&</span>')
     )
+  }
+
+  $scope.showMorePostings = () => {
+    $scope.model.postingsLimit += POSTINGS_PER_PAGE
   }
 }
 

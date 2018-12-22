@@ -1,19 +1,18 @@
 const { SearchPage, ALL_SCREENS } = require('./pageobjects/search.page')
 
-const htmlTests = require('./user-spec-parts/html.spec.part')
-const searchUserTests = require('./user-spec-parts/search.spec.part')
-const filterCommentsTests = require('./user-spec-parts/filter.spec.part')
-const ratingsTests = require('./user-spec-parts/rating.spec.part')
-const statsTests = require('./user-spec-parts/stats.spec.part')
+const testParts = [
+  require('./user-spec-parts/html.spec.part'),
+  require('./user-spec-parts/search.spec.part'),
+  require('./user-spec-parts/filter.spec.part'),
+  require('./user-spec-parts/rating.spec.part'),
+  require('./user-spec-parts/stats.spec.part'),
+  require('./user-spec-parts/pagination.spec.part')
+]
 
 ALL_SCREENS.forEach(testScreen => {
   const searchPage = SearchPage(testScreen)
 
   describe(`[${searchPage.id}]:`, () => {
-    htmlTests(searchPage)
-    searchUserTests(searchPage)
-    filterCommentsTests(searchPage)
-    ratingsTests(searchPage)
-    statsTests(searchPage)
+    testParts.forEach(part => part(searchPage))
   })
 })

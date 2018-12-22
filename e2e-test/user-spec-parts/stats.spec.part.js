@@ -54,16 +54,24 @@ module.exports = searchPage => {
         expect(searchPage.getPostingTotal()).toEqual(1010)
       })
 
-      it('shows karma total', () => {
-        expect(searchPage.getKarmaTotal()).toEqual([606, 404])
-      })
-
-      it('shows pages loaded', () => {
-        expect(searchPage.getPagesLoaded()).toEqual(101)
-      })
-
       it('shows pages total', () => {
         expect(searchPage.getPagesTotal()).toEqual(101)
+      })
+
+      it('shows not all pages loaded yet', () => {
+        expect(searchPage.getPagesLoaded()).toBeLessThan(101)
+      })
+
+      describe('after loading is finished', () => {
+        beforeAll(() => searchPage.waitForPostingsLoaded())
+
+        it('shows karma total', () => {
+          expect(searchPage.getKarmaTotal()).toEqual([606, 404])
+        })
+
+        it('shows pages loaded', () => {
+          expect(searchPage.getPagesLoaded()).toEqual(101)
+        })
       })
     })
   })

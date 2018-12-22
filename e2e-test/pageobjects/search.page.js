@@ -3,7 +3,8 @@ const { by, browser, element } = require('protractor')
 const comments = require('./comments.page')
 const {
   hasElement, onlyDisplayed, asNumber, setInputField,
-  waitForElementText, waitForElementNumber, waitForElementInvisible
+  waitForElementText, waitForElementNumber, waitForElementInvisible,
+  elementInView
 } = require('../utils/utils.page')
 
 // large screen -> xxx-small element identifiers
@@ -81,7 +82,7 @@ const SearchPage = testScreen => {
   const hasKarmaTotal = () => Promise.all([hasElement(byKarma('pos')), hasElement(byKarma('neg'))])
     .then(karmas => karmas[0] && karmas[1])
 
-  const byTotal = by.className(`postings-total`)
+  const byTotal = by.className('postings-total')
   const hasPostingTotal = () => hasElement(byTotal)
   const getPostingTotal = () => waitForElementNumber(byTotal)
 
@@ -89,6 +90,11 @@ const SearchPage = testScreen => {
   const getPagesTotal = () => element(by.className('pages-total')).getText().then(asNumber)
 
   const waitForPostingsLoaded = () => waitForElementInvisible(by.className('loader'))
+
+  const byMorePostingsButton = by.id('more-postings')
+  const hasMorePostingsButton = () => hasElement(byMorePostingsButton)
+  const clickMorePostingsButton = () => elementInView(byMorePostingsButton).click()
+  const getMorePostingsButtonLabel = () => waitForElementText(byMorePostingsButton)
 
   /* eslint object-property-newline: "off" */
   return {
@@ -109,7 +115,8 @@ const SearchPage = testScreen => {
     hasKarmaTotal, getKarmaTotal,
     hasPostingTotal, getPostingTotal,
     getPagesLoaded, getPagesTotal,
-    waitForPostingsLoaded
+    waitForPostingsLoaded,
+    hasMorePostingsButton, clickMorePostingsButton, getMorePostingsButtonLabel
   }
 }
 

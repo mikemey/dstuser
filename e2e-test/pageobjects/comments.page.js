@@ -8,6 +8,7 @@ const getComments = () => waitForAllElements(byCommentBox)
     .filter(onlyDisplayed)
     .map(createComment)
   )
+const countComments = () => waitForAllElements(byCommentBox).then(() => element.all(byCommentBox).count())
 
 const createComment = el => {
   const titleEl = el.element(by.className('cmnt-title'))
@@ -57,6 +58,7 @@ const clickRaterAndFollow = ix => element.all(by.className('rater-link')).get(ix
 /* eslint object-property-newline: "off" */
 module.exports = {
   getComments,
+  countComments,
   getHighlightedTexts,
   getRatingHrefs, clickRating,
   getPositiveRaters, getNegativeRaters, clickRaterAndFollow
