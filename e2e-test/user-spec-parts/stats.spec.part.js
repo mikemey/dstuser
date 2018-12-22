@@ -21,7 +21,7 @@ module.exports = searchPage => {
       beforeAll(searchPage.open)
 
       it('hidden karma points', () => {
-        expect(searchPage.hasKarma()).toBeFalsy()
+        expect(searchPage.hasKarmaTotal()).toBeFalsy()
       })
 
       it('hidden posting total', () => {
@@ -32,13 +32,13 @@ module.exports = searchPage => {
     describe('shows for', () => {
       it('single user page - karma points', () => {
         searchPage.openUserPage(smallUserId)
-        expect(searchPage.hasKarma()).toBeTruthy()
-        expect(searchPage.getKarmaPoints()).toEqual([17, 18])
+        expect(searchPage.hasKarmaTotal()).toBeTruthy()
+        expect(searchPage.getKarmaTotal()).toEqual([17, 18])
       })
 
       it('multiple user page - karma points', () => {
         searchPage.openUserPage(userId)
-        expect(searchPage.getKarmaPoints()).toEqual([278, 231])
+        expect(searchPage.getKarmaTotal()).toEqual([278, 231])
       })
     })
 
@@ -46,7 +46,7 @@ module.exports = searchPage => {
       beforeAll(() => searchPage.openUserPage(largeUserId))
 
       it('shows karma points', () => {
-        expect(searchPage.getKarmaPoints()).toEqual([606, 404])
+        expect(searchPage.getKarmaTotal()).toEqual([606, 404])
       })
 
       it('shows posting total', () => {

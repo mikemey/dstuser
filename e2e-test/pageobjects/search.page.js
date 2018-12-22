@@ -3,7 +3,7 @@ const { by, browser, element } = require('protractor')
 const comments = require('./comments.page')
 const {
   hasElement, onlyDisplayed, asNumber, setInputField,
-  waitForElementText, waitForElementNumber
+  waitForElementText, waitForElementNumber, waitForElementInvisible
 } = require('../utils/utils.page')
 
 // large screen -> xxx-small element identifiers
@@ -73,12 +73,13 @@ const SearchPage = testScreen => {
   const isFilterEnabled = () => filterInput().isEnabled()
   const sendToFilter = filter => setInputField(filterInput(), filter)
 
-  const byKarma = type => by.className(`karma-${type}`)
+  const byKarma = type => by.css(`user-stats *[class~=karma-${type}]`)
   const karmaPoints = type => element.all(byKarma(type))
     .filter(onlyDisplayed)
     .first().getText().then(asNumber)
-  const getKarmaPoints = () => Promise.all([karmaPoints('pos'), karmaPoints('neg')])
-  const hasKarma = () => Promise.all([hasElement(byKarma('pos')), hasElement(byKarma('neg'))])
+  const getKarmaTotal = () => waitForElementInvisible(by.className('loader'))
+    .then(() => Promise.all([karmaPoints('pos'), karmaPoints('neg')]))
+  const hasKarmaTotal = () => Promise.all([hasElement(byKarma('pos')), hasElement(byKarma('neg'))])
     .then(karmas => karmas[0] && karmas[1])
 
   const byTotal = by.className(`total-postings`)
@@ -101,7 +102,7 @@ const SearchPage = testScreen => {
     hasErrorMessage, getErrorMessage,
     hasFilter, isFilterEnabled, sendToFilter,
     comments,
-    hasKarma, getKarmaPoints,
+    hasKarmaTotal, getKarmaTotal,
     hasPostingTotal, getPostingTotal
   }
 }
