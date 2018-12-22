@@ -35,8 +35,6 @@ const userPageCtrl = ($scope, $websocket, $location, $routeParams, $window, wsur
       })
 
       ws.onClose(() => {
-        updateFilterEnabled()
-        focusField()
         $scope.model.loading = false
       })
 
@@ -50,6 +48,8 @@ const userPageCtrl = ($scope, $websocket, $location, $routeParams, $window, wsur
       first = false
       $scope.model.content = partial
       $scope.model.content.partsLoaded = 1
+      updateFilterEnabled()
+      focusField()
     } else {
       $scope.model.content.postings = $scope.model.content.postings.concat(partial.postings)
       $scope.model.content.partsLoaded += 1
@@ -76,6 +76,7 @@ const userPageCtrl = ($scope, $websocket, $location, $routeParams, $window, wsur
     })
   }
 
+  focusField()
   return loadUserData()
 }
 

@@ -32,6 +32,7 @@ module.exports = searchPage => {
     describe('shows for', () => {
       it('single user page - karma points', () => {
         searchPage.openUserPage(smallUserId)
+        searchPage.waitForPostingsLoaded()
         expect(searchPage.hasKarmaTotal()).toBeTruthy()
         expect(searchPage.getKarmaTotal()).toEqual([17, 18])
         expect(searchPage.hasPostingTotal()).toBeTruthy()
@@ -41,6 +42,7 @@ module.exports = searchPage => {
 
       it('multiple user page - karma points + totals', () => {
         searchPage.openUserPage(userId)
+        searchPage.waitForPostingsLoaded()
         expect(searchPage.getKarmaTotal()).toEqual([278, 231])
         expect(searchPage.getPostingTotal()).toEqual(30)
         expect(searchPage.getPagesTotal()).toEqual(3)

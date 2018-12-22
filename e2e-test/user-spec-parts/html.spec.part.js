@@ -1,3 +1,5 @@
+const { activeElementId } = require('../utils/utils.page')
+
 module.exports = searchPage => {
   const hideElementsScreen = searchPage.getHiddenScreen()
 
@@ -9,8 +11,9 @@ module.exports = searchPage => {
         expect(searchPage.formLabel()).toEqual('user ID')
       })
 
-      it(`should show userId input`, () => {
+      it(`should focus on userId input`, () => {
         expect(searchPage.hasUserIdInput()).toBeTruthy()
+        expect(searchPage.userId()).toEqual(activeElementId())
       })
 
       it(`should NOT show [${hideElementsScreen.id}] userId input`, () => {

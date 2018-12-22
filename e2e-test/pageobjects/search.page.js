@@ -3,8 +3,7 @@ const { by, browser, element } = require('protractor')
 const comments = require('./comments.page')
 const {
   hasElement, onlyDisplayed, asNumber, setInputField,
-  waitForElementText, waitForElementNumber, waitForElementInvisible,
-  elementInView
+  waitForElementText, waitForElementNumber, waitForElementInvisible, waitForElementClick
 } = require('../utils/utils.page')
 
 // large screen -> xxx-small element identifiers
@@ -30,8 +29,8 @@ const SearchPage = testScreen => {
 
   const userSearchPath = '#!/search'
   const openUserPage = userId => open(`${userSearchPath}/${userId}`)
-  const open = (path = userSearchPath) => browser.get(path)
-    .then(() => browser.manage().window().setSize(testScreen.width, testScreen.height))
+  const open = (path = userSearchPath) => browser.manage().window().setSize(testScreen.width, testScreen.height)
+    .then(() => browser.get(path))
 
   const restart = () => browser.getAllWindowHandles()
     .then(handles => {
@@ -42,7 +41,8 @@ const SearchPage = testScreen => {
       browser.driver.switchTo().window(handles[0])
     })
 
-  const byUserId = (screen = testScreen) => by.id(`userId-${screen.suffix}`)
+  const userId = (screen = testScreen) => `userId-${screen.suffix}`
+  const byUserId = screen => by.id(userId(screen))
   const hasUserIdInput = screen => hasElement(byUserId(screen))
 
   const userIdInput = () => element(byUserId())
@@ -68,7 +68,8 @@ const SearchPage = testScreen => {
   const hasErrorMessage = screen => hasElement(byErrorMessage(screen))
   const getErrorMessage = () => waitForElementText(byErrorMessage())
 
-  const byFilter = (screen = testScreen) => by.id(`filter-${screen.suffix}`)
+  const filterId = (screen = testScreen) => `filter-${screen.suffix}`
+  const byFilter = (screen = testScreen) => by.id(filterId(screen))
   const hasFilter = screen => hasElement(byFilter(screen))
   const filterInput = () => element(byFilter())
   const isFilterEnabled = () => filterInput().isEnabled()
@@ -93,7 +94,7 @@ const SearchPage = testScreen => {
 
   const byMorePostingsButton = by.id('more-postings')
   const hasMorePostingsButton = () => hasElement(byMorePostingsButton)
-  const clickMorePostingsButton = () => elementInView(byMorePostingsButton).click()
+  const clickMorePostingsButton = () => waitForElementClick(byMorePostingsButton)
   const getMorePostingsButtonLabel = () => waitForElementText(byMorePostingsButton)
 
   /* eslint object-property-newline: "off" */
@@ -104,13 +105,13 @@ const SearchPage = testScreen => {
     restart,
     openUserPage,
     getHiddenScreen,
-    hasUserIdInput, sendToUserId, getUserId,
+    userId, hasUserIdInput, sendToUserId, getUserId,
     formLabel,
     hasSearchButton, isSearchButtonEnabled,
     requestUserComments,
     getUserName, hasUserName,
     hasErrorMessage, getErrorMessage,
-    hasFilter, isFilterEnabled, sendToFilter,
+    filterId, hasFilter, isFilterEnabled, sendToFilter,
     comments,
     hasKarmaTotal, getKarmaTotal,
     hasPostingTotal, getPostingTotal,

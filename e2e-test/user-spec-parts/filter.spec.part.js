@@ -1,6 +1,7 @@
 const { Key } = require('protractor')
 
 const derStandard = require('../derStandardMock')
+const { activeElementId } = require('../utils/utils.page')
 
 module.exports = searchPage => {
   const hideElementsScreen = searchPage.getHiddenScreen()
@@ -24,6 +25,7 @@ module.exports = searchPage => {
         expect(searchPage.hasFilter()).toBeTruthy()
         expect(searchPage.hasFilter(hideElementsScreen)).toBeFalsy()
         expect(searchPage.isFilterEnabled()).toBeFalsy()
+        expect(searchPage.userId()).toEqual(activeElementId())
       })
 
       it('when user not found', () => {
@@ -31,6 +33,7 @@ module.exports = searchPage => {
         searchPage.openUserPage(unknownUserId)
         expect(searchPage.getErrorMessage()).toMatch(`${unknownUserId}`)
         expect(searchPage.isFilterEnabled()).toBeFalsy()
+        expect(searchPage.userId()).toEqual(activeElementId())
       })
     })
 
@@ -42,6 +45,8 @@ module.exports = searchPage => {
 
       it('is enabled and not reload page on Key.Enter', () => {
         expect(searchPage.isFilterEnabled()).toBeTruthy()
+        expect(searchPage.filterId()).toEqual(activeElementId())
+
         searchPage.sendToUserId(23)
         searchPage.sendToFilter(Key.ENTER)
         expect(searchPage.getBrowserUrl())

@@ -1,6 +1,6 @@
 const { by, browser, element } = require('protractor')
 
-const { onlyDisplayed, asHref, asNumber, asText, elementInView, waitForAllElements } = require('../utils/utils.page')
+const { onlyDisplayed, asHref, asNumber, asText, waitForElementClick, waitForAllElements } = require('../utils/utils.page')
 
 const byCommentBox = by.className('cmnt-box')
 const getComments = () => waitForAllElements(byCommentBox)
@@ -41,7 +41,7 @@ const getRatingHrefs = () => element.all(by.css('.cmnt-rate a'))
   .filter(onlyDisplayed).map(el => asHref(el))
 
 const byRatingLink = postingId => by.id(`ln-${postingId}`)
-const clickRating = postingId => elementInView(byRatingLink(postingId)).click()
+const clickRating = postingId => waitForElementClick(byRatingLink(postingId))
 
 const getPositiveRaters = () => element.all(by.className('rating-pos'))
   .filter(onlyDisplayed).map(asText)

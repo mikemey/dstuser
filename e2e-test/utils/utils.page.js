@@ -13,12 +13,6 @@ const asNumber = res => {
 const hasElement = byElement => element.all(byElement)
   .filter(onlyDisplayed).first().isPresent()
 
-const elementInView = byElement => {
-  const el = element(byElement)
-  browser.executeScript('arguments[0].scrollIntoView()', el.getWebElement())
-  return el
-}
-
 const setInputField = (element, text) => element.clear()
   .then(() => element.sendKeys(text))
 
@@ -32,17 +26,26 @@ const waitForElementNumber = byElement => waitForElementText(byElement).then(asN
 
 const waitForElementInvisible = byElement => browser.wait(ExpectedConditions.invisibilityOf(element(byElement)))
 
+const waitForElementClick = byElement => waitForElement(byElement).then(() => {
+  const el = element(byElement)
+  browser.executeScript('arguments[0].scrollIntoView()', el.getWebElement())
+  return el.click()
+})
+
+const activeElementId = () => browser.driver.switchTo().activeElement().getAttribute('id')
+
 module.exports = {
   onlyDisplayed,
   asText,
   asHref,
   asNumber,
   hasElement,
-  elementInView,
+  waitForElementClick,
   setInputField,
   waitForElement,
   waitForAllElements,
   waitForElementText,
   waitForElementNumber,
-  waitForElementInvisible
+  waitForElementInvisible,
+  activeElementId
 }

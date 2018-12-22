@@ -1,6 +1,7 @@
 const { Key } = require('protractor')
 
 const derStandard = require('../derStandardMock')
+const { activeElementId } = require('../utils/utils.page')
 
 module.exports = searchPage => {
   const hideElementsScreen = searchPage.getHiddenScreen()
@@ -119,6 +120,7 @@ module.exports = searchPage => {
       expect(searchPage.hasErrorMessage()).toBeTruthy()
       expect(searchPage.hasErrorMessage(hideElementsScreen)).toBeFalsy()
       expect(searchPage.getErrorMessage()).toEqual(`User ID not found: ${userId}`)
+      expect(searchPage.userId()).toEqual(activeElementId())
     })
   })
 }
