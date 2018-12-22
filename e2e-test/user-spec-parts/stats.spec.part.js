@@ -17,32 +17,39 @@ module.exports = searchPage => {
 
     afterAll(derStandard.stop)
 
-    describe('karma points', () => {
-      it('hidden when no user', () => {
-        searchPage.open()
+    describe('when no user', () => {
+      beforeAll(searchPage.open)
+
+      it('hidden karma points', () => {
         expect(searchPage.hasKarma()).toBeFalsy()
       })
 
-      it('shows cumulative ratings (single user page)', () => {
+      it('hidden posting total', () => {
+        expect(searchPage.hasPostingTotal()).toBeFalsy()
+      })
+    })
+
+    describe('shows for', () => {
+      it('single user page - karma points', () => {
         searchPage.openUserPage(smallUserId)
         expect(searchPage.hasKarma()).toBeTruthy()
         expect(searchPage.getKarmaPoints()).toEqual([17, 18])
       })
 
-      it('shows cumulative ratings (multiple user page)', () => {
+      it('multiple user page - karma points', () => {
         searchPage.openUserPage(userId)
         expect(searchPage.getKarmaPoints()).toEqual([278, 231])
       })
     })
 
-    describe('number of total posts', () => {
-      it('hidden when no user', () => {
-        searchPage.open()
-        expect(searchPage.hasPostingTotal()).toBeFalsy()
+    describe('large user page #', () => {
+      beforeAll(() => searchPage.openUserPage(largeUserId))
+
+      it('shows karma points', () => {
+        expect(searchPage.getKarmaPoints()).toEqual([606, 404])
       })
 
-      it('shows when user (large user page)', () => {
-        searchPage.openUserPage(largeUserId)
+      it('shows posting total', () => {
         expect(searchPage.hasPostingTotal()).toBeTruthy()
         expect(searchPage.getPostingTotal()).toEqual(1010)
       })
