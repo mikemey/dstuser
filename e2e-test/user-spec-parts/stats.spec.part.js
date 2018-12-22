@@ -34,24 +34,42 @@ module.exports = searchPage => {
         searchPage.openUserPage(smallUserId)
         expect(searchPage.hasKarmaTotal()).toBeTruthy()
         expect(searchPage.getKarmaTotal()).toEqual([17, 18])
+        expect(searchPage.hasPostingTotal()).toBeTruthy()
+        expect(searchPage.getPostingTotal()).toEqual(3)
+        expect(searchPage.getPagesTotal()).toEqual(1)
       })
 
-      it('multiple user page - karma points', () => {
+      it('multiple user page - karma points + totals', () => {
         searchPage.openUserPage(userId)
         expect(searchPage.getKarmaTotal()).toEqual([278, 231])
+        expect(searchPage.getPostingTotal()).toEqual(30)
+        expect(searchPage.getPagesTotal()).toEqual(3)
       })
     })
 
     describe('large user page #', () => {
       beforeAll(() => searchPage.openUserPage(largeUserId))
 
-      it('shows karma points', () => {
-        expect(searchPage.getKarmaTotal()).toEqual([606, 404])
+      describe('during postings loading', () => {
+//        it('pages started loading', () => {
+//           expect(searchPage.getPagesLoaded()).toBeLessThan(101)
+//        })
+
+        it('waiting for loading to finish shows total karma points and all pages loaded', () => {
+          return searchPage.waitForPostingsLoaded()
+            .then(() => {
+              expect(searchPage.getKarmaTotal()).toEqual([606, 404])
+              // expect(searchPage.getPagesLoaded()).toEqual(101)
+            })
+        })
       })
 
       it('shows posting total', () => {
-        expect(searchPage.hasPostingTotal()).toBeTruthy()
         expect(searchPage.getPostingTotal()).toEqual(1010)
+      })
+
+      it('shows pages total', () => {
+        expect(searchPage.getPagesTotal()).toEqual(101)
       })
     })
   })

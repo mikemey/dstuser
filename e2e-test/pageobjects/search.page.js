@@ -77,14 +77,18 @@ const SearchPage = testScreen => {
   const karmaPoints = type => element.all(byKarma(type))
     .filter(onlyDisplayed)
     .first().getText().then(asNumber)
-  const getKarmaTotal = () => waitForElementInvisible(by.className('loader'))
-    .then(() => Promise.all([karmaPoints('pos'), karmaPoints('neg')]))
+  const getKarmaTotal = () => Promise.all([karmaPoints('pos'), karmaPoints('neg')])
   const hasKarmaTotal = () => Promise.all([hasElement(byKarma('pos')), hasElement(byKarma('neg'))])
     .then(karmas => karmas[0] && karmas[1])
 
-  const byTotal = by.className(`total-postings`)
+  const byTotal = by.className(`postings-total`)
   const hasPostingTotal = () => hasElement(byTotal)
   const getPostingTotal = () => waitForElementNumber(byTotal)
+
+  const getPagesLoaded = () => waitForElementNumber(by.className('pages-loaded'))
+  const getPagesTotal = () => waitForElementNumber(by.className('pages-total'))
+
+  const waitForPostingsLoaded = () => waitForElementInvisible(by.className('loader'))
 
   /* eslint object-property-newline: "off" */
   return {
@@ -103,7 +107,9 @@ const SearchPage = testScreen => {
     hasFilter, isFilterEnabled, sendToFilter,
     comments,
     hasKarmaTotal, getKarmaTotal,
-    hasPostingTotal, getPostingTotal
+    hasPostingTotal, getPostingTotal,
+    getPagesLoaded, getPagesTotal,
+    waitForPostingsLoaded
   }
 }
 
