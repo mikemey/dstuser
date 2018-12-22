@@ -55,10 +55,7 @@ const SearchPage = testScreen => {
   const hasSearchButton = screen => hasElement(bySearchButton(screen))
   const isSearchButtonEnabled = () => searchButton().isEnabled()
 
-  const requestUserComments = userId => {
-    sendToUserId(userId)
-    searchButton().click()
-  }
+  const requestUserComments = userId => sendToUserId(userId).then(() => searchButton().click())
 
   const byUserName = (screen = testScreen) => by.id(`userName-${screen.suffix}`)
   const hasUserName = screen => hasElement(byUserName(screen))
