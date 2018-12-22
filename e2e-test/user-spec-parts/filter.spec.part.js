@@ -35,10 +35,9 @@ module.exports = searchPage => {
     })
 
     describe('input field behaviour', () => {
-      beforeEach(async () => {
+      beforeEach(() => {
         searchPage.openUserPage(singlePageUserId)
-        const comments = await searchPage.comments.getComments()
-        expect(comments.length).toBe(3)
+        expect(searchPage.comments.countComments()).toEqual(3)
       })
 
       it('is enabled and not reload page on Key.Enter', () => {
@@ -53,9 +52,8 @@ module.exports = searchPage => {
     describe('posting filtering', () => {
       beforeAll(() => searchPage.openUserPage(userId))
 
-      it('shows all when no filter', async () => {
-        const comments = await searchPage.comments.getComments()
-        expect(comments.length).toBe(30)
+      it('shows all when no filter', () => {
+        expect(searchPage.comments.countComments()).toEqual(30)
       })
 
       it('when single title match and highlight text', async () => {
