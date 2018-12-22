@@ -49,8 +49,10 @@ const userPageCtrl = ($scope, $websocket, $location, $routeParams, $window, wsur
     if (first) {
       first = false
       $scope.model.content = partial
+      $scope.model.content.partsLoaded = 1
     } else {
       $scope.model.content.postings = $scope.model.content.postings.concat(partial.postings)
+      $scope.model.content.partsLoaded += 1
     }
   }
 

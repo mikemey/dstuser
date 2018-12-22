@@ -50,22 +50,16 @@ module.exports = searchPage => {
     describe('large user page #', () => {
       beforeAll(() => searchPage.openUserPage(largeUserId))
 
-      describe('during postings loading', () => {
-//        it('pages started loading', () => {
-//           expect(searchPage.getPagesLoaded()).toBeLessThan(101)
-//        })
-
-        it('waiting for loading to finish shows total karma points and all pages loaded', () => {
-          return searchPage.waitForPostingsLoaded()
-            .then(() => {
-              expect(searchPage.getKarmaTotal()).toEqual([606, 404])
-              // expect(searchPage.getPagesLoaded()).toEqual(101)
-            })
-        })
-      })
-
       it('shows posting total', () => {
         expect(searchPage.getPostingTotal()).toEqual(1010)
+      })
+
+      it('shows karma total', () => {
+        expect(searchPage.getKarmaTotal()).toEqual([606, 404])
+      })
+
+      it('shows pages loaded', () => {
+        expect(searchPage.getPagesLoaded()).toEqual(101)
       })
 
       it('shows pages total', () => {
