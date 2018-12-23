@@ -1,10 +1,9 @@
 const { by, browser, element } = require('protractor')
 
-const { onlyDisplayed, asHref, asNumber, asText, waitForElementClick, waitForAllElements } = require('../utils/utils.page')
+const { onlyDisplayed, asHref, asNumber, asText, waitForElementClick, waitForVisibleElements } = require('../utils/utils.page')
 
 const byCommentBox = by.className('cmnt-box')
-const displayedComments = () => waitForAllElements(byCommentBox)
-  .then(() => element.all(byCommentBox).filter(onlyDisplayed))
+const displayedComments = () => waitForVisibleElements(byCommentBox)
 const getComments = () => displayedComments().then(comments => comments.map(createComment))
 const countComments = () => displayedComments().then(comments => comments.length)
 

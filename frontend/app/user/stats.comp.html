@@ -1,13 +1,25 @@
 <div class="row text-center" ng-if="model.content">
   <div class="col-4">
     <small>Postings:</small>
-    <small class="postings-total font-weight-bold" ng-bind="model.content.totalPostings"></small>
+    <div class="d-none d-md-inline">
+      <small class="postings-total font-weight-bold" ng-bind="model.content.totalPostings"></small>
+    </div>
+    <div class="d-md-none">
+      <strong class="postings-total font-weight-bold" ng-bind="model.content.totalPostings"></strong>
+    </div>
   </div>
   <div class="col-4">
-    <small>Pages (loaded/total):</small>
-    <small class="pages-loaded font-weight-bold" ng-bind="model.content.partsLoaded"></small>
-    <small class="font-weight-bold">/</small>
-    <small class="pages-total font-weight-bold" ng-bind="model.content.totalParts"></small>
+    <small>Parts:</small>
+    <div class="d-none d-md-inline">
+      <small class="pages-loaded font-weight-bold" ng-bind="model.content.partsLoaded"></small>
+      <small class="font-weight-bold">/</small>
+      <small class="pages-total font-weight-bold" ng-bind="model.content.totalParts"></small>
+    </div>
+    <div class="d-md-none">
+      <strong class="pages-loaded font-weight-bold" ng-bind="model.content.partsLoaded"></strong>
+      <small class="font-weight-bold">/</small>
+      <strong class="pages-total font-weight-bold" ng-bind="model.content.totalParts"></strong>
+    </div>
   </div>
   <div class="col-4">
     <small>Karma:</small>

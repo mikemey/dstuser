@@ -20,9 +20,17 @@ const setInputField = (byElement, text) => waitForElement(byElement)
 const waitForElement = (byElement, locator = element) => browser
   .wait(EC.presenceOf(locator(byElement)), 3000)
 
-const waitForAllElements = byElement => waitForElement(byElement, element.all)
+const waitForVisibleElements = byElement => waitForElement(byElement, element.all)
+  .then(() => element.all(byElement).filter(onlyDisplayed))
 
-const waitForElementText = byElement => waitForElement(byElement).then(() => element(byElement).getText())
+const waitForElementText = byElement => waitForVisibleElements(byElement).then(elements => {
+  if (elements.length !== 1) {
+    const msg = `Expected exactly 1 matching element for: ${byElement}, matches found: ${elements.length}`
+    throw Error(msg)
+  }
+  return elements[0].getText()
+})
+
 const waitForElementNumber = byElement => waitForElementText(byElement).then(asNumber)
 
 const waitForElementInvisible = byElement => browser.wait(ExpectedConditions.invisibilityOf(element(byElement)))
@@ -44,7 +52,7 @@ module.exports = {
   waitForElementClick,
   setInputField,
   waitForElement,
-  waitForAllElements,
+  waitForVisibleElements,
   waitForElementText,
   waitForElementNumber,
   waitForElementInvisible,

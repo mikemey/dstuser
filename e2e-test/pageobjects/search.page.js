@@ -84,8 +84,8 @@ const SearchPage = testScreen => {
   const hasPostingTotal = () => hasElement(byTotal)
   const getPostingTotal = () => waitForElementNumber(byTotal)
 
-  const getPagesLoaded = () => element(by.className('pages-loaded')).getText().then(asNumber)
-  const getPagesTotal = () => element(by.className('pages-total')).getText().then(asNumber)
+  const getPagesLoaded = () => waitForElementNumber(by.className('pages-loaded'))
+  const getPagesTotal = () => waitForElementNumber(by.className('pages-total'))
 
   const waitForPostingsLoaded = () => waitForElementInvisible(by.className('loader'))
 
