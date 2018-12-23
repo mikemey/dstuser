@@ -2,7 +2,7 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/"><head><META http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Postings von Helmut Wolff - derStandard.at</title>
 <link href="/userprofil/bundles/userprofilecss?v=9cTOAGTWrBEA-Nqz4qJf7wWQR9icX9E_y2hPZmdUNhk1" rel="stylesheet"/>
-<link sizes="16x16 32x32" rel="shortcut icon" href="//at.staticfiles.at/sites/mainweb/img/icons/dst/favicon.ico"><link sizes="16x16" rel="icon" type="image/png" href="//at.staticfiles.at/sites/mainweb/img/icons/dst/16-v2.png"><link sizes="32x32" rel="icon" type="image/png" href="//at.staticfiles.at/sites/mainweb/img/icons/dst/32-v2.png"><link sizes="96x96" rel="icon" type="image/png" href="//at.staticfiles.at/sites/mainweb/img/icons/dst/96-v2.png"><link sizes="128x128" rel="icon" href="//at.staticfiles.at/sites/mainweb/img/icons/dst/128-v2.png"><link sizes="192x192" rel="icon" href="//at.staticfiles.at/sites/mainweb/img/icons/dst/192-v2.png"><link sizes="228x228" rel="icon" href="//at.staticfiles.at/sites/mainweb/img/icons/dst/228-v2.png"><link rel="apple-touch-icon" href="//at.staticfiles.at/sites/mainweb/img/icons/dst/60@2x-v2.png"><link sizes="180x180" rel="apple-touch-icon" href="//at.staticfiles.at/sites/mainweb/img/icons/dst/60@3x-v2.png"><link sizes="167x167" rel="apple-touch-icon" href="//at.staticfiles.at/sites/mainweb/img/icons/dst/167-v2.png"><link sizes="152x152" rel="apple-touch-icon" href="//at.staticfiles.at/sites/mainweb/img/icons/dst/76@2x-v2.png"><meta property="fb:pages" content="122737471962,805265769646722,111038215602766,117367668346158,140319642625,178293428957930"><meta name="Author" content="STANDARD Verlagsgesellschaft m.b.H."><meta name="viewport" content="width=975"><link rel="canonical" href="https://derstandard.at/userprofil/postings/799725"><link rel="alternate" hreflang="de-AT" href="https://derstandard.at/userprofil/postings/799725"><meta name="description" content="derStandard.at die Echtzeit|ung: Permanent aktualisierte Nachrichten aus aller Welt vom Online-Newsroom der führenden Qualitätszeitung Österreichs."><meta property="og:description" content="derStandard.at die Echtzeit|ung: Permanent aktualisierte Nachrichten aus aller Welt vom Online-Newsroom der führenden Qualitätszeitung Österreichs."><meta name="twitter:description" content="derStandard.at die Echtzeit|ung: Permanent aktualisierte Nachrichten aus aller Welt vom Online-Newsroom der führenden Qualitätszeitung Österreichs."><meta name="medium" content="news"><meta property="og:type" content="article"><meta name="twitter:site" content="@derStandardat"><meta property="og:image" content="https://derstandard.at/img/ui/meta_image_1200x630-v2.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:image" content="https://derstandard.at/img/sharing/60@2x-v2.png"><meta name="twitter:card" content="summary"><meta property="og:site_name" content="derStandard.at"><meta property="og:url" content="https://derstandard.at/userprofil/postings/799725"><meta name="twitter:url" content="https://derstandard.at/userprofil/postings/799725"><meta property="al:ios:url" content="iStandard://userprofil/postings/799725"><meta property="al:ios:app_store_id" content="376832518"><meta property="al:ios:app_name" content="iStandard"><link rel="alternate" href="android-app://derstandard.at.istandardx/http/derstandard.at/userprofil/postings/799725"><link rel="manifest" href="/js/manifest.json"><link rel="stylesheet" type="text/css" href="//at.staticfiles.at/sites/mainweb/css/desktop/general.css?v=561"><link rel="stylesheet" type="text/css" href="//at.staticfiles.at/sites/mainweb/css/desktop/dialog.css?v=561"><link rel="stylesheet" type="text/css" href="//at.staticfiles.at/sites/mainweb/css/bundles/components-bundle.min.css?v=561"><link rel="stylesheet" type="text/css" media="screen and (min-device-height: 700px)" href="//at.staticfiles.at/sites/mainweb/css/desktop/fixed-ui.css?v=561"><link rel="stylesheet" type="text/css" media="print" href="//at.staticfiles.at/sites/mainweb/css/print.css?v=561"><link rel="stylesheet" type="text/css" href="//at.staticfiles.at/sites/mainweb/css/themes/themes_bundle.css?v=561"><!--/css/themes/theme_seite1.css--><link rel="stylesheet" type="text/css" href="//at.staticfiles.at/sites/mainweb/css/themes/theme_seite1.css?v=561"><script type="text/javascript">
+<link sizes="16x16 32x32" rel="shortcut icon" href="//at.staticfiles.at/sites/mainweb/img/icons/dst/favicon.ico"><link sizes="16x16" rel="icon" type="image/png" href="//at.staticfiles.at/sites/mainweb/img/icons/dst/16-v2.png"><link sizes="32x32" rel="icon" type="image/png" href="//at.staticfiles.at/sites/mainweb/img/icons/dst/32-v2.png"><link sizes="96x96" rel="icon" type="image/png" href="//at.staticfiles.at/sites/mainweb/img/icons/dst/96-v2.png"><link sizes="128x128" rel="icon" href="//at.staticfiles.at/sites/mainweb/img/icons/dst/128-v2.png"><link sizes="192x192" rel="icon" href="//at.staticfiles.at/sites/mainweb/img/icons/dst/192-v2.png"><link sizes="228x228" rel="icon" href="//at.staticfiles.at/sites/mainweb/img/icons/dst/228-v2.png"><link rel="apple-touch-icon" href="//at.staticfiles.at/sites/mainweb/img/icons/dst/60@2x-v2.png"><link sizes="180x180" rel="apple-touch-icon" href="//at.staticfiles.at/sites/mainweb/img/icons/dst/60@3x-v2.png"><link sizes="167x167" rel="apple-touch-icon" href="//at.staticfiles.at/sites/mainweb/img/icons/dst/167-v2.png"><link sizes="152x152" rel="apple-touch-icon" href="//at.staticfiles.at/sites/mainweb/img/icons/dst/76@2x-v2.png"><meta property="fb:pages" content="122737471962,805265769646722,111038215602766,117367668346158,140319642625,178293428957930"><meta name="Author" content="STANDARD Verlagsgesellschaft m.b.H."><meta name="viewport" content="width=975"><link rel="canonical" href="https://derstandard.at/userprofil/postings/799724"><link rel="alternate" hreflang="de-AT" href="https://derstandard.at/userprofil/postings/799724"><meta name="description" content="derStandard.at die Echtzeit|ung: Permanent aktualisierte Nachrichten aus aller Welt vom Online-Newsroom der führenden Qualitätszeitung Österreichs."><meta property="og:description" content="derStandard.at die Echtzeit|ung: Permanent aktualisierte Nachrichten aus aller Welt vom Online-Newsroom der führenden Qualitätszeitung Österreichs."><meta name="twitter:description" content="derStandard.at die Echtzeit|ung: Permanent aktualisierte Nachrichten aus aller Welt vom Online-Newsroom der führenden Qualitätszeitung Österreichs."><meta name="medium" content="news"><meta property="og:type" content="article"><meta name="twitter:site" content="@derStandardat"><meta property="og:image" content="https://derstandard.at/img/ui/meta_image_1200x630-v2.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:image" content="https://derstandard.at/img/sharing/60@2x-v2.png"><meta name="twitter:card" content="summary"><meta property="og:site_name" content="derStandard.at"><meta property="og:url" content="https://derstandard.at/userprofil/postings/799724"><meta name="twitter:url" content="https://derstandard.at/userprofil/postings/799724"><meta property="al:ios:url" content="iStandard://userprofil/postings/799724"><meta property="al:ios:app_store_id" content="376832518"><meta property="al:ios:app_name" content="iStandard"><link rel="alternate" href="android-app://derstandard.at.istandardx/http/derstandard.at/userprofil/postings/799724"><link rel="manifest" href="/js/manifest.json"><link rel="stylesheet" type="text/css" href="//at.staticfiles.at/sites/mainweb/css/desktop/general.css?v=561"><link rel="stylesheet" type="text/css" href="//at.staticfiles.at/sites/mainweb/css/desktop/dialog.css?v=561"><link rel="stylesheet" type="text/css" href="//at.staticfiles.at/sites/mainweb/css/bundles/components-bundle.min.css?v=561"><link rel="stylesheet" type="text/css" media="screen and (min-device-height: 700px)" href="//at.staticfiles.at/sites/mainweb/css/desktop/fixed-ui.css?v=561"><link rel="stylesheet" type="text/css" media="print" href="//at.staticfiles.at/sites/mainweb/css/print.css?v=561"><link rel="stylesheet" type="text/css" href="//at.staticfiles.at/sites/mainweb/css/themes/themes_bundle.css?v=561"><!--/css/themes/theme_seite1.css--><link rel="stylesheet" type="text/css" href="//at.staticfiles.at/sites/mainweb/css/themes/theme_seite1.css?v=561"><script type="text/javascript">
 			
 			function embedSSOTrackingCookieCheck()
 			{
@@ -47,7 +47,7 @@
 			objectID: 0,
 			channelID: 1192182008384,ressortID: 0,
 			ressortName: '',
-			URI: '/userprofil/postings/799725',
+			URI: '/userprofil/postings/799724',
 			recommendations: {},
 			OEWAContingent: 'Community/Sonstiges/Sonstiges',
 			blockTemplateUrlEncoded: '',
@@ -252,18 +252,18 @@
         </ul>
     <ul id="up_nav">
         <li class="first">
-<a href="/userprofil/799725">Übersicht</a>        </li>
+<a href="/userprofil/799724">Übersicht</a>        </li>
         <li>
-<a href="/userprofil/persoenliches/799725">Persönliches</a>        </li>
+<a href="/userprofil/persoenliches/799724">Persönliches</a>        </li>
                 <li>
-<a class="active" href="/userprofil/postings/799725">Postings<span>1010</span></a>
+<a class="active" href="/userprofil/postings/799724">Postings<span>1010</span></a>
         </li>
         <li class="reading-list">
-<a href="/userprofil/mitposterinnen/799725">MitposterInnen</a>                    <div class="tab-links">
-                        <a class="icn follower" href="/userprofil/mitposterinnen/michlesen/799725">
+<a href="/userprofil/mitposterinnen/799724">MitposterInnen</a>                    <div class="tab-links">
+                        <a class="icn follower" href="/userprofil/mitposterinnen/michlesen/799724">
                             <span>75</span>
                         </a>
-                        <a class="icn following" href="/userprofil/mitposterinnen/ichlese/799725">
+                        <a class="icn following" href="/userprofil/mitposterinnen/ichlese/799724">
                             <span>0</span>
                         </a>
                     </div>
@@ -275,7 +275,7 @@
 
         <ul id="up_nav_report">
 
-            <li><a data-overlay-trigger data-overlay-name="reportProfile" data-overlay-source="/userprofil/profilmelden/799725?mode=chromeless" data-overlay-type="iframe" onclick="STD.User.Profile.report('/userprofil/profilmelden/799725')">Dieses Profil melden</a></li>
+            <li><a data-overlay-trigger data-overlay-name="reportProfile" data-overlay-source="/userprofil/profilmelden/799724?mode=chromeless" data-overlay-type="iframe" onclick="STD.User.Profile.report('/userprofil/profilmelden/799724')">Dieses Profil melden</a></li>
         </ul>
     <div id="artikelLeft" class="artikelLeft">
         <ul id="media-list">
@@ -304,7 +304,7 @@
     <a href="" class="paging_scroller_left" onclick="return false;"></a>
     <div class="paging_scroller">
         <div class="paging_scroller_container">
-<a class="current" href="/userprofil/postings/799725?sortMode=1&amp;groupMode=2&amp;pageNumber=1">1</a><a class="" href="/userprofil/postings/799725?sortMode=1&amp;groupMode=2&amp;pageNumber=2">2</a><a class="" href="/userprofil/postings/799725?sortMode=1&amp;groupMode=2&amp;pageNumber=3">3</a><a class="" href="/userprofil/postings/799725?sortMode=1&amp;groupMode=2&amp;pageNumber=4">4</a><a class="" href="/userprofil/postings/799725?sortMode=1&amp;groupMode=2&amp;pageNumber=5">5</a>
+<a class="current" href="/userprofil/postings/799724?sortMode=1&amp;groupMode=2&amp;pageNumber=1">1</a><a class="" href="/userprofil/postings/799724?sortMode=1&amp;groupMode=2&amp;pageNumber=2">2</a><a class="" href="/userprofil/postings/799724?sortMode=1&amp;groupMode=2&amp;pageNumber=3">3</a><a class="" href="/userprofil/postings/799724?sortMode=1&amp;groupMode=2&amp;pageNumber=4">4</a><a class="" href="/userprofil/postings/799724?sortMode=1&amp;groupMode=2&amp;pageNumber=5">5</a>
         </div>
     </div>
     <a href="" class="paging_scroller_right" onclick="return false;"></a>
@@ -312,7 +312,7 @@
 <div class="paging">
         <a class="std-button first disabled">&#171;</a>
         <a class="std-button back disabled">&#8249;</a>
-    <a class="std-button fwd" href="/userprofil/postings/799725?pageNumber=2&amp;sortMode=1">›</a><a class="std-button last" href="/userprofil/postings/799725?pageNumber=101&amp;sortMode=1">&#187;</a></div>
+    <a class="std-button fwd" href="/userprofil/postings/799724?pageNumber=2&amp;sortMode=1">›</a><a class="std-button last" href="/userprofil/postings/799724?pageNumber=101&amp;sortMode=1">&#187;</a></div>
 
 
         </div>
@@ -572,7 +572,7 @@
     <a href="" class="paging_scroller_left" onclick="return false;"></a>
     <div class="paging_scroller">
         <div class="paging_scroller_container">
-<a class="current" href="/userprofil/postings/799725?sortMode=1&amp;groupMode=2&amp;pageNumber=1">1</a><a class="" href="/userprofil/postings/799725?sortMode=1&amp;groupMode=2&amp;pageNumber=2">2</a><a class="" href="/userprofil/postings/799725?sortMode=1&amp;groupMode=2&amp;pageNumber=3">3</a><a class="" href="/userprofil/postings/799725?sortMode=1&amp;groupMode=2&amp;pageNumber=4">4</a><a class="" href="/userprofil/postings/799725?sortMode=1&amp;groupMode=2&amp;pageNumber=5">5</a>
+<a class="current" href="/userprofil/postings/799724?sortMode=1&amp;groupMode=2&amp;pageNumber=1">1</a><a class="" href="/userprofil/postings/799724?sortMode=1&amp;groupMode=2&amp;pageNumber=2">2</a><a class="" href="/userprofil/postings/799724?sortMode=1&amp;groupMode=2&amp;pageNumber=3">3</a><a class="" href="/userprofil/postings/799724?sortMode=1&amp;groupMode=2&amp;pageNumber=4">4</a><a class="" href="/userprofil/postings/799724?sortMode=1&amp;groupMode=2&amp;pageNumber=5">5</a>
         </div>
     </div>
     <a href="" class="paging_scroller_right" onclick="return false;"></a>
@@ -580,7 +580,7 @@
 <div class="paging">
         <a class="std-button first disabled">&#171;</a>
         <a class="std-button back disabled">&#8249;</a>
-    <a class="std-button fwd" href="/userprofil/postings/799725?pageNumber=2&amp;sortMode=1">›</a><a class="std-button last" href="/userprofil/postings/799725?pageNumber=101&amp;sortMode=1">&#187;</a></div>
+    <a class="std-button fwd" href="/userprofil/postings/799724?pageNumber=2&amp;sortMode=1">›</a><a class="std-button last" href="/userprofil/postings/799724?pageNumber=101&amp;sortMode=1">&#187;</a></div>
 
 
         </div>

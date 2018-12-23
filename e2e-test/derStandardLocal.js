@@ -28,12 +28,14 @@ process.on('SIGINT', shutdown)
 
 const app = express()
 
+const mediumPagesUserId = 799724
 const manyPagesUserId = 799725
+const serveDefaultPageUserIds = [mediumPagesUserId, manyPagesUserId]
 const ratingUserId = 755005
 
 app.use('/userprofil/postings/:userId', (req, res) => {
   const userId = req.params.userId
-  const page = Number(userId) === manyPagesUserId
+  const page = serveDefaultPageUserIds.includes(Number(userId))
     ? 1
     : req.query.pageNumber
   logger.info(`requested user page ${userId}-${page}`)
