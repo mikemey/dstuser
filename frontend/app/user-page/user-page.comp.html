@@ -24,22 +24,23 @@
                 ng-click="search()" ng-disabled="userForm.$invalid">search...</button>
       </div>
 
-      <div class="col mt-sm-0 my-1 text-left">
+      <div ng-class="(model.content.userName || model.errorMessage) ? ' form-messages': ''"
+           class="col mt-sm-0 my-2 mx-1 text-left">
         <div ng-if="model.errorMessage" class="float-left">
           <label id="errorMessage-small" class="form-control-plaintext form-control-sm d-none d-md-block"
                  ng-bind="model.errorMessage"></label>
-          <label id="errorMessage-large" class="form-control-plaintext d-md-none text-center"
+          <label id="errorMessage-large" class="form-control-plaintext d-md-none p-1"
                  ng-bind="model.errorMessage"></label>
         </div>
 
         <div ng-if="model.content.userName" class="float-left">
           <label id="userName-small" class="form-control-plaintext form-control-sm d-none d-md-block"
                  ng-bind="model.content.userName"></label>
-          <label id="userName-large" class="form-control-plaintext d-md-none"
+          <label id="userName-large" class="form-control-plaintext d-md-none p-1"
                  ng-bind="model.content.userName"></label>
         </div>
-        
-        <div ng-if="model.loading" class="float-right p-md-0 p-sm-1">
+
+        <div ng-if="model.loading" class="float-right p-0">
           <div class="loader"></div>
         </div>
       </div>
