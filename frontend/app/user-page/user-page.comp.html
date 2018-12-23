@@ -25,22 +25,22 @@
       </div>
 
       <div class="col mt-sm-0 my-1 text-left">
-        <div ng-if="model.loading">
-          <div class="loader offset-5 float-left"></div>
-        </div>
-
-        <div ng-if="model.errorMessage">
+        <div ng-if="model.errorMessage" class="float-left">
           <label id="errorMessage-small" class="form-control-plaintext form-control-sm d-none d-md-block"
                  ng-bind="model.errorMessage"></label>
           <label id="errorMessage-large" class="form-control-plaintext d-md-none text-center"
                  ng-bind="model.errorMessage"></label>
         </div>
 
-        <div ng-if="model.content.userName">
+        <div ng-if="model.content.userName" class="float-left">
           <label id="userName-small" class="form-control-plaintext form-control-sm d-none d-md-block"
                  ng-bind="model.content.userName"></label>
           <label id="userName-large" class="form-control-plaintext d-md-none"
                  ng-bind="model.content.userName"></label>
+        </div>
+        
+        <div ng-if="model.loading" class="float-right p-md-0 p-sm-1">
+          <div class="loader"></div>
         </div>
       </div>
 
