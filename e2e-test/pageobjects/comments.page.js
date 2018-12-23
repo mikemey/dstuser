@@ -3,12 +3,10 @@ const { by, browser, element } = require('protractor')
 const { onlyDisplayed, asHref, asNumber, asText, waitForElementClick, waitForAllElements } = require('../utils/utils.page')
 
 const byCommentBox = by.className('cmnt-box')
-const getComments = () => waitForAllElements(byCommentBox)
-  .then(() => element.all(byCommentBox)
-    .filter(onlyDisplayed)
-    .map(createComment)
-  )
-const countComments = () => waitForAllElements(byCommentBox).then(() => element.all(byCommentBox).count())
+const displayedComments = () => waitForAllElements(byCommentBox)
+  .then(() => element.all(byCommentBox).filter(onlyDisplayed))
+const getComments = () => displayedComments().then(comments => comments.map(createComment))
+const countComments = () => displayedComments().then(comments => comments.length)
 
 const createComment = el => {
   const titleEl = el.element(by.className('cmnt-title'))

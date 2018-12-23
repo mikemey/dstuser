@@ -7,6 +7,7 @@ module.exports = searchPage => {
   const hideElementsScreen = searchPage.getHiddenScreen()
   const singlePageUserId = 755005
   const userId = 425185
+  const mediumUserId = 799724
 
   describe(`Filter`, () => {
     beforeAll(() => {
@@ -15,6 +16,7 @@ module.exports = searchPage => {
       derStandard.serveUserPageFor(userId, 2)
       derStandard.serveUserPageFor(userId, 3)
       derStandard.serveUserPageFor(singlePageUserId, 1)
+      derStandard.serveDefaultUserPageFor(mediumUserId)
     })
 
     afterAll(derStandard.stop)
@@ -65,26 +67,35 @@ module.exports = searchPage => {
         const filter = 'versus'
         searchPage.sendToFilter(filter)
         const comments = await searchPage.comments.getComments()
-        expect(comments.length).toBe(1)
-        expect(comments[0].title()).toBe('Standard versus Kronenzeitung')
+        expect(comments.length).toEqual(1)
+        expect(comments[0].title()).toEqual('Standard versus Kronenzeitung')
 
         const highlightedText = await searchPage.comments.getHighlightedTexts()
-        expect(highlightedText.length).toBe(1)
-        expect(highlightedText[0]).toBe(filter)
+        expect(highlightedText.length).toEqual(1)
+        expect(highlightedText[0]).toEqual(filter)
       })
 
       it('when single article match', async () => {
         searchPage.sendToFilter('katzian')
         const comments = await searchPage.comments.getComments()
-        expect(comments.length).toBe(1)
-        expect(comments[0].title()).toBe('Das Ende der AK??')
+        expect(comments.length).toEqual(1)
+        expect(comments[0].title()).toEqual('Das Ende der AK??')
       })
 
       it('when many comment contents match', async () => {
         searchPage.sendToFilter('politisch')
         const comments = await searchPage.comments.getComments()
-        expect(comments.length).toBe(6)
-        expect(comments[0].title()).toBe('Großartiger Erfolg')
+        expect(comments.length).toEqual(6)
+        expect(comments[0].title()).toEqual('Großartiger Erfolg')
+      })
+    })
+
+    describe('filter over all postings', () => {
+      beforeAll(() => searchPage.openUserPage(mediumUserId))
+
+      it('show filter result over all postings.', () => {
+        searchPage.sendToFilter('trotzdem')
+        expect(searchPage.comments.countComments()).toEqual(5)
       })
     })
   })

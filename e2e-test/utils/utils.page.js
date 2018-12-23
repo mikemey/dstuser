@@ -13,8 +13,9 @@ const asNumber = res => {
 const hasElement = byElement => element.all(byElement)
   .filter(onlyDisplayed).first().isPresent()
 
-const setInputField = (element, text) => element.clear()
-  .then(() => element.sendKeys(text))
+const setInputField = (byElement, text) => waitForElement(byElement)
+  .then(() => element(byElement).clear())
+  .then(() => element(byElement).sendKeys(text))
 
 const waitForElement = (byElement, locator = element) => browser
   .wait(EC.presenceOf(locator(byElement)), 3000)

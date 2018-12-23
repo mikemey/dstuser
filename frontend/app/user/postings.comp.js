@@ -12,12 +12,17 @@ const postingsCtrl = function ($scope, $sce, $sanitize) {
   }
 
   $scope.model = {
-    postings: null,
+    allPostings: null,
+    visiblePostings: null,
     postingsLimit: POSTINGS_PER_PAGE,
     filter: ''
   }
 
-  const loadPostings = postings => { $scope.model.postings = addFilterContent(postings) }
+  const loadPostings = postings => {
+    $scope.model.allPostings = addFilterContent(postings)
+    filterPostings()
+  }
+
   const setFilter = filter => { $scope.model.filter = filter }
 
   const addFilterContent = postings => {
@@ -41,6 +46,13 @@ const postingsCtrl = function ($scope, $sce, $sanitize) {
 
   $scope.showMorePostings = () => {
     $scope.model.postingsLimit += POSTINGS_PER_PAGE
+    filterPostings()
+  }
+
+  const filterPostings = () => {
+    $scope.model.visiblePostings = $scope.model.allPostings
+      .filter(post => post.filterContent.includes($scope.model.filter.toLowerCase()))
+      .slice(0, $scope.model.postingsLimit)
   }
 }
 

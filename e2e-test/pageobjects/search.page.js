@@ -47,7 +47,7 @@ const SearchPage = testScreen => {
 
   const userIdInput = () => element(byUserId())
   const getUserId = () => userIdInput().getAttribute('value')
-  const sendToUserId = userId => setInputField(userIdInput(), userId)
+  const sendToUserId = userId => setInputField(byUserId(), userId)
   const formLabel = () => userIdInput().getAttribute('placeholder')
 
   const bySearchButton = (screen = testScreen) => by.id(`searchBtn-${screen.suffix}`)
@@ -70,7 +70,7 @@ const SearchPage = testScreen => {
   const hasFilter = screen => hasElement(byFilter(screen))
   const filterInput = () => element(byFilter())
   const isFilterEnabled = () => filterInput().isEnabled()
-  const sendToFilter = filter => setInputField(filterInput(), filter)
+  const sendToFilter = filter => setInputField(byFilter(), filter)
 
   const byKarma = type => by.css(`user-stats *[class~=karma-${type}]`)
   const karmaPoints = type => element.all(byKarma(type))
