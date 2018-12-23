@@ -3,7 +3,7 @@
        ng-class="posting.filterContent.includes(model.filter.toLowerCase()) ? '' : 'filtered-cmnt'">
     <div class="card cmnt-box h-100" ng-class="posting.article.section.toLowerCase()">
       <div class="cmnt-date float-right text-muted" ng-bind="posting.date"></div>
-      <div class="card-body p-3">
+      <div class="card-body p-3 pb-4 pb-md-3">
         <small class="card-title cmnt-title font-weight-bold" ng-bind-html="highlight(posting.title, model.filter)"></small>
         <small ng-if="!posting.title" class="text-muted">
           &lang;&nbsp;no title&nbsp;&rang;
