@@ -48,7 +48,7 @@ module.exports = searchPage => {
       beforeAll(() => searchPage.openUserPage(mediumUserId))
 
       it('button dissapears when reaching end', () => {
-        expect(searchPage.getMorePostingsButtonLabel()).toMatch(/\(48 of/)
+        expect(searchPage.getMorePostingsButtonLabel()).toMatch(/\(48 of 50/)
         searchPage.clickMorePostingsButton()
 
         expect(searchPage.comments.countComments()).toEqual(50)
