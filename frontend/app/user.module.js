@@ -1,15 +1,11 @@
 import angular from 'angular'
 
-import userPage from './user-page.comp'
-import userStats from './stats.comp'
-import postings from './postings.comp'
-import postingRating from './posting-rating.comp'
-import karma from './karma.comp'
+import userPage from './user-page/user-page.comp'
+import userPostings from './user-postings/user-postings.module'
+import userStats from './user-stats/user-stats.module'
 
 export default angular.module('user', [
-  userPage.name,
+  userPostings.name,
   userStats.name,
-  postingRating.name,
-  postings.name,
-  karma.name
+  userPage.name
 ])

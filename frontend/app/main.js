@@ -2,7 +2,7 @@ import angular from 'angular'
 import ngRoute from 'angular-route'
 import 'bootstrap/dist/css/bootstrap.css'
 
-import userModule from './user/user.module'
+import userModule from './user.module'
 
 import main from './main.html'
 import './main.css'
