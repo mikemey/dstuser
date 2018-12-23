@@ -7,7 +7,7 @@ const {
 } = require('../utils/utils.page')
 
 // large screen -> xxx-small element identifiers
-const LARGE_SCREEN = { id: 'LARGE SCREEN', width: 1000, height: 800, suffix: 'small' }
+const LARGE_SCREEN = { id: 'LARGE SCREEN', width: 1000, height: 700, suffix: 'small' }
 // medium screen -> xxx-large element identifiers
 const MEDIUM_SCREEN = { id: 'MEDIUM SCREEN', width: 720, height: 600, suffix: 'large' }
 // small screen -> xxx-large element identifiers
@@ -30,6 +30,7 @@ const SearchPage = testScreen => {
   const userSearchPath = '#!/search'
   const openUserPage = userId => open(`${userSearchPath}/${userId}`)
   const open = (path = userSearchPath) => browser.manage().window().setSize(testScreen.width, testScreen.height)
+    .then(() => browser.manage().window().setPosition(0, 0))
     .then(() => browser.get(path))
 
   const restart = () => browser.getAllWindowHandles()
