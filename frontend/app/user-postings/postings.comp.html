@@ -33,6 +33,9 @@
   <button id="more-postings" ng-if="model.visiblePostings.length < model.allPostings.length"
           ng-click="showMorePostings()" class="btn btn-secondary btn-dark col-12">
     load more postings&hellip;&nbsp;
-    <small>({{ model.postingsLimit }} of {{ model.allPostings.length }})</small>
+    <small>
+      ({{ model.visibleFromIx + 1 }} - {{ model.visibleToIx }} of
+      {{ model.allPostings.length }})
+    </small>
   </button>
 </div>

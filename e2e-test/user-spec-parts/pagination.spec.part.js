@@ -23,24 +23,28 @@ module.exports = searchPage => {
 
       it('when not enough postings for pagination', () => {
         searchPage.openUserPage(smallUserId)
+        searchPage.waitForPostingsLoaded()
         expect(searchPage.hasMorePostingsButton()).toBeFalsy()
       })
     })
 
-    describe('Large user page "more postings" button', () => {
-      beforeAll(() => searchPage.openUserPage(largeUserId))
+    describe('Large user page', () => {
+      beforeAll(() => {
+        searchPage.openUserPage(largeUserId)
+        return searchPage.waitForLoading()
+      })
 
-      it('is available', () => {
+      it('"more postings" button is available', () => {
         expect(searchPage.hasMorePostingsButton()).toBeTruthy()
       })
 
-      it('click will show more postings', () => {
+      it('"more postings" click will show more postings', () => {
         expect(searchPage.comments.countComments()).toEqual(48)
-        expect(searchPage.getMorePostingsButtonLabel()).toMatch(/\(48 of/)
+        expect(searchPage.getMorePostingsButtonLabel()).toMatch(/\(1 - 48 of/)
 
         searchPage.clickMorePostingsButton()
         expect(searchPage.comments.countComments()).toEqual(96)
-        expect(searchPage.getMorePostingsButtonLabel()).toMatch(/\(96 of/)
+        expect(searchPage.getMorePostingsButtonLabel()).toMatch(/\(1 - 96 of/)
       })
     })
 
@@ -48,7 +52,7 @@ module.exports = searchPage => {
       beforeAll(() => searchPage.openUserPage(mediumUserId))
 
       it('button dissapears when reaching end', () => {
-        expect(searchPage.getMorePostingsButtonLabel()).toMatch(/\(48 of 50/)
+        expect(searchPage.getMorePostingsButtonLabel()).toMatch(/\(1 - 48 of 50/)
         searchPage.clickMorePostingsButton()
 
         expect(searchPage.comments.countComments()).toEqual(50)

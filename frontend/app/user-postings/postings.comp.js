@@ -14,7 +14,8 @@ const postingsCtrl = function ($scope, $sce, $sanitize) {
     filter: '',
     allPostings: null,
     visiblePostings: null,
-    postingsLimit: POSTINGS_PER_PAGE
+    visibleFromIx: 0,
+    visibleToIx: POSTINGS_PER_PAGE
   }
 
   const loadPostings = (postings, filter) => {
@@ -43,14 +44,14 @@ const postingsCtrl = function ($scope, $sce, $sanitize) {
   }
 
   $scope.showMorePostings = () => {
-    $scope.model.postingsLimit += POSTINGS_PER_PAGE
+    $scope.model.visibleToIx += POSTINGS_PER_PAGE
     filterPostings()
   }
 
   const filterPostings = () => {
     const filteredPosts = $scope.model.allPostings
       .filter(post => post.filterContent.includes($scope.model.filter.toLowerCase()))
-    $scope.model.visiblePostings = filteredPosts.slice(0, $scope.model.postingsLimit)
+    $scope.model.visiblePostings = filteredPosts.slice(0, $scope.model.visibleToIx)
   }
 }
 

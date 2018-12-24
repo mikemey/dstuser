@@ -3,7 +3,7 @@ const { by, browser, element } = require('protractor')
 const comments = require('./comments.page')
 const {
   hasElement, onlyDisplayed, asNumber, setInputField,
-  waitForElementText, waitForElementNumber, waitForElementInvisible, waitForElementClick
+  waitForElementText, waitForElementNumber, waitForElement, waitForElementInvisible, waitForElementClick
 } = require('../utils/utils.page')
 
 // large screen -> xxx-small element identifiers
@@ -88,7 +88,9 @@ const SearchPage = testScreen => {
   const getPagesLoaded = () => waitForElementNumber(by.className('pages-loaded'))
   const getPagesTotal = () => waitForElementNumber(by.className('pages-total'))
 
-  const waitForPostingsLoaded = () => waitForElementInvisible(by.className('loader'))
+  const byLoader = by.className('loader')
+  const waitForLoading = () => waitForElement(byLoader)
+  const waitForPostingsLoaded = () => waitForElementInvisible(byLoader)
 
   const byMorePostingsButton = by.id('more-postings')
   const hasMorePostingsButton = () => hasElement(byMorePostingsButton)
@@ -114,7 +116,7 @@ const SearchPage = testScreen => {
     hasKarmaTotal, getKarmaTotal,
     hasPostingTotal, getPostingTotal,
     getPagesLoaded, getPagesTotal,
-    waitForPostingsLoaded,
+    waitForLoading, waitForPostingsLoaded,
     hasMorePostingsButton, clickMorePostingsButton, getMorePostingsButtonLabel
   }
 }
