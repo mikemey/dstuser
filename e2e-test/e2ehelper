@@ -96,7 +96,11 @@ function start_webdriver () {
       echo "== Selenium directory not found, running '${wdm_bin_hr} update' first..." && \
       ${wdm_bin} update  >> "$e2e_output" 2>&1
   ${wdm_bin} start --detach >> "$e2e_output" 2>&1
-  echo "$wdm_bin_hr started"
+  if [[ $? -gt 0 ]]; then
+    error_message "$wdm_bin_hr NOT running!"
+  else
+    echo "$wdm_bin_hr started"
+  fi
 }
 
 function extract_pid () {
@@ -116,7 +120,7 @@ function check_is_number () {
 }
 
 function error_message () {
-  printf "$*\n"
+  printf "${FG_LIGHT_RED}$*${FG_DEFAULT}\n"
   exit 1
 }
 
