@@ -7,23 +7,21 @@ import './section-colors.css'
 const POSTINGS_PER_PAGE = 48
 const postingsCtrl = function ($scope, $sce, $sanitize) {
   this.$onChanges = () => {
-    loadPostings(this.postings)
-    setFilter(this.filter)
+    loadPostings(this.postings, this.filter)
   }
 
   $scope.model = {
+    filter: '',
     allPostings: null,
     visiblePostings: null,
-    postingsLimit: POSTINGS_PER_PAGE,
-    filter: ''
+    postingsLimit: POSTINGS_PER_PAGE
   }
 
-  const loadPostings = postings => {
+  const loadPostings = (postings, filter) => {
+    $scope.model.filter = filter
     $scope.model.allPostings = addFilterContent(postings)
     filterPostings()
   }
-
-  const setFilter = filter => { $scope.model.filter = filter }
 
   const addFilterContent = postings => {
     postings.filter(post => !post.filterContent)
@@ -50,9 +48,9 @@ const postingsCtrl = function ($scope, $sce, $sanitize) {
   }
 
   const filterPostings = () => {
-    $scope.model.visiblePostings = $scope.model.allPostings
+    const filteredPosts = $scope.model.allPostings
       .filter(post => post.filterContent.includes($scope.model.filter.toLowerCase()))
-      .slice(0, $scope.model.postingsLimit)
+    $scope.model.visiblePostings = filteredPosts.slice(0, $scope.model.postingsLimit)
   }
 }
 

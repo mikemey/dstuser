@@ -1,6 +1,5 @@
-<div class="row postings my-2">
-  <div class="col-xl-3 col-lg-4 col-sm-6 p-lg-2 p-1" ng-repeat="posting in model.visiblePostings"
-       ng-class="posting.filterContent.includes(model.filter.toLowerCase()) ? '' : 'filtered-cmnt'">
+<div class="row postings">
+  <div class="col-xl-3 col-lg-4 col-sm-6 p-lg-2 p-1" ng-repeat="posting in model.visiblePostings">
     <div class="card cmnt-box h-100" ng-class="posting.article.section.toLowerCase()">
       <div class="cmnt-date float-right text-muted" ng-bind="posting.date"></div>
       <div class="card-body p-3 pb-4 pb-md-3">
