@@ -21,56 +21,43 @@ const PostingsService = (config, logger) => {
       .then(firstPage => {
         const pageParser = UserPageParser.from(firstPage, config)
         const commonProps = pageParser.getCommonProps()
-
         const prBuilder = PartialResultBuilder(commonProps)
-        const collector = Collector(pageParser, prBuilder.build, onPartialResult)
+        const firstPagePostings = pageParser.getPostings(firstPage)
 
-        return sendPageResult(firstPage, collectPostings, collector)
+        const firstPromise = Promise.resolve(onPartialResult(prBuilder.build(firstPagePostings)))
+        const links = pageParser.getRemainingPageLinks()
+        const reqSendPostings = requestAndSendPostings(pageParser.getPostings, prBuilder.build, onPartialResult)
+
+        return links.reduce((prom, link) => prom.then(keepGoing =>
+          keepGoing ? reqSendPostings(link) : Promise.resolve(false)
+        ), firstPromise)
       })
       .then(() => {
-        logger.info(`user profile [${userId}] \tDONE (${stopTimer(profileTimer)}ms)`)
+        logger.info(`user profile [${userId}] DONE (total: ${stopTimer(profileTimer)}ms)`)
       })
   }
 
-  const Collector = (pageParser, responseBuilder, onPartialResult) => {
-    const links = pageParser.getRemainingPageLinks()
-    const linksEmpty = () => links.length === 0
-    const nextLink = () => links.shift()
-    return {
-      linksEmpty,
-      nextLink,
-      responseBuilder,
-      onPartialResult,
-      getPostings: pageParser.getPostings
-    }
-  }
-
-  const sendPageResult = (page, nextFunc, collector) => {
-    const postings = collector.getPostings(page)
-    return sendPartialResult(postings, nextFunc, collector)
-  }
-
-  const sendPartialResult = (postings, nextFunc, collector) => {
-    return collector.onPartialResult(collector.responseBuilder(postings))
-      ? nextFunc(collector)
-      : Promise.resolve()
-  }
-
-  const collectPostings = collector => collector.linksEmpty()
-    ? Promise.resolve()
-    : requestPage(collector.nextLink())
-      .then(page => sendPageResult(page, collectPostings, collector))
+  const requestAndSendPostings = (parsePostings, responseBuilder, onPartialResult) => url => {
+    const receiveSendCycleTimer = startTimer()
+    return requests.getHtml(url)
+      .then(parsePostings)
       .catch(error => {
-        logger.error(`Error requesting page`, error)
-        return sendPartialResult([], collectPostings, collector)
+        logger.error(`Error requesting page: ${url}`, error)
+        return []
       })
+      .then(postings => onPartialResult(responseBuilder(postings)))
+      .then(result => {
+        logger.info(`postings: ${url} DONE (R+S: ${stopTimer(receiveSendCycleTimer)}ms)`)
+        return result
+      })
+  }
 
   const requestPage = url => {
     logger.info(`postings: ${url}`)
-    const pageTimer = startTimer()
+    const requestTimer = startTimer()
     return requests.getHtml(url)
       .then(result => {
-        logger.info(`postings: ${url} \tDONE (${stopTimer(pageTimer)}ms)`)
+        logger.info(`postings: ${url} (req: ${stopTimer(requestTimer)}ms)`)
         return result
       })
   }

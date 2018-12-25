@@ -10,7 +10,6 @@ const createPostingsRouter = (config, logger) => {
   router.ws('/postings/:userId', (ws, req) => {
     const userId = req.params.userId
     logger.info(`received postings request: [${clientIp(req)}], userId: [${userId}]`)
-    ws.isOpen = true
     return isNumber(ws, userId)
       .then(loadPostings(ws))
       .catch(errorHandler(ws, userId))
@@ -21,10 +20,7 @@ const createPostingsRouter = (config, logger) => {
   })
 
   const loadPostings = ws => userId => {
-    const onPartialResult = partial => {
-      saveSend(ws, partial)
-      return ws.isOpen
-    }
+    const onPartialResult = partial => saveSend(ws, partial)
     return postingsService.loadPostings(userId, onPartialResult)
   }
 
@@ -38,9 +34,10 @@ const createPostingsRouter = (config, logger) => {
     const messageStr = JSON.stringify(message)
     try {
       ws.send(messageStr)
+      return true
     } catch (error) {
-      ws.isOpen = false
       logger.info('client closed connection.')
+      return false
     }
   }
 

@@ -4,7 +4,12 @@ import './user-page.comp.css'
 
 const DISABLED = 'disabled'
 
-const userPageCtrl = ($scope, $websocket, $location, $routeParams, $window, wsurl) => {
+const userPageCtrl = function ($scope, $websocket, $location, $routeParams, $window, wsurl) {
+  this.$onDestroy = () => {
+    if ($scope.ws) $scope.ws.close()
+  }
+
+  $scope.ws = null
   $scope.model = {
     userId: null,
     content: null,
@@ -23,9 +28,9 @@ const userPageCtrl = ($scope, $websocket, $location, $routeParams, $window, wsur
       $scope.model.userId = $routeParams.userId
 
       const websocketUrl = wsurl + '/postings/' + $scope.model.userId
-      const ws = $websocket(websocketUrl)
+      $scope.ws = $websocket(websocketUrl)
 
-      ws.onMessage(msgEvent => {
+      $scope.ws.onMessage(msgEvent => {
         const response = JSON.parse(msgEvent.data)
         if (response.error) {
           $scope.model.errorMessage = response.error
@@ -34,11 +39,11 @@ const userPageCtrl = ($scope, $websocket, $location, $routeParams, $window, wsur
         }
       })
 
-      ws.onClose(() => {
+      $scope.ws.onClose(() => {
         $scope.model.loading = false
       })
 
-      ws.onError(errorEv => { $scope.model.message = errorEv.data })
+      $scope.ws.onError(errorEv => { $scope.model.message = errorEv.data })
     }
   }
 
