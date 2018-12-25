@@ -10,14 +10,6 @@ const from = (firstPage, config) => {
       : config.dstuHost + href
   }
 
-  const getCommonProps = () => {
-    const userName = getUserName()
-    const totalParts = getRemainingPageLinks().length + 1
-    const totalPostings = getTotalPostings()
-
-    return { userName, totalParts, totalPostings }
-  }
-
   const getUserName = () => cleanText(firstPage('div#up_user h2'))
 
   const getRemainingPageLinks = () => firstPage('div.paging_scroller_container').first()
@@ -61,7 +53,7 @@ const from = (firstPage, config) => {
   }
 
   return {
-    getCommonProps, getRemainingPageLinks, getPostings
+    getUserName, getRemainingPageLinks, getTotalPostings, getPostings
   }
 }
 

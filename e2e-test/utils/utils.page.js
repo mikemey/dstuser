@@ -33,7 +33,7 @@ const waitForElementText = byElement => waitForVisibleElements(byElement).then(e
 
 const waitForElementNumber = byElement => waitForElementText(byElement).then(asNumber)
 
-const waitForElementInvisible = byElement => browser.wait(ExpectedConditions.invisibilityOf(element(byElement)))
+const waitForElementInvisible = byElement => browser.wait(EC.invisibilityOf(element(byElement)))
 
 const waitForElementClick = byElement => waitForElement(byElement).then(() => {
   const el = element(byElement)

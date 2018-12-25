@@ -1,7 +1,7 @@
 [
   {
     "part": 1,
-    "totalParts": 3,
+    "totalParts": 2,
     "userName": "dst_user_425185",
     "totalPostings": 30,
     "postings": [
@@ -169,7 +169,7 @@
   },
   {
     "part": 2,
-    "totalParts": 3,
+    "totalParts": 2,
     "userName": "dst_user_425185",
     "totalPostings": 30,
     "postings": [
@@ -332,15 +332,7 @@
           "pos": 12,
           "neg": 35
         }
-      }
-    ]
-  },
-  {
-    "part": 3,
-    "totalParts": 3,
-    "userName": "dst_user_425185",
-    "totalPostings": 30,
-    "postings": [
+      },
       {
         "postingId": "1029028549",
         "title": "Arbeiten um zu Leben anstatt Leben um zu arbeiten",

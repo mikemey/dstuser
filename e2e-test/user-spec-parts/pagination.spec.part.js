@@ -31,7 +31,7 @@ module.exports = searchPage => {
     describe('Large user page', () => {
       beforeAll(() => {
         searchPage.openUserPage(largeUserId)
-        return searchPage.waitForLoading()
+        return searchPage.waitForPostingsLoaded()
       })
 
       it('"more postings" button is available', () => {

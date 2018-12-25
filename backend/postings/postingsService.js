@@ -4,6 +4,8 @@ const PartialResultBuilder = require('./partialResultBuilder')
 const requests = require('../utils/requests')
 const { startTimer, stopTimer } = require('../utils/msTimer')
 
+const USERPAGES_PER_PARTITION = 10
+
 const PostingsService = (config, logger) => {
   const profileTemplate = config.dstuHost + config.userProfileTemplate
   const userIdPlaceholder = config.userIdPlaceholder
@@ -20,16 +22,16 @@ const PostingsService = (config, logger) => {
     return requestPage(profileUrl)
       .then(firstPage => {
         const pageParser = UserPageParser.from(firstPage, config)
-        const commonProps = pageParser.getCommonProps()
-        const prBuilder = PartialResultBuilder(commonProps)
+        const prBuilder = PartialResultBuilder(commonProps(pageParser))
         const firstPagePostings = pageParser.getPostings(firstPage)
 
+        const linkBuckets = createBuckets(pageParser.getRemainingPageLinks())
+        const bucketRequest = createBucketRequest(pageParser, prBuilder.build, onPartialResult)
         const firstPromise = Promise.resolve(onPartialResult(prBuilder.build(firstPagePostings)))
-        const links = pageParser.getRemainingPageLinks()
-        const reqSendPostings = requestAndSendPostings(pageParser.getPostings, prBuilder.build, onPartialResult)
 
-        return links.reduce((prom, link) => prom.then(keepGoing =>
-          keepGoing ? reqSendPostings(link) : Promise.resolve(false)
+        return linkBuckets.reduce((prom, linkBucket) => prom.then(keepGoing => keepGoing
+          ? bucketRequest(linkBucket)
+          : Promise.resolve(false)
         ), firstPromise)
       })
       .then(() => {
@@ -37,23 +39,42 @@ const PostingsService = (config, logger) => {
       })
   }
 
-  const requestAndSendPostings = (parsePostings, responseBuilder, onPartialResult) => url => {
-    const receiveSendCycleTimer = startTimer()
-    return requests.getHtml(url)
-      .then(parsePostings)
-      .catch(error => {
-        logger.error(`Error requesting page: ${url}`, error)
-        return []
+  const commonProps = pageParser => {
+    const userName = pageParser.getUserName()
+    const totalParts = 1 + Math.ceil(pageParser.getRemainingPageLinks().length / USERPAGES_PER_PARTITION)
+    const totalPostings = pageParser.getTotalPostings()
+    return { userName, totalParts, totalPostings }
+  }
+
+  const createBuckets = links => links.reduce((buckets, _, ix, arr) => {
+    if (ix % USERPAGES_PER_PARTITION === 0) {
+      buckets.push(arr.slice(ix, ix + USERPAGES_PER_PARTITION))
+    }
+    return buckets
+  }, [])
+
+  const createBucketRequest = (pageParser, responseBuilder, onPartialResult) => links => {
+    const bucketTimer = startTimer()
+    return Promise
+      .all(links.map(requestAndParsePage(pageParser)))
+      .then(postingsBucket => {
+        const allPostings = [].concat.apply([], postingsBucket)
+        return onPartialResult(responseBuilder(allPostings))
       })
-      .then(postings => onPartialResult(responseBuilder(postings)))
       .then(result => {
-        logger.info(`postings: ${url} DONE (R+S: ${stopTimer(receiveSendCycleTimer)}ms)`)
+        logger.info(`bucket DONE (R+P: ${stopTimer(bucketTimer)}ms)`)
         return result
       })
   }
 
+  const requestAndParsePage = pageParser => url => requestPage(url)
+    .then(pageParser.getPostings)
+    .catch(error => {
+      logger.error(`Error requesting page: ${url}`, error)
+      return []
+    })
+
   const requestPage = url => {
-    logger.info(`postings: ${url}`)
     const requestTimer = startTimer()
     return requests.getHtml(url)
       .then(result => {
