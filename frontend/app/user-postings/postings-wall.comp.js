@@ -22,7 +22,7 @@ const postingsCtrl = function ($scope, $sce, $sanitize) {
   const loadPostings = (postings, filter) => {
     $scope.model.filter = filter
     $scope.model.allPostings = addFilterContent(postings)
-    filterPostings()
+    separatePostings()
   }
 
   const addFilterContent = postings => {
@@ -46,18 +46,20 @@ const postingsCtrl = function ($scope, $sce, $sanitize) {
 
   $scope.showMorePostings = () => {
     $scope.model.visibleToIx += $scope.postingsPerPage
-    filterPostings()
+    separatePostings()
   }
 
-  const filterPostings = () => {
+  $scope.jumpTo = offset => {
+    $scope.model.visibleFromIx = offset
+    $scope.model.visibleToIx = offset + $scope.postingsPerPage
+    separatePostings()
+  }
+
+  const separatePostings = () => {
     const filteredPosts = $scope.model.allPostings
       .filter(post => post.filterContent.includes($scope.model.filter.toLowerCase()))
     $scope.model.filteredPostingsCount = filteredPosts.length
-    $scope.model.visiblePostings = filteredPosts.slice(0, $scope.model.visibleToIx)
-  }
-
-  $scope.jumpTo = page => {
-    console.log(`goto page ${page}`)
+    $scope.model.visiblePostings = filteredPosts.slice($scope.model.visibleFromIx, $scope.model.visibleToIx)
   }
 }
 

@@ -61,6 +61,12 @@ module.exports = searchPage => {
         expect(searchPage.comments.countComments()).toEqual(96)
         expect(searchPage.getMorePostingsButtonLabel()).toMatch(morePostingsLabel(1, 96, 1010))
       })
+
+      it('click on page link will jump to page', () => {
+        searchPage.clickPostingPageLink(20)
+        expect(searchPage.comments.countComments()).toEqual(48)
+        expect(searchPage.getMorePostingsButtonLabel()).toMatch(morePostingsLabel(913, 960, 1010))
+      })
     })
 
     describe('medium user page "more postings" button', () => {

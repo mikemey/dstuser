@@ -1,4 +1,4 @@
-<page-links on-page-click="jumpTo(page)" posting-count="model.filteredPostingsCount"
+<page-links on-page-click="jumpTo(offset)" posting-count="model.filteredPostingsCount"
             postings-per-page="postingsPerPage">
 </page-links>
 
@@ -34,7 +34,7 @@
 </div>
 
 <div class="row mb-5 p-lg-2 p-1">
-  <button id="more-postings" ng-if="model.visiblePostings.length < model.allPostings.length"
+  <button id="more-postings" ng-if="model.visibleToIx < model.filteredPostingsCount"
           ng-click="showMorePostings()" class="btn btn-secondary btn-dark col-12">
     show more postings&hellip;&nbsp;
     <small>

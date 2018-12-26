@@ -98,9 +98,10 @@ const SearchPage = testScreen => {
   const getMorePostingsButtonLabel = () => waitForElementText(byMorePostingsButton)
 
   const hasPostingPages = () => hasElement(by.className('posting-pages'))
-  const postingPages = () => element.all(by.css('.posting-pages a')).filter(onlyDisplayed)
+  const postingPages = () => element.all(by.css('.posting-pages li:not(.disabled) a'))
   const getPostingPagesLinks = () => postingPages().map(el => asHref(el))
   const getPostingPagesNumbers = () => postingPages().map(anchor => asText(anchor).then(asNumber))
+  const clickPostingPageLink = pageNum => element(by.cssContainingText('.page-link', `${pageNum}`)).click()
 
   /* eslint object-property-newline: "off" */
   return {
@@ -123,7 +124,7 @@ const SearchPage = testScreen => {
     getPartsLoaded, getPartsTotal,
     waitForPostingsLoaded,
     hasMorePostingsButton, clickMorePostingsButton, getMorePostingsButtonLabel,
-    hasPostingPages, getPostingPagesNumbers, getPostingPagesLinks
+    hasPostingPages, getPostingPagesNumbers, getPostingPagesLinks, clickPostingPageLink
   }
 }
 
