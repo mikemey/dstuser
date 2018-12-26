@@ -13,17 +13,17 @@ const pageLinksCtrl = function ($scope) {
     pageCallback: null,
     postingsPerPage: null,
     linkbar: null,
-    currentPage: 1
+    currentPageIx: 0
   }
 
   const calculateLinkBar = postingCount => {
     const pages = Math.ceil(postingCount / $scope.model.postingsPerPage)
-    $scope.model.linkbar = Array.from({ length: pages }).map((_, ix) => ix + 1)
+    $scope.model.linkbar = Array.from({ length: pages }).map((_, ix) => ix)
   }
 
-  $scope.showPage = pageNum => {
-    $scope.model.currentPage = pageNum
-    const offset = (pageNum - 1) * $scope.model.postingsPerPage
+  $scope.showPage = pageIx => {
+    $scope.model.currentPageIx = pageIx
+    const offset = pageIx * $scope.model.postingsPerPage
     $scope.model.pageCallback({ offset })
   }
 }

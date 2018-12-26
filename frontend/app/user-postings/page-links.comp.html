@@ -5,9 +5,9 @@
         <small>Pages:</small>
       </a>
     </li>
-    <li class="page-item" ng-repeat="pageNum in model.linkbar" ng-class="($index + 1) === model.currentPage ? 'current': ''">
+    <li class="page-item" ng-repeat="pageIx in model.linkbar" ng-class="pageIx === model.currentPageIx ? 'current': ''">
       <a class="page-link border-0 rounded py-1 px-2" href="#" onclick="return false;"
-         ng-click="showPage(pageNum)">{{ pageNum }}</a>
+         ng-click="showPage(pageIx)">{{ pageIx + 1 }}</a>
     </li>
   </ul>
 </nav>
