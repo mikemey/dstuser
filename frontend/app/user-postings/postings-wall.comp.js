@@ -63,7 +63,7 @@ const postingsCtrl = function ($scope, $sce, $sanitize) {
 
 export default angular
   .module('user.postings.wall', [ngSanitize])
-  .component('postings', {
+  .component('postingsWall', {
     template: require('./postings-wall.comp.html'),
     controller: ['$scope', '$sce', '$sanitize', postingsCtrl],
     bindings: { postings: '<', filter: '<' }

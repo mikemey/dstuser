@@ -22,7 +22,7 @@
           </a>
         </div>
       </div>
-      <rating ng-if="posting.showRating" posting-id="{{ posting.postingId }}"></rating>
+      <posting-rating ng-if="posting.showRating" posting-id="{{ posting.postingId }}"></posting-rating>
       <div class="card-footer p-3">
         <a class="cmnt-article d-block" ng-href="{{ posting.article.url }}"
            target="_blank" ng-bind-html="highlight(posting.article.title, model.filter)">
