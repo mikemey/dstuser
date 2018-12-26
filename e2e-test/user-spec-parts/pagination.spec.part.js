@@ -67,6 +67,25 @@ module.exports = searchPage => {
         expect(searchPage.comments.countComments()).toEqual(48)
         expect(searchPage.getMorePostingsButtonLabel()).toMatch(morePostingsLabel(913, 960, 1010))
       })
+
+      it('click on last page - does not have a "more postings" button', () => {
+        searchPage.clickPostingPageLink(22)
+        expect(searchPage.comments.countComments()).toEqual(2)
+        expect(searchPage.hasMorePostingsButton()).toBeFalsy()
+      })
+
+      it('filtering resets pagination', () => {
+        searchPage.clickPostingPageLink(20)
+        searchPage.sendToFilter('einget')
+
+        expect(searchPage.comments.countComments()).toEqual(48)
+        expect(searchPage.getPostingPagesNumbers()).toEqual([1, 2, 3])
+        expect(searchPage.getMorePostingsButtonLabel()).toMatch(morePostingsLabel(1, 48, 101))
+
+        searchPage.clickPostingPageLink(3)
+        expect(searchPage.comments.countComments()).toEqual(5)
+        expect(searchPage.hasMorePostingsButton()).toBeFalsy()
+      })
     })
 
     describe('medium user page "more postings" button', () => {

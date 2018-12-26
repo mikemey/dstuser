@@ -19,6 +19,11 @@ const postingsCtrl = function ($scope, $sce, $sanitize) {
     filteredPostingsCount: 0
   }
 
+  $scope.$watch('model.filter', () => {
+    $scope.model.visibleFromIx = 0
+    $scope.model.visibleToIx = $scope.postingsPerPage
+  })
+
   const loadPostings = (postings, filter) => {
     $scope.model.filter = filter
     $scope.model.allPostings = addFilterContent(postings)
