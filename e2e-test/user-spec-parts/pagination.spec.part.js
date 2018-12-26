@@ -15,6 +15,8 @@ module.exports = searchPage => {
 
     afterAll(derStandard.stop)
 
+    const morePostingsLabel = (from, to, total) => new RegExp(`show more postings… {2}\\(${from} - ${to} of ${total}\\)`)
+
     describe('no "more postings" button', () => {
       it('when no user', () => {
         searchPage.open()
@@ -40,11 +42,11 @@ module.exports = searchPage => {
 
       it('"more postings" click will show more postings', () => {
         expect(searchPage.comments.countComments()).toEqual(48)
-        expect(searchPage.getMorePostingsButtonLabel()).toMatch(/\(1 - 48 of/)
+        expect(searchPage.getMorePostingsButtonLabel()).toMatch(morePostingsLabel(1, 48, 1010))
 
         searchPage.clickMorePostingsButton()
         expect(searchPage.comments.countComments()).toEqual(96)
-        expect(searchPage.getMorePostingsButtonLabel()).toMatch(/\(1 - 96 of/)
+        expect(searchPage.getMorePostingsButtonLabel()).toMatch(morePostingsLabel(1, 96, 1010))
       })
     })
 
@@ -52,7 +54,7 @@ module.exports = searchPage => {
       beforeAll(() => searchPage.openUserPage(mediumUserId))
 
       it('button dissapears when reaching end', () => {
-        expect(searchPage.getMorePostingsButtonLabel()).toMatch(/\(1 - 48 of 50/)
+        expect(searchPage.getMorePostingsButtonLabel()).toMatch(morePostingsLabel(1, 48, 50))
         searchPage.clickMorePostingsButton()
 
         expect(searchPage.comments.countComments()).toEqual(50)
