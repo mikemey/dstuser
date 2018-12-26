@@ -1,0 +1,10 @@
+<nav class="posting-pages" ng-if="model.linkbar.length > 1">
+  <ul class="pagination pagination-sm justify-content-center flex-wrap mb-1" watch-width>
+    <li class="page-item" ng-repeat="pageNum in model.linkbar">
+      <a class="page-link border-0 rounded p-1" href="#" onclick="return false;"
+         ng-click="showPage(pageNum)">
+        {{ pageNum }}
+      </a>
+    </li>
+  </ul>
+</nav>

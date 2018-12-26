@@ -4,18 +4,19 @@ import ngSanitize from 'angular-sanitize'
 import './postings.comp.css'
 import './section-colors.css'
 
-const POSTINGS_PER_PAGE = 48
 const postingsCtrl = function ($scope, $sce, $sanitize) {
   this.$onChanges = () => {
     loadPostings(this.postings, this.filter)
   }
 
+  $scope.postingsPerPage = 48
   $scope.model = {
     filter: '',
     allPostings: null,
     visiblePostings: null,
     visibleFromIx: 0,
-    visibleToIx: POSTINGS_PER_PAGE
+    visibleToIx: $scope.postingsPerPage,
+    filteredPostingsCount: 0
   }
 
   const loadPostings = (postings, filter) => {
@@ -44,14 +45,19 @@ const postingsCtrl = function ($scope, $sce, $sanitize) {
   }
 
   $scope.showMorePostings = () => {
-    $scope.model.visibleToIx += POSTINGS_PER_PAGE
+    $scope.model.visibleToIx += $scope.postingsPerPage
     filterPostings()
   }
 
   const filterPostings = () => {
     const filteredPosts = $scope.model.allPostings
       .filter(post => post.filterContent.includes($scope.model.filter.toLowerCase()))
+    $scope.model.filteredPostingsCount = filteredPosts.length
     $scope.model.visiblePostings = filteredPosts.slice(0, $scope.model.visibleToIx)
+  }
+
+  $scope.jumpTo = page => {
+    console.log(`goto page ${page}`)
   }
 }
 
@@ -59,11 +65,6 @@ export default angular
   .module('user.postings', [ngSanitize])
   .component('postings', {
     template: require('./postings.comp.html'),
-    controller: [
-      '$scope', '$sce', '$sanitize', postingsCtrl
-    ],
-    bindings: {
-      postings: '<',
-      filter: '<'
-    }
+    controller: ['$scope', '$sce', '$sanitize', postingsCtrl],
+    bindings: { postings: '<', filter: '<' }
   })

@@ -27,10 +27,11 @@ module.exports = searchPage => {
         searchPage.openUserPage(smallUserId)
         searchPage.waitForPostingsLoaded()
         expect(searchPage.hasMorePostingsButton()).toBeFalsy()
+        expect(searchPage.hasPostingPages()).toBeFalsy()
       })
     })
 
-    describe('Large user page', () => {
+    describe('large user page', () => {
       beforeAll(() => {
         searchPage.openUserPage(largeUserId)
         return searchPage.waitForPostingsLoaded()
@@ -38,6 +39,18 @@ module.exports = searchPage => {
 
       it('"more postings" button is available', () => {
         expect(searchPage.hasMorePostingsButton()).toBeTruthy()
+      })
+
+      it('parts pages are available', () => {
+        const expectedPostingPages = Array.from({ length: 22 })
+        const emptyHref = derStandard.getServerUrl('/dstu/#')
+        const expectedPageNumbers = expectedPostingPages.map((_, ix) => ix + 1)
+        const expectedPageLinks = expectedPostingPages.map(_ => emptyHref)
+
+        expect(searchPage.hasMorePostingsButton()).toBeTruthy()
+        expect(searchPage.hasPostingPages()).toBeTruthy()
+        expect(searchPage.getPostingPagesNumbers()).toEqual(expectedPageNumbers)
+        expect(searchPage.getPostingPagesLinks()).toEqual(expectedPageLinks)
       })
 
       it('"more postings" click will show more postings', () => {
@@ -50,7 +63,7 @@ module.exports = searchPage => {
       })
     })
 
-    describe('Medium user page "more postings" button', () => {
+    describe('medium user page "more postings" button', () => {
       beforeAll(() => searchPage.openUserPage(mediumUserId))
 
       it('button dissapears when reaching end', () => {

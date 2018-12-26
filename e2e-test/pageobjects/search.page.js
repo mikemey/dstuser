@@ -2,6 +2,7 @@ const { by, browser, element } = require('protractor')
 
 const comments = require('./comments.page')
 const {
+  asHref, asText,
   hasElement, onlyDisplayed, asNumber, setInputField,
   waitForElementText, waitForElementNumber, waitForElementInvisible, waitForElementClick
 } = require('../utils/utils.page')
@@ -96,6 +97,11 @@ const SearchPage = testScreen => {
   const clickMorePostingsButton = () => waitForElementClick(byMorePostingsButton)
   const getMorePostingsButtonLabel = () => waitForElementText(byMorePostingsButton)
 
+  const hasPostingPages = () => hasElement(by.className('posting-pages'))
+  const postingPages = () => element.all(by.css('.posting-pages a')).filter(onlyDisplayed)
+  const getPostingPagesLinks = () => postingPages().map(el => asHref(el))
+  const getPostingPagesNumbers = () => postingPages().map(anchor => asText(anchor).then(asNumber))
+
   /* eslint object-property-newline: "off" */
   return {
     id: testScreen.id,
@@ -116,7 +122,8 @@ const SearchPage = testScreen => {
     hasPostingTotal, getPostingTotal,
     getPartsLoaded, getPartsTotal,
     waitForPostingsLoaded,
-    hasMorePostingsButton, clickMorePostingsButton, getMorePostingsButtonLabel
+    hasMorePostingsButton, clickMorePostingsButton, getMorePostingsButtonLabel,
+    hasPostingPages, getPostingPagesNumbers, getPostingPagesLinks
   }
 }
 
