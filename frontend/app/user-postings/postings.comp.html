@@ -2,7 +2,7 @@
             postings-per-page="postingsPerPage">
 </page-links>
 
-<div class="row postings">
+<div class="row">
   <div class="col-xl-3 col-lg-4 col-sm-6 p-lg-2 p-1" ng-repeat="posting in model.visiblePostings">
     <div class="card cmnt-box h-100" ng-class="posting.article.section.toLowerCase()">
       <div class="cmnt-date float-right text-muted" ng-bind="posting.date"></div>
@@ -33,7 +33,7 @@
   </div>
 </div>
 
-<div class="row postings mb-5 p-lg-2 p-1">
+<div class="row mb-5 p-lg-2 p-1">
   <button id="more-postings" ng-if="model.visiblePostings.length < model.allPostings.length"
           ng-click="showMorePostings()" class="btn btn-secondary btn-dark col-12">
     show more postings&hellip;&nbsp;
