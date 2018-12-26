@@ -1,7 +1,7 @@
 import angular from 'angular'
 import ngSanitize from 'angular-sanitize'
 
-import './postings.comp.css'
+import './postings-wall.comp.css'
 import './section-colors.css'
 
 const postingsCtrl = function ($scope, $sce, $sanitize) {
@@ -62,9 +62,9 @@ const postingsCtrl = function ($scope, $sce, $sanitize) {
 }
 
 export default angular
-  .module('user.postings', [ngSanitize])
+  .module('user.postings.wall', [ngSanitize])
   .component('postings', {
-    template: require('./postings.comp.html'),
+    template: require('./postings-wall.comp.html'),
     controller: ['$scope', '$sce', '$sanitize', postingsCtrl],
     bindings: { postings: '<', filter: '<' }
   })

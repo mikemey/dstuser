@@ -35,7 +35,7 @@ const ratingCtrl = function ($scope, $websocket, wsurl) {
 }
 
 export default angular
-  .module('user.rating', [ngWebSocket.name])
+  .module('user.posting.rating', [ngWebSocket.name])
   .component('rating', {
     template: require('./posting-rating.comp.html'),
     controller: ['$scope', '$websocket', 'wsurl', ratingCtrl],
