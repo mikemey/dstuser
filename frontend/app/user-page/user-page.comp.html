@@ -34,9 +34,9 @@
         </div>
 
         <div ng-if="model.content.userName" class="float-left">
-          <label id="userName-small" class="form-control-plaintext form-control-sm d-none d-md-block"
+          <label id="userName-small" class="form-control-plaintext form-control-sm d-none d-md-block px-2"
                  ng-bind="model.content.userName"></label>
-          <label id="userName-large" class="form-control-plaintext d-md-none p-1"
+          <label id="userName-large" class="form-control-plaintext d-md-none py-1 px-2"
                  ng-bind="model.content.userName"></label>
         </div>
 
@@ -47,7 +47,7 @@
 
       <div class="col-md-3 d-none d-md-block mt-sm-0 mt-2">
         <input id="filter-small" type="text" formnovalidate="formnovalidate"
-               class="form-control form-control-sm" placeholder="filter..."
+               class="form-control form-control-sm" placeholder="search..."
                ng-model="model.filter" onkeydown="if (event.keyCode === 13) { return false; }"
                disabled />
       </div>
@@ -56,7 +56,7 @@
     <div class="form-row">
       <div class="col pt-md-0 pt-sm-2 pt-0">
         <input id="filter-large" type="text" formnovalidate="formnovalidate"
-               class="form-control d-md-none" placeholder="filter..." ng-model="model.filter"
+               class="form-control d-md-none" placeholder="search..." ng-model="model.filter"
                onkeydown="if (event.keyCode === 13) { return false; }" disabled />
       </div>
     </div>
