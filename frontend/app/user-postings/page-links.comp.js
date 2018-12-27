@@ -1,8 +1,8 @@
 import angular from 'angular'
 
-import './page-links.comp.css'
+import './paging-links.comp.css'
 
-const pageLinksCtrl = function ($scope) {
+const pagingLinksCtrl = function ($scope) {
   this.$onChanges = () => {
     $scope.model.postingsPerPage = this.postingsPerPage
     $scope.model.pageCallback = this.onPageClick
@@ -29,9 +29,9 @@ const pageLinksCtrl = function ($scope) {
 }
 
 export default angular
-  .module('user.postings.pagelinks', [])
-  .component('pageLinks', {
-    template: require('./page-links.comp.html'),
-    controller: ['$scope', pageLinksCtrl],
+  .module('user.postings.paging.links', [])
+  .component('pagingLinks', {
+    template: require('./paging-links.comp.html'),
+    controller: ['$scope', pagingLinksCtrl],
     bindings: { onPageClick: '&', postingCount: '<', postingsPerPage: '<' }
   })
