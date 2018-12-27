@@ -1,4 +1,4 @@
-a.page-link {
+a.page-link, .page-item.disabled a.page-link {
   color: darkgreen;
   background-color: transparent;
 }
