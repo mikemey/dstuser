@@ -13,16 +13,14 @@
     <karma-points class="text-nowrap" postings="model.content.postings"></karma-points>
   </div>
   <div class="col-4">
-    <small>Parts:</small>
+    <small>received:</small>
     <div class="d-none d-md-inline">
-      <small class="parts-loaded font-weight-bold" ng-bind="model.content.partsLoaded"></small>
-      <small class="font-weight-bold">/</small>
-      <small class="parts-total font-weight-bold" ng-bind="model.content.totalParts"></small>
+      <small class="pct-loaded font-weight-bold" ng-bind="model.loadedPct.toFixed(0)"></small>
+      <small class="font-weight-bold">&percnt;</small>
     </div>
     <div class="d-md-none">
-      <strong class="parts-loaded font-weight-bold" ng-bind="model.content.partsLoaded"></strong>
-      <small class="font-weight-bold">/</small>
-      <strong class="parts-total font-weight-bold" ng-bind="model.content.totalParts"></strong>
+      <strong class="pct-loaded font-weight-bold" ng-bind="model.loadedPct.toFixed(0)"></strong>
+      <small class="font-weight-bold">&percnt;</small>
     </div>
   </div>
 </div>

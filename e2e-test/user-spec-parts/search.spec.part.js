@@ -108,22 +108,6 @@ module.exports = searchPage => {
     })
   })
 
-  describe('user search (large amount of comment pages)', () => {
-    const userId = '799725'
-
-    beforeAll(() => Promise.all([
-      derStandard.start(),
-      derStandard.serveDefaultUserPageFor(userId)
-    ]).then(() => searchPage.openUserPage(userId)))
-
-    afterAll(derStandard.stop)
-
-    it('should show total user stats', () => {
-      expect(searchPage.getPostingTotal()).toEqual(1010)
-      expect(searchPage.getPartsTotal()).toEqual(11)
-    })
-  })
-
   describe('derStandard errors', () => {
     const userId = '755005'
     beforeEach(derStandard.start)

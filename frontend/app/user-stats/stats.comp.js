@@ -1,13 +1,17 @@
 import angular from 'angular'
 import ngWebSocket from 'angular-websocket'
 
-import './stats.comp.css'
-
 const statsCtrl = function ($scope) {
-  this.$onInit = () => { $scope.model.content = this.content() }
+  this.$onInit = () => {
+    $scope.model.content = this.content()
+    $scope.$watch('model.content.partsLoaded', () => {
+      $scope.model.loadedPct = $scope.model.content.partsLoaded / $scope.model.content.totalParts * 100
+    })
+  }
 
   $scope.model = {
-    content: null
+    content: null,
+    loadedPct: 0
   }
 }
 

@@ -37,7 +37,7 @@ module.exports = searchPage => {
         expect(searchPage.getKarmaTotal()).toEqual([17, 18])
         expect(searchPage.hasPostingTotal()).toBeTruthy()
         expect(searchPage.getPostingTotal()).toEqual(3)
-        expect(searchPage.getPartsTotal()).toEqual(1)
+        expect(searchPage.getPercentageLoaded()).toEqual(100)
       })
 
       it('multiple user page - karma points + totals', () => {
@@ -45,7 +45,7 @@ module.exports = searchPage => {
         searchPage.waitForPostingsLoaded()
         expect(searchPage.getKarmaTotal()).toEqual([278, 231])
         expect(searchPage.getPostingTotal()).toEqual(30)
-        expect(searchPage.getPartsTotal()).toEqual(2)
+        expect(searchPage.getPercentageLoaded()).toEqual(100)
       })
     })
 
@@ -56,12 +56,8 @@ module.exports = searchPage => {
         expect(searchPage.getPostingTotal()).toEqual(1010)
       })
 
-      it('shows pages total', () => {
-        expect(searchPage.getPartsTotal()).toEqual(11)
-      })
-
       it('shows not all pages loaded yet', () => {
-        expect(searchPage.getPartsLoaded()).toBeLessThan(11)
+        expect(searchPage.getPercentageLoaded()).toBeLessThan(100)
       })
 
       describe('after loading is finished', () => {
@@ -72,7 +68,7 @@ module.exports = searchPage => {
         })
 
         it('shows pages loaded', () => {
-          expect(searchPage.getPartsLoaded()).toEqual(11)
+          expect(searchPage.getPercentageLoaded()).toEqual(100)
         })
       })
     })

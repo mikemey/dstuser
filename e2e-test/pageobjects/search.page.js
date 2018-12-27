@@ -85,9 +85,7 @@ const SearchPage = testScreen => {
   const hasPostingTotal = () => hasElement(byTotal)
   const getPostingTotal = () => waitForElementNumber(byTotal)
 
-  const getPartsLoaded = () => waitForElementNumber(by.className('parts-loaded'))
-  const getPartsTotal = () => waitForElementNumber(by.className('parts-total'))
-
+  const getPercentageLoaded = () => waitForElementNumber(by.className('pct-loaded'))
   const byLoader = by.className('loader')
   const waitForPostingsLoaded = () => waitForElementInvisible(byLoader)
 
@@ -122,7 +120,7 @@ const SearchPage = testScreen => {
     comments,
     hasKarmaTotal, getKarmaTotal,
     hasPostingTotal, getPostingTotal,
-    getPartsLoaded, getPartsTotal,
+    getPercentageLoaded,
     waitForPostingsLoaded,
     hasMorePostingsButton, clickMorePostingsButton, getMorePostingsButtonLabel,
     hasPostingPages, getPostingPagesNumbers, getPostingPagesLinks, clickPostingPageLink, getActivePostingPagesLinks
