@@ -47,7 +47,7 @@ module.exports = searchPage => {
         expect(searchPage.hasMorePostingsButton()).toBeTruthy()
       })
 
-      it('parts pages are available', () => {
+      it('page links are available', () => {
         const expectedPostingPages = Array.from({ length: 22 })
         const emptyHref = derStandard.getServerUrl('/dstu/#')
         const expectedPageNumbers = expectedPostingPages.map((_, ix) => ix + 1)
@@ -63,10 +63,12 @@ module.exports = searchPage => {
       it('"more postings tail" click will show more postings', () => {
         expect(searchPage.comments.countComments()).toEqual(48)
         expect(searchPage.getMorePostingsButtonLabel()).toMatch(morePostingsLabel(1, 48, 1010))
+        expect(searchPage.getActivePostingPagesLinks()).toEqual([1])
 
         searchPage.clickMorePostingsButton()
         expect(searchPage.comments.countComments()).toEqual(96)
         expect(searchPage.getMorePostingsButtonLabel()).toMatch(morePostingsLabel(1, 96, 1010))
+        expect(searchPage.getActivePostingPagesLinks()).toEqual([1, 2])
       })
 
       it('click on page link will jump to page', () => {
@@ -95,6 +97,10 @@ module.exports = searchPage => {
         searchPage.clickPostingPageLink(3)
         expect(searchPage.comments.countComments()).toEqual(5)
         expect(searchPage.hasMorePostingsButton()).toBeFalsy()
+        expect(searchPage.hasMorePostingsButton('head')).toBeTruthy()
+        expect(searchPage.getActivePostingPagesLinks()).toEqual([3])
+        searchPage.clickMorePostingsButton('head')
+        expect(searchPage.getActivePostingPagesLinks()).toEqual([2, 3])
       })
     })
 
@@ -108,6 +114,7 @@ module.exports = searchPage => {
         expect(searchPage.comments.countComments()).toEqual(50)
         expect(searchPage.hasMorePostingsButton()).toBeFalsy()
         expect(searchPage.hasMorePostingsButton('head')).toBeFalsy()
+        expect(searchPage.getActivePostingPagesLinks()).toEqual([1, 2])
       })
 
       it('"more postings head" button dissapears when reaching start', () => {
@@ -122,6 +129,7 @@ module.exports = searchPage => {
         expect(searchPage.comments.countComments()).toEqual(50)
         expect(searchPage.hasMorePostingsButton()).toBeFalsy()
         expect(searchPage.hasMorePostingsButton('head')).toBeFalsy()
+        expect(searchPage.getActivePostingPagesLinks()).toEqual([1, 2])
       })
     })
   })

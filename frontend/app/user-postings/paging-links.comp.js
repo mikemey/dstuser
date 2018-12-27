@@ -6,7 +6,7 @@ const pagingLinksCtrl = function ($scope) {
   this.$onChanges = () => {
     $scope.model.postingsPerPage = this.postingsPerPage
     $scope.model.pageCallback = this.onPageClick
-    calculateLinkBar(this.postingCount)
+    calculateLinkBar(this.from, this.to, this.postingCount)
   }
 
   $scope.model = {
@@ -16,9 +16,13 @@ const pagingLinksCtrl = function ($scope) {
     currentPageIx: 0
   }
 
-  const calculateLinkBar = postingCount => {
+  const calculateLinkBar = (from, to, postingCount) => {
     const pages = Math.ceil(postingCount / $scope.model.postingsPerPage)
-    $scope.model.linkbar = Array.from({ length: pages }).map((_, ix) => ix)
+    $scope.model.linkbar = Array.from({ length: pages }).map((_, ix) => {
+      const firstPagePostIx = ix * $scope.model.postingsPerPage
+      const isCurrent = firstPagePostIx >= from && firstPagePostIx < to
+      return { ix, isCurrent }
+    })
   }
 
   $scope.showPage = pageIx => {
@@ -33,5 +37,11 @@ export default angular
   .component('pagingLinks', {
     template: require('./paging-links.comp.html'),
     controller: ['$scope', pagingLinksCtrl],
-    bindings: { onPageClick: '&', postingCount: '<', postingsPerPage: '<' }
+    bindings: {
+      onPageClick: '&',
+      from: '<',
+      to: '<',
+      postingCount: '<',
+      postingsPerPage: '<'
+    }
   })

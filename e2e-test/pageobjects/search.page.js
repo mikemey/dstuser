@@ -2,7 +2,7 @@ const { by, browser, element } = require('protractor')
 
 const comments = require('./comments.page')
 const {
-  getHref, getText,
+  getHref, getTextAsNumber,
   hasElement, onlyDisplayed, asNumber, setInputField,
   waitForElementText, waitForElementNumber, waitForElementInvisible, waitForElementClick
 } = require('../utils/utils.page')
@@ -96,11 +96,13 @@ const SearchPage = testScreen => {
   const clickMorePostingsButton = direction => waitForElementClick(byMorePostingsButton(direction))
   const getMorePostingsButtonLabel = direction => waitForElementText(byMorePostingsButton(direction))
 
-  const hasPostingPages = () => hasElement(by.className('posting-pages'))
-  const postingPages = () => element.all(by.css('.posting-pages li:not(.disabled) a'))
+  const postingPagesClass = 'posting-pages'
+  const hasPostingPages = () => hasElement(by.className(postingPagesClass))
+  const postingPages = () => element.all(by.css(`.${postingPagesClass} li:not(.disabled) a`))
   const getPostingPagesLinks = () => postingPages().map(el => getHref(el))
-  const getPostingPagesNumbers = () => postingPages().map(anchor => getText(anchor).then(asNumber))
+  const getPostingPagesNumbers = () => postingPages().map(getTextAsNumber)
   const clickPostingPageLink = pageNum => element(by.cssContainingText('.page-link', `${pageNum}`)).click()
+  const getActivePostingPagesLinks = () => element.all(by.css(`.${postingPagesClass} li.current a`)).map(getTextAsNumber)
 
   /* eslint object-property-newline: "off" */
   return {
@@ -123,7 +125,7 @@ const SearchPage = testScreen => {
     getPartsLoaded, getPartsTotal,
     waitForPostingsLoaded,
     hasMorePostingsButton, clickMorePostingsButton, getMorePostingsButtonLabel,
-    hasPostingPages, getPostingPagesNumbers, getPostingPagesLinks, clickPostingPageLink
+    hasPostingPages, getPostingPagesNumbers, getPostingPagesLinks, clickPostingPageLink, getActivePostingPagesLinks
   }
 }
 

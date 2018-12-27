@@ -3,6 +3,7 @@ const EC = ExpectedConditions
 
 const onlyDisplayed = el => el.isDisplayed()
 const getText = el => el.getText()
+const getTextAsNumber = el => el.getText().then(asNumber)
 const getHref = (el, attrName = 'href') => el.getAttribute(attrName)
 const asNumber = res => {
   const num = Number(res)
@@ -46,6 +47,7 @@ const activeElementId = () => browser.driver.switchTo().activeElement().getAttri
 module.exports = {
   onlyDisplayed,
   getText,
+  getTextAsNumber,
   getHref,
   asNumber,
   hasElement,

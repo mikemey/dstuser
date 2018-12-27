@@ -1,5 +1,6 @@
 a.page-link {
   color: darkgreen;
+  background-color: transparent;
 }
 
 a.page-link:focus {
@@ -8,5 +9,5 @@ a.page-link:focus {
 
 .page-item.current .page-link {
   color: #f1fff1;
-  background-color: #b9b9b9;
+  background-color: #5a6268;
 }

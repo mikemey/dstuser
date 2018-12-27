@@ -1,5 +1,5 @@
-<paging-links on-page-click="jumpTo(offset)" posting-count="model.filteredPostingsCount"
-              postings-per-page="postingsPerPage">
+<paging-links on-page-click="jumpTo(offset)" from="model.visibleFromIx" to="model.visibleToIx"
+              posting-count="model.filteredPostingsCount" postings-per-page="postingsPerPage">
 </paging-links>
 
 <div class="row">
