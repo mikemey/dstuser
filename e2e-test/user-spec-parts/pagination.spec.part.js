@@ -15,7 +15,7 @@ module.exports = searchPage => {
 
     afterAll(derStandard.stop)
 
-    const morePostingsLabel = (from, to, total) => new RegExp(`show more postings… {2}\\(${from} - ${to} of ${total}\\)`)
+    const morePostingsLabel = (from, to, total) => new RegExp(`ᐁ show more postings \\(${from} - ${to} of ${total}\\) ᐁ`)
 
     describe('no "more postings" button', () => {
       it('when no user', () => {
