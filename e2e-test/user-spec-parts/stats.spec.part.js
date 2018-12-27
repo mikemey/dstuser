@@ -32,20 +32,22 @@ module.exports = searchPage => {
     describe('shows for', () => {
       it('single user page - karma points', () => {
         searchPage.openUserPage(smallUserId)
-        searchPage.waitForPostingsLoaded()
-        expect(searchPage.hasKarmaTotal()).toBeTruthy()
-        expect(searchPage.getKarmaTotal()).toEqual([17, 18])
-        expect(searchPage.hasPostingTotal()).toBeTruthy()
-        expect(searchPage.getPostingTotal()).toEqual(3)
-        expect(searchPage.getPercentageLoaded()).toEqual(100)
+        return searchPage.waitForPostingsLoaded().then(() => {
+          expect(searchPage.hasKarmaTotal()).toBeTruthy()
+          expect(searchPage.getKarmaTotal()).toEqual([17, 18])
+          expect(searchPage.hasPostingTotal()).toBeTruthy()
+          expect(searchPage.getPostingTotal()).toEqual(3)
+          expect(searchPage.getPercentageLoaded()).toEqual(100)
+        })
       })
 
       it('multiple user page - karma points + totals', () => {
         searchPage.openUserPage(userId)
-        searchPage.waitForPostingsLoaded()
-        expect(searchPage.getKarmaTotal()).toEqual([278, 231])
-        expect(searchPage.getPostingTotal()).toEqual(30)
-        expect(searchPage.getPercentageLoaded()).toEqual(100)
+        return searchPage.waitForPostingsLoaded().then(() => {
+          expect(searchPage.getKarmaTotal()).toEqual([278, 231])
+          expect(searchPage.getPostingTotal()).toEqual(30)
+          expect(searchPage.getPercentageLoaded()).toEqual(100)
+        })
       })
     })
 

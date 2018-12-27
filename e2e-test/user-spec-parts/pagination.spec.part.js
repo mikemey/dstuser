@@ -29,11 +29,12 @@ module.exports = searchPage => {
 
       it('when not enough postings for pagination', () => {
         searchPage.openUserPage(smallUserId)
-        searchPage.waitForPostingsLoaded()
-        expect(searchPage.hasMorePostingsButton()).toBeFalsy()
-        expect(searchPage.hasMorePostingsButton('head')).toBeFalsy()
-        expect(searchPage.hasPostingPages()).toBeFalsy()
-        expect(searchPage.hasPostingPages('head')).toBeFalsy()
+        return searchPage.waitForPostingsLoaded().then(() => {
+          expect(searchPage.hasMorePostingsButton()).toBeFalsy()
+          expect(searchPage.hasMorePostingsButton('head')).toBeFalsy()
+          expect(searchPage.hasPostingPages()).toBeFalsy()
+          expect(searchPage.hasPostingPages('head')).toBeFalsy()
+        })
       })
     })
 
