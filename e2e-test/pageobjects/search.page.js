@@ -92,10 +92,10 @@ const SearchPage = testScreen => {
   const byLoader = by.className('loader')
   const waitForPostingsLoaded = () => waitForElementInvisible(byLoader)
 
-  const byMorePostingsButton = by.id('more-postings')
-  const hasMorePostingsButton = () => hasElement(byMorePostingsButton)
-  const clickMorePostingsButton = () => waitForElementClick(byMorePostingsButton)
-  const getMorePostingsButtonLabel = () => waitForElementText(byMorePostingsButton)
+  const byMorePostingsButton = (direction = 'tail') => by.id(`more-postings-${direction}`)
+  const hasMorePostingsButton = direction => hasElement(byMorePostingsButton(direction))
+  const clickMorePostingsButton = direction => waitForElementClick(byMorePostingsButton(direction))
+  const getMorePostingsButtonLabel = direction => waitForElementText(byMorePostingsButton(direction))
 
   const hasPostingPages = () => hasElement(by.className('posting-pages'))
   const postingPages = () => element.all(by.css('.posting-pages li:not(.disabled) a'))

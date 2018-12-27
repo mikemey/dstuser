@@ -19,6 +19,14 @@ const postingsCtrl = function ($scope, $sce, $sanitize) {
     filteredPostingsCount: 0
   }
 
+  const setFromIx = newFrom => {
+    $scope.model.visibleFromIx = Math.max(newFrom, 0)
+  }
+
+  const setToIx = newTo => {
+    $scope.model.visibleToIx = Math.min(newTo, $scope.model.filteredPostingsCount)
+  }
+
   $scope.$watch('model.filter', () => {
     $scope.model.visibleFromIx = 0
     $scope.model.visibleToIx = $scope.postingsPerPage
@@ -49,14 +57,23 @@ const postingsCtrl = function ($scope, $sce, $sanitize) {
     )
   }
 
-  $scope.showMorePostings = () => {
-    $scope.model.visibleToIx += $scope.postingsPerPage
+  $scope.showMorePostings = direction => {
+    switch (direction) {
+      case 'head':
+        setFromIx($scope.model.visibleFromIx - $scope.postingsPerPage)
+        break
+      case 'tail':
+        setToIx($scope.model.visibleToIx + $scope.postingsPerPage)
+        break
+      default: console.log(`direction not recognized: ${direction}`)
+        return
+    }
     separatePostings()
   }
 
   $scope.jumpTo = offset => {
-    $scope.model.visibleFromIx = offset
-    $scope.model.visibleToIx = offset + $scope.postingsPerPage
+    setFromIx(offset)
+    setToIx(offset + $scope.postingsPerPage)
     separatePostings()
   }
 

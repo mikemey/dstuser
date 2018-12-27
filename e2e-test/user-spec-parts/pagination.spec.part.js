@@ -15,19 +15,25 @@ module.exports = searchPage => {
 
     afterAll(derStandard.stop)
 
-    const morePostingsLabel = (from, to, total) => new RegExp(`ᐁ show more postings \\(${from} - ${to} of ${total}\\) ᐁ`)
+    const morePostingsLabel = (from, to, total, tail = true) => {
+      const arrow = tail ? 'ᐁ' : 'ᐃ'
+      return new RegExp(`${arrow} show more postings \\(${from} - ${to} of ${total}\\) ${arrow}`)
+    }
 
     describe('no "more postings" button', () => {
       it('when no user', () => {
         searchPage.open()
         expect(searchPage.hasMorePostingsButton()).toBeFalsy()
+        expect(searchPage.hasMorePostingsButton('head')).toBeFalsy()
       })
 
       it('when not enough postings for pagination', () => {
         searchPage.openUserPage(smallUserId)
         searchPage.waitForPostingsLoaded()
         expect(searchPage.hasMorePostingsButton()).toBeFalsy()
+        expect(searchPage.hasMorePostingsButton('head')).toBeFalsy()
         expect(searchPage.hasPostingPages()).toBeFalsy()
+        expect(searchPage.hasPostingPages('head')).toBeFalsy()
       })
     })
 
@@ -37,7 +43,7 @@ module.exports = searchPage => {
         return searchPage.waitForPostingsLoaded()
       })
 
-      it('"more postings" button is available', () => {
+      it('"more postings tail" button is available', () => {
         expect(searchPage.hasMorePostingsButton()).toBeTruthy()
       })
 
@@ -48,12 +54,13 @@ module.exports = searchPage => {
         const expectedPageLinks = expectedPostingPages.map(_ => emptyHref)
 
         expect(searchPage.hasMorePostingsButton()).toBeTruthy()
+        expect(searchPage.hasMorePostingsButton('head')).toBeFalsy()
         expect(searchPage.hasPostingPages()).toBeTruthy()
         expect(searchPage.getPostingPagesNumbers()).toEqual(expectedPageNumbers)
         expect(searchPage.getPostingPagesLinks()).toEqual(expectedPageLinks)
       })
 
-      it('"more postings" click will show more postings', () => {
+      it('"more postings tail" click will show more postings', () => {
         expect(searchPage.comments.countComments()).toEqual(48)
         expect(searchPage.getMorePostingsButtonLabel()).toMatch(morePostingsLabel(1, 48, 1010))
 
@@ -66,12 +73,15 @@ module.exports = searchPage => {
         searchPage.clickPostingPageLink(20)
         expect(searchPage.comments.countComments()).toEqual(48)
         expect(searchPage.getMorePostingsButtonLabel()).toMatch(morePostingsLabel(913, 960, 1010))
+        expect(searchPage.getMorePostingsButtonLabel('head')).toMatch(morePostingsLabel(913, 960, 1010, false))
       })
 
-      it('click on last page - does not have a "more postings" button', () => {
+      it('click on last page - hide "tail" button, show "head" button', () => {
         searchPage.clickPostingPageLink(22)
         expect(searchPage.comments.countComments()).toEqual(2)
         expect(searchPage.hasMorePostingsButton()).toBeFalsy()
+        expect(searchPage.hasMorePostingsButton('head')).toBeTruthy()
+        expect(searchPage.getMorePostingsButtonLabel('head')).toMatch(morePostingsLabel(1009, 1010, 1010, false))
       })
 
       it('filtering resets pagination', () => {
@@ -88,15 +98,30 @@ module.exports = searchPage => {
       })
     })
 
-    describe('medium user page "more postings" button', () => {
+    describe('medium user page ', () => {
       beforeAll(() => searchPage.openUserPage(mediumUserId))
 
-      it('button dissapears when reaching end', () => {
+      it('"more postings tail" button dissapears when reaching end', () => {
         expect(searchPage.getMorePostingsButtonLabel()).toMatch(morePostingsLabel(1, 48, 50))
         searchPage.clickMorePostingsButton()
 
         expect(searchPage.comments.countComments()).toEqual(50)
         expect(searchPage.hasMorePostingsButton()).toBeFalsy()
+        expect(searchPage.hasMorePostingsButton('head')).toBeFalsy()
+      })
+
+      it('"more postings head" button dissapears when reaching start', () => {
+        searchPage.clickPostingPageLink(2)
+        expect(searchPage.comments.countComments()).toEqual(2)
+        expect(searchPage.hasMorePostingsButton()).toBeFalsy()
+        expect(searchPage.hasMorePostingsButton('head')).toBeTruthy()
+
+        expect(searchPage.getMorePostingsButtonLabel('head')).toMatch(morePostingsLabel(49, 50, 50, false))
+
+        searchPage.clickMorePostingsButton('head')
+        expect(searchPage.comments.countComments()).toEqual(50)
+        expect(searchPage.hasMorePostingsButton()).toBeFalsy()
+        expect(searchPage.hasMorePostingsButton('head')).toBeFalsy()
       })
     })
   })
