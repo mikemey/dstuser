@@ -16,6 +16,11 @@ module.exports = searchPage => {
     afterAll(derStandard.stop)
 
     describe('rating links', () => {
+      beforeAll(() => {
+        searchPage.openUserPage(userId)
+        searchPage.comments.clickRating(postingId)
+      })
+
       it('point to nowhere', () => {
         const emptyHref = derStandard.getServerUrl('/dstu/#')
         expect(searchPage.comments.getRatingHrefs()).toEqual([emptyHref, emptyHref, emptyHref])
@@ -28,21 +33,19 @@ module.exports = searchPage => {
     })
 
     describe('rater links', () => {
-      afterEach(searchPage.restart)
+      beforeEach(() => {
+        searchPage.openUserPage(userId)
+        searchPage.comments.clickRating(postingId)
+      })
 
-      it('should forward to wolf', () => {
-        searchPage.comments.clickRaterAndFollow(0)
+      it('should forward to positive and negative rater', () => {
+        searchPage.comments.clickRater(0)
         expect(searchPage.getBrowserUrl()).toMatch(new RegExp(`#!/search/248538$`))
       })
 
       it('should forward to wilderpel', () => {
-        searchPage.comments.clickRaterAndFollow(1)
+        searchPage.comments.clickRater(1)
         expect(searchPage.getBrowserUrl()).toMatch(new RegExp(`#!/search/277282$`))
-      })
-
-      it('should forward to kargel', () => {
-        searchPage.comments.clickRaterAndFollow(2)
-        expect(searchPage.getBrowserUrl()).toMatch(new RegExp(`#!/search/223109$`))
       })
     })
   })

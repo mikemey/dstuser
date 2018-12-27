@@ -34,15 +34,6 @@ const SearchPage = testScreen => {
     .then(() => browser.manage().window().setPosition(0, 0))
     .then(() => browser.get(path))
 
-  const restart = () => browser.getAllWindowHandles()
-    .then(handles => {
-      if (handles[1]) {
-        browser.driver.switchTo().window(handles[1])
-        browser.driver.close()
-      }
-      browser.driver.switchTo().window(handles[0])
-    })
-
   const userId = (screen = testScreen) => `userId-${screen.suffix}`
   const byUserId = screen => by.id(userId(screen))
   const hasUserIdInput = screen => hasElement(byUserId(screen))
@@ -107,7 +98,6 @@ const SearchPage = testScreen => {
     id: testScreen.id,
     getBrowserUrl,
     open,
-    restart,
     openUserPage,
     getHiddenScreen,
     userId, hasUserIdInput, sendToUserId, getUserId,

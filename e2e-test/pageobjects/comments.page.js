@@ -1,4 +1,4 @@
-const { by, browser, element } = require('protractor')
+const { by, element } = require('protractor')
 
 const { onlyDisplayed, getHref, asNumber, getText, waitForElementClick, waitForVisibleElements } = require('../utils/utils.page')
 
@@ -45,12 +45,7 @@ const getPositiveRaters = () => element.all(by.className('rating-pos'))
 const getNegativeRaters = () => element.all(by.className('rating-neg'))
   .filter(onlyDisplayed).map(getText)
 
-const clickRaterAndFollow = ix => element.all(by.className('rater-link')).get(ix).click()
-  .then(() => browser.getAllWindowHandles())
-  .then(handles => {
-    const newWindowHandle = handles[1]
-    return browser.switchTo().window(newWindowHandle)
-  })
+const clickRater = ix => element.all(by.className('rater-link')).get(ix).click()
 
 /* eslint object-property-newline: "off" */
 module.exports = {
@@ -58,5 +53,5 @@ module.exports = {
   countComments,
   getHighlightedTexts,
   getRatingHrefs, clickRating,
-  getPositiveRaters, getNegativeRaters, clickRaterAndFollow
+  getPositiveRaters, getNegativeRaters, clickRater
 }
