@@ -77,7 +77,7 @@ function start_server () {
 function wait_for_server () {
   server_port=`extract_server_port`
   printf "waiting for server start (port ${server_port}): "
-  sleep 2
+  sleep 4
   while [[ ${server_startup_retries} > 0 && ! `lsof -i :${server_port}` ]]; do
     sleep 1
     printf "$server_startup_retries "

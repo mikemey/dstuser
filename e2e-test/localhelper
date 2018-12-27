@@ -79,6 +79,7 @@ function start_server () {
 function wait_for_server () {
   printf "waiting for server start (port $1): "
   ix=${server_startup_retries}
+  sleep 3
   while [[ ${ix} > 0 && ! `lsof -i :${1} 2> /dev/null` ]]; do
     sleep 1
     printf "$ix "
