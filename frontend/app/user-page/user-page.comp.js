@@ -24,7 +24,6 @@ const userPageCtrl = function ($scope, $websocket, $location, $routeParams, $win
 
   const loadUserData = () => {
     if ($routeParams.userId) {
-      $scope.model.loading = true
       $scope.model.userId = $routeParams.userId
 
       const websocketUrl = wsurl + '/postings/' + $scope.model.userId
@@ -49,6 +48,7 @@ const userPageCtrl = function ($scope, $websocket, $location, $routeParams, $win
 
   let first = true
   const updateContent = partial => {
+    $scope.model.loading = true
     if (first) {
       first = false
       $scope.model.content = partial
