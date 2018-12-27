@@ -19,8 +19,14 @@ form[name=userForm] input::placeholder {
   color: #d8d8d8;
 }
 
-.form-messages {
-  background-color: rgba(100, 100, 100, 0.1);
+.user-message {
+  background-color: rgba(255, 255, 255, 0.65);
+  border-radius: 0.25rem;
+  border: 1px solid #aeaeae;
+}
+
+.error-message {
+  background-color: rgba(255, 155, 155, 0.65);
   border-radius: 0.25rem;
   border: 1px solid #aeaeae;
 }

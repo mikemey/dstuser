@@ -24,7 +24,7 @@
                 ng-click="search()" ng-disabled="userForm.$invalid">search...</button>
       </div>
 
-      <div ng-class="(model.content.userName || model.errorMessage) ? ' form-messages': ''"
+      <div ng-class="model.content.userName ? 'user-message':  model.errorMessage ? 'error-message': ''"
            class="col mt-sm-0 my-2 mx-1 text-left">
         <div ng-if="model.errorMessage" class="float-left">
           <label id="errorMessage-small" class="form-control-plaintext form-control-sm d-none d-md-block"
