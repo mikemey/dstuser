@@ -2,7 +2,7 @@ const { by, browser, element } = require('protractor')
 
 const comments = require('./comments.page')
 const {
-  asHref, asText,
+  getHref, getText,
   hasElement, onlyDisplayed, asNumber, setInputField,
   waitForElementText, waitForElementNumber, waitForElementInvisible, waitForElementClick
 } = require('../utils/utils.page')
@@ -98,8 +98,8 @@ const SearchPage = testScreen => {
 
   const hasPostingPages = () => hasElement(by.className('posting-pages'))
   const postingPages = () => element.all(by.css('.posting-pages li:not(.disabled) a'))
-  const getPostingPagesLinks = () => postingPages().map(el => asHref(el))
-  const getPostingPagesNumbers = () => postingPages().map(anchor => asText(anchor).then(asNumber))
+  const getPostingPagesLinks = () => postingPages().map(el => getHref(el))
+  const getPostingPagesNumbers = () => postingPages().map(anchor => getText(anchor).then(asNumber))
   const clickPostingPageLink = pageNum => element(by.cssContainingText('.page-link', `${pageNum}`)).click()
 
   /* eslint object-property-newline: "off" */

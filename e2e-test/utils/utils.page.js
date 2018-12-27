@@ -2,8 +2,8 @@ const { element, browser, ExpectedConditions } = require('protractor')
 const EC = ExpectedConditions
 
 const onlyDisplayed = el => el.isDisplayed()
-const asText = el => el.getText()
-const asHref = (el, attrName = 'href') => el.getAttribute(attrName)
+const getText = el => el.getText()
+const getHref = (el, attrName = 'href') => el.getAttribute(attrName)
 const asNumber = res => {
   const num = Number(res)
   if (isNaN(num)) console.log(`NaN: [${res}]`)
@@ -45,8 +45,8 @@ const activeElementId = () => browser.driver.switchTo().activeElement().getAttri
 
 module.exports = {
   onlyDisplayed,
-  asText,
-  asHref,
+  getText,
+  getHref,
   asNumber,
   hasElement,
   waitForElementClick,

@@ -1,6 +1,6 @@
 const { by, browser, element } = require('protractor')
 
-const { onlyDisplayed, asHref, asNumber, asText, waitForElementClick, waitForVisibleElements } = require('../utils/utils.page')
+const { onlyDisplayed, getHref, asNumber, getText, waitForElementClick, waitForVisibleElements } = require('../utils/utils.page')
 
 const byCommentBox = by.className('cmnt-box')
 const displayedComments = () => waitForVisibleElements(byCommentBox)
@@ -19,11 +19,11 @@ const createComment = el => {
 
   return {
     title: () => titleEl.getText(),
-    url: () => asHref(urlEl, 'ng-href'),
+    url: () => getHref(urlEl, 'ng-href'),
     content: () => contentEl.getText(),
     date: () => dateEl.getText(),
     articleTitle: () => articleEl.getText(),
-    articleUrl: () => asHref(articleEl, 'ng-href'),
+    articleUrl: () => getHref(articleEl, 'ng-href'),
     articleSection: () => sectionEl.getText(),
     commentBoxClasses: () => el.getAttribute('class'),
     ratingPos: () => ratePosEl.getText().then(asNumber),
@@ -32,18 +32,18 @@ const createComment = el => {
 }
 
 const getHighlightedTexts = () => element.all(by.className('highlightedText'))
-  .map(asText)
+  .map(getText)
 
 const getRatingHrefs = () => element.all(by.css('.cmnt-rate a'))
-  .filter(onlyDisplayed).map(el => asHref(el))
+  .filter(onlyDisplayed).map(el => getHref(el))
 
 const byRatingLink = postingId => by.id(`ln-${postingId}`)
 const clickRating = postingId => waitForElementClick(byRatingLink(postingId))
 
 const getPositiveRaters = () => element.all(by.className('rating-pos'))
-  .filter(onlyDisplayed).map(asText)
+  .filter(onlyDisplayed).map(getText)
 const getNegativeRaters = () => element.all(by.className('rating-neg'))
-  .filter(onlyDisplayed).map(asText)
+  .filter(onlyDisplayed).map(getText)
 
 const clickRaterAndFollow = ix => element.all(by.className('rater-link')).get(ix).click()
   .then(() => browser.getAllWindowHandles())
