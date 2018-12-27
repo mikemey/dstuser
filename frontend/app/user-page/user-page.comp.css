@@ -36,8 +36,7 @@ form[name=userForm] input::placeholder {
   border-top: 4px solid #de137a;
   border-left: 4px solid #de137a;
   border-radius: 50%;
-  margin-top: 8px;
-  margin-bottom: 2px;
+  margin-top: 6px;
   width: 20px;
   height: 20px;
   animation: rotating 0.55s linear infinite;
