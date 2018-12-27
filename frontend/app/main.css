@@ -3,6 +3,20 @@ body {
   line-height: 1.4;
 }
 
+.title {
+  font-family: 'Times New Roman', Times, serif, sans-serif;
+  font-weight: bold;
+  letter-spacing: 2pt;
+  transform: skewX(170deg) scaleX(1.05);
+  background-color: #fdefdb;
+  box-shadow: 35px 0px #fdefdb, -35px 0px #fdefdb;
+}
+
+.title-cmnt {
+  font-weight: normal;
+  font-size: 70%;
+}
+
 user-postings {
   font-family: Arial, Helvetica, sans-serif;
 }

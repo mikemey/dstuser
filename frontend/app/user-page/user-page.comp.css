@@ -1,18 +1,6 @@
-main {
+.form-bg {
   background-color: #fdefdb;
-  box-shadow: 35px 0px 5px #fdefdb, -35px 0px 5px #fdefdb, -35px -8px #fdefdb, 35px -8px #fdefdb;
-}
-
-.title {
-  font-family: 'Times New Roman', Times, serif, sans-serif;
-  font-weight: bold;
-  letter-spacing: 2pt;
-  transform: skewX(170deg);
-}
-
-.title-cmnt {
-  font-weight: normal;
-  font-size: 70%;
+  box-shadow: 35px 2px 5px #fdefdb, -35px 2px 5px #fdefdb, -35px -8px #fdefdb, 35px -8px #fdefdb;
 }
 
 form[name=userForm] input::placeholder {
