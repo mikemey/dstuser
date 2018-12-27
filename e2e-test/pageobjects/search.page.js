@@ -67,8 +67,7 @@ const SearchPage = testScreen => {
   const hasErrorMessage = screen => hasElement(byErrorMessage(screen))
   const getErrorMessage = () => waitForElementText(byErrorMessage())
 
-  const filterId = (screen = testScreen) => `filter-${screen.suffix}`
-  const byFilter = (screen = testScreen) => by.id(filterId(screen))
+  const byFilter = (screen = testScreen) => by.id(`filter-${screen.suffix}`)
   const hasFilter = screen => hasElement(byFilter(screen))
   const filterInput = () => element(byFilter())
   const isFilterEnabled = () => filterInput().isEnabled()
@@ -117,7 +116,7 @@ const SearchPage = testScreen => {
     requestUserComments,
     getUserName, hasUserName,
     hasErrorMessage, getErrorMessage,
-    filterId, hasFilter, isFilterEnabled, sendToFilter,
+    hasFilter, isFilterEnabled, sendToFilter,
     comments,
     hasKarmaTotal, getKarmaTotal,
     hasPostingTotal, getPostingTotal,

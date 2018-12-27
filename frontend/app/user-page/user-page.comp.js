@@ -54,7 +54,6 @@ const userPageCtrl = function ($scope, $websocket, $location, $routeParams, $win
       $scope.model.content = partial
       $scope.model.content.partsLoaded = 1
       updateFilterEnabled()
-      focusField()
     } else {
       $scope.model.content.postings = $scope.model.content.postings.concat(partial.postings)
       $scope.model.content.partsLoaded += 1
@@ -68,11 +67,8 @@ const userPageCtrl = function ($scope, $websocket, $location, $routeParams, $win
     }
   }
 
-  const focusField = () => {
-    const selectField = $scope.model.content && $scope.model.content.postings
-      ? 'input[id^="filter-"]'
-      : 'input[id^="userId-"]'
-    const uidFields = $window.document.querySelectorAll(selectField)
+  const focusUserIdField = () => {
+    const uidFields = $window.document.querySelectorAll('input[id^="userId-"]')
     uidFields.forEach(field => {
       const style = $window.getComputedStyle(field)
       if (style.display !== 'none') {
@@ -81,7 +77,7 @@ const userPageCtrl = function ($scope, $websocket, $location, $routeParams, $win
     })
   }
 
-  focusField()
+  focusUserIdField()
   return loadUserData()
 }
 

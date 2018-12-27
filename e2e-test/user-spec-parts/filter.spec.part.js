@@ -47,7 +47,6 @@ module.exports = searchPage => {
 
       it('is enabled and not reload page on Key.Enter', () => {
         expect(searchPage.isFilterEnabled()).toBeTruthy()
-        expect(searchPage.filterId()).toEqual(activeElementId())
 
         searchPage.sendToUserId(23)
         searchPage.sendToFilter(Key.ENTER)
