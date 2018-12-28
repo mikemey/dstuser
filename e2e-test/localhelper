@@ -110,7 +110,7 @@ function check_is_number () {
 }
 
 function error_message () {
-  printf "\n$*\n"
+  printf "${FG_LIGHT_RED}\n$*${FG_DEFAULT}\n"
   exit 1
 }
 
