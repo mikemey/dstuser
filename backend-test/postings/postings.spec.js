@@ -61,7 +61,7 @@ describe('postings websocket', () => {
         response.data[0].totalParts.should.equal(11)
         response.data[0].totalPostings.should.equal(1010)
       })
-    }).timeout(3000)
+    }).timeout(5000)
   })
 
   describe('invalid requests', () => {
