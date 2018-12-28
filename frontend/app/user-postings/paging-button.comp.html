@@ -1,10 +1,8 @@
 <button ng-click="moreBtnCtrl.onBtnClick()" class="btn btn-secondary btn-sm col-12">
-  <span ng-if="moreBtnCtrl.arrows === 'down'" class="mr-3">&#5121;</span>
-  <span ng-if="moreBtnCtrl.arrows === 'up'" class="mr-3">&#5123;</span>
+  <span class="mr-3" ng-class="moreBtnCtrl.arrows === 'up' ? 'rotate-180': ''">&#9663;</span>
   <span>show more postings</span>
   <small class="ml-2">
     ({{ moreBtnCtrl.from }} - {{ moreBtnCtrl.to }} of {{ moreBtnCtrl.total }})
   </small>
-  <span ng-if="moreBtnCtrl.arrows === 'down'" class="ml-3">&#5121;</span>
-  <span ng-if="moreBtnCtrl.arrows === 'up'" class="ml-3">&#5123;</span>
+  <span class="ml-3" ng-class="moreBtnCtrl.arrows === 'up' ? 'rotate-180': ''">&#9663;</span>
 </button>

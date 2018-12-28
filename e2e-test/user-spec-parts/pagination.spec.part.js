@@ -15,8 +15,8 @@ module.exports = searchPage => {
 
     afterAll(derStandard.stop)
 
-    const morePostingsLabel = (from, to, total, tail = true) => {
-      const arrow = tail ? 'ᐁ' : 'ᐃ'
+    const morePostingsLabel = (from, to, total) => {
+      const arrow = '▿'
       return new RegExp(`${arrow} show more postings \\(${from} - ${to} of ${total}\\) ${arrow}`)
     }
 
@@ -76,7 +76,7 @@ module.exports = searchPage => {
         searchPage.clickPostingPageLink(20)
         expect(searchPage.comments.countComments()).toEqual(48)
         expect(searchPage.getMorePostingsButtonLabel()).toMatch(morePostingsLabel(913, 960, 1010))
-        expect(searchPage.getMorePostingsButtonLabel('head')).toMatch(morePostingsLabel(913, 960, 1010, false))
+        expect(searchPage.getMorePostingsButtonLabel('head')).toMatch(morePostingsLabel(913, 960, 1010))
       })
 
       it('click on last page - hide "tail" button, show "head" button', () => {
@@ -84,7 +84,7 @@ module.exports = searchPage => {
         expect(searchPage.comments.countComments()).toEqual(2)
         expect(searchPage.hasMorePostingsButton()).toBeFalsy()
         expect(searchPage.hasMorePostingsButton('head')).toBeTruthy()
-        expect(searchPage.getMorePostingsButtonLabel('head')).toMatch(morePostingsLabel(1009, 1010, 1010, false))
+        expect(searchPage.getMorePostingsButtonLabel('head')).toMatch(morePostingsLabel(1009, 1010, 1010))
       })
 
       it('filtering resets pagination', () => {
@@ -124,7 +124,7 @@ module.exports = searchPage => {
         expect(searchPage.hasMorePostingsButton()).toBeFalsy()
         expect(searchPage.hasMorePostingsButton('head')).toBeTruthy()
 
-        expect(searchPage.getMorePostingsButtonLabel('head')).toMatch(morePostingsLabel(49, 50, 50, false))
+        expect(searchPage.getMorePostingsButtonLabel('head')).toMatch(morePostingsLabel(49, 50, 50))
 
         searchPage.clickMorePostingsButton('head')
         expect(searchPage.comments.countComments()).toEqual(50)
