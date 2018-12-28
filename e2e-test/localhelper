@@ -56,16 +56,16 @@ function start_local () {
 
   start_server "$dst_server_bin" "$dst_server_pid_msg"
   start_server "$server_bin" "$server_pid_msg"
-  wait_for_server "$dst_server_port"
-  wait_for_server "$server_port"
+  wait_for_server "$dst_server_port" "derStandard mock-server"
+  wait_for_server "$server_port" "DSTU server"
 
   echo -e "infrastructure started. See logging file: \ntail -f ${local_output}"
 }
 
 function stop_local () {
   [[ ! -f "$local_output" ]] && error_message "$local_output not found!"
-  kill "$(extract_pid "$server_pid_re")" && echo "server stopped."
-  kill "$(extract_pid "$dst_server_pid_re")" && echo "local dst server stopped."
+  kill "$(extract_pid "$server_pid_re")" && echo "derStandard mock-server stopped."
+  kill "$(extract_pid "$dst_server_pid_re")" && echo "DSTU server stopped."
   rm "$local_output"
   echo "local infrastructure stopped."
 }
@@ -77,7 +77,7 @@ function start_server () {
 }
 
 function wait_for_server () {
-  printf "waiting for server start (port $1): "
+  printf "waiting for $2 start (port $1): "
   ix=${server_startup_retries}
   sleep 3
   while [[ ${ix} > 0 && ! `lsof -i :${1} 2> /dev/null` ]]; do
