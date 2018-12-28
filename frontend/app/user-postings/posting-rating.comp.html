@@ -3,12 +3,14 @@
     <div ng-if="model.message" class="w-100 bg-warning px-3 py-2" ng-bind="model.message"></div>
     <ul class="list-group w-50 float-left rating-group-pos">
       <li class="list-group-item rating-pos" ng-repeat="rater in model.rating.pos">
-        <a class="rater-link" ng-bind="rater.name" ng-href="{{ rater.link }}"></a>
+        <a ng-if="rater.link" class="rater-entry" ng-bind="rater.name" ng-href="{{ rater.link }}"></a>
+        <span ng-if="!rater.link" class="rater-entry text-muted" ng-bind="rater.name"></span>
       </li>
     </ul>
     <ul class="list-group w-50 float-right rating-group-neg">
       <li class="list-group-item rating-neg" ng-repeat="rater in model.rating.neg">
-        <a class="rater-link" ng-bind="rater.name" ng-href="{{ rater.link }}"></a>
+        <a ng-if="rater.link" class="rater-entry" ng-bind="rater.name" ng-href="{{ rater.link }}"></a>
+        <span ng-if="!rater.link" class="rater-entry text-muted" ng-bind="rater.name"></span>
       </li>
     </ul>
   </div>

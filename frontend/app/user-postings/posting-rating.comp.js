@@ -29,7 +29,9 @@ const ratingCtrl = function ($scope, $websocket, wsurl) {
   }
 
   const convertRater = rater => {
-    rater.link = '#!/search/' + rater.userId
+    if (rater.userId) {
+      rater.link = '#!/search/' + rater.userId
+    }
     return rater
   }
 }

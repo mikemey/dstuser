@@ -49,24 +49,38 @@ const RatingService = (config, logger) => {
     return { pos, neg, latestRaterId }
   })
 
-  const extractRating = (rate, page) => page(`li[data-rate="${rate}"] > a`)
-    .map((_, anchor) => {
-      const name = cleanText($(anchor))
-      const userId = cleanUserId($(anchor))
+  const extractRating = (rate, page) => page(`li[data-rate="${rate}"] > .ratings-log-communityname`)
+    .map((_, el) => {
+      const cheerioEl = $(el)
+      const name = cleanText(cheerioEl)
+      const userId = cheerioEl.hasClass('ratings-log-is-deleted')
+        ? null
+        : cleanUserId(cheerioEl)
+
       return { name, userId }
     })
     .get()
 
   const extractLastRaterId = page => {
-    const lastLi = page(`li:last-child`)
-    if (lastLi.length > 0) {
-      const dataFinished = lastLi.attr('data-finished')
-      if (dataFinished !== 'true') {
-        return cleanUserId(lastLi.find('a'))
-      }
+    const raterIdInput = page('#LatestRaterCommunityIdentityId')
+    if (elementExists(raterIdInput)) {
+      return raterIdInput.attr('value')
+    }
+
+    const allEntries = page('li')
+    if (moreDataAvailable(allEntries)) {
+      const lastValidEntry = allEntries.filter(':has(a)').last().find('a')
+      return cleanUserId(lastValidEntry)
     }
     return null
   }
+
+  const elementExists = el => el.length > 0
+  const moreDataAvailable = entries => {
+    const lastEntry = entries.last()
+    return elementExists(lastEntry) && lastEntry.attr('data-finished') !== 'true'
+  }
+
   return { loadRating }
 }
 

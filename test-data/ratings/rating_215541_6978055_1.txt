@@ -1,0 +1,53 @@
+<div class="js-ratings-log ratings-log basic-depth-8dp" data-totalpositive="9" data-totalnegative="2" data-closable="ratinglog-1-6978055" data-closable-active="true" data-closable-remove="true">
+    <div class="ratings-log-inner basic-scrollbar-light">
+<form action="/Forum/RatingLog?id=6978055&amp;idType=Posting" data-ajax="true" data-ajax-begin="ForumLoader.onRatingLogEntriesLoadedBegin" data-ajax-complete="ForumLoader.onRatingLogEntriesLoadedComplete" data-ajax-loading="#js-ratings-log-loading" data-ajax-method="GET" data-ajax-mode="after" data-ajax-success="ForumLoader.onRatingLogEntriesLoadedSuccess" data-ajax-update="#js-ratings-log-entries" data-ajax-url="/Forum/RatingLog?id=6978055&amp;idType=Posting" id="form0" method="post">            <ul id="js-ratings-log-entries">
+                <li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/26373" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Chien de Pique</span>
+        </a>
+            <button data-communityidentityid="26373" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <span class="ratings-log-communityname ratings-log-is-deleted">
+            <span>gel&#246;schter User</span>
+        </span>
+    </li><li data-rate="positive" data-finished="">
+        <span class="ratings-log-communityname ratings-log-is-deleted">
+            <span>gel&#246;schter User</span>
+        </span>
+    </li><li data-rate="positive" data-finished="">
+        <span class="ratings-log-communityname ratings-log-is-deleted">
+            <span>gel&#246;schter User</span>
+        </span>
+    </li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/276006" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Man &#228;ndert seinen Nick regelm&#228;&#223;ig</span>
+        </a>
+            <button data-communityidentityid="276006" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="negative" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/117969" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Klima Engerl</span>
+        </a>
+            <button data-communityidentityid="117969" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="negative" data-finished="">
+        <span class="ratings-log-communityname ratings-log-is-deleted">
+            <span>gel&#246;schter User</span>
+        </span>
+    </li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/222569" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>united1</span>
+        </a>
+            <button data-communityidentityid="222569" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/15122" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>a wurscht</span>
+        </a>
+            <button data-communityidentityid="15122" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <span class="ratings-log-communityname ratings-log-is-deleted">
+            <span>gel&#246;schter User</span>
+        </span>
+    </li>
+            </ul>                <div id="js-ratings-log-loading" class="ratings-log-loading">wird geladen…</div>
+<input class="js-ratings-log-communityidentityid-param" data-val="true" data-val-number="The field LatestRaterCommunityIdentityId must be a number." data-val-required="The LatestRaterCommunityIdentityId field is required." id="LatestRaterCommunityIdentityId" name="LatestRaterCommunityIdentityId" type="hidden" value="136366" />                <button class="js-ratings-log-showmore ratings-log-showmore" onclick="event.stopPropagation();" type="submit">mehr anzeigen</button>
+</form>    </div>
+</div>

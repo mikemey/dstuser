@@ -43,12 +43,12 @@ describe('ratings websocket', () => {
 
   const requestRating = (postingId = '') => server.ws(`/dstu/ws/rating/${postingId}`)
 
-  describe('request posting ratings', () => {
-    it('responds with only positive ratings', () => runRatingsTest(1036279475))
+  describe('responds with posting ratings', () => {
+    it('only positive', () => runRatingsTest(1036279475))
 
-    it('responds with only negative ratings', () => runRatingsTest(1034368216))
+    it('only negative', () => runRatingsTest(1034368216))
 
-    it('responds with positive and negative ratings', () => {
+    it('positive and negative ratings', () => {
       const postingId = 1034153378
       const postingNextData = `${postingId}_ext`
       const lastRaterId = 608969
@@ -56,7 +56,16 @@ describe('ratings websocket', () => {
       return runRatingsTest(postingId)
     })
 
-    it('responds with ratings requiring multiple requests', () => {
+    const runRatingsTest = postingId => {
+      nockPostingRating(postingId).reply(200, testRating(postingId))
+      return requestRating(postingId)
+        .then(response => {
+          response.data[0].should.deep.equal(expectedData(postingId))
+          response.status.should.equal('closed')
+        })
+    }
+
+    it('requires multiple requests', () => {
       const manyRatingsUserId = 215541
       const postingId = 27270389
 
@@ -71,14 +80,21 @@ describe('ratings websocket', () => {
         })
     })
 
-    const runRatingsTest = postingId => {
-      nockPostingRating(postingId).reply(200, testRating(postingId))
+    it('multiple requests with deleted users as last entry', () => {
+      const manyRatingsUserId = 215541
+      const postingId = 6978055
+
+      nockPostingRating(postingId).reply(200, testRating(`${postingId}_1`, manyRatingsUserId))
+      const secondScope = nockPostingNextRating(postingId, 136366).reply(200, testRating(`${postingId}_2`, manyRatingsUserId))
+      const thirdScope = nockPostingNextRating(postingId, 169536).reply(200, testRating(`${postingId}_3`, manyRatingsUserId))
+
       return requestRating(postingId)
         .then(response => {
-          response.data[0].should.deep.equal(expectedData(postingId))
-          response.status.should.equal('closed')
+          secondScope.isDone().should.equal(true)
+          thirdScope.isDone().should.equal(true)
+          response.data[0].should.deep.equal(expectedData(postingId, manyRatingsUserId))
         })
-    }
+    })
   })
 
   describe('invalid requests', () => {

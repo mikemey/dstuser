@@ -9,6 +9,14 @@
       "userId": "98420"
     },
     {
+      "name": "gelöschter User",
+      "userId": null
+    },
+    {
+      "name": "gelöschter User",
+      "userId": null
+    },
+    {
       "name": "Diversion",
       "userId": "38509"
     },
@@ -45,8 +53,16 @@
       "userId": "130263"
     },
     {
+      "name": "gelöschter User",
+      "userId": null
+    },
+    {
       "name": "Unwritten Tales",
       "userId": "500890"
+    },
+    {
+      "name": "gelöschter User",
+      "userId": null
     },
     {
       "name": "FAIL",
@@ -181,12 +197,24 @@
       "userId": "30195"
     },
     {
+      "name": "gelöschter User",
+      "userId": null
+    },
+    {
       "name": "JakobGutschlhofer",
       "userId": "88119"
     },
     {
+      "name": "gelöschter User",
+      "userId": null
+    },
+    {
       "name": "bearskin",
       "userId": "499873"
+    },
+    {
+      "name": "gelöschter User",
+      "userId": null
     },
     {
       "name": "8uddh48r0t",
@@ -225,6 +253,10 @@
       "userId": "87375"
     },
     {
+      "name": "gelöschter User",
+      "userId": null
+    },
+    {
       "name": "Raubmordkopierer",
       "userId": "196920"
     },
@@ -251,6 +283,10 @@
     {
       "name": "Hans Meier459",
       "userId": "79389"
+    },
+    {
+      "name": "gelöschter User",
+      "userId": null
     },
     {
       "name": "mad bad boy",
@@ -299,6 +335,10 @@
     {
       "name": "A.S.",
       "userId": "503887"
+    },
+    {
+      "name": "gelöschter User",
+      "userId": null
     }
   ],
   "neg": []

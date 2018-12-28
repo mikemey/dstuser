@@ -11,11 +11,19 @@
         <span>Wolf19710</span>
       </a>
       <button data-communityidentityid="248538" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
-    </li><li data-rate="negative" data-finished="true">
+    </li><li data-rate="negative" data-finished="">
       <a onclick="event.stopPropagation();" href="/userprofil/postings/223109" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
         <span>Werner Kargel</span>
       </a>
       <button data-communityidentityid="223109" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+    </li><li data-rate="negative" data-finished="">
+        <span class="ratings-log-communityname ratings-log-is-deleted">
+            <span>gel&#246;schter User</span>
+        </span>
+    </li><li data-rate="positive" data-finished="true">
+        <span class="ratings-log-communityname ratings-log-is-deleted">
+            <span>gel&#246;schter User</span>
+        </span>
     </li>
     </ul></form>    </div>
 </div>

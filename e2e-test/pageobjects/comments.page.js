@@ -45,7 +45,7 @@ const getPositiveRaters = () => element.all(by.className('rating-pos'))
 const getNegativeRaters = () => element.all(by.className('rating-neg'))
   .filter(onlyDisplayed).map(getText)
 
-const clickRater = ix => element.all(by.className('rater-link')).get(ix).click()
+const clickRater = ix => element.all(by.className('rater-entry')).get(ix).click()
 
 /* eslint object-property-newline: "off" */
 module.exports = {

@@ -21,14 +21,14 @@ module.exports = searchPage => {
         searchPage.comments.clickRating(postingId)
       })
 
-      it('point to nowhere', () => {
+      it('for all posts point to nowhere', () => {
         const emptyHref = derStandard.getServerUrl('/dstu/#')
         expect(searchPage.comments.getRatingHrefs()).toEqual([emptyHref, emptyHref, emptyHref])
       })
 
-      it('should show pos/neg ratings', () => {
-        expect(searchPage.comments.getPositiveRaters()).toEqual(['Wolf19710'])
-        expect(searchPage.comments.getNegativeRaters()).toEqual(['wilderpel', 'Werner Kargel'])
+      it('on click - show pos/neg ratings including deleted user', () => {
+        expect(searchPage.comments.getPositiveRaters()).toEqual(['Wolf19710', 'gelöschter User'])
+        expect(searchPage.comments.getNegativeRaters()).toEqual(['wilderpel', 'Werner Kargel', 'gelöschter User'])
       })
     })
 
@@ -38,14 +38,21 @@ module.exports = searchPage => {
         searchPage.comments.clickRating(postingId)
       })
 
-      it('should forward to positive and negative rater', () => {
+      it('should forward to wolf (positive rating)', () => {
         searchPage.comments.clickRater(0)
-        expect(searchPage.getBrowserUrl()).toMatch(new RegExp(`#!/search/248538$`))
+        expect(searchPage.getBrowserUrl()).toMatch(new RegExp('#!/search/248538$'))
       })
 
-      it('should forward to wilderpel', () => {
+      it('should forward to wilderpel (negative rating)', () => {
+        searchPage.comments.clickRater(2)
+        expect(searchPage.getBrowserUrl()).toMatch(new RegExp('#!/search/277282$'))
+      })
+
+      it('should NOT forward when deleted user (positive + negative ratings)', () => {
         searchPage.comments.clickRater(1)
-        expect(searchPage.getBrowserUrl()).toMatch(new RegExp(`#!/search/277282$`))
+        expect(searchPage.getBrowserUrl()).toMatch(new RegExp(`#!/search/${userId}$`))
+        searchPage.comments.clickRater(4)
+        expect(searchPage.getBrowserUrl()).toMatch(new RegExp(`#!/search/${userId}$`))
       })
     })
   })
