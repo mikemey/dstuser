@@ -25,12 +25,13 @@ const PostingsService = (config, logger) => {
         const prBuilder = PartialResultBuilder(commonProps(pageParser))
         const firstPagePostings = pageParser.getPostings(firstPage)
 
-        const linkBuckets = createBuckets(pageParser.getRemainingPageLinks())
+        const buckets = createBuckets(pageParser.getRemainingPageLinks())
         const bucketRequest = createBucketRequest(pageParser, prBuilder.build, onPartialResult)
         const firstPromise = Promise.resolve(onPartialResult(prBuilder.build(firstPagePostings)))
 
-        return linkBuckets.reduce((prom, linkBucket) => prom.then(keepGoing => keepGoing
-          ? bucketRequest(linkBucket)
+        const bucketsCount = buckets.length
+        return buckets.reduce((prom, bucketLinks, ix) => prom.then(keepGoing => keepGoing
+          ? bucketRequest(bucketLinks, ix + 1, bucketsCount)
           : Promise.resolve(false)
         ), firstPromise)
       })
@@ -46,26 +47,27 @@ const PostingsService = (config, logger) => {
     return { userName, totalParts, totalPostings }
   }
 
-  const createBuckets = links => links.reduce((buckets, _, ix, arr) => {
+  const createBuckets = links => links.reduce((buckets, _, ix, originalLinks) => {
     if (ix % USERPAGES_PER_PARTITION === 0) {
-      buckets.push(arr.slice(ix, ix + USERPAGES_PER_PARTITION))
+      buckets.push(originalLinks.slice(ix, ix + USERPAGES_PER_PARTITION))
     }
     return buckets
   }, [])
 
-  const createBucketRequest = (pageParser, responseBuilder, onPartialResult) => links => {
-    const bucketTimer = startTimer()
-    return Promise
-      .all(links.map(requestAndParsePage(pageParser)))
-      .then(postingsBucket => {
-        const allPostings = [].concat.apply([], postingsBucket)
-        return onPartialResult(responseBuilder(allPostings))
-      })
-      .then(result => {
-        logger.info(`bucket DONE (R+P: ${stopTimer(bucketTimer)}ms)`)
-        return result
-      })
-  }
+  const createBucketRequest = (pageParser, responseBuilder, onPartialResult) =>
+    (linkBucket, currentBucket, totalBuckets) => {
+      const bucketTimer = startTimer()
+      return Promise
+        .all(linkBucket.map(requestAndParsePage(pageParser)))
+        .then(postingsBucket => {
+          const allPostings = [].concat.apply([], postingsBucket)
+          return onPartialResult(responseBuilder(allPostings))
+        })
+        .then(result => {
+          logger.info(`bucket ${currentBucket}/${totalBuckets} DONE (R+P: ${stopTimer(bucketTimer)}ms)`)
+          return result
+        })
+    }
 
   const requestAndParsePage = pageParser => url => requestPage(url)
     .then(pageParser.getPostings)
