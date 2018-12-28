@@ -21,8 +21,8 @@ describe('ratings websocket', () => {
 
   afterEach(nock.cleanAll)
 
-  const testRating = postingId => dataLoader.getRating(userId, postingId)
-  const expectedData = postingId => dataLoader.getRatingResult(userId, postingId)
+  const testRating = (postingId, uid = userId) => dataLoader.getRating(uid, postingId)
+  const expectedData = (postingId, uid = userId) => dataLoader.getRatingResult(uid, postingId)
 
   const postingRatingPath = postId => testConfig.postingRatingTemplate
     .replace(testConfig.postingIdPlaceholder, postId)
@@ -56,6 +56,21 @@ describe('ratings websocket', () => {
       return runRatingsTest(postingId)
     })
 
+    it('responds with ratings requiring multiple requests', () => {
+      const manyRatingsUserId = 215541
+      const postingId = 27270389
+
+      nockPostingRating(postingId).reply(200, testRating(`${postingId}_1`, manyRatingsUserId))
+      nockPostingNextRating(postingId, 4967).reply(200, testRating(`${postingId}_2`, manyRatingsUserId))
+      const lastNockScope = nockPostingNextRating(postingId, 202090).reply(200, testRating(`${postingId}_3`, manyRatingsUserId))
+
+      return requestRating(postingId)
+        .then(response => {
+          lastNockScope.isDone().should.equal(true)
+          response.data[0].should.deep.equal(expectedData(postingId, manyRatingsUserId))
+        })
+    })
+
     const runRatingsTest = postingId => {
       nockPostingRating(postingId).reply(200, testRating(postingId))
       return requestRating(postingId)
@@ -77,7 +92,7 @@ describe('ratings websocket', () => {
     })
   })
 
-  describe('derStandard server errors', () => {
+  describe('no ratings available', () => {
     const postingId = 1034153378
     const emptyResult = { neg: [], pos: [] }
 

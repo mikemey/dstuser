@@ -1,0 +1,123 @@
+<li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/38211" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>coachingopfer</span>
+        </a>
+            <button data-communityidentityid="38211" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/500143" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Ich m&#246;chte einen neuen Postingnamen w&#228;hlen</span>
+        </a>
+            <button data-communityidentityid="500143" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/87375" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>geek!</span>
+        </a>
+            <button data-communityidentityid="87375" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <span class="ratings-log-communityname ratings-log-is-deleted">
+            <span>gel&#246;schter User</span>
+        </span>
+    </li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/196920" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Raubmordkopierer</span>
+        </a>
+            <button data-communityidentityid="196920" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/15305" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Mr. Fjeldsted</span>
+        </a>
+            <button data-communityidentityid="15305" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/233121" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>testministrator_</span>
+        </a>
+            <button data-communityidentityid="233121" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/65247" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Fi!isch</span>
+        </a>
+            <button data-communityidentityid="65247" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/199482" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Sonoir</span>
+        </a>
+            <button data-communityidentityid="199482" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/177469" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>n0-0ne</span>
+        </a>
+            <button data-communityidentityid="177469" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/79389" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Hans Meier459</span>
+        </a>
+            <button data-communityidentityid="79389" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <span class="ratings-log-communityname ratings-log-is-deleted">
+            <span>gel&#246;schter User</span>
+        </span>
+    </li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/143002" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>mad bad boy</span>
+        </a>
+            <button data-communityidentityid="143002" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/105970" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Kallisto</span>
+        </a>
+            <button data-communityidentityid="105970" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/121615" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Lala4</span>
+        </a>
+            <button data-communityidentityid="121615" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/20257" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Biha</span>
+        </a>
+            <button data-communityidentityid="20257" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/172150" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Nihilius</span>
+        </a>
+            <button data-communityidentityid="172150" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/194354" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Shadow</span>
+        </a>
+            <button data-communityidentityid="194354" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/55519" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Detlef.Knieschl&#228;ger</span>
+        </a>
+            <button data-communityidentityid="55519" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/84858" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Herman Toothrot</span>
+        </a>
+            <button data-communityidentityid="84858" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/313156" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Ein Analyst</span>
+        </a>
+            <button data-communityidentityid="313156" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/42269" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>Daniel Zwick</span>
+        </a>
+            <button data-communityidentityid="42269" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/236771" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>swurzn</span>
+        </a>
+            <button data-communityidentityid="236771" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="">
+        <a onclick="event.stopPropagation();" href="/userprofil/postings/503887" class="ratings-log-communityname" data-closable-close="true" rel="nofollow">
+            <span>A.S.</span>
+        </a>
+            <button data-communityidentityid="503887" title="MitposterIn werden" type="button" class="js-ratings-log-follow ratings-log-follow"><span>User folgen</span></button>
+</li><li data-rate="positive" data-finished="true">
+        <span class="ratings-log-communityname ratings-log-is-deleted">
+            <span>gel&#246;schter User</span>
+        </span>
+    </li>
