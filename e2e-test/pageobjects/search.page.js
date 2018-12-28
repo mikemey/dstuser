@@ -4,7 +4,7 @@ const comments = require('./comments.page')
 const {
   getHref, getTextAsNumber,
   hasElement, onlyDisplayed, asNumber, setInputField,
-  waitForElementText, waitForElementNumber, waitForElementInvisible, waitForElementClick
+  waitForElementText, waitForElementNumber, waitForTextPresent, waitForElementClick
 } = require('../utils/utils.page')
 
 // large screen -> xxx-small element identifiers
@@ -76,9 +76,9 @@ const SearchPage = testScreen => {
   const hasPostingTotal = () => hasElement(byTotal)
   const getPostingTotal = () => waitForElementNumber(byTotal)
 
-  const getPercentageLoaded = () => waitForElementNumber(by.className('pct-loaded'))
-  const byLoader = by.className('loader')
-  const waitForPostingsLoaded = () => waitForElementInvisible(byLoader)
+  const byPercentageLoaded = by.className('pct-loaded')
+  const getPercentageLoaded = () => waitForElementNumber(byPercentageLoaded)
+  const waitForPostingsLoaded = () => waitForTextPresent(byPercentageLoaded, 100)
 
   const byMorePostingsButton = (direction = 'tail') => by.id(`more-postings-${direction}`)
   const hasMorePostingsButton = direction => hasElement(byMorePostingsButton(direction))

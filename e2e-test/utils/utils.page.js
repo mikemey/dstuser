@@ -34,13 +34,16 @@ const waitForElementText = byElement => waitForVisibleElements(byElement).then(e
 
 const waitForElementNumber = byElement => waitForElementText(byElement).then(asNumber)
 
-const waitForElementInvisible = byElement => browser.wait(EC.invisibilityOf(element(byElement)))
-
 const waitForElementClick = byElement => waitForElement(byElement).then(() => {
   const el = element(byElement)
   browser.executeScript('arguments[0].scrollIntoView()', el.getWebElement())
   return el.click()
 })
+
+const waitForTextPresent = (byElement, text) => {
+  const visibleEl = element.all(byElement).filter(onlyDisplayed).get(0)
+  return browser.wait(EC.textToBePresentInElement(visibleEl, text))
+}
 
 const activeElementId = () => browser.driver.switchTo().activeElement().getAttribute('id')
 
@@ -57,6 +60,6 @@ module.exports = {
   waitForVisibleElements,
   waitForElementText,
   waitForElementNumber,
-  waitForElementInvisible,
+  waitForTextPresent,
   activeElementId
 }
