@@ -3,7 +3,7 @@ const { by, browser, element } = require('protractor')
 const comments = require('./comments.page')
 const {
   getHref, getTextAsNumber,
-  hasElement, onlyDisplayed, asNumber, setInputField,
+  hasElement, onlyDisplayed, setInputField,
   waitForElementText, waitForElementNumber, waitForTextPresent, waitForElementClick
 } = require('../utils/utils.page')
 
@@ -67,14 +67,14 @@ const SearchPage = testScreen => {
   const byKarma = type => by.css(`user-stats *[class~=karma-${type}]`)
   const karmaPoints = type => element.all(byKarma(type))
     .filter(onlyDisplayed)
-    .first().getText().then(asNumber)
+    .first().getText()
   const getKarmaTotal = () => Promise.all([karmaPoints('pos'), karmaPoints('neg')])
   const hasKarmaTotal = () => Promise.all([hasElement(byKarma('pos')), hasElement(byKarma('neg'))])
     .then(karmas => karmas[0] && karmas[1])
 
   const byTotal = by.className('postings-total')
   const hasPostingTotal = () => hasElement(byTotal)
-  const getPostingTotal = () => waitForElementNumber(byTotal)
+  const getPostingTotal = () => waitForElementText(byTotal)
 
   const byPercentageLoaded = by.className('pct-loaded')
   const getPercentageLoaded = () => waitForElementNumber(byPercentageLoaded)

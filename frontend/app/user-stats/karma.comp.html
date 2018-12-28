@@ -1,10 +1,10 @@
 <div class="d-none d-md-inline">
-  <small class="karma-pos font-weight-bold" ng-bind="model.pos"></small>
+  <small class="karma-pos font-weight-bold" ng-bind="model.pos | number"></small>
   <small class="karma-plus-minus">+/&#8722;</small>
-  <small class="karma-neg font-weight-bold" ng-bind="model.neg"></small>
+  <small class="karma-neg font-weight-bold" ng-bind="model.neg | number"></small>
 </div>
 <div class="d-md-none">
-  <strong class="karma-pos font-weight-bold" ng-bind="model.pos"></strong>
+  <strong class="karma-pos font-weight-bold" ng-bind="model.pos | number"></strong>
   <small class="karma-plus-minus">+/&#8722;</small>
-  <strong class="karma-neg font-weight-bold" ng-bind="model.neg"></strong>
+  <strong class="karma-neg font-weight-bold" ng-bind="model.neg | number"></strong>
 </div>

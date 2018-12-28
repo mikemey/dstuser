@@ -2,10 +2,10 @@
   <div class="col-4">
     <small>Postings:</small>
     <div class="d-none d-md-inline">
-      <small class="postings-total font-weight-bold" ng-bind="model.content.totalPostings"></small>
+      <small class="postings-total font-weight-bold" ng-bind="model.content.totalPostings | number"></small>
     </div>
     <div class="d-md-none">
-      <strong class="postings-total font-weight-bold" ng-bind="model.content.totalPostings"></strong>
+      <strong class="postings-total font-weight-bold" ng-bind="model.content.totalPostings | number"></strong>
     </div>
   </div>
   <div class="col-4">

@@ -34,9 +34,9 @@ module.exports = searchPage => {
         searchPage.openUserPage(smallUserId)
         return searchPage.waitForPostingsLoaded().then(() => {
           expect(searchPage.hasKarmaTotal()).toBeTruthy()
-          expect(searchPage.getKarmaTotal()).toEqual([17, 18])
+          expect(searchPage.getKarmaTotal()).toEqual(['17', '18'])
           expect(searchPage.hasPostingTotal()).toBeTruthy()
-          expect(searchPage.getPostingTotal()).toEqual(3)
+          expect(searchPage.getPostingTotal()).toEqual('3')
           expect(searchPage.getPercentageLoaded()).toEqual(100)
         })
       })
@@ -44,8 +44,8 @@ module.exports = searchPage => {
       it('multiple user page - karma points + totals', () => {
         searchPage.openUserPage(userId)
         return searchPage.waitForPostingsLoaded().then(() => {
-          expect(searchPage.getKarmaTotal()).toEqual([278, 231])
-          expect(searchPage.getPostingTotal()).toEqual(30)
+          expect(searchPage.getKarmaTotal()).toEqual(['278', '231'])
+          expect(searchPage.getPostingTotal()).toEqual('30')
           expect(searchPage.getPercentageLoaded()).toEqual(100)
         })
       })
@@ -55,7 +55,7 @@ module.exports = searchPage => {
       beforeAll(() => searchPage.openUserPage(largeUserId))
 
       it('shows posting total', () => {
-        expect(searchPage.getPostingTotal()).toEqual(1010)
+        expect(searchPage.getPostingTotal()).toEqual('1,010')
       })
 
       it('shows not all pages loaded yet', () => {
@@ -66,7 +66,7 @@ module.exports = searchPage => {
         beforeAll(() => searchPage.waitForPostingsLoaded())
 
         it('shows karma total', () => {
-          expect(searchPage.getKarmaTotal()).toEqual([606, 404])
+          expect(searchPage.getKarmaTotal()).toEqual(['606', '404'])
         })
 
         it('shows pages loaded', () => {
