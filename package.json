@@ -29,6 +29,7 @@
     "express": "^4.16.4",
     "express-ws": "^4.0.0",
     "moment": "^2.23.0",
+    "moment-timezone": "^0.5.23",
     "morgan": "^1.9.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",

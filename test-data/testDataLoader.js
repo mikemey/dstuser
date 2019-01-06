@@ -17,11 +17,16 @@ const TestDataLoader = host => {
       .replace(HOST_RE, host)
   }
 
-  const getCommentResult = userId => {
+  const getCommentResult = (userId, fullTestResults = false) => {
     const fileName = `profile_${userId}_result.json`
-    return JSON.parse(readFile(postingsDir, fileName)
-      .replace(HOST_RE, host)
-    )
+    const resultObj = JSON.parse(readFile(postingsDir, fileName).replace(HOST_RE, host))
+
+    if (!fullTestResults) {
+      resultObj.forEach(partialResult => {
+        partialResult.postings.forEach(post => delete post.uiDate)
+      })
+    }
+    return resultObj
   }
 
   const get404Page = () => readFile(errorsDir, '404response.html')

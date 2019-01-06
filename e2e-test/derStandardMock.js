@@ -41,7 +41,7 @@ const serveDefaultUserPageFor = userId => {
 const server404WhenUserPageFor = userId => mockWithQuery(pagePath(userId, 1))
   .thenReply(404, dataLoader.get404Page())
 
-const getCommentResult = userId => dataLoader.getCommentResult(userId)
+const getCommentResult = userId => dataLoader.getCommentResult(userId, true)
 
 const serveRating = (userId, postingId, dataPostingId = postingId) => {
   const body = dataLoader.getRating(userId, dataPostingId)

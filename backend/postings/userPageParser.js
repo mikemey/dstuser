@@ -32,7 +32,7 @@ const from = (firstPage, config) => {
     const title = cleanText($('strong', contentDiv))
     const content = cleanText($('span', contentDiv))
     const url = cleanHref($('a', contentDiv))
-    const date = cleanText($('.absolute', postingDiv))
+    const date = $('span.date', postingDiv).attr('data-timestamp')
 
     const article = extractArtice(postingDiv)
     const rating = extractRating(postingDiv)
