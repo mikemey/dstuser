@@ -1,5 +1,6 @@
 import angular from 'angular'
 import ngWebSocket from 'angular-websocket'
+import moment from 'moment-timezone'
 
 import './posting-rating.comp.css'
 
@@ -45,3 +46,8 @@ export default angular
       postingId: '@'
     }
   })
+  .filter('dateDE', () => (unixDate, formatStr) => moment
+    .tz(Number(unixDate), 'Europe/Vienna')
+    .locale('de')
+    .format(formatStr)
+  )
